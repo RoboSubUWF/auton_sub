@@ -24,6 +24,7 @@ setup(
             'leak_sensor = auton_sub.leak_node:main',
             'object_detection = auton_sub.vision_node:main',
             'navigation = auton_sub.navigation:main',
+            'leak_node = auton_sub.leak_node:main',
         ],
     },
 )

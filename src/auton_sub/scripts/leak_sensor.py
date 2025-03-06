@@ -5,7 +5,7 @@ import Jetson.GPIO as GPIO  # Use Jetson's GPIO library
 import time
 
 # Define the GPIO pin connected to the leak sensor
-LEAK_SENSOR_PIN = 12  # Change this based on your actual wiring
+LEAK_SENSOR_PIN = 12  #Actual pin 32
 # GPIO setup
 
 
