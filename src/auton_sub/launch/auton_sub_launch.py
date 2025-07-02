@@ -21,6 +21,12 @@ def generate_launch_description():
         ),
         launch_ros.actions.Node(
             package='auton_sub',
+            executable='gopro',
+            name='gopro',
+            output='screen'
+        ),
+        launch_ros.actions.Node(
+            package='auton_sub',
             executable='navigation',
             name='navigation'
         ),

@@ -208,7 +208,7 @@ class JetsonObjectDetection(Node):
                         conf = float(box.conf[0])
                         
                         # Confidence threshold
-                        if conf > 0.5:
+                        if conf > 0.2:
                             detection_count += 1
                             label = f"{self.model.names[cls]} {conf:.2f}"
                             
