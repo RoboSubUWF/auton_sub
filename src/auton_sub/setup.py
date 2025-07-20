@@ -13,7 +13,9 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/launch', ['launch/auton_sub_launch.py']),
-        
+        ('share/' + package_name + '/launch', ['launch/mavros_launch.py']),
+        ('share/' + package_name + '/launch', ['launch/dvl_mavros_launch.py']),
+        ('share/' + package_name + '/config', glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -26,16 +28,15 @@ setup(
     #}
     entry_points={
         'console_scripts': [
-            'thruster_control = auton_sub.scripts.thruster_control:main',
-            'leak_sensor = auton_sub.scripts.leak_sensor:main',
-            'object_detection = auton_sub.object_detection:main',
-            'gopro = auton_sub.gopro:main',
-            'navigation = auton_sub.scripts.navigation:main',
-            'thruster_node = auton_sub.thruster_node:main',
-            'leak_node = auton_sub.leak_node:main',
+            'object_detection = auton_sub.cv.object_detection:main',
+            'jetson_camera = auton_sub.cv.jetson_camera:main',
+            'dvl_node = auton_sub.sensors.dvl_node:main',
+            'dvl_mavros_bridge = auton_sub.sensors.dvl_mavros_bridge:main',
+            'leak_node = auton_sub.sensors.leak_node:main',
             'test_thruster = auton_sub.test_thruster:main',
             'mission_control = auton_sub.mission_control:main',
             'claw = auton_sub.claw:main',
+            
         ],
     },
 )

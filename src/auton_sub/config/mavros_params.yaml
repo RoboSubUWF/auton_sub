@@ -1,20 +1,20 @@
 mavros:
   ros__parameters:
     # ✅ MAVLink Connection Settings
-    fcu_url: "serial:///dev/ttyTHS1:57600"  # Adjust for Jetson Orin Nano UART
+    fcu_url: "serial:///dev/ttyTHS1:57600"
     target_system: 1
     target_component: 1
     system_id: 1
 
     # ✅ MAVLink Message Stream Rates (Hz)
-    stream_rate: 10  # Default stream rate for MAVLink messages
-    sys_rate: 10     # System status
-    imu_rate: 50     # IMU data
-    gps_rate: 5      # GPS data
-    battery_rate: 5  # Battery status
+    stream_rate: 10
+    sys_rate: 10
+    imu_rate: 50
+    gps_rate: 5
+    battery_rate: 5
 
-    # ✅ Enable Required Plugins
-    plugin_blacklist: [ 'image_pub' ]  # Disable unused plugins to save resources
+    # ✅ Enable DVL/Vision Position Plugins
+    plugin_blacklist: ['image_pub']
     plugin_whitelist: [
       'sys_status',
       'imu',
@@ -23,28 +23,59 @@ mavros:
       'actuator_control',
       'setpoint_velocity',
       'setpoint_position',
-      'setpoint_attitude'
+      'setpoint_attitude',
+      'vision_pose',           # ← DVL position integration
+      'vision_speed',          # ← DVL velocity integration
+      'local_position',
+      'mocap_pose'             # ← For fake GPS mode
     ]
 
-    # ✅ Thruster Control (Actuator Outputs)
-    actuator_control:
-      group_mix: "submarine"  # Ensure this is set to "submarine" for ArduSub
+    # ✅ Vision/DVL Configuration - CRITICAL for DVL integration
+    vision_pose:
+      listen_twist: true
+      frame_id: "map"          # Global frame
+      child_frame_id: "base_link"
+      
+    vision_speed:
+      listen_twist: true
+      frame_id: "base_link"    # Vehicle frame for velocities
+      
+    # ✅ Mocap Configuration (for fake GPS)
+    mocap_pose:
+      listen_pose: true
+      frame_id: "map"
+      child_frame_id: "base_link"
 
-    # ✅ Frame Type (Vectored ROV)
+    # ✅ Local Position Configuration
+    local_position:
+      frame_id: "map"
+      tf_send: true
+      tf_frame_id: "map"
+      tf_child_frame_id: "base_link"
+
+    # ✅ Thruster Control
+    actuator_control:
+      group_mix: "submarine"
+
+    # ✅ Frame Type
     frame: "VECTORED"
 
-    # ✅ Arm and Safety Settings
+    # ✅ Safety Settings
     safety_area:
-      min_altitude: -5.0  # Minimum depth (negative for underwater)
-      max_altitude: 0.0   # Surface level
-    arming_check: true   # Enable pre-arm checks (set false for debugging)
+      min_altitude: -5.0
+      max_altitude: 0.0
+    arming_check: true
 
-    # ✅ GPS Spoofing (If Testing Indoors)
-    gps:
-      use_fake_gps: true
-      gps_type: "fake"
-
+    # ✅ Fake GPS (for indoor/pool testing)
+    global_position:
+      use_mocap: true          # Use vision system instead of GPS
+      mocap_transform: true
+      
     # ✅ Battery Monitoring
     battery:
       min_voltage: 10.5
       critical_voltage: 9.0
+      
+    # ✅ Additional DVL-specific settings
+    setpoint_velocity:
+      mav_frame: "BODY_NED"    # Use body frame for velocity commands

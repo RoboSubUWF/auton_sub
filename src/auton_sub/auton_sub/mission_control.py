@@ -1,52 +1,56 @@
+#!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32MultiArray, String, Bool
 from sensor_msgs.msg import Image, NavSatFix, FluidPressure
-from geometry_msgs.msg import Pose, PoseStamped
+from geometry_msgs.msg import TwistStamped, Pose, PoseStamped
+from nav_msgs.msg import Odometry
 import time
 import math
 import numpy as np
 from pymavlink import mavutil
 
-class AutonomousMissionControl(Node):
+class GuidedMissionControl(Node):
     def __init__(self):
-        super().__init__('autonomous_mission_control')
+        super().__init__('guided_mission_control')
         
-        # Connect to Pixhawk via MAVLink (direct connection for autonomous commands)
+        # Connect to Pixhawk via MAVLink
         self.master = mavutil.mavlink_connection('/dev/ttyTHS1', baud=57600)
         
-        # Wait for a heartbeat to confirm connection
+        # Wait for heartbeat
         self.get_logger().info("🔄 Waiting for heartbeat from Pixhawk...")
         self.master.wait_heartbeat()
         self.get_logger().info("✅ Heartbeat received! Connected to Pixhawk.")
         
-        # Define mission parameters
+        # Mission parameters
         self.mission_active = False
         self.current_mission_step = 0
-        self.mission_steps = [
-            {"type": "dive", "depth": 1.0},
-            {"type": "move", "direction": "forward", "distance": 5.0},
-            {"type": "turn", "heading": 90},
-            {"type": "move", "direction": "forward", "distance": 3.0},
-            {"type": "search", "target": "gate", "timeout": 60},
-            {"type": "surface"}
-            # Add more mission steps as needed
+        self.auto_start_delay = 2.0  # 2 seconds after startup
+        self.target_distance = 3.048  # 10 feet in meters
+        
+        # Mission waypoints (relative to starting position)
+        self.mission_waypoints = [
+            {"x": 0.0, "y": 0.0, "z": -1.0, "description": "Dive to 1m depth"},
+            {"x": 3.048, "y": 0.0, "z": -1.0, "description": "Move forward 10ft"},
+            {"x": 3.048, "y": 0.0, "z": 0.0, "description": "Surface"}
         ]
         
         # State tracking
-        self.detected_objects = []
         self.current_depth = 0.0
-        self.current_heading = 0.0
         self.leak_detected = False
+        self.home_position = None
+        self.current_position = np.array([0.0, 0.0, 0.0])
         
-        # Thruster control publisher (as backup for direct commands)
-        self.thruster_pub = self.create_publisher(
-            Float32MultiArray,
-            '/thruster_cmds',
-            10
-        )
+        # DVL data
+        self.dvl_velocity = np.array([0.0, 0.0, 0.0])
+        self.dvl_position = np.array([0.0, 0.0, 0.0])
         
-        # Subscribers
+        # Control parameters
+        self.position_tolerance = 0.3  # meters
+        self.waypoint_timeout = 5.0  # seconds
+        self.waypoint_start_time = 0.0
+        
+        # Subscribers - NO thruster publisher needed in GUIDED mode
         self.leak_sub = self.create_subscription(
             Bool,
             '/leak_detected',
@@ -54,10 +58,17 @@ class AutonomousMissionControl(Node):
             10
         )
         
-        self.object_sub = self.create_subscription(
-            String,
-            '/detected_object',
-            self.object_detection_callback,
+        self.dvl_velocity_sub = self.create_subscription(
+            TwistStamped,
+            '/dvl/velocity',
+            self.dvl_velocity_callback,
+            10
+        )
+        
+        self.dvl_odometry_sub = self.create_subscription(
+            Odometry,
+            '/dvl/odometry',
+            self.dvl_odometry_callback,
             10
         )
         
@@ -68,79 +79,61 @@ class AutonomousMissionControl(Node):
             10
         )
         
-        # Timer for mission execution
-        self.mission_timer = self.create_timer(1.0, self.mission_step)
+        # Timers
+        self.mission_timer = self.create_timer(0.5, self.mission_step)  # 2 Hz
+        self.auto_start_timer = self.create_timer(1.0, self.auto_start_check)
+        self.dvl_sender_timer = self.create_timer(0.1, self.send_dvl_to_pixhawk)  # 10 Hz
         
-        self.get_logger().info("✅ Autonomous Mission Control started!")
-        self.get_logger().info("Type 'start' to begin mission, 'stop' to abort")
+        # Auto-start tracking
+        self.start_time = time.time()
         
-        # Create command line interface for starting/stopping
-        self.cmd_timer = self.create_timer(0.1, self.check_cmd_input)
+        self.get_logger().info("✅ GUIDED Mission Control initialized!")
+        self.get_logger().info(f"🚀 Will auto-start mission in {self.auto_start_delay} seconds")
     
-    def check_cmd_input(self):
-        """Check for command line input to start/stop mission"""
-        try:
-            # Non-blocking input check
-            import sys, select
-            if select.select([sys.stdin], [], [], 0)[0]:
-                cmd = sys.stdin.readline().strip()
-                if cmd.lower() == "start":
-                    self.start_mission()
-                elif cmd.lower() == "stop":
-                    self.stop_mission()
-        except:
-            pass
+    def auto_start_check(self):
+        """Check if it's time to auto-start the mission"""
+        if not self.mission_active and time.time() - self.start_time > self.auto_start_delay:
+            self.get_logger().info("🚀 Auto-starting GUIDED mission!")
+            self.start_mission()
+            self.auto_start_timer.cancel()
     
     def start_mission(self):
-        """Start the autonomous mission"""
-        # Ensure Pixhawk is in GUIDED mode
+        """Start the autonomous mission in GUIDED mode"""
+        # Set to guided mode and arm
         self.set_guided_mode()
+        self.arm_vehicle()
         
-        # Start the mission
+        # Set home position
+        self.set_home_position()
+        
+        # Start mission
         self.mission_active = True
         self.current_mission_step = 0
-        self.get_logger().info("🚀 Mission started!")
+        self.waypoint_start_time = time.time()
+        
+        self.get_logger().info("🚀 GUIDED mission started!")
     
     def stop_mission(self):
         """Stop the autonomous mission"""
         self.mission_active = False
-        # Send stop command to all thrusters
-        self.send_thruster_command([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         self.get_logger().info("🛑 Mission stopped!")
     
     def set_guided_mode(self):
-        """Set the vehicle to GUIDED mode for autonomous operation"""
+        """Set Pixhawk to GUIDED mode"""
         self.get_logger().info("🛠️ Setting GUIDED mode...")
         
-        # ArduSub GUIDED mode is 15
-        guided_mode = 15
-        
+        # For ArduSub, GUIDED mode is mode 4
         self.master.mav.set_mode_send(
             self.master.target_system,
             mavutil.mavlink.MAV_MODE_FLAG_CUSTOM_MODE_ENABLED,
-            guided_mode
+            4  # GUIDED mode for ArduSub
         )
         
-        # Wait for mode change confirmation
-        start_time = time.time()
-        timeout = 10.0  # seconds
-        
-        while True:
-            msg = self.master.recv_match(type='HEARTBEAT', blocking=True, timeout=1.0)
-            if msg:
-                if msg.custom_mode == guided_mode:
-                    self.get_logger().info("✅ GUIDED mode activated!")
-                    break
-            
-            if time.time() - start_time > timeout:
-                self.get_logger().warn("⚠️ Mode change timeout, but continuing operation...")
-                break
-        
-        # Arm the vehicle if not already armed
-        self.arm_vehicle()
+        time.sleep(2)
+        self.get_logger().info("✅ GUIDED mode set!")
     
     def arm_vehicle(self):
-        """Arm the vehicle for operation"""
+        """Arm the vehicle"""
         self.get_logger().info("🛠️ Arming vehicle...")
         
         self.master.mav.command_long_send(
@@ -151,343 +144,155 @@ class AutonomousMissionControl(Node):
             1, 0, 0, 0, 0, 0, 0  # 1 = Arm
         )
         
-        # Wait for arming confirmation
-        start_time = time.time()
-        timeout = 10.0  # seconds
+        time.sleep(3)
+        self.get_logger().info("✅ Vehicle armed!")
+    
+    def set_home_position(self):
+        """Set current position as home"""
+        self.get_logger().info("🏠 Setting home position...")
         
-        while True:
-            msg = self.master.recv_match(type='COMMAND_ACK', blocking=True, timeout=1.0)
-            if msg and msg.command == mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM:
-                if msg.result == mavutil.mavlink.MAV_RESULT_ACCEPTED:
-                    self.get_logger().info("✅ Vehicle armed!")
-                    break
-                else:
-                    self.get_logger().error(f"❌ Arming failed with result: {msg.result}")
-                    break
-            
-            if time.time() - start_time > timeout:
-                self.get_logger().warn("⚠️ Arming timeout, but continuing operation...")
-                break
+        self.master.mav.command_long_send(
+            self.master.target_system,
+            self.master.target_component,
+            mavutil.mavlink.MAV_CMD_DO_SET_HOME,
+            0,
+            1, 0, 0, 0, 0, 0, 0  # 1 = use current position
+        )
+        
+        time.sleep(1)
+        self.get_logger().info("✅ Home position set!")
+    
+    def send_waypoint(self, x, y, z):
+        """Send waypoint command to Pixhawk in GUIDED mode"""
+        self.get_logger().info(f"📍 Sending waypoint: [{x:.2f}, {y:.2f}, {z:.2f}]")
+        
+        # Send position target in local NED frame
+        self.master.mav.set_position_target_local_ned_send(
+            0,  # time_boot_ms
+            self.master.target_system,
+            self.master.target_component,
+            mavutil.mavlink.MAV_FRAME_LOCAL_NED,
+            0b110111111000,  # Use position only (ignore velocity/acceleration)
+            x, y, z,  # Position in meters (NED frame)
+            0, 0, 0,  # Velocity (ignored)
+            0, 0, 0,  # Acceleration (ignored)
+            0, 0  # Yaw (ignored)
+        )
     
     def leak_callback(self, msg):
-        """Handle leak detection"""
+        """Handle leak detection - emergency surface"""
         if msg.data:
             self.leak_detected = True
-            self.get_logger().error("🚨 LEAK DETECTED! Aborting mission!")
-            # Emergency surface
-            self.execute_surface(emergency=True)
+            self.get_logger().error("🚨 LEAK DETECTED! Emergency surface!")
+            self.emergency_surface()
             self.stop_mission()
     
-    def object_detection_callback(self, msg):
-        """Process detected objects"""
-        object_name = msg.data
-        if object_name not in self.detected_objects:
-            self.detected_objects.append(object_name)
-            self.get_logger().info(f"🎯 New object detected: {object_name}")
+    def emergency_surface(self):
+        """Emergency surface command"""
+        self.get_logger().warn("🚨 EMERGENCY SURFACING!")
+        # Send surface waypoint immediately
+        self.send_waypoint(self.current_position[0], self.current_position[1], 0.0)
+    
+    def dvl_velocity_callback(self, msg):
+        """Process DVL velocity data"""
+        self.dvl_velocity = np.array([
+            msg.twist.linear.x,
+            msg.twist.linear.y,
+            msg.twist.linear.z
+        ])
+    
+    def dvl_odometry_callback(self, msg):
+        """Process DVL odometry data"""
+        self.dvl_position = np.array([
+            msg.pose.pose.position.x,
+            msg.pose.pose.position.y,
+            msg.pose.pose.position.z
+        ])
+    
+    def send_dvl_to_pixhawk(self):
+        """Send DVL data to Pixhawk for navigation feedback"""
+        if not self.mission_active:
+            return
+        
+        # Send DVL velocity as vision speed estimate
+        current_time_us = int(time.time() * 1e6)
+        
+        self.master.mav.vision_speed_estimate_send(
+            current_time_us,  # timestamp
+            self.dvl_velocity[0],  # vx
+            self.dvl_velocity[1],  # vy
+            self.dvl_velocity[2],  # vz
+            0,  # reset counter
+            0   # quality (0-100)
+        )
+        
+        # Also send position estimate if available
+        self.master.mav.vision_position_estimate_send(
+            current_time_us,  # timestamp
+            self.dvl_position[0],  # x
+            self.dvl_position[1],  # y
+            self.dvl_position[2],  # z
+            0, 0, 0,  # roll, pitch, yaw
+            0,  # reset counter
+            0   # quality
+        )
     
     def pressure_callback(self, msg):
         """Calculate depth from pressure"""
-        # Simple conversion from pressure to depth
-        # Actual calculation depends on your sensor calibration
         pressure_pascal = msg.fluid_pressure
-        # Example: depth in meters = (pressure - atmospheric) / (density * gravity)
-        # This is a simplification; you'll need to calibrate for your specific sensor
         self.current_depth = (pressure_pascal - 101325) / (1000 * 9.8)
-    
-    def send_thruster_command(self, values):
-        """Send commands to thrusters using the ROS2 topic"""
-        if self.leak_detected:
-            # Safety feature - no thruster commands if leak detected
-            return
-            
-        msg = Float32MultiArray()
-        msg.data = values
-        self.thruster_pub.publish(msg)
-        self.get_logger().info(f"🚀 Thruster command: {values}")
+        
+        # Update current position Z with depth
+        self.current_position[2] = -self.current_depth  # Negative for NED frame
     
     def mission_step(self):
-        """Execute the current mission step"""
+        """Execute current mission step using waypoints"""
         if not self.mission_active:
             return
-            
-        if self.current_mission_step >= len(self.mission_steps):
+        
+        if self.current_mission_step >= len(self.mission_waypoints):
             self.get_logger().info("✅ Mission completed!")
             self.stop_mission()
             return
-            
-        step = self.mission_steps[self.current_mission_step]
         
-        if step["type"] == "dive":
-            self.execute_dive(step)
-        elif step["type"] == "move":
-            self.execute_move(step)
-        elif step["type"] == "turn":
-            self.execute_turn(step)
-        elif step["type"] == "search":
-            self.execute_search(step)
-        elif step["type"] == "surface":
-            self.execute_surface()
-        # Add more step types as needed
-    
-    def execute_dive(self, step):
-        """Execute a dive to specified depth"""
-        target_depth = step.get("depth", 1.0)  # Default 1 meter
+        waypoint = self.mission_waypoints[self.current_mission_step]
         
-        self.get_logger().info(f"🔽 Diving to {target_depth} meters")
+        # Check if we've reached the waypoint
+        target_pos = np.array([waypoint["x"], waypoint["y"], waypoint["z"]])
+        current_pos = np.array([self.dvl_position[0], self.dvl_position[1], -self.current_depth])
         
-        # Send TARGET_POSITION command for depth control
-        self.master.mav.set_position_target_local_ned_send(
-            0,  # timestamp
-            self.master.target_system,
-            self.master.target_component,
-            mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-            0b0000111111111000,  # mask (only use Z position)
-            0, 0, target_depth,  # NED position (Z is depth)
-            0, 0, 0,  # NED velocity
-            0, 0, 0,  # NED acceleration
-            0, 0  # yaw and yaw rate
-        )
+        distance_to_target = np.linalg.norm(target_pos - current_pos)
         
-        # Wait until we reach target depth (with timeout)
-        start_time = time.time()
-        timeout = 30.0  # seconds
-        depth_threshold = 0.2  # meters
-        
-        while time.time() - start_time < timeout:
-            if abs(self.current_depth - target_depth) < depth_threshold:
-                self.get_logger().info(f"✅ Reached target depth: {self.current_depth} meters")
-                self.current_mission_step += 1
-                return
-            time.sleep(1.0)
-        
-        # If timeout, move to next step anyway
-        self.get_logger().warn(f"⚠️ Timeout reaching depth {target_depth}, continuing mission")
-        self.current_mission_step += 1
-    
-    def execute_move(self, step):
-        """Execute a movement in a specified direction and distance"""
-        direction = step["direction"]
-        distance = step.get("distance", 3.0)  # Default 3 meters
-        
-        # Calculate velocity components based on current heading
-        heading_rad = math.radians(self.current_heading)
-        vx = 0.0
-        vy = 0.0
-        
-        if direction == "forward":
-            vx = math.cos(heading_rad)
-            vy = math.sin(heading_rad)
-        elif direction == "backward":
-            vx = -math.cos(heading_rad)
-            vy = -math.sin(heading_rad)
-        elif direction == "left":
-            vx = -math.sin(heading_rad)
-            vy = math.cos(heading_rad)
-        elif direction == "right":
-            vx = math.sin(heading_rad)
-            vy = -math.cos(heading_rad)
-        
-        speed = 0.5  # m/s
-        vx *= speed
-        vy *= speed
-        
-        # Estimated time to travel the distance
-        duration = distance / speed
-        
-        self.get_logger().info(f"➡️ Moving {direction} for {distance} meters ({duration:.1f} seconds)")
-        
-        # Send velocity command
-        self.master.mav.set_position_target_local_ned_send(
-            0,  # timestamp
-            self.master.target_system,
-            self.master.target_component,
-            mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-            0b0000111111000111,  # mask (only use velocity)
-            0, 0, 0,  # NED position
-            vx, vy, 0,  # NED velocity
-            0, 0, 0,  # NED acceleration
-            0, 0  # yaw and yaw rate
-        )
-        
-        # Sleep for the estimated duration
-        time.sleep(duration)
-        
-        # Send stop command
-        self.master.mav.set_position_target_local_ned_send(
-            0,  # timestamp
-            self.master.target_system,
-            self.master.target_component,
-            mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-            0b0000111111000111,  # mask (only use velocity)
-            0, 0, 0,  # NED position
-            0, 0, 0,  # NED velocity
-            0, 0, 0,  # NED acceleration
-            0, 0  # yaw and yaw rate
-        )
-        
-        self.get_logger().info("✅ Movement complete")
-        self.current_mission_step += 1
-    
-    def execute_turn(self, step):
-        """Execute a turn to a specific heading"""
-        target_heading = step.get("heading", 0)  # Default 0 degrees (North)
-        
-        self.get_logger().info(f"🔄 Turning to heading {target_heading} degrees")
-        
-        # Send heading command
-        self.master.mav.set_position_target_local_ned_send(
-            0,  # timestamp
-            self.master.target_system,
-            self.master.target_component,
-            mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-            0b0000111111111111,  # mask (only use yaw)
-            0, 0, 0,  # NED position
-            0, 0, 0,  # NED velocity
-            0, 0, 0,  # NED acceleration
-            math.radians(target_heading), 0  # yaw and yaw rate
-        )
-        
-        # Wait for turn completion (with timeout)
-        start_time = time.time()
-        timeout = 15.0  # seconds
-        heading_threshold = 5.0  # degrees
-        
-        # Sleep for a reasonable turn time
-        # In a real implementation, you'd use IMU/compass feedback
-        turn_time = abs(target_heading - self.current_heading) / 30.0  # Assuming 30 deg/sec
-        time.sleep(max(turn_time, 3.0))  # At least 3 seconds
-        
-        # Update current heading (in a real system, this would come from sensors)
-        self.current_heading = target_heading
-        
-        self.get_logger().info(f"✅ Turn complete, heading: {self.current_heading} degrees")
-        self.current_mission_step += 1
-    
-    def execute_search(self, step):
-        """Execute a search pattern looking for a target"""
-        target = step["target"]
-        timeout = step.get("timeout", 30)  # Default 30 seconds
-        
-        self.get_logger().info(f"🔍 Searching for {target}")
-        
-        # Simple search pattern - rotate slowly
-        yaw_rate = 0.2  # rad/sec
-        
-        # Send yaw rate command
-        self.master.mav.set_position_target_local_ned_send(
-            0,  # timestamp
-            self.master.target_system,
-            self.master.target_component,
-            mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-            0b0000111111111110,  # mask (only use yaw rate)
-            0, 0, 0,  # NED position
-            0, 0, 0,  # NED velocity
-            0, 0, 0,  # NED acceleration
-            0, yaw_rate  # yaw and yaw rate
-        )
-        
-        # Continue until object found or timeout
-        start_time = time.time()
-        
-        while time.time() - start_time < timeout:
-            if target in self.detected_objects:
-                self.get_logger().info(f"✅ Found {target}!")
-                
-                # Stop rotation
-                self.master.mav.set_position_target_local_ned_send(
-                    0,  # timestamp
-                    self.master.target_system,
-                    self.master.target_component,
-                    mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-                    0b0000111111111110,  # mask (only use yaw rate)
-                    0, 0, 0,  # NED position
-                    0, 0, 0,  # NED velocity
-                    0, 0, 0,  # NED acceleration
-                    0, 0  # yaw and yaw rate
-                )
-                
-                self.current_mission_step += 1
-                return
-            
-            time.sleep(0.1)
-        
-        # If timeout, stop rotation and move to next step
-        self.master.mav.set_position_target_local_ned_send(
-            0,  # timestamp
-            self.master.target_system,
-            self.master.target_component,
-            mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-            0b0000111111111110,  # mask (only use yaw rate)
-            0, 0, 0,  # NED position
-            0, 0, 0,  # NED velocity
-            0, 0, 0,  # NED acceleration
-            0, 0  # yaw and yaw rate
-        )
-        
-        self.get_logger().warn(f"⚠️ Timeout searching for {target}")
-        self.current_mission_step += 1
-    
-    def execute_surface(self, emergency=False):
-        """Surface the vehicle, optionally as an emergency procedure"""
-        if emergency:
-            self.get_logger().warn("🚨 EMERGENCY SURFACING!")
-            
-            # Fast ascent for emergency
-            self.master.mav.set_position_target_local_ned_send(
-                0,  # timestamp
-                self.master.target_system,
-                self.master.target_component,
-                mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-                0b0000111111111000,  # mask (only use Z position)
-                0, 0, 0,  # Surface (Z=0)
-                0, 0, 0,  # NED velocity
-                0, 0, 0,  # NED acceleration
-                0, 0  # yaw and yaw rate
-            )
-        else:
-            self.get_logger().info("🔼 Surfacing vehicle")
-            
-            # Normal, controlled ascent
-            self.master.mav.set_position_target_local_ned_send(
-                0,  # timestamp
-                self.master.target_system,
-                self.master.target_component,
-                mavutil.mavlink.MAV_FRAME_LOCAL_NED,
-                0b0000111111111000,  # mask (only use Z position)
-                0, 0, 0,  # Surface (Z=0)
-                0, 0, 0,  # NED velocity
-                0, 0, 0,  # NED acceleration
-                0, 0  # yaw and yaw rate
-            )
-        
-        # Wait until we reach the surface (with timeout)
-        start_time = time.time()
-        timeout = 60.0 if not emergency else 30.0  # shorter timeout for emergency
-        depth_threshold = 0.3  # meters
-        
-        while time.time() - start_time < timeout:
-            if self.current_depth < depth_threshold:
-                self.get_logger().info("✅ Reached the surface!")
-                if not emergency:
-                    self.current_mission_step += 1
-                return
-            time.sleep(1.0)
-        
-        # If timeout, just continue
-        self.get_logger().warn("⚠️ Timeout while surfacing")
-        if not emergency:
+        # Check if waypoint reached
+        if distance_to_target < self.position_tolerance:
+            self.get_logger().info(f"✅ Reached waypoint {self.current_mission_step}: {waypoint['description']}")
             self.current_mission_step += 1
+            self.waypoint_start_time = time.time()
+            return
+        
+        # Check for timeout
+        if time.time() - self.waypoint_start_time > self.waypoint_timeout:
+            self.get_logger().warn(f"⏰ Waypoint {self.current_mission_step} timed out, moving to next")
+            self.current_mission_step += 1
+            self.waypoint_start_time = time.time()
+            return
+        
+        # Send waypoint command
+        self.send_waypoint(waypoint["x"], waypoint["y"], waypoint["z"])
+        
+        self.get_logger().info(f"🎯 Moving to waypoint {self.current_mission_step}: {waypoint['description']} "
+                              f"(distance: {distance_to_target:.2f}m)")
 
 def main(args=None):
     rclpy.init(args=args)
-    node = AutonomousMissionControl()
+    node = GuidedMissionControl()
     
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
-        node.get_logger().info("🛑 Mission Control shutting down...")
+        node.get_logger().info("🛑 GUIDED Mission Control shutting down...")
     finally:
-        node.stop_mission()  # Make sure thrusters stop
+        node.stop_mission()
         node.destroy_node()
         rclpy.shutdown()
 

@@ -11,9 +11,9 @@ GPIO.setup(led_pin, GPIO.OUT, initial=GPIO.LOW) # Set pin as an output
 try:
     while True:
         GPIO.output(led_pin, GPIO.HIGH) # Turn LED on
-        time.sleep(0.5) # Wait for 500ms
+        time.sleep(5) # Wait for 500ms
         GPIO.output(led_pin, GPIO.LOW) # Turn LED off
-        time.sleep(0.5) # Wait for 500ms
+        time.sleep(5) # Wait for 500ms
 except KeyboardInterrupt:
     print("Exiting gracefully")
     GPIO.cleanup() # Cleanup all GPIOs
