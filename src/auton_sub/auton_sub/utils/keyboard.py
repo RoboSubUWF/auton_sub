@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# pip install keyboard
+# pip install keyboard // must be run and installed in root
 
 import rclpy
 from rclpy.node import Node
@@ -8,8 +8,9 @@ import threading
 import time
 
 from auton_sub.motion.robot_control import RobotControl
-from auton_sub.motion.servo import Servo
+from auton_sub.motion import servo
 from auton_sub.utils import arm, disarm  # Ensure these are ROS 2 compatible
+from auton_sub.utils.guided import set_guided_mode  # Import the modified function
 
 
 class KeyboardControlNode(Node):
@@ -17,7 +18,7 @@ class KeyboardControlNode(Node):
         super().__init__('keyboard_control_node')
         
         self.rc = RobotControl()
-        self.servo = Servo()  # Assume always present
+        self.servo = servo  # Assume always present
 
         self.forward = 0
         self.lateral = 0
@@ -27,22 +28,23 @@ class KeyboardControlNode(Node):
         self.function_control = False
         self.flag = True
         self.data_lock = threading.Lock()
-
-        arm.arm()  # Assume this sends the MAVLink arm command properly in ROS 2
-
+        
+        # ✅ Now calling set_guided_mode() within the existing ROS 2 context
+        if not set_guided_mode():
+            self.get_logger().error("Could not set GUIDED mode. Aborting.")
+            return
+            
+        arm.ArmerNode()  # Assume this sends the MAVLink arm command properly in ROS 2
+        
         self.movement_thread = threading.Thread(target=self.send_data_loop)
         self.movement_thread.daemon = True
 
     def send_data_loop(self):
         while self.flag:
             with self.data_lock:
-                self.rc.movement(
-                    forward=self.forward,
-                    lateral=self.lateral,
-                    yaw=self.yaw,
-                    pitch=0,
-                    roll=0
-                )
+                self.rc.direct_input = [self.lateral, self.forward, self.yaw, 0, 0, 0]
+                self.rc.mode = "direct"
+
             time.sleep(0.05)
 
     def start(self):
@@ -68,13 +70,14 @@ class KeyboardControlNode(Node):
             self.flag = False
             self.movement_thread.join()
             with self.data_lock:
-                self.rc.movement(forward=0, lateral=0, yaw=0, pitch=0, roll=0)
-            disarm.disarm()
-            print("[INFO] Node shutdown complete.")
+                self.rc.direct_input = [0, 0, 0, 0, 0, 0]
+                self.rc.mode = "direct"
+            disarm.DisarmerNode()
+            self.get_logger().info("Node shutdown complete.")
 
     def manual_control_loop(self):
-        print("[INFO] Entering manual control mode (press 'b' to stop)...")
-        print("[INFO] Use WASD for motion, QE for yaw.")
+        self.get_logger().info("Entering manual control mode (press 'b' to stop)...")
+        self.get_logger().info("Use WASD for motion, QE for yaw.")
 
         while self.manual_control:
             event = keyboard.read_event(suppress=True)
@@ -97,20 +100,20 @@ class KeyboardControlNode(Node):
                         self.forward = 0
                         self.lateral = 0
                         self.yaw = 0
-                        print("[INFO] Stopping manual control.")
+                        self.get_logger().info("Stopping manual control.")
                         self.manual_control = False
                         break
                     else:
-                        print(f"[WARN] Unmapped key: {key}")
+                        self.get_logger().warn(f"Unmapped key: {key}")
             elif event.event_type == keyboard.KEY_UP:
                 with self.data_lock:
                     self.forward = 0
                     self.lateral = 0
                     self.yaw = 0
-                    print("[INFO] Stopped motion.")
+                    self.get_logger().info("Stopped motion.")
 
     def function_control_loop(self):
-        print("[INFO] Entering function control mode. Type commands like: fire 1, drop 2, open, close")
+        self.get_logger().info("Entering function control mode. Type commands like: fire 1, drop 2, open, close")
         while self.function_control:
             try:
                 cmd = input("> ").strip().lower()
@@ -127,14 +130,14 @@ class KeyboardControlNode(Node):
                 elif cmd == "exit":
                     self.function_control = False
                 else:
-                    print("[WARN] Unknown command.")
+                    self.get_logger().warn("Unknown command.")
             except KeyboardInterrupt:
                 break
         self.function_control = False
 
 
 def main(args=None):
-    rclpy.init(args=args)
+    rclpy.init(args=args)  # ✅ Initialize ROS 2 context only once here
     node = KeyboardControlNode()
     node.start()
     rclpy.shutdown()

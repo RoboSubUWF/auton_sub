@@ -69,25 +69,45 @@ def generate_launch_description():
             ]
         ),
         
-        #TimerAction(
-        #    period=3.0,
-        #    actions=[
-        #        Node(
-        #            package='auton_sub',
-        #            executable='arm',
-        #            output='screen'
-        #        )
-        #    ]
-        #),
-        #TimerAction(
-        #    period=10.0,
-        #    actions=[
-        #        Node(
-        #            package='auton_sub',
-        #            executable='disarm',
-        #            output='screen'
-        #        )
-        #    ]
-        #)
+        TimerAction(
+            period=3.0,
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='arm',
+                    output='screen'
+                )
+            ]
+        ),
+        TimerAction(
+            period=3.0,
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='guided',
+                    output='screen'
+                )
+            ]
+        ),
+        TimerAction(
+            period=4.0,
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='prequal',
+                    output='screen'
+                )
+            ]
+        ),
+        TimerAction(
+            period=60.0,
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='disarm',
+                    output='screen'
+                )
+            ]
+        )
         
     ])

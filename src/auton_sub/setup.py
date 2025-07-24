@@ -15,6 +15,7 @@ setup(
         ('share/' + package_name + '/launch', ['launch/auton_sub_launch.py']),
         ('share/' + package_name + '/launch', ['launch/mavros_launch.py']),
         ('share/' + package_name + '/launch', ['launch/dvl_mavros_launch.py']),
+        ('share/' + package_name + '/launch', ['launch/manual_launch.py']),
         ('share/' + package_name + '/config', glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
@@ -38,6 +39,8 @@ setup(
             'arm = auton_sub.utils.arm:main',
             'disarm = auton_sub.utils.disarm:main',
             'rosbag = auton_sub.utils.rosbag_launcher:main',
+            'keyboard = auton_sub.utils.keyboard:main',
+            'servo = auton_sub.motion.servo:main',
             
         ],
     },

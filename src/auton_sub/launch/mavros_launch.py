@@ -8,6 +8,7 @@ from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
+from launch.actions import TimerAction
 import os
 
 def generate_launch_description():
@@ -66,6 +67,15 @@ def generate_launch_description():
                 # Optional: remap MAVROS topics if needed
             ]
         ),
-        
+        TimerAction(
+            period=3.0,
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='keyboard',
+                    output='screen'
+                )
+            ]
+        ),
         
     ])

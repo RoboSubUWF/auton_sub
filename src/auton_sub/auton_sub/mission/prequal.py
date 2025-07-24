@@ -5,7 +5,6 @@ from std_msgs.msg import String
 
 from auton_sub.motion import robot_control  # For controlling motors
 
-
 class StraightLeftMission(Node):
     def __init__(self):
         super().__init__('straight_left_mission')

@@ -1,44 +1,48 @@
-#rewrite without device helper
 import json
 import time
 
 import rclpy
 from rclpy.node import Node
 
-from auton_sub.sensors.cv_handler import CVHandler  # Your ROS 2-compatible CV handler
+from auton_sub.sensors.cv_handler import CVHandler
 from auton_sub.motion.robot_control import RobotControl
 from auton_sub.utils import arm, disarm
 
 
 class PathMission(Node):
     """
-    Class to handle the running of the Follow-the-Path mission in ROS 2.
+    ROS 2 class to handle the Follow-the-Path mission without deviceHelper.
     """
-    def __init__(self, **config):
+    def __init__(self):
         super().__init__('path_mission')
-        self.config = config
+
         self.cv_files = ["path_cv"]
         self.data = {}
         self.next_data = {}
         self.received = False
-        self.robot_control = RobotControl()
-        self.cv_handler = CVHandler(**self.config)
         self.path_compass_heading = None
+
+        self.robot_control = RobotControl()
+
+        # Direct configuration instead of deviceHelper
+        self.config = {
+            "camera_topic": "/camera/front/image_raw",
+            # "cv_dummy": ["/path/to/test_video.mp4"]  # Uncomment if using a dummy video
+        }
+
+        self.cv_handler = CVHandler(**self.config)
 
         for file in self.cv_files:
             self.cv_handler.start_cv(
                 mission_name=file,
                 module_path=f"auv.cv.{file}",
-                camera_topic="/camera/front/image_raw",  # Update if using a different camera
+                camera_topic=self.config["camera_topic"],
                 callback=self.callback
             )
 
         self.get_logger().info("[MISSION] PathMission initialized")
 
     def callback(self, msg):
-        """
-        Callback for receiving CV data.
-        """
         try:
             file_name = msg._connection_header["topic"].split("/")[-1]
         except AttributeError:
@@ -49,10 +53,7 @@ class PathMission(Node):
         self.received = True
 
     def run(self):
-        """
-        Main execution loop of the path mission.
-        """
-        self.get_logger().info("[MISSION] Running PathMission...")
+        self.get_logger().info("[MISSION] Running PathMission")
 
         while rclpy.ok():
             rclpy.spin_once(self, timeout_sec=0.05)
@@ -60,7 +61,6 @@ class PathMission(Node):
             if not self.received:
                 continue
 
-            # Merge new CV data
             for key in self.next_data:
                 if key in self.data:
                     self.data[key].update(self.next_data[key])
@@ -89,7 +89,6 @@ class PathMission(Node):
                 self.robot_control.movement()
                 break
 
-        # After CV alignment ends
         self.path_compass_heading = self.robot_control.get_heading()
         self.get_logger().info(f"[DEBUG] Final heading: {self.path_compass_heading}")
 
@@ -97,9 +96,6 @@ class PathMission(Node):
         self.get_logger().info("[MISSION] PathMission complete")
 
     def cleanup(self):
-        """
-        Cleanup CV processes and stop the robot.
-        """
         for file in self.cv_files:
             self.cv_handler.stop_cv(file)
 
@@ -109,25 +105,17 @@ class PathMission(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    from auv.utils import deviceHelper
 
-    config = deviceHelper.variables
-    config.update({
-        # "cv_dummy": ["/path/to/video.mp4"],
-    })
+    mission = PathMission()
 
-    node = PathMission(**config)
-
-    # Arm the robot
     arm.arm()
 
-    node.run()
-    node.cleanup()
+    mission.run()
+    mission.cleanup()
 
-    # Disarm
     disarm.disarm()
 
-    node.destroy_node()
+    mission.destroy_node()
     rclpy.shutdown()
 
 
