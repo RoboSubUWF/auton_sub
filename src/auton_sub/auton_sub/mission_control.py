@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from std_msgs.msg import Float32MultiArray, String, Bool
 from sensor_msgs.msg import Image, NavSatFix, FluidPressure
 from geometry_msgs.msg import TwistStamped, Pose, PoseStamped
@@ -13,6 +14,14 @@ from pymavlink import mavutil
 class GuidedMissionControl(Node):
     def __init__(self):
         super().__init__('guided_mission_control')
+        
+        # ✅ FIXED: QoS Profile to match DVL node
+        qos_profile = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,  # Match DVL node
+            history=HistoryPolicy.KEEP_LAST,
+            depth=10,
+            durability=DurabilityPolicy.VOLATILE
+        )
         
         # Connect to Pixhawk via MAVLink
         self.master = mavutil.mavlink_connection('/dev/ttyTHS1', baud=57600)
@@ -50,33 +59,33 @@ class GuidedMissionControl(Node):
         self.waypoint_timeout = 5.0  # seconds
         self.waypoint_start_time = 0.0
         
-        # Subscribers - NO thruster publisher needed in GUIDED mode
+        # ✅ FIXED: Subscribers with matching QoS
         self.leak_sub = self.create_subscription(
             Bool,
             '/leak_detected',
             self.leak_callback,
-            10
+            10  # Default QoS is fine for leak detection
         )
         
         self.dvl_velocity_sub = self.create_subscription(
             TwistStamped,
             '/dvl/velocity',
             self.dvl_velocity_callback,
-            10
+            qos_profile  # ✅ Use matching QoS
         )
         
         self.dvl_odometry_sub = self.create_subscription(
             Odometry,
             '/dvl/odometry',
             self.dvl_odometry_callback,
-            10
+            qos_profile  # ✅ Use matching QoS
         )
         
         self.pressure_sub = self.create_subscription(
             FluidPressure,
             '/pressure',
             self.pressure_callback,
-            10
+            10  # Default QoS is fine for pressure sensor
         )
         
         # Timers
@@ -87,7 +96,7 @@ class GuidedMissionControl(Node):
         # Auto-start tracking
         self.start_time = time.time()
         
-        self.get_logger().info("✅ GUIDED Mission Control initialized!")
+        self.get_logger().info("✅ GUIDED Mission Control initialized with QoS matching!")
         self.get_logger().info(f"🚀 Will auto-start mission in {self.auto_start_delay} seconds")
     
     def auto_start_check(self):
@@ -200,6 +209,15 @@ class GuidedMissionControl(Node):
             msg.twist.linear.y,
             msg.twist.linear.z
         ])
+        
+        # ✅ Added: Log velocity reception for debugging
+        if hasattr(self, '_vel_msg_count'):
+            self._vel_msg_count += 1
+        else:
+            self._vel_msg_count = 1
+            
+        if self._vel_msg_count % 50 == 0:  # Log every 50 messages
+            self.get_logger().info(f"📡 DVL velocity received: [{self.dvl_velocity[0]:.3f}, {self.dvl_velocity[1]:.3f}, {self.dvl_velocity[2]:.3f}] m/s")
     
     def dvl_odometry_callback(self, msg):
         """Process DVL odometry data"""
@@ -208,6 +226,15 @@ class GuidedMissionControl(Node):
             msg.pose.pose.position.y,
             msg.pose.pose.position.z
         ])
+        
+        # ✅ Added: Log position reception for debugging
+        if hasattr(self, '_pos_msg_count'):
+            self._pos_msg_count += 1
+        else:
+            self._pos_msg_count = 1
+            
+        if self._pos_msg_count % 20 == 0:  # Log every 20 messages
+            self.get_logger().info(f"📍 DVL position received: [{self.dvl_position[0]:.3f}, {self.dvl_position[1]:.3f}, {self.dvl_position[2]:.3f}] m")
     
     def send_dvl_to_pixhawk(self):
         """Send DVL data to Pixhawk for navigation feedback"""

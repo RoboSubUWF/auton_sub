@@ -29,13 +29,15 @@ setup(
     entry_points={
         'console_scripts': [
             'object_detection = auton_sub.cv.object_detection:main',
-            'jetson_camera = auton_sub.cv.jetson_camera:main',
             'dvl_node = auton_sub.sensors.dvl_node:main',
             'dvl_mavros_bridge = auton_sub.sensors.dvl_mavros_bridge:main',
             'leak_node = auton_sub.sensors.leak_node:main',
             'test_thruster = auton_sub.test_thruster:main',
             'mission_control = auton_sub.mission_control:main',
             'claw = auton_sub.claw:main',
+            'arm = auton_sub.utils.arm:main',
+            'disarm = auton_sub.utils.disarm:main',
+            'rosbag = auton_sub.utils.rosbag_launcher:main',
             
         ],
     },

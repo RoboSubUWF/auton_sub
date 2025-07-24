@@ -35,7 +35,7 @@ def generate_launch_description():
         Node(
             package='auton_sub',  # Replace with your package name
             executable='dvl_node',
-            name='dvl_node',
+            
             output='screen',
             parameters=[{
                 'dvl_port': LaunchConfiguration('dvl_port'),
@@ -49,7 +49,7 @@ def generate_launch_description():
         Node(
             package='auton_sub',  # Replace with your package name
             executable='dvl_mavros_bridge',
-            name='dvl_mavros_bridge',
+            
             output='screen'
         ),
         
@@ -57,7 +57,7 @@ def generate_launch_description():
         Node(
             package='mavros',
             executable='mavros_node',
-            name='mavros',
+            
             output='screen',
             parameters=[mavros_params_file, {
                 'fcu_url': LaunchConfiguration('fcu_url'),
@@ -67,12 +67,5 @@ def generate_launch_description():
             ]
         ),
         
-        # Optional: Static transform publisher for sensor mounting
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='dvl_tf_broadcaster',
-            arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'dvl_link'],
-            output='screen'
-        ),
+        
     ])

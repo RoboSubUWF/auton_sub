@@ -5,6 +5,7 @@ mavros:
     target_system: 1
     target_component: 1
     system_id: 1
+    
 
     # ✅ MAVLink Message Stream Rates (Hz)
     stream_rate: 10
@@ -79,3 +80,4 @@ mavros:
     # ✅ Additional DVL-specific settings
     setpoint_velocity:
       mav_frame: "BODY_NED"    # Use body frame for velocity commands
+    

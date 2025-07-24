@@ -1,155 +1,93 @@
 #!/usr/bin/env python3
+"""
+Launch file for DVL + MAVROS integration
+"""
+
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, TimerAction, LogInfo, GroupAction, ExecuteProcess
-from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from ament_index_python.packages import get_package_share_directory
+from launch.actions import TimerAction
 import os
 
-def generate_launch_description():
-    # Package directory
-    auton_sub_share = FindPackageShare('auton_sub')
-    
-    # Launch arguments
-    use_sim_time_arg = DeclareLaunchArgument(
-        'use_sim_time', 
-        default_value='false',
-        description='Use simulation time'
-    )
-    
-    auto_start_arg = DeclareLaunchArgument(
-        'auto_start',
-        default_value='true', 
-        description='Auto start mission'
-    )
-    
-    # ✅ CRITICAL FIX: Clear any existing MAVROS processes
-    cleanup_mavros = ExecuteProcess(
-        cmd=['pkill', '-f', 'mavros_node'],
-        output='screen',
-        on_exit=None  # Continue regardless of exit code
-    )
-    
-    # DVL Node
-    dvl_node = Node(
-        package='auton_sub',
-        executable='dvl_node',
-        name='dvl_node',
-        output='screen',
-        parameters=[{
-            'use_sim_time': LaunchConfiguration('use_sim_time')
-        }],
-        # ✅ Add namespace to avoid conflicts
-        namespace='sensors'
-    )
-    
-    # DVL-MAVROS Bridge - Start after DVL
-    dvl_mavros_bridge = TimerAction(
-        period=3.0,  # Wait for DVL to initialize
-        actions=[
-            LogInfo(msg="🌉 Starting DVL-MAVROS Bridge..."),
-            Node(
-                package='auton_sub',
-                executable='dvl_mavros_bridge', 
-                name='dvl_mavros_bridge',
-                output='screen',
-                parameters=[{
-                    'use_sim_time': LaunchConfiguration('use_sim_time')
-                }]
-            )
-        ]
-    )
-    
-    # ✅ MAVROS Node with explicit environment and delays
-    mavros_node = TimerAction(
-        period=5.0,  # Wait for DVL bridge to start
-        actions=[
-            LogInfo(msg="🚀 Starting MAVROS..."),
-            Node(
-                package='mavros',
-                executable='mavros_node',
-                name='mavros',
-                output='screen',
-                parameters=[
-                    PathJoinSubstitution([
-                        auton_sub_share,
-                        'config',
-                        'mavros_params.yaml'
-                    ]),
-                    {
-                        'use_sim_time': LaunchConfiguration('use_sim_time')
-                    }
-                ],
-                # ✅ CRITICAL: Set environment variables to fix memory issues
-                additional_env={'RMW_IMPLEMENTATION': 'rmw_cyclone_dx'},
-                remappings=[
-                    # Avoid topic conflicts
-                    ('~/local_position/pose', '/mavros/local_position/pose'),
-                    ('~/setpoint_position/local', '/mavros/setpoint_position/local')
-                ]
-            )
-        ]
-    )
-    
-    # TF Static Transform (DVL to base_link)
-    dvl_tf_publisher = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='dvl_tf_broadcaster',
-        output='screen',
-        arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'dvl_link'],
-        parameters=[{
-            'use_sim_time': LaunchConfiguration('use_sim_time')
-        }]
-    )
-    
-    # Mission Control Node (delayed start) - Only after everything is ready
-    mission_control_delayed = TimerAction(
-        period=12.0,  # Wait longer for MAVROS to fully initialize
-        actions=[
-            LogInfo(msg="🚀 Starting Mission Control..."),
-            Node(
-                package='auton_sub',
-                executable='mission_control',
-                name='mission_control',
-                output='screen',
-                parameters=[{
-                    'auto_start_delay': 15.0,  # Even longer delay for auto-start
-                    'use_sim_time': LaunchConfiguration('use_sim_time')
-                }],
-                condition=IfCondition(LaunchConfiguration('auto_start'))
-            )
-        ]
-    )
 
+def generate_launch_description():
+    # Get package directory
+    pkg_dir = get_package_share_directory('auton_sub')  # Replace with your package name
+    
+    # MAVROS parameters file
+    mavros_params_file = os.path.join(pkg_dir, 'config', 'mavros_params.yaml')
+    
     return LaunchDescription([
-        use_sim_time_arg,
-        auto_start_arg,
+        # Launch arguments
+        DeclareLaunchArgument(
+            'fcu_url',
+            default_value='serial:///dev/ttyTHS1:57600',
+            description='FCU connection URL'
+        ),
         
-        LogInfo(msg="🌊 Starting Autonomous Submarine System..."),
+        DeclareLaunchArgument(
+            'dvl_port',
+            default_value='/dev/ttyUSB0',
+            description='DVL serial port'
+        ),
         
-        # ✅ Step 1: Cleanup any existing MAVROS
-        cleanup_mavros,
-        
-        # ✅ Step 2: Start DVL first
-        TimerAction(
-            period=1.0,  # Small delay after cleanup
-            actions=[
-                LogInfo(msg="📡 Starting DVL..."),
-                dvl_node,
-                dvl_tf_publisher
+        # DVL Node
+        Node(
+            package='auton_sub',  # Replace with your package name
+            executable='dvl_node',
+            
+            output='screen',
+            parameters=[{
+                'dvl_port': LaunchConfiguration('dvl_port'),
+            }],
+            remappings=[
+                # Optional: remap topics if needed
             ]
         ),
         
-        # ✅ Step 3: Start DVL-MAVROS Bridge
-        dvl_mavros_bridge,
+        # DVL-MAVROS Bridge
+        Node(
+            package='auton_sub',  # Replace with your package name
+            executable='dvl_mavros_bridge',
+            
+            output='screen'
+        ),
         
-        # ✅ Step 4: Start MAVROS
-        mavros_node,
+        # MAVROS Node
+        Node(
+            package='mavros',
+            executable='mavros_node',
+            
+            output='screen',
+            parameters=[mavros_params_file, {
+                'fcu_url': LaunchConfiguration('fcu_url'),
+            }],
+            remappings=[
+                # Optional: remap MAVROS topics if needed
+            ]
+        ),
         
-        # ✅ Step 5: Start Mission Control (optional)
-        mission_control_delayed,
+        TimerAction(
+            period=3.0,
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='arm',
+                    output='screen'
+                )
+            ]
+        ),
+        TimerAction(
+            period=10.0,
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='disarm',
+                    output='screen'
+                )
+            ]
+        )
         
-        LogInfo(msg="✅ Launch sequence initiated!"),
     ])
