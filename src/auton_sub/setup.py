@@ -15,7 +15,7 @@ setup(
         ('share/' + package_name + '/launch', ['launch/auton_sub_launch.py']),
         ('share/' + package_name + '/launch', ['launch/mavros_launch.py']),
         ('share/' + package_name + '/launch', ['launch/dvl_mavros_launch.py']),
-        ('share/' + package_name + '/launch', ['launch/manual_launch.py']),
+        ('share/' + package_name + '/launch', ['launch/pixhawk_launch.py']),
         ('share/' + package_name + '/config', glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
@@ -30,6 +30,7 @@ setup(
     entry_points={
         'console_scripts': [
             'object_detection = auton_sub.cv.object_detection:main',
+            '120size = auton_sub.cv.120size:main',
             'dvl_node = auton_sub.sensors.dvl_node:main',
             'dvl_mavros_bridge = auton_sub.sensors.dvl_mavros_bridge:main',
             'leak_node = auton_sub.sensors.leak_node:main',
@@ -40,7 +41,9 @@ setup(
             'disarm = auton_sub.utils.disarm:main',
             'rosbag = auton_sub.utils.rosbag_launcher:main',
             'keyboard = auton_sub.utils.keyboard:main',
+            'keyboard_guided = auton_sub.utils.keyboard_guided:main',
             'servo = auton_sub.motion.servo:main',
+            'prequal = auton_sub.mission.prequal:main',
             
         ],
     },

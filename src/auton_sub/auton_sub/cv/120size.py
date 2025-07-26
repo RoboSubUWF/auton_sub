@@ -51,9 +51,9 @@ class JetsonObjectDetection(Node):
         self.bridge = CvBridge()
         
         # Camera configuration - matching DeepStream settings
-        self.camera_width = 800
-        self.camera_height = 600
-        self.camera_fps = 15
+        self.camera_width = 640
+        self.camera_height = 480
+        self.camera_fps = 60
         
         # Initialize direct camera access (like DeepStream)
         self.cap = None
@@ -80,19 +80,19 @@ class JetsonObjectDetection(Node):
             camera_configs = [
                 # Standard OpenCV camera access
                 {
-                    'source': 2,
+                    'source': 0,
                     'backend': cv2.CAP_V4L2,
                     'name': 'V4L2 Direct'
                 },
                 # GStreamer pipeline (Jetson optimized)
                 {
-                    'source': f"v4l2src device=/dev/video2 ! video/x-raw,width={self.camera_width},height={self.camera_height},framerate={self.camera_fps}/1 ! videoconvert ! appsink",
+                    'source': f"v4l2src device=/dev/video0 ! video/x-raw,width={self.camera_width},height={self.camera_height},framerate={self.camera_fps}/1 ! videoconvert ! appsink",
                     'backend': cv2.CAP_GSTREAMER,
                     'name': 'GStreamer V4L2'
                 },
                 # Simple GStreamer
                 {
-                    'source': f"v4l2src device=/dev/video2 ! videoconvert ! appsink",
+                    'source': f"v4l2src device=/dev/video0 ! videoconvert ! appsink",
                     'backend': cv2.CAP_GSTREAMER,  
                     'name': 'GStreamer Simple'
                 },

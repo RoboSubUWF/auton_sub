@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Launch file for DVL + MAVROS integration
+Launch file for keyboard inputs
 """
 
 from launch import LaunchDescription
@@ -10,7 +10,6 @@ from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
 from launch.actions import TimerAction
 import os
-
 
 def generate_launch_description():
     # Get package directory
@@ -27,33 +26,6 @@ def generate_launch_description():
             description='FCU connection URL'
         ),
         
-        DeclareLaunchArgument(
-            'dvl_port',
-            default_value='/dev/ttyUSB0',
-            description='DVL serial port'
-        ),
-        
-        # DVL Node
-        Node(
-            package='auton_sub',  # Replace with your package name
-            executable='dvl_node',
-            
-            output='screen',
-            parameters=[{
-                'dvl_port': LaunchConfiguration('dvl_port'),
-            }],
-            remappings=[
-                # Optional: remap topics if needed
-            ]
-        ),
-        
-        # DVL-MAVROS Bridge
-        Node(
-            package='auton_sub',  # Replace with your package name
-            executable='dvl_mavros_bridge',
-            
-            output='screen'
-        ),
         
         # MAVROS Node
         Node(
@@ -68,14 +40,15 @@ def generate_launch_description():
                 # Optional: remap MAVROS topics if needed
             ]
         ),
-        TimerAction(
-            period=4.0,
-            actions=[
-                Node(
-                    package='auton_sub',
-                    executable='prequal',
-                    output='screen'
-                )
-            ]
-        ),  
+        #TimerAction(
+        #    period=3.0,
+        #    actions=[
+        #        Node(
+        #            package='auton_sub',
+        #            executable='keyboard',
+        #            output='screen'
+        #        )
+        #    ]
+        #),
+        
     ])

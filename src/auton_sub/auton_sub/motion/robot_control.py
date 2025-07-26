@@ -29,7 +29,7 @@ class RobotControl(Node):
         self.debug = False
 
         # Hardcoded config (since no deviceHelper file)
-        self.pwm_scale = 80
+        self.pwm_scale = 200  # Increased from 80 for more responsive control
         self.pwm_neutral = 1500
         self.pwm_min = 1100
         self.pwm_max = 1900
@@ -44,6 +44,9 @@ class RobotControl(Node):
         # Publishers and subscribers
         self.pose_sub = self.create_subscription(PoseStamped, '/pose', self.pose_callback, 10)
         self.thruster_pub = self.create_publisher(OverrideRCIn, '/mavros/rc/override', 10)
+        
+        # Also publish manual control for MANUAL mode
+        self.manual_control_pub = self.create_publisher(ManualControl, '/mavros/manual_control/control', 10)
 
         # PID controllers
         self.PIDs = {
@@ -59,6 +62,8 @@ class RobotControl(Node):
         self.running = True
         self.control_thread = threading.Thread(target=self.control_loop)
         self.control_thread.start()
+        
+        self.get_logger().info("RobotControl initialized - PWM scale: %d" % self.pwm_scale)
 
     def pose_callback(self, msg):
         self.position['x'] = msg.pose.position.x
@@ -73,6 +78,7 @@ class RobotControl(Node):
                 self.update_pid_control()
             elif self.mode == "direct":
                 self.send_pwm_from_direct_input()
+                self.send_manual_control()  # Also send manual control commands
             time.sleep(0.05)
 
     def update_pid_control(self):
@@ -93,8 +99,10 @@ class RobotControl(Node):
         pwm = OverrideRCIn()
         pwm.channels = [self.pwm_neutral] * 18
 
+        # Fixed channel assignments for typical ArduSub configuration
+        # Channels 1-6 (index 0-5) for thrusters
         pwm.channels[0] = clip(self.pwm_min, self.pwm_max, int(self.PIDs["pitch"](0) * self.pwm_scale + self.pwm_neutral))
-        pwm.channels  * self.pwm_scale + self.pwm_neutral
+        pwm.channels[1] = clip(self.pwm_min, self.pwm_max, int(self.PIDs["roll"](0) * self.pwm_scale + self.pwm_neutral))  # FIXED
         pwm.channels[2] = clip(self.pwm_min, self.pwm_max, int(self.PIDs["depth"](errors['z']) * self.pwm_scale + self.pwm_neutral))
         pwm.channels[3] = clip(self.pwm_min, self.pwm_max, int(self.PIDs["yaw"](errors['yaw']) * self.pwm_scale + self.pwm_neutral))
         pwm.channels[4] = clip(self.pwm_min, self.pwm_max, int(self.PIDs["surge"](errors['y']) * self.pwm_scale + self.pwm_neutral))
@@ -105,11 +113,55 @@ class RobotControl(Node):
     def send_pwm_from_direct_input(self):
         pwm = OverrideRCIn()
         pwm.channels = [self.pwm_neutral] * 18
+        
         with self.lock:
-            for i in range(6):
-                value = self.direct_input[i]
-                pwm.channels[i] = clip(self.pwm_min, self.pwm_max, int(value * self.pwm_scale + self.pwm_neutral))
+            # Map direct input to thruster channels
+            # direct_input: [lateral, forward, yaw, 0, 0, 0] from keyboard
+            # Map to ArduSub motor outputs:
+            lateral = self.direct_input[0]    # Left/Right
+            forward = self.direct_input[1]    # Forward/Backward  
+            yaw = self.direct_input[2]        # Rotation
+            
+            # For typical vectored frame:
+            # Motors 1-4: Vertical (up/down) - index 0-3
+            # Motors 5-6: Horizontal forward/back - index 4-5
+            
+            # Vertical thrusters (all receive same signal for now)
+            vertical_pwm = self.pwm_neutral  # No vertical control in this basic setup
+            
+            # Forward/backward thrusters
+            forward_pwm = int(forward * self.pwm_scale + self.pwm_neutral)
+            
+            # Lateral movement via differential thrust (if using vectored config)
+            left_thrust = int((forward + yaw + lateral) * self.pwm_scale/3 + self.pwm_neutral)
+            right_thrust = int((forward - yaw - lateral) * self.pwm_scale/3 + self.pwm_neutral)
+            
+            # Channel mapping for BlueROV2/typical configuration:
+            pwm.channels[0] = clip(self.pwm_min, self.pwm_max, vertical_pwm)     # Vertical 1
+            pwm.channels[1] = clip(self.pwm_min, self.pwm_max, vertical_pwm)     # Vertical 2
+            pwm.channels[2] = clip(self.pwm_min, self.pwm_max, vertical_pwm)     # Vertical 3
+            pwm.channels[3] = clip(self.pwm_min, self.pwm_max, vertical_pwm)     # Vertical 4
+            pwm.channels[4] = clip(self.pwm_min, self.pwm_max, left_thrust)      # Left forward
+            pwm.channels[5] = clip(self.pwm_min, self.pwm_max, right_thrust)     # Right forward
+            
+            if self.debug:
+                self.get_logger().info(f"Direct input: L={lateral:.2f} F={forward:.2f} Y={yaw:.2f}")
+                self.get_logger().info(f"PWM: L={left_thrust} R={right_thrust}")
+        
         self.thruster_pub.publish(pwm)
+
+    def send_manual_control(self):
+        """Send manual control commands for MANUAL flight mode"""
+        manual = ManualControl()
+        
+        with self.lock:
+            # Scale from -1,1 to -1000,1000 for manual control (use float values)
+            manual.x = float(self.direct_input[1] * 1000.0)    # Forward/backward
+            manual.y = float(self.direct_input[0] * 1000.0)    # Left/right  
+            manual.z = 500.0  # Neutral throttle
+            manual.r = float(self.direct_input[2] * 1000.0)    # Yaw
+            
+        self.manual_control_pub.publish(manual)
 
     def stop(self):
         self.running = False
