@@ -71,7 +71,43 @@ class RobotControl(Node):
         self.position['z'] = msg.pose.position.z
         # Assuming quaternion is [0, 0, sin(yaw/2), cos(yaw/2)] for yaw only (simplified)
         self.orientation['yaw'] = msg.pose.orientation.z  # You should convert properly if using full 3D orientation
+        
+    def set_depth(self, target_depth):
+        """Set the target depth for the submarine"""
+        with self.lock:
+            self.desired_point['z'] = target_depth
+            # Ensure we're in PID mode for depth control
+            if self.mode != "pid":
+                self.get_logger().info("Switching to PID mode for depth control")
+                self.mode = "pid"
+        
+        self.get_logger().info(f"Target depth set to: {target_depth}m")
 
+    def set_position(self, x=None, y=None, z=None, yaw=None):
+        """Set target position and orientation"""
+        with self.lock:
+            if x is not None:
+                self.desired_point['x'] = x
+            if y is not None:
+                self.desired_point['y'] = y
+            if z is not None:
+                self.desired_point['z'] = z
+            if yaw is not None:
+                self.desired_point['yaw'] = yaw
+                
+            # Switch to PID mode for position control
+            if self.mode != "pid":
+                self.get_logger().info("Switching to PID mode for position control")
+                self.mode = "pid"
+
+    def get_current_depth(self):
+        """Get current depth"""
+        return self.position['z']
+
+    def get_current_position(self):
+        """Get current position"""
+        return self.position.copy()
+    
     def control_loop(self):
         while rclpy.ok() and self.running:
             if self.mode == "pid":

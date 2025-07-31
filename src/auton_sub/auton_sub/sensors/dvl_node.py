@@ -258,29 +258,76 @@ class DVLNode(Node):
         self.dvl_tcp_callback(report)
     
     def calculate_velocity_covariance(self, current_vel):
-        """Calculate velocity covariance based on recent measurements"""
+    #"""Calculate velocity covariance based on recent measurements"""
+    # Ensure current_vel is clean
+        if np.any(np.isnan(current_vel)) or np.any(np.isinf(current_vel)):
+            self.get_logger().warn("⚠️ Invalid velocity data in covariance calculation")
+            return self.get_default_covariance()
+    
         self.velocity_samples.append(current_vel.copy())
         if len(self.velocity_samples) > self.max_samples:
             self.velocity_samples.pop(0)
-        
+    
         if len(self.velocity_samples) < 3:
             # Default covariance for insufficient samples
-            return np.diag([0.1, 0.1, 0.1]).flatten()  # Conservative estimate
+            return self.get_default_covariance()
+    
+        try:
+            # Calculate sample covariance
+            samples = np.array(self.velocity_samples)
         
-        # Calculate sample covariance
-        samples = np.array(self.velocity_samples)
-        cov_matrix = np.cov(samples.T)
+            # Check for any NaN or inf in samples
+            if np.any(np.isnan(samples)) or np.any(np.isinf(samples)):
+                self.get_logger().warn("⚠️ Invalid samples in covariance calculation")
+                return self.get_default_covariance()
         
-        # Ensure minimum covariance
-        min_var = 0.01  # 0.1 m/s std dev minimum
-        np.fill_diagonal(cov_matrix, np.maximum(np.diag(cov_matrix), min_var))
+            cov_matrix = np.cov(samples.T)
         
-        # Convert to ROS covariance format (6x6 matrix flattened)
+            # Ensure minimum covariance and handle potential issues
+            min_var = 0.01  # 0.1 m/s std dev minimum
+            if cov_matrix.shape == ():  # Single value case
+                cov_matrix = np.array([[cov_matrix, 0, 0], [0, cov_matrix, 0], [0, 0, cov_matrix]])
+            elif cov_matrix.shape == (3,):  # 1D case
+                cov_matrix = np.diag(cov_matrix)
+        
+            # Ensure it's a proper 3x3 matrix
+            if cov_matrix.shape != (3, 3):
+                return self.get_default_covariance()
+        
+            # Check for NaN or inf in covariance matrix
+            if np.any(np.isnan(cov_matrix)) or np.any(np.isinf(cov_matrix)):
+                return self.get_default_covariance()
+        
+            np.fill_diagonal(cov_matrix, np.maximum(np.diag(cov_matrix), min_var))
+        
+            # Convert to ROS covariance format (6x6 matrix flattened)
+            ros_cov = np.zeros((6, 6))
+            ros_cov[:3, :3] = cov_matrix
+            ros_cov[3:, 3:] = np.eye(3) * 0.01  # Angular velocity covariance
+        
+            #   Ensure all values are finite floats
+            covariance_flat = ros_cov.flatten()
+            covariance_flat = np.nan_to_num(covariance_flat, nan=0.1, posinf=1.0, neginf=1.0)
+        
+            # Convert to Python floats (important for ROS message compatibility)
+            return [float(x) for x in covariance_flat]
+        
+        except Exception as e:
+            self.get_logger().error(f"❌ Covariance calculation error: {e}")
+            return self.get_default_covariance()
+    def get_default_covariance(self):
+        #"""Return a safe default covariance matrix"""
         ros_cov = np.zeros((6, 6))
-        ros_cov[:3, :3] = cov_matrix
-        ros_cov[3:, 3:] = np.eye(3) * 0.01  # Angular velocity covariance
-        
-        return ros_cov.flatten()
+        # Conservative default values
+        ros_cov[0, 0] = 0.1  # x velocity variance
+        ros_cov[1, 1] = 0.1  # y velocity variance  
+        ros_cov[2, 2] = 0.1  # z velocity variance
+        ros_cov[3, 3] = 0.01  # x angular velocity variance
+        ros_cov[4, 4] = 0.01  # y angular velocity variance
+        ros_cov[5, 5] = 0.01  # z angular velocity variance
+    
+        # Convert to Python floats
+        return [float(x) for x in ros_cov.flatten()]
     
     def dvl_serial_callback(self, data_obj: OutputData, *args):
         """Process DVL data from serial connection"""
@@ -397,18 +444,28 @@ class DVLNode(Node):
         self.velocity_pub.publish(msg)
     
     def publish_velocity_with_covariance(self, velocities, fom, timestamp):
-        """Publish velocity with covariance for MAVROS integration"""
+        #"""Publish velocity with covariance for MAVROS integration"""
         msg = TwistWithCovarianceStamped()
         msg.header.stamp = timestamp
         msg.header.frame_id = self.frame_id
-        
-        msg.twist.twist.linear.x = float(velocities[0])
-        msg.twist.twist.linear.y = float(velocities[1])
-        msg.twist.twist.linear.z = float(velocities[2])
-        
-        # Calculate covariance
-        msg.twist.covariance = list(self.calculate_velocity_covariance(velocities))
-        
+    
+        # Ensure velocities are finite
+        safe_velocities = np.nan_to_num(velocities, nan=0.0, posinf=0.0, neginf=0.0)
+    
+        msg.twist.twist.linear.x = float(safe_velocities[0])
+        msg.twist.twist.linear.y = float(safe_velocities[1])
+        msg.twist.twist.linear.z = float(safe_velocities[2])
+    
+        # Calculate covariance - this now returns a list of 36 floats
+        covariance_list = self.calculate_velocity_covariance(safe_velocities)
+    
+        # Verify covariance format
+        if len(covariance_list) != 36:
+            self.get_logger().error(f"❌ Invalid covariance length: {len(covariance_list)}")
+            covariance_list = self.get_default_covariance()
+    
+        msg.twist.covariance = covariance_list
+    
         self.velocity_cov_pub.publish(msg)
     
     def publish_range(self, range_to_bottom, timestamp):
@@ -466,20 +523,29 @@ class DVLNode(Node):
         self.odometry_pub.publish(odom_msg)
     
     def publish_position(self, pose, timestamp):
-        """Publish position with covariance for MAVROS"""
+        #"""Publish position with covariance for MAVROS"""
         msg = PoseWithCovarianceStamped()
         msg.header.stamp = timestamp
         msg.header.frame_id = "odom"
-        
+    
         msg.pose.pose = pose.pose
-        
+    
+        # Initialize covariance array with zeros
+        covariance = [0.0] * 36
+    
         # Position covariance (grows with time due to dead reckoning)
         pos_cov = 0.1 + (time.time() - (self.last_valid_data_time or time.time())) * 0.01
-        msg.pose.covariance[0] = pos_cov   # x
-        msg.pose.covariance[7] = pos_cov   # y  
-        msg.pose.covariance[14] = pos_cov  # z
-        msg.pose.covariance[35] = 0.1      # yaw
-        
+        pos_cov = max(0.01, min(pos_cov, 10.0))  # Clamp between reasonable bounds
+    
+        covariance[0] = float(pos_cov)   # x position variance
+        covariance[7] = float(pos_cov)   # y position variance
+        covariance[14] = float(pos_cov)  # z position variance
+        covariance[21] = 0.1  # roll variance
+        covariance[28] = 0.1  # pitch variance  
+        covariance[35] = 0.1  # yaw variance
+    
+        msg.pose.covariance = covariance
+    
         self.position_pub.publish(msg)
     
     def check_health(self):
