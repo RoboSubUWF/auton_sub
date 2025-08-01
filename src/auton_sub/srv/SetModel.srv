@@ -1,7 +1,0 @@
-# File: auton_sub_msgs/srv/SetModel.srv
-# Request
-string model_name    # Name of the model to load (empty string to unload)
----
-# Response  
-bool success         # True if model was loaded successfully
-string message       # Status message
