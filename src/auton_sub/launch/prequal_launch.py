@@ -32,7 +32,19 @@ def generate_launch_description():
             default_value='/dev/ttyUSB0',
             description='DVL serial port'
         ),
-        
+        # MAVROS Node
+        Node(
+            package='mavros',
+            executable='mavros_node',
+            
+            output='screen',
+            parameters=[mavros_params_file, {
+                'fcu_url': LaunchConfiguration('fcu_url'),
+            }],
+            remappings=[
+                # Optional: remap MAVROS topics if needed
+            ]
+        ),
         # DVL Node
         Node(
             package='auton_sub',  # Replace with your package name
@@ -55,19 +67,7 @@ def generate_launch_description():
             output='screen'
         ),
         
-        # MAVROS Node
-        Node(
-            package='mavros',
-            executable='mavros_node',
-            
-            output='screen',
-            parameters=[mavros_params_file, {
-                'fcu_url': LaunchConfiguration('fcu_url'),
-            }],
-            remappings=[
-                # Optional: remap MAVROS topics if needed
-            ]
-        ),
+        
         TimerAction(
             period=4.0,
             actions=[

@@ -160,17 +160,18 @@ class StraightLeftMission(Node):
         self.get_logger().info("[INFO] Starting Straight Left Mission with Depth Control")
         
         try:
-            # Step 1: Set GUIDED mode using imported utility
-            self.get_logger().info("[INFO] Setting GUIDED mode...")
-            if not set_guided_mode():
-                self.get_logger().error("[ERROR] Failed to set GUIDED mode")
-                return False
-            
-            # Step 2: Arm the vehicle using imported utility
+            # Step 1: Arm the vehicle using imported utility
             self.get_logger().info("[INFO] Arming vehicle...")
             arm_node = arm.ArmerNode()
             # Give some time for arming to complete
             self.sleep(2.0)
+            
+            # Step 2: Set GUIDED mode using imported utility
+            self.get_logger().info("[INFO] Setting GUIDED mode...")
+            if not set_guided_mode():
+                self.get_logger().error("[ERROR] Failed to set GUIDED mode")
+                return False
+                    
             
             # Step 3: Wait for the robot control system to be ready
             self.get_logger().info("[INFO] Waiting for robot control system...")
