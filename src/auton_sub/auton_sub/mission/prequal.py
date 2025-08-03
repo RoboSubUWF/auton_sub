@@ -21,11 +21,11 @@ class StraightLeftMission(Node):
         self.forward_distance_3 = 13.0  # meters
         self.pause_time = 2.0         # seconds to pause between steps
         self.turn_duration = 4.0      # seconds to rotate 90 degrees left
-        self.forward_speed = 0.4      # forward movement speed (m/s in guided mode)
-        self.turn_speed = 0.3         # yaw rate for turning (rad/s)
+        self.forward_speed = 1     # forward movement speed (m/s in guided mode)
+        self.turn_speed = 1         # yaw rate for turning (rad/s)
         
         # Depth tolerance
-        self.depth_tolerance = 0.1    # 10cm tolerance for depth
+        self.depth_tolerance = 1    # 10cm tolerance for depth
 
     def descend_to_depth(self, target_depth=0.65):
         """Descend to the specified depth and maintain it"""
@@ -39,7 +39,7 @@ class StraightLeftMission(Node):
         self.robot_control.set_depth(target_depth)
         
         # Wait and monitor depth changes
-        max_wait_time = 20.0  # 20 seconds max for descent
+        max_wait_time = 30.0  # 20 seconds max for descent
         start_time = time.time()
         
         while (time.time() - start_time) < max_wait_time:
@@ -48,6 +48,7 @@ class StraightLeftMission(Node):
             
             if error < self.depth_tolerance:
                 self.get_logger().info(f"[DEPTH] ✅ Target depth achieved: {current:.2f}m (target: {target_depth}m)")
+                self.robot_control.set_max_descent_rate(False) #dont turn off thrusters (keep current depth)
                 return True
                 
             # Log progress every 2 seconds
@@ -64,7 +65,7 @@ class StraightLeftMission(Node):
     def move_forward_distance(self, distance_meters, description=""):
         """Move forward for a specific distance using time-based estimation"""
         # Estimate time needed: distance / speed
-        estimated_time = distance_meters / self.forward_speed
+        estimated_time = distance_meters / abs(self.forward_speed)
         
         self.get_logger().info(f"[MOTION] {description} - Moving forward {distance_meters}m (estimated {estimated_time:.1f}s)")
         
@@ -72,12 +73,8 @@ class StraightLeftMission(Node):
         start_pos = self.robot_control.get_current_position()
         start_time = time.time()
         
-        # Set mode to direct control for movement
-        self.robot_control.mode = "direct"
-        
         # Move forward
-        with self.robot_control.lock:
-            self.robot_control.direct_input = [0.0, self.forward_speed, 0.0, 0.0, 0.0, 0.0]
+        self.robot_control.set_movement_command(forward=self.forward_speed, yaw=0.0)
         
         # Monitor movement
         while (time.time() - start_time) < estimated_time:
@@ -88,14 +85,14 @@ class StraightLeftMission(Node):
             if int(elapsed) % 3 == 0 and elapsed > 2.0:
                 distance_traveled = ((current_pos['x'] - start_pos['x'])**2 + 
                                    (current_pos['y'] - start_pos['y'])**2)**0.5
+                depth_error = abs(current_pos['z'] - self.target_depth)
                 self.get_logger().info(f"[MOTION] Progress: {distance_traveled:.1f}m traveled, depth: {current_pos['z']:.2f}m")
             
             self.sleep(0.2)
         
-        # Stop movement
-        with self.robot_control.lock:
-            self.robot_control.direct_input = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        
+        # Stop movement forward, keep depth
+        self.robot_control.set_movement_command(forward=0.0, yaw=0.0)
+
         final_pos = self.robot_control.get_current_position()
         distance_traveled = ((final_pos['x'] - start_pos['x'])**2 + 
                            (final_pos['y'] - start_pos['y'])**2)**0.5
@@ -109,14 +106,8 @@ class StraightLeftMission(Node):
         start_yaw = self.robot_control.orientation['yaw']
         start_time = time.time()
         
-        # Set mode to direct control for turning
-        self.robot_control.mode = "direct"
+        self.robot_control.set_movement_command(forward=0.0, yaw=-self.turn_speed)
         
-        # Turn left (negative yaw rate)
-        with self.robot_control.lock:
-            self.robot_control.direct_input = [0.0, 0.0, -self.turn_speed, 0.0, 0.0, 0.0]
-        
-        # Monitor turning
         while (time.time() - start_time) < self.turn_duration:
             current_pos = self.robot_control.get_current_position()
             elapsed = time.time() - start_time
@@ -124,24 +115,23 @@ class StraightLeftMission(Node):
             # Log progress every 2 seconds
             if int(elapsed) % 2 == 0 and elapsed > 1.0:
                 yaw_change = abs(self.robot_control.orientation['yaw'] - start_yaw)
-                self.get_logger().info(f"[MOTION] Turning... Yaw change: {yaw_change:.2f} rad, depth: {current_pos['z']:.2f}m")
+                depth_error = abs(current_pos['z'] - self.target_depth)
+                self.get_logger().info(f"[MOTION] Turning... Yaw change: {yaw_change:.2f} rad, depth: {current_pos['z']:.2f}m (error: {depth_error:.2f}m)")
             
             self.sleep(0.2)
         
-        # Stop turning
-        with self.robot_control.lock:
-            self.robot_control.direct_input = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        # Stop turning but keep depth control
+        self.robot_control.set_movement_command(forward=0.0, yaw=0.0)
         
         final_yaw = self.robot_control.orientation['yaw']
         yaw_change = abs(final_yaw - start_yaw)
-        self.get_logger().info(f"[MOTION] ✅ {description} complete - Yaw change: {yaw_change:.2f} rad (~{yaw_change*57.3:.0f} degrees)")
+        final_pos = self.robot_control.get_current_position()
+        self.get_logger().info(f"[MOTION] ✅ {description} complete - Yaw change: {yaw_change:.2f} rad (~{yaw_change*57.3:.0f} degrees), Final depth: {final_pos['z']:.2f}m")
 
-    def maintain_depth_during_pause(self, pause_duration):
+    def pause_and_monitor_depth(self, pause_duration):
         """Pause while maintaining depth using guided mode"""
         self.get_logger().info(f"[MOTION] Pausing {pause_duration}s while maintaining depth...")
         
-        # Switch back to guided mode to maintain position
-        self.robot_control.mode = "guided"
         
         start_time = time.time()
         while (time.time() - start_time) < pause_duration:
@@ -182,29 +172,29 @@ class StraightLeftMission(Node):
                 self.get_logger().error("[ERROR] Failed to reach target depth")
                 return False
             
-            self.maintain_depth_during_pause(self.pause_time)
+            self.pause_and_monitor_depth(self.pause_time)
             
             # Step 5: Move forward 13 meters
             self.move_forward_distance(self.forward_distance_1, "First forward segment")
-            self.maintain_depth_during_pause(self.pause_time)
+            self.pause_and_monitor_depth(self.pause_time)
             
             # Step 6: Turn left 90 degrees
             self.turn_left_90_degrees("First left turn")
-            self.maintain_depth_during_pause(self.pause_time)
+            self.pause_and_monitor_depth(self.pause_time)
             
             # Step 7: Move forward 1 meter
             self.move_forward_distance(self.forward_distance_2, "Short forward segment")
-            self.maintain_depth_during_pause(self.pause_time)
+            self.pause_and_monitor_depth(self.pause_time)
             
             # Step 8: Turn left 90 degrees again
             self.turn_left_90_degrees("Second left turn")
-            self.maintain_depth_during_pause(self.pause_time)
+            self.pause_and_monitor_depth(self.pause_time)
             
             # Step 9: Move forward 13 meters
             self.move_forward_distance(self.forward_distance_3, "Final forward segment")
             
             # Final stop and maintain position
-            self.robot_control.mode = "guided"
+            self.robot_control.set_movement_command(forward=0.0, yaw=0.0)
             final_pos = self.robot_control.get_current_position()
             self.get_logger().info(f"[INFO] ✅ Mission Complete! Final position: x={final_pos['x']:.2f}m, y={final_pos['y']:.2f}m, depth={final_pos['z']:.2f}m")
             

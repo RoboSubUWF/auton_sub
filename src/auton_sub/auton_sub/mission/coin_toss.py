@@ -52,7 +52,7 @@ class CoinTossMission(Node):
         self.model_loaded = False
         
         # Turning parameters
-        self.turn_speed = 0.3
+        self.turn_speed = 1
         self.search_timeout = 30.0
         
         self.get_logger().info("🪙 Coin Toss mission initialized with topic-based model control")

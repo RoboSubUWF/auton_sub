@@ -69,7 +69,7 @@ def generate_launch_description():
         
         
         TimerAction(
-            period=4.0,
+            period=30.0,
             actions=[
                 Node(
                     package='auton_sub',
