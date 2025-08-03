@@ -32,45 +32,46 @@ def generate_launch_description():
             default_value='/dev/ttyUSB0',
             description='DVL serial port'
         ),
-        # MAVROS Node
-        Node(
-            package='mavros',
-            executable='mavros_node',
-            
-            output='screen',
-            parameters=[mavros_params_file, {
-                'fcu_url': LaunchConfiguration('fcu_url'),
-            }],
-            remappings=[
-                # Optional: remap MAVROS topics if needed
-            ]
-        ),
-        # DVL Node
-        Node(
-            package='auton_sub',  # Replace with your package name
-            executable='dvl_node',
-            
-            output='screen',
-            parameters=[{
-                'dvl_port': LaunchConfiguration('dvl_port'),
-            }],
-            remappings=[
-                # Optional: remap topics if needed
-            ]
-        ),
-        
-        # DVL-MAVROS Bridge
-        Node(
-            package='auton_sub',  # Replace with your package name
-            executable='dvl_mavros_bridge',
-            
-            output='screen'
-        ),
-        
-        
         TimerAction(
             period=30.0,
             actions=[
+        # MAVROS Node
+                Node(
+                    package='mavros',
+                    executable='mavros_node',
+                    
+                    output='screen',
+                    parameters=[mavros_params_file, {
+                        'fcu_url': LaunchConfiguration('fcu_url'),
+                    }],
+                    remappings=[
+                        # Optional: remap MAVROS topics if needed
+                    ]
+                ),
+        # DVL Node
+                Node(
+                    package='auton_sub',  # Replace with your package name
+                    executable='dvl_node',
+                    
+                    output='screen',
+                    parameters=[{
+                        'dvl_port': LaunchConfiguration('dvl_port'),
+                    }],
+                    remappings=[
+                        # Optional: remap topics if needed
+                    ]
+                ),
+        
+        # DVL-MAVROS Bridge
+                Node(
+                    package='auton_sub',  # Replace with your package name
+                    executable='dvl_mavros_bridge',
+                    
+                    output='screen'
+                ),
+        
+        
+        
                 Node(
                     package='auton_sub',
                     executable='prequal',

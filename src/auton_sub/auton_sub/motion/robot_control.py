@@ -12,7 +12,7 @@ import numpy as np
 import math
 import time
 import threading
-import tf_transformations
+
 
 
 def clip(pwm_min: int, pwm_max: int, value: int):
@@ -20,6 +20,11 @@ def clip(pwm_min: int, pwm_max: int, value: int):
     value = max(pwm_min, value)  # chooses maximum value between min and value
     return value
 
+def quaternion_to_yaw(x, y, z, w):
+    """Convert quaternion to yaw angle (in radians)"""
+    # Formula for yaw from quaternion
+    yaw = math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
+    return yaw
 
 class RobotControl(Node):
     def __init__(self):
@@ -39,7 +44,7 @@ class RobotControl(Node):
         self.position = {'x': 0.0, 'y': 0.0, 'z': 0.0}  #sets starting position as home position
         self.orientation = {'yaw': 0.0, 'pitch': 0.0, 'roll': 0.0}  #sets starting values
         self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None, 'pitch': None, 'roll': None} #also initializes
-        self.movement_command = {'lateral': 0.0, 'forward': 0.0, 'yaw': 0.0}
+        self.movement_command = {'forward': 0.0, 'yaw': 0.0}
         self.max_descent_mode = False 
         self.mode = "hybrid"
 
@@ -62,7 +67,7 @@ class RobotControl(Node):
             "roll": PID(0.5, 0.1, 0.1, setpoint=0, output_limits=(-2, 2)),
             "surge": PID(2.0, 0.05, 0.01, setpoint=0, output_limits=(-2, 2)),
             "lateral": PID(2.0, 0.05, 0.01, setpoint=0, output_limits=(-2, 2)),
-            "depth": PID(100.0, 10.0, 0.75, setpoint=0, output_limits=(-2,2)),
+            "depth": PID(2.0, 0.1, 0.5, setpoint=0, output_limits=(-2.0, 2.0))
         }
 
         # Start the main control thread
@@ -76,14 +81,11 @@ class RobotControl(Node):
         self.position['x'] = msg.pose.position.x #copies the recieved positions x y z to position dictionary
         self.position['y'] = msg.pose.position.y
         self.position['z'] = msg.pose.position.z
-        # gets quaternian euler 
+        
+        # Convert quaternion to yaw manually (no tf_transformations needed)
         q = msg.pose.orientation
-        quaternion = [q.x, q.y, q.z, q.w]
-        (_, _, yaw) = tf_transformations.euler_from_quaternion(quaternion)
-
-        self.orientation['yaw'] = yaw #extracts only yaw
-        #self.orientation['roll'] = roll #not used
-        #self.orientation['pitch'] = pitch #not used
+        self.orientation['yaw'] = quaternion_to_yaw(q.x, q.y, q.z, q.w)
+        
         
     def set_depth(self, target_depth):
         """Set the target depth for the submarine"""
@@ -115,7 +117,6 @@ class RobotControl(Node):
     def set_movement_command(self, lateral=0.0, forward=0.0, yaw=0.0):
         """Set movement commands while maintaining depth control"""
         with self.lock:
-            self.movement_command['lateral'] = lateral
             self.movement_command['forward'] = forward
             self.movement_command['yaw'] = yaw
         
@@ -145,14 +146,12 @@ class RobotControl(Node):
             
             if has_position_targets:
                 # Position control mode - use PID to reach specific coordinates
-                #lateral_cmd = 0.0
                 forward_cmd = 0.0 
                 yaw_cmd = 0.0
                 
                 # X position control (lateral movement)
                 if self.desired_point['x'] is not None:
                     x_error = self.desired_point['x'] - self.position['x']
-                    #lateral_cmd = self.PIDs["lateral"](x_error)
                     if abs(x_error) > 0.1:
                         self.get_logger().warn(f"Cannot move laterally - no lateral thrusters. X error: {x_error:.2f}m")
                         
@@ -168,7 +167,6 @@ class RobotControl(Node):
                     
             else:
                 # Movement command mode - direct velocity commands
-                #lateral_cmd = self.movement_command['lateral']
                 forward_cmd = self.movement_command['forward']
                 yaw_cmd = self.movement_command['yaw']
             
@@ -216,13 +214,12 @@ class RobotControl(Node):
         right_pwm = clip(self.pwm_min, self.pwm_max, right_pwm)
 
         # Assign to channels (typical BlueROV2 mapping)
-        pwm.channels[0] = vertical_pwm    # Vertical thruster 1
-        pwm.channels[1] = vertical_pwm    # Vertical thruster 2  
-        pwm.channels[2] = vertical_pwm    # Vertical thruster 3
-        pwm.channels[3] = vertical_pwm    # Vertical thruster 4
-        pwm.channels[4] = left_pwm        # Left horizontal thruster
-        pwm.channels[5] = right_pwm       # Right horizontal thruster
-
+        pwm.channels[1] = right_pwm    # Right 
+        pwm.channels[2] = left_pwm    # Left  
+        pwm.channels[5] = vertical_pwm    #front right
+        pwm.channels[6] = vertical_pwm    # front left
+        pwm.channels[7] = vertical_pwm        # back right
+        pwm.channels[8] = vertical_pwm       # back left
         # Debug logging
         if self.debug and (abs(depth_output) > 0.1 or abs(forward_cmd) > 0.1 or abs(yaw_cmd) > 0.1):
             current_depth = self.position['z']

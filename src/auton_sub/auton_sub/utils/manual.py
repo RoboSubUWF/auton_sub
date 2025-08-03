@@ -5,7 +5,7 @@ import sys
 import rclpy
 from rclpy.node import Node
 from mavros_msgs.srv import SetMode
-from auton_sub.utils.guided import set_guided_mode
+
 
 class SetModeClient(Node):
     def __init__(self):

@@ -15,7 +15,7 @@ class StraightLeftMission(Node):
         self.get_logger().info("[INFO] Straight Left Mission Node Initialized")
 
         # Mission parameters
-        self.target_depth = 0.65      # meters below surface (positive = down)
+        self.target_depth = 2      # meters below surface (positive = down)
         self.forward_distance_1 = 13.0  # meters
         self.forward_distance_2 = 1.0   # meters  
         self.forward_distance_3 = 13.0  # meters
@@ -25,9 +25,9 @@ class StraightLeftMission(Node):
         self.turn_speed = 1         # yaw rate for turning (rad/s)
         
         # Depth tolerance
-        self.depth_tolerance = 1    # 10cm tolerance for depth
+        self.depth_tolerance = 0.25    # 10cm tolerance for depth
 
-    def descend_to_depth(self, target_depth=0.65):
+    def descend_to_depth(self, target_depth=2):
         """Descend to the specified depth and maintain it"""
         self.get_logger().info(f"[DEPTH] Descending to {target_depth}m depth...")
         
@@ -37,6 +37,7 @@ class StraightLeftMission(Node):
         
         # Set target depth using guided mode
         self.robot_control.set_depth(target_depth)
+        self.robot_control.set_max_descent_rate(True)
         
         # Wait and monitor depth changes
         max_wait_time = 30.0  # 20 seconds max for descent
@@ -60,43 +61,50 @@ class StraightLeftMission(Node):
         
         final_depth = self.robot_control.get_current_depth()
         self.get_logger().warn(f"[DEPTH] ⏰ Descent timeout - Final depth: {final_depth:.2f}m (target: {target_depth}m)")
+        self.robot_control.set_max_descent_rate(False)
         return abs(final_depth - target_depth) < (self.depth_tolerance * 2)  # Accept with larger tolerance
 
     def move_forward_distance(self, distance_meters, description=""):
-        """Move forward for a specific distance using time-based estimation"""
-        # Estimate time needed: distance / speed
-        estimated_time = distance_meters / abs(self.forward_speed)
+        """Move forward for a specific distance using actual DVL position feedback"""
+        self.get_logger().info(f"[MOTION] {description} - Moving forward {distance_meters}m")
         
-        self.get_logger().info(f"[MOTION] {description} - Moving forward {distance_meters}m (estimated {estimated_time:.1f}s)")
-        
-        # Record starting position for reference
+        # Record starting position
         start_pos = self.robot_control.get_current_position()
         start_time = time.time()
         
         # Move forward
         self.robot_control.set_movement_command(forward=self.forward_speed, yaw=0.0)
         
-        # Monitor movement
-        while (time.time() - start_time) < estimated_time:
+        # Monitor actual distance traveled using DVL
+        max_time = distance_meters / abs(self.forward_speed) * 2.0  # Safety timeout (2x expected time)
+        
+        while (time.time() - start_time) < max_time:
             current_pos = self.robot_control.get_current_position()
-            elapsed = time.time() - start_time
             
+            # Calculate actual distance traveled using DVL position
+            distance_traveled = ((current_pos['x'] - start_pos['x'])**2 + 
+                            (current_pos['y'] - start_pos['y'])**2)**0.5
+            
+            # Check if we've reached the target distance
+            if distance_traveled >= distance_meters:
+                self.get_logger().info(f"[MOTION] ✅ Target distance reached: {distance_traveled:.2f}m")
+                break
+                
             # Log progress every 3 seconds
+            elapsed = time.time() - start_time
             if int(elapsed) % 3 == 0 and elapsed > 2.0:
-                distance_traveled = ((current_pos['x'] - start_pos['x'])**2 + 
-                                   (current_pos['y'] - start_pos['y'])**2)**0.5
                 depth_error = abs(current_pos['z'] - self.target_depth)
-                self.get_logger().info(f"[MOTION] Progress: {distance_traveled:.1f}m traveled, depth: {current_pos['z']:.2f}m")
+                self.get_logger().info(f"[MOTION] Progress: {distance_traveled:.1f}m/{distance_meters}m, depth: {current_pos['z']:.2f}m")
             
             self.sleep(0.2)
         
-        # Stop movement forward, keep depth
+        # Stop movement
         self.robot_control.set_movement_command(forward=0.0, yaw=0.0)
-
+        
         final_pos = self.robot_control.get_current_position()
-        distance_traveled = ((final_pos['x'] - start_pos['x'])**2 + 
-                           (final_pos['y'] - start_pos['y'])**2)**0.5
-        self.get_logger().info(f"[MOTION] ✅ {description} complete - Distance traveled: {distance_traveled:.2f}m")
+        final_distance = ((final_pos['x'] - start_pos['x'])**2 + 
+                        (final_pos['y'] - start_pos['y'])**2)**0.5
+        self.get_logger().info(f"[MOTION] ✅ {description} complete - Distance traveled: {final_distance:.2f}m")
 
     def turn_left_90_degrees(self, description=""):
         """Turn left 90 degrees"""
@@ -161,7 +169,7 @@ class StraightLeftMission(Node):
             if not set_guided_mode():
                 self.get_logger().error("[ERROR] Failed to set GUIDED mode")
                 return False
-                    
+               
             
             # Step 3: Wait for the robot control system to be ready
             self.get_logger().info("[INFO] Waiting for robot control system...")
@@ -208,10 +216,8 @@ class StraightLeftMission(Node):
             return False
         finally:
             # Ensure movement is stopped
-            with self.robot_control.lock:
-                self.robot_control.direct_input = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-            self.robot_control.mode = "guided"  # Return to guided mode for position hold
-            self.get_logger().info("[INFO] Robot stopped. Mission ended.")
+            self.robot_control.set_movement_command(forward=0.0, yaw=0.0)
+            self.get_logger().info("[INFO] All movement stopped. Depth control still active.")
 
     def sleep(self, seconds):
         """Sleep while allowing ROS to continue spinning"""
@@ -221,13 +227,9 @@ class StraightLeftMission(Node):
 
     def cleanup(self):
         """Clean up the mission by stopping movement"""
-        with self.robot_control.lock:
-            self.robot_control.direct_input = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        
-        # Return to guided mode for position hold
-        self.robot_control.mode = "guided"
-        
+        self.robot_control.set_movement_command(forward=0.0, yaw=0.0)
         self.get_logger().info("[INFO] Straight Left mission cleanup complete")
+
 
 
 def main(args=None):
