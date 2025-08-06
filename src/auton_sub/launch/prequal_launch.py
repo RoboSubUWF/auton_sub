@@ -33,7 +33,7 @@ def generate_launch_description():
             description='DVL serial port'
         ),
         TimerAction(
-            period=30.0,
+            period=5.0,
             actions=[
         # MAVROS Node
                 Node(

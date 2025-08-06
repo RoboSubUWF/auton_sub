@@ -18,7 +18,7 @@ setup(
         #('share/' + package_name + '/launch', ['launch/dvl_mavros_launch.py']),
         #('share/' + package_name + '/launch', ['launch/pixhawk_launch.py']),
         ('share/' + package_name + '/config', glob('config/*.yaml')),
-        (os.path.join('share', package_name), glob('srv/*.srv')),
+        
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -48,7 +48,8 @@ setup(
             'servo = auton_sub.motion.servo:main',
             'prequal = auton_sub.mission.prequal:main',
             'coin_toss = auton_sub.mission.coin_toss:main',
-            
+            'test_thrust = auton_sub.mission.test_thrust:main',
+            'depth_hold = auton_sub.mission.depth_hold'
             
         ],
     },
