@@ -1,4 +1,3 @@
-# front camera
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -105,9 +104,9 @@ class MultiModelObjectDetection(Node):
         # Auto-load gate detection model for coin toss mission
         self.get_logger().info("🤖 Multi-Model Object Detection Node Initialized!")
         self.get_logger().info("🎯 Auto-loading gate detection model for mission...")
-        if self.load_model("coin_detection"):
+        if self.load_model("gate_detection"):
             self.detection_enabled = True
-            self.get_logger().info("✅ coin detection model loaded and enabled automatically")
+            self.get_logger().info("✅ Gate detection model loaded and enabled automatically")
         else:
             self.get_logger().warn("⚠️ Failed to auto-load gate detection model")
         
@@ -316,7 +315,7 @@ class MultiModelObjectDetection(Node):
                         cls = int(box.cls[0])
                         conf = float(box.conf[0])
                         
-                        if conf > 0.5:
+                        if conf > 0.2:
                             label = f"{self.current_model.names[cls]} {conf:.2f}"
                             
                             # Bounding box

@@ -11,6 +11,10 @@ import os
 import warnings
 import threading
 
+#jade added import
+
+from interfaces.msg import Objcoords
+
 # Suppress matplotlib warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
 
@@ -22,9 +26,9 @@ class MultiModelObjectDetection(Node):
         self.available_models = {
             "gate_detection": {
                 "paths": [
-                    "src/auton_sub/auton_sub/cv/model/gate_best.pt",
-                    "./gate_best.pt",
-                    "gate_best.pt"
+                    "src/auton_sub/auton_sub/cv/model/coin_best.pt",
+                    "./coin_best.pt",
+                    "coin_best.pt"
                 ],
                 "description": "Gate detection model for navigation missions"
             },
@@ -65,6 +69,10 @@ class MultiModelObjectDetection(Node):
         self.image_publisher = self.create_publisher(Image, '/processed_camera_feed', 10)
         self.objects_publisher = self.create_publisher(String, '/detected_objects', 10)
         self.model_status_publisher = self.create_publisher(String, '/current_model_status', 10)
+
+        # New Publisher
+
+        self.coords_publisher = self.create_publisher(Objcoords, '/detected_object_coords', 10)
         
         # ROS2 Subscribers for topic-based model control
         self.model_command_sub = self.create_subscription(
@@ -333,12 +341,18 @@ class MultiModelObjectDetection(Node):
                             
                             detected_objects.add(self.current_model.names[cls])
 
+                            Objcoords_msg = Objcoords()
+                            Objcoords_msg.name = self.current_model.names[cls]
+                            Objcoords_msg.x1 = x1
+                            Objcoords_msg.x2 = x2
+                            self.coords_publisher.publish(Objcoords_msg)
+
             # Publish detected objects
             if detected_objects:
                 obj_msg = String()
                 obj_msg.data = ",".join(detected_objects)
                 self.objects_publisher.publish(obj_msg)
-                
+
             return frame
             
         except Exception as e:

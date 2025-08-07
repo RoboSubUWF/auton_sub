@@ -1,12 +1,10 @@
-# ROS 2 version of RobotControl using heading-based control with DVL integration
+# ROS 2 version of RobotControl with hardcoded configuration for a single submarine
 
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from geometry_msgs.msg import PoseStamped, TwistStamped
-from mavros_msgs.msg import ManualControl, AttitudeTarget, PositionTarget
-from mavros_msgs.srv import SetMode, CommandBool
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import PoseStamped
+from mavros_msgs.msg import OverrideRCIn, ManualControl
 from std_srvs.srv import Trigger
 
 from simple_pid import PID
@@ -16,8 +14,15 @@ import time
 import threading
 
 
+
+def clip(pwm_min: int, pwm_max: int, value: int):
+    value = min(pwm_max, value)  #chooses lowest value between max and value
+    value = max(pwm_min, value)  # chooses maximum value between min and value
+    return value
+
 def quaternion_to_yaw(x, y, z, w):
     """Convert quaternion to yaw angle (in radians)"""
+    # Formula for yaw from quaternion
     yaw = math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
     return yaw
 
@@ -25,109 +30,62 @@ class RobotControl(Node):
     def __init__(self):
         super().__init__('robot_control')
 
-        self.rate = self.create_rate(20)  # 20 Hz loop rate
-        self.lock = threading.Lock()#make sure different threads arent posting different data in same place same time
-        self.debug = True  # Enable debug info
+        self.rate = self.create_rate(20)  # 20 Hz loop rate (do this 20 times per second)
+        self.lock = threading.Lock() #make sure different threads arent posting different data in same place same time
+        self.debug = False # does not print debug info
 
-        # Robot state - Use ArduSub EKF fused position (includes DVL + IMU)
-        self.position = {'x': 0.0, 'y': 0.0, 'z': 0.0}  # EKF fused position from ArduSub
-        self.velocity = {'x': 0.0, 'y': 0.0, 'z': 0.0}  # EKF fused velocity
-        self.orientation = {'yaw': 0.0, 'pitch': 0.0, 'roll': 0.0}
-        self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None}
+        # Hardcoded config (since no deviceHelper file)
+        self.pwm_scale = 400  # 1*400+1500 = full speed
+        self.pwm_neutral = 1500 #off
+        self.pwm_min = 1100 #backwards full speed
+        self.pwm_max = 1900 #forwards full speed
+
+        # Robot state
+        self.position = {'x': 0.0, 'y': 0.0, 'z': 0.0}  #sets starting position as home position
+        self.orientation = {'yaw': 0.0, 'pitch': 0.0, 'roll': 0.0}  #sets starting values
+        self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None, 'pitch': None, 'roll': None} #also initializes
         self.movement_command = {'forward': 0.0, 'yaw': 0.0}
         self.max_descent_mode = False 
-        self.mode = "guided"
+        self.mode = "hybrid"
 
-        # Status flags
-        self.position_valid = False
-        self.velocity_valid = False
-        self.last_position_time = time.time()
-        self.position_timeout = 2.0  # seconds
+        # Publishers and subscribers
+        self.pose_sub = self.create_subscription(PoseStamped, '/pose', self.pose_callback, 10) #creates subscription to recieve x,y,z
+        self.thruster_pub = self.create_publisher(OverrideRCIn, '/mavros/rc/override', 10) #publishes where to move
+        
+        # Also publish manual control for MANUAL mode
+        self.manual_control_pub = self.create_publisher(ManualControl, '/mavros/manual_control/control', 10) #direct control
 
-        # Publishers and subscribers - Use proper MAVROS topics for DVL integration
-        # LOCAL_POSITION_NED from ArduSub EKF (fuses DVL + IMU + barometer)
-        self.pose_sub = self.create_subscription(
-            PoseStamped, '/mavros/local_position/pose', self.ekf_pose_callback, 10) #gets position and stores the last 10 messages in pose
-        
-        # Get velocity from EKF for better dead reckoning
-        self.velocity_sub = self.create_subscription(
-            TwistStamped, '/mavros/local_position/velocity_local', self.ekf_velocity_callback, 10)
-        
-        # Publishers for GUIDED mode control
-        # Use velocity commands for GUIDED mode (preferred method)
-        self.velocity_pub = self.create_publisher(Twist, '/mavros/setpoint_velocity/cmd_vel_unstamped', 10)
-        
-        # Alternative: Use position targets for waypoint navigation
-        self.position_target_pub = self.create_publisher(PositionTarget, '/mavros/setpoint_raw/local', 10)
-        
-        # ManualControl for MANUAL mode fallback (if needed)
-        self.manual_control_pub = self.create_publisher(ManualControl, '/mavros/manual_control/control', 10)
-
-        # PID controllers - tuned for heading-based control
+        ##kp=how much it reacts to current error *0.1to 100, 
+        # Ki=reacts to past error *0 to 5
+        #kd = reacts to to future predicted error 0 to 10
+        #setpoint (wants error to be zero)
+        #
+        # PID controllers
         self.PIDs = {   
-            "yaw": PID(1.5, 0.02, 0.05, setpoint=0, output_limits=(-1.0, 1.0)),
-            "depth": PID(1.0, 0.1, 0.2, setpoint=0, output_limits=(-1.0, 1.0)),
-            "surge": PID(0.8, 0.03, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
-            "lateral": PID(0.8, 0.03, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
+            "yaw": PID(12.0, 0.01, 0.0, setpoint=0, output_limits=(-2, 2)),
+            "pitch": PID(0.5, 0.1, 0.1, setpoint=0, output_limits=(-2, 2)),
+            "roll": PID(0.5, 0.1, 0.1, setpoint=0, output_limits=(-2, 2)),
+            "surge": PID(2.0, 0.05, 0.01, setpoint=0, output_limits=(-2, 2)),
+            "lateral": PID(2.0, 0.05, 0.01, setpoint=0, output_limits=(-2, 2)),
+            "depth": PID(2.0, 0.1, 0.5, setpoint=0, output_limits=(-2.0, 2.0))
         }
 
         # Start the main control thread
-        self.running = True
-        self.control_thread = threading.Thread(target=self.control_loop)
-        self.control_thread.start()
+        self.running = True #keep running as long as ros2 is running
+        self.control_thread = threading.Thread(target=self.control_loop) #runs control loop when called
+        self.control_thread.start() #starts the thread
         
-        self.get_logger().info("RobotControl initialized with DVL-based EKF positioning")
+        self.get_logger().info("RobotControl initialized - PWM scale: %d" % self.pwm_scale)
 
-    def ekf_pose_callback(self, msg):
-        """EKF fused position callback from ArduSub (includes DVL + IMU + barometer)"""
-        # This is the LOCAL_POSITION_NED message from ArduSub's EKF
-        # Contains fused DVL, IMU, and barometer data
-        if (not math.isnan(msg.pose.position.x) and 
-            not math.isnan(msg.pose.position.y) and 
-            not math.isnan(msg.pose.position.z)):
-            
-            with self.lock:
-                self.position['x'] = msg.pose.position.x
-                self.position['y'] = msg.pose.position.y
-                self.position['z'] = msg.pose.position.z  # Fused depth (barometer + DVL altitude)
-                self.position_valid = True
-                self.last_position_time = time.time()
-            
-            if self.debug and time.time() % 5 < 0.1:  # Log every 5 seconds
-                self.get_logger().info(f"EKF Position: x={self.position['x']:.2f}, y={self.position['y']:.2f}, z={self.position['z']:.2f}")
-        else:
-            with self.lock:
-                self.position_valid = False
-            if self.debug:
-                self.get_logger().warn("EKF position invalid (NaN values)")
+    def pose_callback(self, msg): #called anytime a pose message is recieved
+        self.position['x'] = msg.pose.position.x #copies the recieved positions x y z to position dictionary
+        self.position['y'] = msg.pose.position.y
+        self.position['z'] = msg.pose.position.z
         
-        # Always update orientation (from IMU)
+        # Convert quaternion to yaw manually (no tf_transformations needed)
         q = msg.pose.orientation
-        if not math.isnan(q.w):
-            with self.lock:
-                self.orientation['yaw'] = quaternion_to_yaw(q.x, q.y, q.z, q.w)
-                
-                self.orientation['pitch'] = math.asin(2.0 * (q.w * q.y - q.z * q.x))
-                self.orientation['roll'] = math.atan2(2.0 * (q.w * q.x + q.y * q.z), 1.0 - 2.0 * (q.x * q.x + q.y * q.y))
-
-    def ekf_velocity_callback(self, msg):
-        """EKF fused velocity callback from ArduSub"""
-        if (not math.isnan(msg.twist.linear.x) and  #twist is tyoe of logger
-            not math.isnan(msg.twist.linear.y) and 
-            not math.isnan(msg.twist.linear.z)):
-            
-            with self.lock:
-                self.velocity['x'] = msg.twist.linear.x
-                self.velocity['y'] = msg.twist.linear.y
-                self.velocity['z'] = msg.twist.linear.z
-                self.velocity_valid = True
-            
-            if self.debug and abs(self.velocity['x']) > 0.1 or abs(self.velocity['y']) > 0.1:
-                self.get_logger().info(f"EKF Velocity: x={self.velocity['x']:.2f}, y={self.velocity['y']:.2f}, z={self.velocity['z']:.2f}")
+        self.orientation['yaw'] = quaternion_to_yaw(q.x, q.y, q.z, q.w)
         
-    def check_position_timeout(self):
-        """Check if position data is stale"""
-        return (time.time() - self.last_position_time) < self.position_timeout
         
     def set_depth(self, target_depth):
         """Set the target depth for the submarine"""
@@ -166,247 +124,130 @@ class RobotControl(Node):
             self.get_logger().info(f"Movement command: lateral={lateral:.2f}, forward={forward:.2f}, yaw={yaw:.2f}")            
     
     def get_current_depth(self):
-        """Get current depth from ArduSub EKF (fused barometer + DVL altitude)"""
-        with self.lock:
-            return self.position['z']
+        """Get current depth"""
+        return self.position['z']
 
     def get_current_position(self):
-        """Get current position from ArduSub EKF (fused DVL + IMU)"""
-        with self.lock:
-            pos = self.position.copy()
-            pos['yaw'] = self.orientation['yaw']
-            pos['valid'] = self.position_valid and self.check_position_timeout()
-        return pos
-    
-    def get_current_velocity(self):
-        """Get current velocity from ArduSub EKF"""
-        with self.lock:
-            return self.velocity.copy()
+        """Get current position"""
+        return self.position.copy()
     
     def control_loop(self):
         while rclpy.ok() and self.running:
-            self.update_heading_control()
+            self.update_hybrid_control()
             time.sleep(0.05)
 
-    def update_heading_control(self):
-        """Send control commands appropriate for GUIDED mode"""
+    def update_hybrid_control(self):
+        """Hybrid control: continuous depth PID + movement commands OR position control"""
         with self.lock:
-            # Check position validity
-            position_ok = self.position_valid and self.check_position_timeout()
-            
-            # Initialize control outputs
-            forward_cmd = 0.0
-            lateral_cmd = 0.0
-            yaw_cmd = 0.0
-            depth_cmd = 0.0
-            
-            # Check if we have position targets (waypoint navigation)
+            # Check if we have position setpoints (for waypoint navigation)
             has_position_targets = (self.desired_point['x'] is not None or 
                                   self.desired_point['y'] is not None or
                                   self.desired_point['yaw'] is not None)
             
-            if has_position_targets and position_ok:
-                # Position control mode - use PositionTarget for GUIDED mode
-                self.send_position_target()
-                return
-            elif not has_position_targets:
-                # Velocity control mode using DVL-based EKF position
-                current_pos = self.position
+            if has_position_targets:
+                # Position control mode - use PID to reach specific coordinates
+                forward_cmd = 0.0 
+                yaw_cmd = 0.0
                 
-                # Movement command mode (direct velocity commands)
+                # X position control (lateral movement)
+                if self.desired_point['x'] is not None:
+                    x_error = self.desired_point['x'] - self.position['x']
+                    if abs(x_error) > 0.1:
+                        self.get_logger().warn(f"Cannot move laterally - no lateral thrusters. X error: {x_error:.2f}m")
+                        
+                # Y position control (forward/backward movement)  
+                if self.desired_point['y'] is not None:
+                    y_error = self.desired_point['y'] - self.position['y']
+                    forward_cmd = self.PIDs["surge"](y_error)
+                
+                # Yaw control
+                if self.desired_point['yaw'] is not None:
+                    yaw_error = self.desired_point['yaw'] - self.orientation['yaw']
+                    yaw_cmd = self.PIDs["yaw"](yaw_error)
+                    
+            else:
+                # Movement command mode - direct velocity commands
                 forward_cmd = self.movement_command['forward']
                 yaw_cmd = self.movement_command['yaw']
-            else:
-                # Position targets set but no valid position data
-                if self.debug:
-                    self.get_logger().warn("Position targets set but no valid DVL/EKF position data")
             
-            # Depth control (always active when target is set)
+            # Calculate depth error and PID output (always active)
             if self.desired_point['z'] is not None:
-                current_depth = self.position['z']
-                depth_error = self.desired_point['z'] - current_depth
+                depth_error = self.desired_point['z'] - self.position['z']
                 
                 if self.max_descent_mode and depth_error > 0.1:
-                    # Maximum descent rate
-                    depth_cmd = 1.0  # Full downward velocity
+                    # Maximum descent - force full downward thrust
+                    depth_output = 1.0  # Full power down
                 else:
-                    # Normal PID depth control
-                    depth_cmd = self.PIDs["depth"](depth_error)
+                    # Normal PID control
+                    depth_output = self.PIDs["depth"](depth_error)
+                    # Clamp depth output to reasonable range
+                    depth_output = max(-1.0, min(1.0, depth_output))
+            else:
+                depth_output = 0.0
 
-        # Send velocity commands for GUIDED mode
-        self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd)
+        # Create PWM message
+        pwm = OverrideRCIn()
+        pwm.channels = [self.pwm_neutral] * 18
 
-    def send_velocity_command(self, forward, lateral, vertical, yaw_rate):
-        """Send velocity commands for GUIDED mode - use actual target velocities"""
-        # Create Twist message for velocity control in GUIDED mode
-        vel_cmd = Twist()
-        
-        # Convert normalized commands to actual velocity targets (m/s)
-        max_forward_velocity = 2.0   # m/s - adjust based on your sub's max speed
-        max_lateral_velocity = 1.0   # m/s - adjust based on thruster config
-        max_vertical_velocity = 1.0  # m/s - depth change rate
-        max_yaw_rate = 1.5          # rad/s - yaw rotation rate
-        
-        # Scale commands to actual velocities (full speed when active)
-        if abs(forward) > 0.01:
-            vel_cmd.linear.x = max_forward_velocity if forward > 0 else -max_forward_velocity
-        else:
-            vel_cmd.linear.x = 0.0
-            
-        if abs(lateral) > 0.01:
-            vel_cmd.linear.y = max_lateral_velocity if lateral > 0 else -max_lateral_velocity  
-        else:
-            vel_cmd.linear.y = 0.0
-            
-        if abs(vertical) > 0.01:
-            vel_cmd.linear.z = max_vertical_velocity if vertical > 0 else -max_vertical_velocity
-        else:
-            vel_cmd.linear.z = 0.0
-        
-        if abs(yaw_rate) > 0.01:
-            vel_cmd.angular.z = max_yaw_rate if yaw_rate > 0 else -max_yaw_rate
-        else:
-            vel_cmd.angular.z = 0.0
-            
-        # Other axes (typically not used in subs)
-        vel_cmd.angular.x = 0.0       # Roll rate
-        vel_cmd.angular.y = 0.0       # Pitch rate
+        # Calculate thruster outputs for vectored configuration
+        # Assuming typical BlueROV2 configuration:
+        # - 4 vertical thrusters (channels 0-3) for depth control
+        # - 2 horizontal thrusters (channels 4-5) for forward/yaw/lateral
 
+        # Vertical thrusters - all get same depth control signal
+        vertical_pwm = int(depth_output * self.pwm_scale + self.pwm_neutral)
+        vertical_pwm = clip(self.pwm_min, self.pwm_max, vertical_pwm)
+        
+        # Horizontal thrusters - combine forward, lateral, and yaw commands
+        # Simple differential thrust for lateral and yaw
+        left_horizontal = forward_cmd + yaw_cmd * 0.5
+        right_horizontal = forward_cmd - yaw_cmd * 0.5
+        
+        # Clamp horizontal commands
+        left_horizontal = max(-1.0, min(1.0, left_horizontal))
+        right_horizontal = max(-1.0, min(1.0, right_horizontal))
+        
+        left_pwm = int(left_horizontal * self.pwm_scale + self.pwm_neutral)
+        right_pwm = int(right_horizontal * self.pwm_scale + self.pwm_neutral)
+        
+        left_pwm = clip(self.pwm_min, self.pwm_max, left_pwm)
+        right_pwm = clip(self.pwm_min, self.pwm_max, right_pwm)
+
+        # Assign to channels (typical BlueROV2 mapping)
+        pwm.channels[1] = right_pwm    # Right 
+        pwm.channels[2] = left_pwm    # Left  
+        pwm.channels[5] = vertical_pwm    #front right
+        pwm.channels[6] = vertical_pwm    # front left
+        pwm.channels[7] = vertical_pwm        # back right
+        pwm.channels[8] = vertical_pwm       # back left
         # Debug logging
-        if self.debug and (abs(vertical) > 0.01 or abs(forward) > 0.01 or abs(yaw_rate) > 0.01):
-            position_ok = self.position_valid and self.check_position_timeout()
+        if self.debug and (abs(depth_output) > 0.1 or abs(forward_cmd) > 0.1 or abs(yaw_cmd) > 0.1):
             current_depth = self.position['z']
             target_depth = self.desired_point['z'] if self.desired_point['z'] is not None else current_depth
-            ekf_status = "EKF_OK" if position_ok else "EKF_STALE"
-            vel = self.velocity
-            self.get_logger().info(f"GUIDED Vel (FULL SPEED): depth={current_depth:.2f}→{target_depth:.2f} (Z:{vel_cmd.linear.z:.1f}m/s) "
-                                 f"pos: x={self.position['x']:.1f},y={self.position['y']:.1f} vel: x={vel['x']:.2f},y={vel['y']:.2f} "
-                                 f"cmd: F={vel_cmd.linear.x:.1f}m/s Y={vel_cmd.angular.z:.1f}rad/s ({ekf_status})")
+            self.get_logger().info(f"Control: depth={current_depth:.2f}→{target_depth:.2f} (PWM:{vertical_pwm}) "
+                                 f"move: F={forward_cmd:.2f} Y={yaw_cmd:.2f} (PWM: L={left_pwm} R={right_pwm})")
 
-        # Publish velocity command
-        self.velocity_pub.publish(vel_cmd)
-
-    def send_position_target(self):
-        """Send position targets for waypoint navigation in GUIDED mode"""
-        position_target = PositionTarget()
-        position_target.header.stamp = self.get_clock().now().to_msg()
-        position_target.header.frame_id = "base_link"
-        
-        # Coordinate frame (body frame NED)
-        position_target.coordinate_frame = PositionTarget.FRAME_LOCAL_NED
-        
-        # Set what to control (position and yaw)
-        position_target.type_mask = (
-            PositionTarget.IGNORE_VX | PositionTarget.IGNORE_VY | PositionTarget.IGNORE_VZ |
-            PositionTarget.IGNORE_AFX | PositionTarget.IGNORE_AFY | PositionTarget.IGNORE_AFZ
-        )
-        
-        # Set position targets (if specified)
-        if self.desired_point['x'] is not None:
-            position_target.position.x = self.desired_point['x']
-        else:
-            position_target.type_mask |= PositionTarget.IGNORE_PX
-            
-        if self.desired_point['y'] is not None:
-            position_target.position.y = self.desired_point['y'] 
-        else:
-            position_target.type_mask |= PositionTarget.IGNORE_PY
-            
-        if self.desired_point['z'] is not None:
-            position_target.position.z = self.desired_point['z']
-        else:
-            position_target.type_mask |= PositionTarget.IGNORE_PZ
-            
-        # Set yaw target (if specified)
-        if self.desired_point['yaw'] is not None:
-            position_target.yaw = self.desired_point['yaw']
-        else:
-            position_target.type_mask |= PositionTarget.IGNORE_YAW
-            
-        # Publish position target
-        self.position_target_pub.publish(position_target)
-        
-        if self.debug:
-            self.get_logger().info(f"GUIDED Position Target: x={position_target.position.x:.2f}, "
-                                 f"y={position_target.position.y:.2f}, z={position_target.position.z:.2f}, "
-                                 f"yaw={position_target.yaw:.2f}")
-
-    def send_manual_control(self, forward, lateral, vertical, yaw_rate):
-        """Send manual control commands (for MANUAL mode fallback) - FULL SPEED WHEN ACTIVE"""
-        manual_cmd = ManualControl()
-        manual_cmd.header.stamp = self.get_clock().now().to_msg()
-        
-        # For your PWM requirements: 1100=full back, 1500=off, 1900=full forward
-        # ManualControl expects -1000 to 1000, which maps to your 1100-1900 range
-        
-        # Full speed when active (binary on/off control)
-        if abs(forward) > 0.01:
-            manual_cmd.x = 1000 if forward > 0 else -1000  # Full forward (1900) or full back (1100)
-        else:
-            manual_cmd.x = 0  # Off (1500)
-            
-        if abs(lateral) > 0.01:
-            manual_cmd.y = 1000 if lateral > 0 else -1000  # Full lateral
-        else:
-            manual_cmd.y = 0  # Off
-            
-        if abs(vertical) > 0.01:
-            manual_cmd.z = 1000 if vertical > 0 else -1000  # Full up/down (1900/1100)
-        else:
-            manual_cmd.z = 0  # Off (1500)
-            
-        if abs(yaw_rate) > 0.01:
-            manual_cmd.r = 1000 if yaw_rate > 0 else -1000  # Full yaw rotation
-        else:
-            manual_cmd.r = 0  # Off
-        
-        # Values are already at max (-1000/1000), so no clamping needed
-        
-        if self.debug:
-            pwm_x = int(manual_cmd.x * 0.4 + 1500)  # Convert back to actual PWM for logging
-            pwm_z = int(manual_cmd.z * 0.4 + 1500) 
-            pwm_r = int(manual_cmd.r * 0.4 + 1500)
-            self.get_logger().info(f"MANUAL Control (FULL SPEED): "
-                                 f"Forward: {manual_cmd.x} → PWM {pwm_x}, "
-                                 f"Depth: {manual_cmd.z} → PWM {pwm_z}, "
-                                 f"Yaw: {manual_cmd.r} → PWM {pwm_r}")
-        
-        # Publish manual control command
-        self.manual_control_pub.publish(manual_cmd)
+        self.thruster_pub.publish(pwm)
 
     def stop(self):
         """Stop the control system"""
         self.running = False
         
-        # Send stop commands for GUIDED mode
-        stop_vel = Twist()
-        stop_vel.linear.x = 0.0
-        stop_vel.linear.y = 0.0
-        stop_vel.linear.z = 0.0
-        stop_vel.angular.x = 0.0
-        stop_vel.angular.y = 0.0
-        stop_vel.angular.z = 0.0
-        self.velocity_pub.publish(stop_vel)
-        
-        # Also send neutral manual control (for safety)
-        manual_cmd = ManualControl()
-        manual_cmd.header.stamp = self.get_clock().now().to_msg()
-        manual_cmd.x = 0
-        manual_cmd.y = 0
-        manual_cmd.z = 0
-        manual_cmd.r = 0
-        self.manual_control_pub.publish(manual_cmd)
+        # Send neutral PWM to all channels
+        pwm = OverrideRCIn()
+        pwm.channels = [self.pwm_neutral] * 18
+        self.thruster_pub.publish(pwm)
         
         if self.control_thread.is_alive():
             self.control_thread.join()
         self.get_logger().info("RobotControl stopped.")
 
 
-def main(args=None):
-    rclpy.init(args=args)
+def main(args=None): #function can optionally accept command-line arguments (passed in from ROS 2 or the terminal).
+    rclpy.init(args=args) #initializes the ROS 2 Python library (rclpy)
     rc = RobotControl()
     try:
-        rclpy.spin(rc)
+        rclpy.spin(rc) #tells ROS to keep the program running and wait for messages
     except KeyboardInterrupt:
         rc.get_logger().info("Keyboard interrupt - shutting down")
     finally:

@@ -52,7 +52,7 @@ def generate_launch_description():
         
         # Small delay to ensure detection node is ready
         TimerAction(
-            period=30.0,
+            period=5.0,
             actions=[
                 # Coin toss mission node - starts after detection node is ready
                 Node(
