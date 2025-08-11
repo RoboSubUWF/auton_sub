@@ -1,3 +1,4 @@
+# front camera
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -10,6 +11,8 @@ from ultralytics import YOLO
 import os
 import warnings
 import threading
+
+from interfaces.msg import Objcoords
 
 # Suppress matplotlib warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
@@ -65,7 +68,8 @@ class MultiModelObjectDetection(Node):
         self.image_publisher = self.create_publisher(Image, '/processed_camera_feed', 10)
         self.objects_publisher = self.create_publisher(String, '/detected_objects', 10)
         self.model_status_publisher = self.create_publisher(String, '/current_model_status', 10)
-        
+        self.coords_publisher = self.create_publisher(Objcoords, '/detected_object_coords', 10)
+
         # ROS2 Subscribers for topic-based model control
         self.model_command_sub = self.create_subscription(
             String,
@@ -104,9 +108,9 @@ class MultiModelObjectDetection(Node):
         # Auto-load gate detection model for coin toss mission
         self.get_logger().info("🤖 Multi-Model Object Detection Node Initialized!")
         self.get_logger().info("🎯 Auto-loading gate detection model for mission...")
-        if self.load_model("gate_detection"):
+        if self.load_model("coin_detection"):
             self.detection_enabled = True
-            self.get_logger().info("✅ Gate detection model loaded and enabled automatically")
+            self.get_logger().info("✅ coin detection model loaded and enabled automatically")
         else:
             self.get_logger().warn("⚠️ Failed to auto-load gate detection model")
         
@@ -315,7 +319,7 @@ class MultiModelObjectDetection(Node):
                         cls = int(box.cls[0])
                         conf = float(box.conf[0])
                         
-                        if conf > 0.2:
+                        if conf > 0.5:
                             label = f"{self.current_model.names[cls]} {conf:.2f}"
                             
                             # Bounding box
@@ -332,6 +336,12 @@ class MultiModelObjectDetection(Node):
                                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
                             
                             detected_objects.add(self.current_model.names[cls])
+
+                            Objcoords_msg = Objcoords()
+                            Objcoords_msg.name = self.current_model.names[cls]
+                            Objcoords_msg.x1 = x1
+                            Objcoords_msg.x2 = x2
+                            self.coords_publisher.publish(Objcoords_msg)
 
             # Publish detected objects
             if detected_objects:

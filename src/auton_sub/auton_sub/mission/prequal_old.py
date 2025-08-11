@@ -26,7 +26,7 @@ class StraightLeftMission(Node):
         self.turn_speed = 1         # yaw rate for turning (rad/s)
         
         # Depth tolerance
-        self.depth_tolerance = 0.25    # 10cm tolerance for depth
+        self.depth_tolerance = 0.25    # 25cm tolerance for depth
 
     def descend_to_depth(self, target_depth=2):
         """Descend to the specified depth and maintain it"""
