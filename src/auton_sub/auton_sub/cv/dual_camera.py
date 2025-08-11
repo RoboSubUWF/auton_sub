@@ -49,13 +49,13 @@ class DualCameraObjectDetection(Node):
                 ],
                 "description": "Gate detection model for navigation missions"
             },
-            "buoy_detection": {
+            "slalom_detection": {
                 "paths": [
-                    "src/auton_sub/auton_sub/cv/model/buoy_best.pt", 
-                    "./buoy_best.pt",
-                    "buoy_best.pt"
+                    "src/auton_sub/auton_sub/cv/model/slalom.pt", 
+                    "./slalom.pt",
+                    "slalom.pt"
                 ],
-                "description": "Buoy detection model for buoy missions"
+                "description": "slalom detection model for slalom missions"
             },
             "coin_detection": {
                 "paths": [
