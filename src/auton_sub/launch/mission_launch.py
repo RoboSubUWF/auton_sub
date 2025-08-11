@@ -43,7 +43,7 @@ def generate_launch_description():
         # Multi-model object detection node
         Node(
             package='auton_sub',
-            executable='front_multi',
+            executable='dual_camera',
             output='screen',
             parameters=[
                 # Add any parameters for the detection node
@@ -52,12 +52,12 @@ def generate_launch_description():
         
         # Small delay to ensure detection node is ready
         TimerAction(
-            period=30.0,
+            period=5.0,
             actions=[
                 # Coin toss mission node - starts after detection node is ready
                 Node(
                     package='auton_sub',
-                    executable='coin_toss',
+                    executable='Ocean_Cleanup',
                     output='screen',
                     parameters=[
                         # Add any parameters for the mission node

@@ -237,6 +237,7 @@ class CoinTossMission(Node):
             if not self.toggle_detection(True):
                 self.get_logger().error("[ERROR] Failed to enable detection")
                 return False
+            
             # Step 3: Arm the vehicle
             self.get_logger().info("[INFO] Arming vehicle...")
             arm_node = arm.ArmerNode()
@@ -247,7 +248,7 @@ class CoinTossMission(Node):
             if not set_guided_mode():
                 self.get_logger().error("[ERROR] Failed to set GUIDED mode")
                 return False
-             
+            
             # Step 5: Wait for systems to be ready
             self.get_logger().info("[INFO] Waiting for control systems and vision data...")
             

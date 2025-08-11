@@ -25,9 +25,9 @@ class MultiModelObjectDetection(Node):
         self.available_models = {
             "gate_detection": {
                 "paths": [
-                    "src/auton_sub/auton_sub/cv/model/gate_best.pt",
-                    "./gate_best.pt",
-                    "gate_best.pt"
+                    "src/auton_sub/auton_sub/cv/model/prequal.pt",
+                    "./prequal.pt",
+                    "prequal.pt"
                 ],
                 "description": "Gate detection model for navigation missions"
             },
