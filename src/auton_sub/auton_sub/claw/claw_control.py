@@ -71,6 +71,16 @@ def emergency_open():
     print("🚨 EMERGENCY CLAW OPEN!")
     return open_claw()
 
+def cleanup_gpio():
+    """Manual GPIO cleanup - call this if you need to clean up"""
+    try:
+        GPIO.cleanup()
+        print("🧹 GPIO cleaned up")
+        return True
+    except Exception as e:
+        print(f"⚠️ GPIO cleanup warning: {e}")
+        return False
+
 # Standalone script functionality
 if __name__ == '__main__':
     import sys
@@ -97,11 +107,13 @@ if __name__ == '__main__':
             open_claw()
             print("✅ Test complete")
             success = True
+        elif command == 'cleanup':
+            success = cleanup_gpio()
         else:
-            print("Usage: python simple_claw_control.py [open|close|state|test]")
+            print("Usage: python claw_control.py [open|close|state|test|cleanup]")
             success = False
     else:
-        print("Usage: python simple_claw_control.py [open|close|state|test]")
+        print("Usage: python claw_control.py [open|close|state|test|cleanup]")
         success = False
     
     sys.exit(0 if success else 1)

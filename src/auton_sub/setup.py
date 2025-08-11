@@ -42,7 +42,7 @@ setup(
             'leak_node = auton_sub.sensors.leak_node:main',
             'test_thruster = auton_sub.test_thruster:main',
             'mission_control = auton_sub.mission_control:main',
-            'claw = auton_sub.claw:main',
+            'claw = auton_sub.claw',
             'claw_control_node = auton_sub.claw.claw_control_node:main',
             'claw_open = auton_sub.claw.claw_open:main',
             'claw_close = auton_sub.claw.claw_close:main',

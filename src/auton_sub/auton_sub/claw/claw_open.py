@@ -3,7 +3,7 @@
 Simple Claw Open - GPIO Pin 7 HIGH
 Just opens the claw, GPIO state stays HIGH until changed
 """
-from auton_sub.claw.simple_claw_control import open_claw
+from auton_sub.claw.claw_control import open_claw
 
 def main():
     """Main function - just open the claw"""
