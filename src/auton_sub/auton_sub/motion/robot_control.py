@@ -63,6 +63,10 @@ class RobotControl(Node):
         # ManualControl for MANUAL mode fallback (if needed)
         self.manual_control_pub = self.create_publisher(ManualControl, '/mavros/manual_control/control', 10)
 
+        #kp=how much it reacts to current error *0.1to 100, 
+        # Ki=reacts to past error *0 to 5
+        #kd = reacts to to future predicted error 0 to 10
+        #setpoint (wants error to be zero)
         # PID controllers - tuned for heading-based control
         self.PIDs = {   
             "yaw": PID(1.5, 0.02, 0.05, setpoint=0, output_limits=(-1.0, 1.0)),
@@ -82,6 +86,7 @@ class RobotControl(Node):
         """EKF fused position callback from ArduSub (includes DVL + IMU + barometer)"""
         # This is the LOCAL_POSITION_NED message from ArduSub's EKF
         # Contains fused DVL, IMU, and barometer data
+        # makes sure it can process the nan data when dvl not pinging
         if (not math.isnan(msg.pose.position.x) and 
             not math.isnan(msg.pose.position.y) and 
             not math.isnan(msg.pose.position.z)):
@@ -93,7 +98,7 @@ class RobotControl(Node):
                 self.position_valid = True
                 self.last_position_time = time.time()
             
-            if self.debug and time.time() % 5 < 0.1:  # Log every 5 seconds
+            if self.debug and time.time() % 5 < 0.1:  # Log position every 5 seconds
                 self.get_logger().info(f"EKF Position: x={self.position['x']:.2f}, y={self.position['y']:.2f}, z={self.position['z']:.2f}")
         else:
             with self.lock:
@@ -235,7 +240,7 @@ class RobotControl(Node):
 
         # Send velocity commands for GUIDED mode
         self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd)
-
+    #option one
     def send_velocity_command(self, forward, lateral, vertical, yaw_rate):
         """Send velocity commands for GUIDED mode - use actual target velocities"""
         # Create Twist message for velocity control in GUIDED mode
@@ -286,16 +291,17 @@ class RobotControl(Node):
         # Publish velocity command
         self.velocity_pub.publish(vel_cmd)
 
+        #option 2
     def send_position_target(self):
         """Send position targets for waypoint navigation in GUIDED mode"""
         position_target = PositionTarget()
         position_target.header.stamp = self.get_clock().now().to_msg()
-        position_target.header.frame_id = "base_link"
+        position_target.header.frame_id = "base_link" #shows x,y,z position
         
         # Coordinate frame (body frame NED)
-        position_target.coordinate_frame = PositionTarget.FRAME_LOCAL_NED
+        position_target.coordinate_frame = PositionTarget.FRAME_LOCAL_NED #uses North, East, Down coordinates
         
-        # Set what to control (position and yaw)
+        # Set what to control (position and yaw) and ignore velocity commands since pixhawk handels the position
         position_target.type_mask = (
             PositionTarget.IGNORE_VX | PositionTarget.IGNORE_VY | PositionTarget.IGNORE_VZ |
             PositionTarget.IGNORE_AFX | PositionTarget.IGNORE_AFY | PositionTarget.IGNORE_AFZ
@@ -305,7 +311,7 @@ class RobotControl(Node):
         if self.desired_point['x'] is not None:
             position_target.position.x = self.desired_point['x']
         else:
-            position_target.type_mask |= PositionTarget.IGNORE_PX
+            position_target.type_mask |= PositionTarget.IGNORE_PX #ignores if not relevant
             
         if self.desired_point['y'] is not None:
             position_target.position.y = self.desired_point['y'] 
@@ -330,7 +336,7 @@ class RobotControl(Node):
             self.get_logger().info(f"GUIDED Position Target: x={position_target.position.x:.2f}, "
                                  f"y={position_target.position.y:.2f}, z={position_target.position.z:.2f}, "
                                  f"yaw={position_target.yaw:.2f}")
-
+        #option 3
     def send_manual_control(self, forward, lateral, vertical, yaw_rate):
         """Send manual control commands (for MANUAL mode fallback) - FULL SPEED WHEN ACTIVE"""
         manual_cmd = ManualControl()
