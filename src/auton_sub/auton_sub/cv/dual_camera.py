@@ -27,7 +27,7 @@ class DualCameraObjectDetection(Node):
             'width': 640,
             'height': 480,
             'fps': 60,
-            'device_id': 0,  # Usually /dev/video0
+            'device_id': 4,  # Usually /dev/video0
             'name': 'Front Camera'
         }
         
@@ -35,7 +35,7 @@ class DualCameraObjectDetection(Node):
             'width': 600,
             'height': 800,
             'fps': 30,
-            'device_id': 2,  # Usually /dev/video1
+            'device_id': 0,  # Usually /dev/video1
             'name': 'Bottom Camera'
         }
         
@@ -80,6 +80,16 @@ class DualCameraObjectDetection(Node):
                     "./best.pt",
                     "best.pt",
                     os.path.expanduser("~/best.pt")
+                ],
+                "description": "General object detection model (includes table, items, baskets)"
+                
+            },
+            "path_detection": {
+                "paths": [
+                    "src/auton_sub/auton_sub/cv/model/prequal.pt",
+                    "./prequal.pt",
+                    "prequal.pt",
+                    os.path.expanduser("~/prequal.pt")
                 ],
                 "description": "General object detection model (includes table, items, baskets)"
             }

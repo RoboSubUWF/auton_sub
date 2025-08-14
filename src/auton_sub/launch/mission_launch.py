@@ -57,7 +57,7 @@ def generate_launch_description():
                 # Coin toss mission node - starts after detection node is ready
                 Node(
                     package='auton_sub',
-                    executable='slalom',
+                    executable='full_planner',
                     output='screen',
                     parameters=[
                         # Add any parameters for the mission node

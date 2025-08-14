@@ -1,13 +1,16 @@
-# ROS 2 version of RobotControl using heading-based control with DVL integration
+# ROS 2 version of RobotControl using MAVROS Vision Topics (from DVL bridge)
 
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from geometry_msgs.msg import PoseStamped, TwistStamped
+from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
 from mavros_msgs.msg import ManualControl, AttitudeTarget, PositionTarget
 from mavros_msgs.srv import SetMode, CommandBool
 from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
+from sensor_msgs.msg import Range
 from std_srvs.srv import Trigger
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy
 
 from simple_pid import PID
 import numpy as np
@@ -15,6 +18,16 @@ import math
 import time
 import threading
 
+# Create QoS profile that matches MAVROS
+def create_mavros_qos():
+    """Create QoS profile compatible with MAVROS topics"""
+    qos = QoSProfile(
+        reliability=ReliabilityPolicy.RELIABLE,  # MAVROS vision topics use RELIABLE
+        durability=DurabilityPolicy.VOLATILE,
+        history=HistoryPolicy.KEEP_LAST,
+        depth=10
+    )
+    return qos
 
 def quaternion_to_yaw(x, y, z, w):
     """Convert quaternion to yaw angle (in radians)"""
@@ -26,48 +39,73 @@ class RobotControl(Node):
         super().__init__('robot_control')
 
         self.rate = self.create_rate(20)  # 20 Hz loop rate
-        self.lock = threading.Lock()#make sure different threads arent posting different data in same place same time
+        self.lock = threading.Lock()
         self.debug = True  # Enable debug info
 
-        # Robot state - Use ArduSub EKF fused position (includes DVL + IMU)
-        self.position = {'x': 0.0, 'y': 0.0, 'z': 0.0}  # EKF fused position from ArduSub
-        self.velocity = {'x': 0.0, 'y': 0.0, 'z': 0.0}  # EKF fused velocity
-        self.orientation = {'yaw': 0.0, 'pitch': 0.0, 'roll': 0.0}
+        # Robot state - Use MAVROS Vision Topics (from DVL bridge)
+        self.position = {'x': 0.0, 'y': 0.0, 'z': 0.0}  # DVL position via MAVROS vision
+        self.velocity = {'x': 0.0, 'y': 0.0, 'z': 0.0}  # DVL velocity via MAVROS vision
+        self.orientation = {'yaw': 0.0, 'pitch': 0.0, 'roll': 0.0}  # IMU orientation
+        self.range_to_bottom = float('nan')  # DVL range sensor
         self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None}
         self.movement_command = {'forward': 0.0, 'yaw': 0.0}
         self.max_descent_mode = False 
         self.mode = "guided"
 
-        # Status flags
-        self.position_valid = False
-        self.velocity_valid = False
-        self.last_position_time = time.time()
-        self.position_timeout = 2.0  # seconds
+        # Status flags for MAVROS Vision data (from DVL bridge)
+        self.vision_pose_valid = False
+        self.vision_velocity_valid = False
+        self.imu_valid = False
+        self.last_vision_time = time.time()
+        self.last_imu_time = time.time()
+        self.data_timeout = 3.0  # seconds
 
-        # Publishers and subscribers - Use proper MAVROS topics for DVL integration
-        # LOCAL_POSITION_NED from ArduSub EKF (fuses DVL + IMU + barometer)
-        self.pose_sub = self.create_subscription(
-            PoseStamped, '/mavros/local_position/pose', self.ekf_pose_callback, 10) #gets position and stores the last 10 messages in pose
+        # QoS profiles
+        mavros_qos = create_mavros_qos()
+        dvl_qos = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            durability=DurabilityPolicy.VOLATILE,
+            history=HistoryPolicy.KEEP_LAST,
+            depth=10
+        )
         
-        # Get velocity from EKF for better dead reckoning
-        self.velocity_sub = self.create_subscription(
-            TwistStamped, '/mavros/local_position/velocity_local', self.ekf_velocity_callback, 10)
+        # MAVROS Vision Topic Subscribers (from DVL bridge output)
+        self.vision_pose_sub = self.create_subscription(
+            PoseStamped,
+            '/mavros/vision_pose/pose',  # DVL position via bridge
+            self.mavros_pose_callback,
+            mavros_qos
+        )
+        
+        self.vision_speed_sub = self.create_subscription(
+            TwistStamped,
+            '/mavros/vision_speed/speed_twist',  # DVL velocity via bridge
+            self.mavros_velocity_callback,
+            mavros_qos
+        )
+        
+        # Optional: Direct DVL range subscription (if available)
+        self.dvl_range_sub = self.create_subscription(
+            Range,
+            'dvl/range',
+            self.dvl_range_callback,
+            dvl_qos
+        )
+        
+        # IMU data for orientation (still from MAVROS directly)
+        self.imu_sub = self.create_subscription(
+            PoseStamped, 
+            '/mavros/local_position/pose', 
+            self.imu_orientation_callback, 
+            mavros_qos
+        )
         
         # Publishers for GUIDED mode control
-        # Use velocity commands for GUIDED mode (preferred method)
         self.velocity_pub = self.create_publisher(Twist, '/mavros/setpoint_velocity/cmd_vel_unstamped', 10)
-        
-        # Alternative: Use position targets for waypoint navigation
         self.position_target_pub = self.create_publisher(PositionTarget, '/mavros/setpoint_raw/local', 10)
-        
-        # ManualControl for MANUAL mode fallback (if needed)
         self.manual_control_pub = self.create_publisher(ManualControl, '/mavros/manual_control/control', 10)
 
-        #kp=how much it reacts to current error *0.1to 100, 
-        # Ki=reacts to past error *0 to 5
-        #kd = reacts to to future predicted error 0 to 10
-        #setpoint (wants error to be zero)
-        # PID controllers - tuned for heading-based control
+        # PID controllers - tuned for DVL-based control via MAVROS vision
         self.PIDs = {   
             "yaw": PID(1.5, 0.02, 0.05, setpoint=0, output_limits=(-1.0, 1.0)),
             "depth": PID(1.0, 0.1, 0.2, setpoint=0, output_limits=(-1.0, 1.0)),
@@ -80,59 +118,81 @@ class RobotControl(Node):
         self.control_thread = threading.Thread(target=self.control_loop)
         self.control_thread.start()
         
-        self.get_logger().info("RobotControl initialized with DVL-based EKF positioning")
+        self.get_logger().info("RobotControl initialized with MAVROS Vision Topics (DVL via Bridge)")
 
-    def ekf_pose_callback(self, msg):
-        """EKF fused position callback from ArduSub (includes DVL + IMU + barometer)"""
-        # This is the LOCAL_POSITION_NED message from ArduSub's EKF
-        # Contains fused DVL, IMU, and barometer data
-        # makes sure it can process the nan data when dvl not pinging
-        if (not math.isnan(msg.pose.position.x) and 
-            not math.isnan(msg.pose.position.y) and 
-            not math.isnan(msg.pose.position.z)):
-            
+    def mavros_pose_callback(self, msg: PoseStamped):
+        """MAVROS vision pose callback - DVL position data via bridge"""
+        try:
             with self.lock:
+                # Position from MAVROS vision pose (DVL data via bridge)
                 self.position['x'] = msg.pose.position.x
                 self.position['y'] = msg.pose.position.y
-                self.position['z'] = msg.pose.position.z  # Fused depth (barometer + DVL altitude)
-                self.position_valid = True
-                self.last_position_time = time.time()
-            
-            if self.debug and time.time() % 5 < 0.1:  # Log position every 5 seconds
-                self.get_logger().info(f"EKF Position: x={self.position['x']:.2f}, y={self.position['y']:.2f}, z={self.position['z']:.2f}")
-        else:
-            with self.lock:
-                self.position_valid = False
-            if self.debug:
-                self.get_logger().warn("EKF position invalid (NaN values)")
-        
-        # Always update orientation (from IMU)
-        q = msg.pose.orientation
-        if not math.isnan(q.w):
-            with self.lock:
-                self.orientation['yaw'] = quaternion_to_yaw(q.x, q.y, q.z, q.w)
+                self.position['z'] = msg.pose.position.z
                 
-                self.orientation['pitch'] = math.asin(2.0 * (q.w * q.y - q.z * q.x))
-                self.orientation['roll'] = math.atan2(2.0 * (q.w * q.x + q.y * q.z), 1.0 - 2.0 * (q.x * q.x + q.y * q.y))
-
-    def ekf_velocity_callback(self, msg):
-        """EKF fused velocity callback from ArduSub"""
-        if (not math.isnan(msg.twist.linear.x) and  #twist is tyoe of logger
-            not math.isnan(msg.twist.linear.y) and 
-            not math.isnan(msg.twist.linear.z)):
+                # Mark pose data as valid
+                self.vision_pose_valid = True
+                self.last_vision_time = time.time()
             
+            if self.debug and time.time() % 3 < 0.1:  # Log every 3 seconds
+                self.get_logger().info(f"MAVROS Vision Pose (DVL): x={self.position['x']:.3f}m, y={self.position['y']:.3f}m, z={self.position['z']:.3f}m")
+                
+        except Exception as e:
+            self.get_logger().error(f"MAVROS vision pose callback error: {e}")
+
+    def mavros_velocity_callback(self, msg: TwistStamped):
+        """MAVROS vision speed callback - DVL velocity data via bridge"""
+        try:
             with self.lock:
+                # Velocity from MAVROS vision speed (DVL data via bridge)
                 self.velocity['x'] = msg.twist.linear.x
                 self.velocity['y'] = msg.twist.linear.y
                 self.velocity['z'] = msg.twist.linear.z
-                self.velocity_valid = True
+                
+                # Mark velocity data as valid
+                self.vision_velocity_valid = True
+                self.last_vision_time = time.time()
             
-            if self.debug and abs(self.velocity['x']) > 0.1 or abs(self.velocity['y']) > 0.1:
-                self.get_logger().info(f"EKF Velocity: x={self.velocity['x']:.2f}, y={self.velocity['y']:.2f}, z={self.velocity['z']:.2f}")
+            # Log velocity changes (only when significant movement)
+            if self.debug and (abs(self.velocity['x']) > 0.05 or abs(self.velocity['y']) > 0.05 or abs(self.velocity['z']) > 0.05):
+                self.get_logger().info(f"MAVROS Vision Speed (DVL): x={self.velocity['x']:.3f}m/s, y={self.velocity['y']:.3f}m/s, z={self.velocity['z']:.3f}m/s")
+                
+        except Exception as e:
+            self.get_logger().error(f"MAVROS vision speed callback error: {e}")
+
+    def dvl_range_callback(self, msg):
+        """DVL range to bottom callback (direct from DVL if available)"""
+        try:
+            with self.lock:
+                self.range_to_bottom = msg.range
+            
+            if self.debug and not math.isnan(self.range_to_bottom) and time.time() % 5 < 0.1:
+                self.get_logger().info(f"DVL Range to bottom: {self.range_to_bottom:.2f}m")
+                
+        except Exception as e:
+            self.get_logger().error(f"DVL range callback error: {e}")
+
+    def imu_orientation_callback(self, msg):
+        """IMU orientation callback - still need this for heading control"""
+        try:
+            q = msg.pose.orientation
+            if not math.isnan(q.w):
+                with self.lock:
+                    self.orientation['yaw'] = quaternion_to_yaw(q.x, q.y, q.z, q.w)
+                    self.orientation['pitch'] = math.asin(2.0 * (q.w * q.y - q.z * q.x))
+                    self.orientation['roll'] = math.atan2(2.0 * (q.w * q.x + q.y * q.z), 1.0 - 2.0 * (q.x * q.x + q.y * q.y))
+                    self.imu_valid = True
+                    self.last_imu_time = time.time()
+                    
+        except Exception as e:
+            self.get_logger().error(f"IMU orientation callback error: {e}")
+
+    def check_vision_data_timeout(self):
+        """Check if MAVROS vision data is stale"""
+        return (time.time() - self.last_vision_time) < self.data_timeout
         
-    def check_position_timeout(self):
-        """Check if position data is stale"""
-        return (time.time() - self.last_position_time) < self.position_timeout
+    def check_imu_data_timeout(self):
+        """Check if IMU data is stale"""
+        return (time.time() - self.last_imu_time) < self.data_timeout
         
     def set_depth(self, target_depth):
         """Set the target depth for the submarine"""
@@ -171,22 +231,25 @@ class RobotControl(Node):
             self.get_logger().info(f"Movement command: lateral={lateral:.2f}, forward={forward:.2f}, yaw={yaw:.2f}")            
     
     def get_current_depth(self):
-        """Get current depth from ArduSub EKF (fused barometer + DVL altitude)"""
+        """Get current depth from MAVROS vision pose (DVL data via bridge)"""
         with self.lock:
             return self.position['z']
 
     def get_current_position(self):
-        """Get current position from ArduSub EKF (fused DVL + IMU)"""
+        """Get current position from MAVROS vision topics (DVL data via bridge)"""
         with self.lock:
             pos = self.position.copy()
             pos['yaw'] = self.orientation['yaw']
-            pos['valid'] = self.position_valid and self.check_position_timeout()
+            pos['valid'] = (self.vision_pose_valid and self.check_vision_data_timeout() and
+                           self.imu_valid and self.check_imu_data_timeout())
         return pos
     
     def get_current_velocity(self):
-        """Get current velocity from ArduSub EKF"""
+        """Get current velocity from MAVROS vision speed (DVL data via bridge)"""
         with self.lock:
-            return self.velocity.copy()
+            vel = self.velocity.copy()
+            vel['valid'] = self.vision_velocity_valid and self.check_vision_data_timeout()
+        return vel
     
     def control_loop(self):
         while rclpy.ok() and self.running:
@@ -196,8 +259,10 @@ class RobotControl(Node):
     def update_heading_control(self):
         """Send control commands appropriate for GUIDED mode"""
         with self.lock:
-            # Check position validity
-            position_ok = self.position_valid and self.check_position_timeout()
+            # Check data validity from MAVROS vision topics
+            vision_pose_ok = self.vision_pose_valid and self.check_vision_data_timeout()
+            vision_speed_ok = self.vision_velocity_valid and self.check_vision_data_timeout()
+            imu_ok = self.imu_valid and self.check_imu_data_timeout()
             
             # Initialize control outputs
             forward_cmd = 0.0
@@ -210,37 +275,37 @@ class RobotControl(Node):
                                   self.desired_point['y'] is not None or
                                   self.desired_point['yaw'] is not None)
             
-            if has_position_targets and position_ok:
+            if has_position_targets and vision_pose_ok and imu_ok:
                 # Position control mode - use PositionTarget for GUIDED mode
                 self.send_position_target()
                 return
             elif not has_position_targets:
-                # Velocity control mode using DVL-based EKF position
-                current_pos = self.position
-                
-                # Movement command mode (direct velocity commands)
+                # Velocity control mode using MAVROS vision data
                 forward_cmd = self.movement_command['forward']
                 yaw_cmd = self.movement_command['yaw']
             else:
-                # Position targets set but no valid position data
+                # Position targets set but no valid data
                 if self.debug:
-                    self.get_logger().warn("Position targets set but no valid DVL/EKF position data")
+                    pose_status = "POSE_OK" if vision_pose_ok else "POSE_STALE"
+                    speed_status = "SPEED_OK" if vision_speed_ok else "SPEED_STALE"
+                    imu_status = "IMU_OK" if imu_ok else "IMU_STALE"
+                    self.get_logger().warn(f"Position targets set but no valid data - {pose_status}, {speed_status}, {imu_status}")
             
-            # Depth control (always active when target is set)
+            # Depth control (always active when target is set) - use MAVROS vision pose z
             if self.desired_point['z'] is not None:
                 current_depth = self.position['z']
                 depth_error = self.desired_point['z'] - current_depth
                 
                 if self.max_descent_mode and depth_error > 0.1:
                     # Maximum descent rate
-                    depth_cmd = 1.0  # Full downward velocity
+                    depth_cmd = -1.0  # Full downward velocity
                 else:
                     # Normal PID depth control
                     depth_cmd = self.PIDs["depth"](depth_error)
 
-        # Send velocity commands for GUIDED mode
-        self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd)
-    #option one
+            # Send velocity commands for GUIDED mode
+            self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd)
+
     def send_velocity_command(self, forward, lateral, vertical, yaw_rate):
         """Send velocity commands for GUIDED mode - use actual target velocities"""
         # Create Twist message for velocity control in GUIDED mode
@@ -249,7 +314,7 @@ class RobotControl(Node):
         # Convert normalized commands to actual velocity targets (m/s)
         max_forward_velocity = 2.0   # m/s - adjust based on your sub's max speed
         max_lateral_velocity = 1.0   # m/s - adjust based on thruster config
-        max_vertical_velocity = 1.0  # m/s - depth change rate
+        max_vertical_velocity = -1.0  # m/s - depth change rate
         max_yaw_rate = 1.5          # rad/s - yaw rotation rate
         
         # Scale commands to actual velocities (full speed when active)
@@ -277,41 +342,44 @@ class RobotControl(Node):
         vel_cmd.angular.x = 0.0       # Roll rate
         vel_cmd.angular.y = 0.0       # Pitch rate
 
-        # Debug logging
+        # Debug logging with MAVROS vision status
         if self.debug and (abs(vertical) > 0.01 or abs(forward) > 0.01 or abs(yaw_rate) > 0.01):
-            position_ok = self.position_valid and self.check_position_timeout()
+            vision_pose_ok = self.vision_pose_valid and self.check_vision_data_timeout()
+            vision_speed_ok = self.vision_velocity_valid and self.check_vision_data_timeout()
+            imu_ok = self.imu_valid and self.check_imu_data_timeout()
             current_depth = self.position['z']
             target_depth = self.desired_point['z'] if self.desired_point['z'] is not None else current_depth
-            ekf_status = "EKF_OK" if position_ok else "EKF_STALE"
             vel = self.velocity
-            self.get_logger().info(f"GUIDED Vel (FULL SPEED): depth={current_depth:.2f}→{target_depth:.2f} (Z:{vel_cmd.linear.z:.1f}m/s) "
+            
+            status = f"POSE:{'OK' if vision_pose_ok else 'STALE'} SPEED:{'OK' if vision_speed_ok else 'STALE'} IMU:{'OK' if imu_ok else 'STALE'}"
+            
+            self.get_logger().info(f"GUIDED Vel (MAVROS-VISION): depth={current_depth:.2f}→{target_depth:.2f} (Z:{vel_cmd.linear.z:.1f}m/s) "
                                  f"pos: x={self.position['x']:.1f},y={self.position['y']:.1f} vel: x={vel['x']:.2f},y={vel['y']:.2f} "
-                                 f"cmd: F={vel_cmd.linear.x:.1f}m/s Y={vel_cmd.angular.z:.1f}rad/s ({ekf_status})")
+                                 f"cmd: F={vel_cmd.linear.x:.1f}m/s Y={vel_cmd.angular.z:.1f}rad/s ({status})")
 
         # Publish velocity command
         self.velocity_pub.publish(vel_cmd)
 
-        #option 2
     def send_position_target(self):
         """Send position targets for waypoint navigation in GUIDED mode"""
         position_target = PositionTarget()
         position_target.header.stamp = self.get_clock().now().to_msg()
-        position_target.header.frame_id = "base_link" #shows x,y,z position
+        position_target.header.frame_id = "base_link"
         
         # Coordinate frame (body frame NED)
-        position_target.coordinate_frame = PositionTarget.FRAME_LOCAL_NED #uses North, East, Down coordinates
+        position_target.coordinate_frame = PositionTarget.FRAME_LOCAL_NED
         
-        # Set what to control (position and yaw) and ignore velocity commands since pixhawk handels the position
+        # Set what to control (position and yaw) and ignore velocity commands
         position_target.type_mask = (
             PositionTarget.IGNORE_VX | PositionTarget.IGNORE_VY | PositionTarget.IGNORE_VZ |
             PositionTarget.IGNORE_AFX | PositionTarget.IGNORE_AFY | PositionTarget.IGNORE_AFZ
         )
         
-        # Set position targets (if specified)
+        # Set position targets (if specified) - using MAVROS vision pose data
         if self.desired_point['x'] is not None:
             position_target.position.x = self.desired_point['x']
         else:
-            position_target.type_mask |= PositionTarget.IGNORE_PX #ignores if not relevant
+            position_target.type_mask |= PositionTarget.IGNORE_PX
             
         if self.desired_point['y'] is not None:
             position_target.position.y = self.desired_point['y'] 
@@ -333,12 +401,12 @@ class RobotControl(Node):
         self.position_target_pub.publish(position_target)
         
         if self.debug:
-            self.get_logger().info(f"GUIDED Position Target: x={position_target.position.x:.2f}, "
+            self.get_logger().info(f"GUIDED Position Target (MAVROS-VISION): x={position_target.position.x:.2f}, "
                                  f"y={position_target.position.y:.2f}, z={position_target.position.z:.2f}, "
                                  f"yaw={position_target.yaw:.2f}")
-        #option 3
+
     def send_manual_control(self, forward, lateral, vertical, yaw_rate):
-        """Send manual control commands (for MANUAL mode fallback) - FULL SPEED WHEN ACTIVE"""
+        """Send manual control commands (for MANUAL mode fallback)"""
         manual_cmd = ManualControl()
         manual_cmd.header.stamp = self.get_clock().now().to_msg()
         
@@ -365,8 +433,6 @@ class RobotControl(Node):
             manual_cmd.r = 1000 if yaw_rate > 0 else -1000  # Full yaw rotation
         else:
             manual_cmd.r = 0  # Off
-        
-        # Values are already at max (-1000/1000), so no clamping needed
         
         if self.debug:
             pwm_x = int(manual_cmd.x * 0.4 + 1500)  # Convert back to actual PWM for logging
@@ -397,10 +463,10 @@ class RobotControl(Node):
         # Also send neutral manual control (for safety)
         manual_cmd = ManualControl()
         manual_cmd.header.stamp = self.get_clock().now().to_msg()
-        manual_cmd.x = 0
-        manual_cmd.y = 0
-        manual_cmd.z = 0
-        manual_cmd.r = 0
+        manual_cmd.x = 0.0
+        manual_cmd.y = 0.0
+        manual_cmd.z = 0.0
+        manual_cmd.r = 0.0
         self.manual_control_pub.publish(manual_cmd)
         
         if self.control_thread.is_alive():

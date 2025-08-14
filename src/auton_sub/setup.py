@@ -60,7 +60,8 @@ setup(
             'full_planner = auton_sub.mission.full_planner:main',
             'Ocean_Cleanup = auton_sub.mission.Ocean_Cleanup:main',
             'slalom = auton_sub.mission.slalom:main',
-            
+            'path = auton_sub.mission.path:main',
+            'home = auton_sub.mission.home:main',
         ],
     },
 )
