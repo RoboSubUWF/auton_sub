@@ -36,7 +36,8 @@ mavros:
       listen_pose: true        # ← ADDED: Explicitly enable pose listening
       frame_id: "odom"         # ← CHANGED: Use odom frame to match DVL output
       child_frame_id: "base_link"
-      
+      tf_rate_limit: 50.0
+
     vision_speed:
       listen_twist: true       # ← Keep this for velocity
       listen_pose: false       # ← ADDED: Don't listen to pose on speed topic
@@ -54,6 +55,14 @@ mavros:
       tf_send: true
       tf_frame_id: "odom"      # ← CHANGED: Match DVL frame
       tf_child_frame_id: "base_link"
+      tf_listen: true
+
+    setpoint_velocity:
+      mav_frame: "BODY_NED"    # This ensures Z- is down for ArduSub
+      
+    # 🔧 FIXED: Setpoint position in NED frame  
+    setpoint_position:
+      mav_frame: "LOCAL_NED" 
 
     # ✅ Thruster Control
     actuator_control:
@@ -78,6 +87,4 @@ mavros:
       min_voltage: 10.5
       critical_voltage: 9.0
       
-    # ✅ Additional DVL-specific settings
-    setpoint_velocity:
-      mav_frame: "BODY_NED"    # Use body frame for velocity commands
+   

@@ -39,7 +39,7 @@ class StraightLeftMission(Node):
         self.get_logger().info(f"[DEPTH] Current depth: {current_depth:.2f}m (MAVROS vision pose)")
         
         # Set target depth
-        self.robot_control.set_depth(-target_depth)
+        self.robot_control.set_depth(target_depth)
         self.robot_control.set_max_descent_rate(True)
         
         # Wait and monitor depth changes using MAVROS vision pose data
