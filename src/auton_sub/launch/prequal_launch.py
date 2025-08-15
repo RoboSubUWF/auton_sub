@@ -74,7 +74,7 @@ def generate_launch_description():
             output='screen'
         ),
         TimerAction(
-            period=3.0,  # Wait 3 seconds for nodes to initialize
+            period=5.0,  # Wait 3 seconds for nodes to initialize
             actions=[
                 Node(
                     package='auton_sub',

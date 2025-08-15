@@ -302,7 +302,7 @@ class RobotControl(Node):
                 
                 if self.max_descent_mode and depth_error > 0.1:
                     # Maximum descent rate
-                    depth_cmd = -0.6  #  downward velocity
+                    depth_cmd = -0.55  #  downward velocity
                 else:
                     # Normal PID depth control
                     depth_cmd = self.PIDs["depth"](depth_error)
@@ -316,9 +316,9 @@ class RobotControl(Node):
         vel_cmd = Twist()
         
         # Convert normalized commands to actual velocity targets (m/s)
-        max_forward_velocity = 2.0   # m/s - adjust based on your sub's max speed
+        max_forward_velocity = 1.0   # m/s - adjust based on your sub's max speed
         max_lateral_velocity = 1.0   # m/s - adjust based on thruster config
-        max_vertical_velocity = -0.6  # m/s - depth change rate
+        max_vertical_velocity = -0.55  # m/s - depth change rate
         max_yaw_rate = 1.5          # rad/s - yaw rotation rate
         
         # Scale commands to actual velocities (full speed when active)
