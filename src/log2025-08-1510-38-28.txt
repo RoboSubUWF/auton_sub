@@ -1,0 +1,909 @@
+Starting ROS 2 launch script...
+ROS_VERSION=2
+ROS_PYTHON_VERSION=3
+ROS_LOCALHOST_ONLY=0
+ROS_DISTRO=humble
+[INFO] [launch]: All log files can be found below /home/robosub/.ros/log/2025-08-15-10-38-30-240522-ubuntu-2562
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [mavros_node-1]: process started with pid [2759]
+[INFO] [dvl_node-2]: process started with pid [2761]
+[INFO] [dvl_mavros_bridge-3]: process started with pid [2763]
+[mavros_node-1] [INFO] [1755272310.460225576] [mavros_node]: Starting mavros_node container
+[mavros_node-1] [INFO] [1755272310.461748200] [mavros_node]: FCU URL: serial:///dev/ttyTHS1:57600
+[mavros_node-1] [INFO] [1755272310.461813736] [mavros_node]: GCS URL: 
+[mavros_node-1] [INFO] [1755272310.461827496] [mavros_node]: UAS Prefix: /uas1
+[mavros_node-1] [INFO] [1755272310.461837000] [mavros_node]: Starting mavros router node
+[mavros_node-1] [INFO] [1755272310.481146600] [mavros_router]: Built-in SIMD instructions: ARM NEON
+[mavros_node-1] [INFO] [1755272310.481228552] [mavros_router]: Built-in MAVLink package version: 2025.6.6
+[mavros_node-1] [INFO] [1755272310.481245640] [mavros_router]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser matrixpilot paparazzi standard storm32 uAvionix ualberta
+[mavros_node-1] [INFO] [1755272310.481258568] [mavros_router]: MAVROS Router started
+[mavros_node-1] [INFO] [1755272310.481320200] [mavros_router]: Requested to add endpoint: type: 0, url: serial:///dev/ttyTHS1:57600
+[mavros_node-1] [INFO] [1755272310.481362792] [mavros_router]: Endpoint link[1000] created
+[mavros_node-1] [INFO] [1755272310.487331976] [mavros_router]: link[1000] opened successfully
+[mavros_node-1] [INFO] [1755272310.487887496] [mavros_router]: Requested to add endpoint: type: 2, url: /uas1
+[mavros_node-1] [INFO] [1755272310.487962792] [mavros_router]: Endpoint link[1001] created
+[mavros_node-1] [INFO] [1755272310.493801960] [mavros_router]: link[1001] opened successfully
+[mavros_node-1] [INFO] [1755272310.493938984] [mavros_node]: Starting mavros uas node
+[mavros_node-1] [INFO] [1755272310.496518152] [mavros_router]: link[1000] detected remote address 1.1
+[mavros_node-1] [INFO] [1755272310.560712360] [mavros]: UAS Executor started, threads: 6
+[mavros_node-1] [INFO] [1755272310.593076872] [mavros]: Plugin actuator_control created
+[mavros_node-1] [INFO] [1755272310.593214472] [mavros]: Plugin actuator_control initialized
+[mavros_node-1] [INFO] [1755272310.633960360] [mavros]: Plugin adsb created
+[mavros_node-1] [INFO] [1755272310.634091464] [mavros]: Plugin adsb initialized
+[mavros_node-1] [INFO] [1755272310.639041384] [mavros]: Plugin altitude created
+[mavros_node-1] [INFO] [1755272310.639143752] [mavros]: Plugin altitude initialized
+[mavros_node-1] [INFO] [1755272310.645215752] [mavros]: Plugin cam_imu_sync created
+[mavros_node-1] [INFO] [1755272310.645329288] [mavros]: Plugin cam_imu_sync initialized
+[mavros_node-1] [INFO] [1755272310.652378952] [mavros]: Plugin camera created
+[mavros_node-1] [INFO] [1755272310.653746504] [mavros]: Plugin camera initialized
+[mavros_node-1] [INFO] [1755272310.662858024] [mavros]: Plugin cellular_status created
+[mavros_node-1] [INFO] [1755272310.664057960] [mavros]: Plugin cellular_status initialized
+[mavros_node-1] [INFO] [1755272310.677095304] [mavros]: Plugin command created
+[mavros_node-1] [INFO] [1755272310.677239720] [mavros]: Plugin command initialized
+[mavros_node-1] [INFO] [1755272310.684145992] [mavros]: Plugin companion_process_status created
+[mavros_node-1] [INFO] [1755272310.684241896] [mavros]: Plugin companion_process_status initialized
+[mavros_node-1] [INFO] [1755272310.692409640] [mavros]: Plugin debug_value created
+[mavros_node-1] [INFO] [1755272310.693588552] [mavros]: Plugin debug_value initialized
+[mavros_node-1] [INFO] [1755272310.700335272] [mavros.distance_sensor]: DS: Plugin not configured!
+[mavros_node-1] [INFO] [1755272310.700555016] [mavros]: Plugin distance_sensor created
+[mavros_node-1] [INFO] [1755272310.700614344] [mavros]: Plugin distance_sensor initialized
+[mavros_node-1] [INFO] [1755272310.708755464] [mavros]: Plugin esc_status created
+[mavros_node-1] [INFO] [1755272310.709400776] [mavros]: Plugin esc_status initialized
+[mavros_node-1] [INFO] [1755272310.727873480] [mavros]: Plugin esc_telemetry created
+[mavros_node-1] [INFO] [1755272310.729749288] [mavros]: Plugin esc_telemetry initialized
+[mavros_node-1] [INFO] [1755272310.796496264] [mavros]: Plugin fake_gps created
+[mavros_node-1] [INFO] [1755272310.796605544] [mavros]: Plugin fake_gps initialized
+[mavros_node-1] [INFO] [1755272310.813896200] [mavros]: Plugin ftp created
+[mavros_node-1] [INFO] [1755272310.814023112] [mavros]: Plugin ftp initialized
+[mavros_node-1] [INFO] [1755272310.826678952] [mavros]: Plugin geofence created
+[mavros_node-1] [INFO] [1755272310.826817448] [mavros]: Plugin geofence initialized
+[mavros_node-1] [INFO] [1755272310.846032392] [mavros]: Plugin gimbal_control created
+[mavros_node-1] [INFO] [1755272310.846177416] [mavros]: Plugin gimbal_control initialized
+[mavros_node-1] [INFO] [1755272310.867055016] [mavros]: Plugin global_position created
+[mavros_node-1] [INFO] [1755272310.867208840] [mavros]: Plugin global_position initialized
+[mavros_node-1] [INFO] [1755272310.880051016] [mavros]: Plugin gps_input created
+[mavros_node-1] [INFO] [1755272310.880164104] [mavros]: Plugin gps_input initialized
+[mavros_node-1] [INFO] [1755272310.891542472] [mavros]: Plugin gps_rtk created
+[mavros_node-1] [INFO] [1755272310.891662088] [mavros]: Plugin gps_rtk initialized
+[mavros_node-1] [INFO] [1755272310.903952936] [mavros]: Plugin gps_status created
+[mavros_node-1] [INFO] [1755272310.904088136] [mavros]: Plugin gps_status initialized
+[mavros_node-1] [INFO] [1755272310.915407112] [mavros]: Plugin guided_target created
+[mavros_node-1] [INFO] [1755272310.915535272] [mavros]: Plugin guided_target initialized
+[mavros_node-1] [INFO] [1755272310.931477864] [mavros]: Plugin hil created
+[mavros_node-1] [INFO] [1755272310.931609256] [mavros]: Plugin hil initialized
+[mavros_node-1] [INFO] [1755272310.944970120] [mavros]: Plugin home_position created
+[mavros_node-1] [INFO] [1755272310.945099368] [mavros]: Plugin home_position initialized
+[mavros_node-1] [INFO] [1755272310.961780904] [mavros]: Plugin imu created
+[mavros_node-1] [INFO] [1755272310.962004648] [mavros]: Plugin imu initialized
+[mavros_node-1] [INFO] [1755272310.978851528] [mavros]: Plugin landing_target created
+[mavros_node-1] [INFO] [1755272310.979009192] [mavros]: Plugin landing_target initialized
+[mavros_node-1] [INFO] [1755272310.997268232] [mavros]: Plugin local_position created
+[mavros_node-1] [INFO] [1755272310.997427176] [mavros]: Plugin local_position initialized
+[mavros_node-1] [INFO] [1755272311.018811176] [mavros]: Plugin log_transfer created
+[mavros_node-1] [INFO] [1755272311.018951272] [mavros]: Plugin log_transfer initialized
+[mavros_node-1] [INFO] [1755272311.034854792] [mavros]: Plugin mag_calibration_status created
+[mavros_node-1] [INFO] [1755272311.034991112] [mavros]: Plugin mag_calibration_status initialized
+[mavros_node-1] [INFO] [1755272311.051782536] [mavros]: Plugin manual_control created
+[mavros_node-1] [INFO] [1755272311.051905448] [mavros]: Plugin manual_control initialized
+[mavros_node-1] [INFO] [1755272311.068545928] [mavros]: Plugin mocap_pose_estimate created
+[mavros_node-1] [INFO] [1755272311.068657832] [mavros]: Plugin mocap_pose_estimate initialized
+[mavros_node-1] [INFO] [1755272311.090368328] [mavros]: Plugin mount_control created
+[mavros_node-1] [INFO] [1755272311.090542600] [mavros]: Plugin mount_control initialized
+[mavros_node-1] [INFO] [1755272311.116140264] [mavros]: Plugin nav_controller_output created
+[mavros_node-1] [INFO] [1755272311.116274248] [mavros]: Plugin nav_controller_output initialized
+[mavros_node-1] [INFO] [1755272311.135447464] [mavros]: Plugin obstacle_distance created
+[mavros_node-1] [INFO] [1755272311.135567304] [mavros]: Plugin obstacle_distance initialized
+[mavros_node-1] [INFO] [1755272311.156718600] [mavros]: Plugin odometry created
+[mavros_node-1] [INFO] [1755272311.156841160] [mavros]: Plugin odometry initialized
+[mavros_node-1] [INFO] [1755272311.181854472] [mavros]: Plugin onboard_computer_status created
+[mavros_node-1] [INFO] [1755272311.182104232] [mavros]: Plugin onboard_computer_status initialized
+[mavros_node-1] [INFO] [1755272311.224620744] [mavros]: Plugin open_drone_id created
+[mavros_node-1] [INFO] [1755272311.224743912] [mavros]: Plugin open_drone_id initialized
+[mavros_node-1] [INFO] [1755272311.249559368] [mavros]: Plugin optical_flow created
+[mavros_node-1] [INFO] [1755272311.249694216] [mavros]: Plugin optical_flow initialized
+[mavros_node-1] [INFO] [1755272311.273210120] [mavros]: Plugin param created
+[mavros_node-1] [INFO] [1755272311.273341736] [mavros]: Plugin param initialized
+[dvl_node-2] [INFO] [1755272311.290004136] [dvl_node]: 🔄 Connecting to DVL via serial...
+[mavros_node-1] [INFO] [1755272311.294058728] [mavros]: Plugin play_tune created
+[mavros_node-1] [INFO] [1755272311.294322280] [mavros]: Plugin play_tune initialized
+[mavros_node-1] [INFO] [1755272311.320280232] [mavros]: Plugin px4flow created
+[mavros_node-1] [INFO] [1755272311.320453480] [mavros]: Plugin px4flow initialized
+[dvl_node-2] [INFO] [1755272311.335073512] [dvl_node]: ✅ Connected to DVL via serial!
+[mavros_node-1] [INFO] [1755272311.347912744] [mavros]: Plugin rallypoint created
+[mavros_node-1] [INFO] [1755272311.349499592] [mavros]: Plugin rallypoint initialized
+[mavros_node-1] [INFO] [1755272311.371945672] [mavros]: Plugin rangefinder created
+[mavros_node-1] [INFO] [1755272311.372080168] [mavros]: Plugin rangefinder initialized
+[mavros_node-1] [INFO] [1755272311.399724616] [mavros]: Plugin rc_io created
+[mavros_node-1] [INFO] [1755272311.399858216] [mavros]: Plugin rc_io initialized
+[mavros_node-1] [INFO] [1755272311.427070824] [mavros]: Plugin setpoint_accel created
+[mavros_node-1] [INFO] [1755272311.427185416] [mavros]: Plugin setpoint_accel initialized
+[mavros_node-1] [INFO] [1755272311.454891176] [mavros]: Plugin setpoint_attitude created
+[mavros_node-1] [INFO] [1755272311.455012616] [mavros]: Plugin setpoint_attitude initialized
+[mavros_node-1] [INFO] [1755272311.488293992] [mavros]: Plugin setpoint_position created
+[mavros_node-1] [INFO] [1755272311.488413320] [mavros]: Plugin setpoint_position initialized
+[mavros_node-1] [INFO] [1755272311.522201640] [mavros]: Plugin setpoint_raw created
+[mavros_node-1] [INFO] [1755272311.522342600] [mavros]: Plugin setpoint_raw initialized
+[mavros_node-1] [INFO] [1755272311.555387016] [mavros]: Plugin setpoint_trajectory created
+[mavros_node-1] [INFO] [1755272311.555505672] [mavros]: Plugin setpoint_trajectory initialized
+[mavros_node-1] [INFO] [1755272311.582967496] [mavros]: Plugin setpoint_velocity created
+[mavros_node-1] [INFO] [1755272311.583127016] [mavros]: Plugin setpoint_velocity initialized
+[mavros_node-1] [INFO] [1755272311.632470568] [mavros]: Plugin sys_status created
+[mavros_node-1] [INFO] [1755272311.632827240] [mavros]: Plugin sys_status initialized
+[mavros_node-1] [INFO] [1755272311.659259080] [mavros.time]: TM: Timesync mode: MAVLINK
+[mavros_node-1] [INFO] [1755272311.667165256] [mavros]: Plugin sys_time created
+[mavros_node-1] [INFO] [1755272311.667296296] [mavros]: Plugin sys_time initialized
+[mavros_node-1] [INFO] [1755272311.696074472] [mavros]: Plugin tdr_radio created
+[mavros_node-1] [INFO] [1755272311.696214056] [mavros]: Plugin tdr_radio initialized
+[mavros_node-1] [INFO] [1755272311.726177000] [mavros]: Plugin terrain created
+[mavros_node-1] [INFO] [1755272311.726358376] [mavros]: Plugin terrain initialized
+[mavros_node-1] [INFO] [1755272311.764729544] [mavros]: Plugin trajectory created
+[mavros_node-1] [INFO] [1755272311.764866440] [mavros]: Plugin trajectory initialized
+[mavros_node-1] [INFO] [1755272311.797146312] [mavros]: Plugin tunnel created
+[mavros_node-1] [INFO] [1755272311.797287496] [mavros]: Plugin tunnel initialized
+[mavros_node-1] [INFO] [1755272311.829388456] [mavros]: Plugin vfr_hud created
+[mavros_node-1] [INFO] [1755272311.829511656] [mavros]: Plugin vfr_hud initialized
+[mavros_node-1] [INFO] [1755272311.862464680] [mavros]: Plugin vibration created
+[mavros_node-1] [INFO] [1755272311.862607272] [mavros]: Plugin vibration initialized
+[mavros_node-1] [INFO] [1755272311.897920744] [mavros]: Plugin vision_pose created
+[mavros_node-1] [INFO] [1755272311.898112776] [mavros]: Plugin vision_pose initialized
+[mavros_node-1] [INFO] [1755272311.933424456] [mavros]: Plugin vision_speed created
+[mavros_node-1] [INFO] [1755272311.933553064] [mavros]: Plugin vision_speed initialized
+[mavros_node-1] [INFO] [1755272311.980056904] [mavros]: Plugin waypoint created
+[mavros_node-1] [INFO] [1755272311.980244136] [mavros]: Plugin waypoint initialized
+[mavros_node-1] [INFO] [1755272312.021372200] [mavros]: Plugin wheel_odometry created
+[mavros_node-1] [INFO] [1755272312.021594792] [mavros]: Plugin wheel_odometry initialized
+[mavros_node-1] [INFO] [1755272312.058197000] [mavros]: Plugin wind_estimation created
+[mavros_node-1] [INFO] [1755272312.058331752] [mavros]: Plugin wind_estimation initialized
+[mavros_node-1] [INFO] [1755272312.062057160] [mavros]: Built-in SIMD instructions: ARM NEON
+[mavros_node-1] [INFO] [1755272312.062175720] [mavros]: Built-in MAVLink package version: 2025.6.6
+[mavros_node-1] [INFO] [1755272312.062193448] [mavros]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser matrixpilot paparazzi standard storm32 uAvionix ualberta
+[mavros_node-1] [INFO] [1755272312.062206504] [mavros]: MAVROS UAS via /uas1 started. MY ID 1.191, TARGET ID 1.1
+[mavros_node-1] [WARN] [1755272312.065059496] [mavros.global_position]: GP: No GPS fix
+[mavros_node-1] [WARN] [1755272312.151293928] [mavros.time]: TM: Wrong FCU time.
+[mavros_node-1] [INFO] [1755272312.497478600] [mavros]: CON: Got HEARTBEAT, connected. FCU: ArduPilot
+[mavros_node-1] [INFO] [1755272312.497755880] [mavros.mission]: WP: detected enable_partial_push: 1
+[mavros_node-1] [INFO] [1755272312.536354856] [mavros.rc]: RC_CHANNELS message detected!
+[mavros_node-1] [INFO] [1755272312.541924424] [mavros.imu]: IMU: Raw IMU message used.
+[mavros_node-1] [INFO] [1755272312.614746504] [mavros_router]: link[1001] detected remote address 1.191
+[dvl_node-2] [INFO] [1755272313.042417000] [dvl_node]: ✅ DVL Node initialized and ready!
+[mavros_node-1] [WARN] [1755272313.630003720] [mavros.cmd]: CMD: Unexpected command 520, result 0
+[mavros_node-1] [INFO] [1755272313.643951432] [mavros.geofence]: GF: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755272313.644065064] [mavros.rallypoint]: RP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755272313.644119816] [mavros.mission]: WP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755272313.644163720] [mavros.sys]: VER: 1.1: Capabilities         0x000000000000f9e7
+[mavros_node-1] [INFO] [1755272313.644211880] [mavros.sys]: VER: 1.1: Flight software:     040503ff (80e8c23a)
+[mavros_node-1] [INFO] [1755272313.644244616] [mavros.sys]: VER: 1.1: Middleware software: 00000000 (        )
+[mavros_node-1] [INFO] [1755272313.644274344] [mavros.sys]: VER: 1.1: OS software:         00000000 (6a85082c	@W��)
+[mavros_node-1] [INFO] [1755272313.644298312] [mavros.sys]: VER: 1.1: Board hardware:      00320000
+[mavros_node-1] [INFO] [1755272313.644320648] [mavros.sys]: VER: 1.1: VID/PID:             1209:5740
+[mavros_node-1] [INFO] [1755272313.644341768] [mavros.sys]: VER: 1.1: UID:                 0000000000000000
+[dvl_mavros_bridge-3] [INFO] [1755272314.167187752] [dvl_mavros_bridge]: 🌉 DVL-MAVROS Bridge started with QoS matching!
+[dvl_mavros_bridge-3] [INFO] [1755272314.167940104] [dvl_mavros_bridge]: 📡 Bridging /dvl/* → /mavros/vision_*
+[mavros_node-1] [INFO] [1755272315.235074920] [mavros.sys]: FCU: EKF3 IMU0 is using external nav data
+[mavros_node-1] [INFO] [1755272315.243096584] [mavros.sys]: FCU: EKF3 IMU0 initial pos NED = -0.0,0.0,-0.0 (m)
+[mavros_node-1] [INFO] [1755272315.254150984] [mavros.sys]: FCU: EKF3 IMU0 initial vel NED = 0.0,-0.0,-0.0 (m/s)
+[mavros_node-1] [INFO] [1755272315.262520168] [mavros.sys]: FCU: EKF3 IMU1 is using external nav data
+[mavros_node-1] [INFO] [1755272315.273866792] [mavros.sys]: FCU: EKF3 IMU1 initial pos NED = -0.0,0.0,-0.0 (m)
+[mavros_node-1] [INFO] [1755272315.282317640] [mavros.sys]: FCU: EKF3 IMU1 initial vel NED = 0.0,-0.0,-0.0 (m/s)
+[INFO] [rosbag_recorder-4]: process started with pid [2824]
+[INFO] [prequal-5]: process started with pid [2826]
+[rosbag_recorder-4] [INFO] [1755272315.816815976] [rosbag_recorder]: 🔦 Starting rosbag2 recording to: /home/robosub/rosbags/robosub_2025-08-15_10-38-35
+[rosbag_recorder-4] [INFO] [1755272315.817612808] [rosbag_recorder]: 🛰️ Recording 29 topics for DVL+MAVROS system
+[rosbag_recorder-4] [INFO] [1755272315.818228200] [rosbag_recorder]: 💾 Bag will be saved to: /home/robosub/rosbags/robosub_2025-08-15_10-38-35
+[rosbag_recorder-4] [INFO] [1755272315.818809736] [rosbag_recorder]: 📝 Command: ros2 bag record -o /home/robosub/rosbags/robosub_2025-08-15_10-38-35 --compression-mode file --compression-format ... [+29 topics]
+[rosbag_recorder-4] [INFO] [1755272315.820393768] [rosbag_recorder]: ✅ Rosbag recording started successfully
+[rosbag_recorder-4] [INFO] [1755272315.822380488] [rosbag_recorder]: 📊 Recording active for 0.0 minutes
+[dvl_mavros_bridge-3] [INFO] [1755272316.170854344] [dvl_mavros_bridge]: ✅ MAVROS topics detected (150 topics) - bridge ready
+[dvl_mavros_bridge-3] [INFO] [1755272316.379027560] [dvl_mavros_bridge]: 🎯 Position bridged: [0.003, 0.003, -0.000] m
+[dvl_mavros_bridge-3] [INFO] [1755272317.715010760] [dvl_mavros_bridge]: 🚀 Velocity bridged: [0.004, 0.001, -0.001] m/s
+[dvl_mavros_bridge-3] [INFO] [1755272317.721505096] [dvl_mavros_bridge]: 🎯 Position bridged: [0.010, 0.001, -0.000] m
+[dvl_mavros_bridge-3] [INFO] [1755272319.060046024] [dvl_mavros_bridge]: 🎯 Position bridged: [0.010, 0.002, -0.000] m
+[dvl_mavros_bridge-3] [INFO] [1755272319.170272072] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 6.0Hz, Pos: 6.0Hz
+[dvl_mavros_bridge-3] [INFO] [1755272320.395375816] [dvl_mavros_bridge]: 🎯 Position bridged: [0.000, -0.001, 0.008] m
+[prequal-5] [INFO] [1755272321.649934280] [robot_control]: 🔄 Waiting for MAVROS to initialize...
+[prequal-5] [INFO] [1755272321.689696616] [robot_control]: RobotControl initialized with MAVROS Vision Topics (DVL via Bridge)
+[prequal-5] [INFO] [1755272321.692766760] [straight_left_mission]: [INFO] Straight Left Mission Node Initialized (MAVROS Vision Topics Mode)
+[prequal-5] [INFO] [1755272321.693494184] [straight_left_mission]: [INFO] Starting Straight Left Mission with MAVROS Vision Topics Control
+[prequal-5] [INFO] [1755272321.694112744] [straight_left_mission]: [INFO] Arming vehicle...
+[dvl_mavros_bridge-3] [INFO] [1755272321.719314536] [dvl_mavros_bridge]: 🚀 Velocity bridged: [0.004, -0.009, 0.004] m/s
+[prequal-5] [INFO] [1755272321.724093288] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755272321.724163080] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.005, -0.010, 0.006] m
+[prequal-5] [INFO] [1755272321.791652296] [armer_node]: ✅ Vehicle armed successfully.
+[mavros_node-1] [WARN] [1755272321.799294888] [mavros.sys]: FCU: Backup location parameters are missing or zero
+[mavros_node-1] [WARN] [1755272321.807637832] [mavros.sys]: FCU: Compass performance degraded
+[prequal-5] [INFO] [1755272321.859009960] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272321.993469544] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272322.118554760] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272322.254647496] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272322.389530088] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755272322.500893000] [mavros.home_position]: HP: requesting home position
+[prequal-5] [INFO] [1755272322.525105128] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755272322.633167848] [mavros.sys]: FCU: ArduSub V4.5.3 (80e8c23a)
+[mavros_node-1] [INFO] [1755272322.638752648] [mavros.sys]: FCU: ChibiOS: 6a85082c
+[mavros_node-1] [INFO] [1755272322.647756168] [mavros.sys]: FCU: Pixhawk4 00380030 31385117 35333837
+[prequal-5] [INFO] [1755272322.651131464] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755272322.655395592] [mavros.sys]: FCU: IOMCU: 420 1001 411FC231
+[mavros_node-1] [INFO] [1755272322.658234280] [mavros.sys]: FCU: RCOut: PWM:1-16
+[mavros_node-1] [INFO] [1755272322.669398376] [mavros.sys]: FCU: IMU0: fast sampling enabled 8.0kHz/2.0kHz
+[mavros_node-1] [INFO] [1755272322.674818248] [mavros.sys]: FCU: Frame: VECTORED_6DOF
+[prequal-5] [INFO] [1755272322.787016552] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272322.922840296] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755272323.057906568] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.004, -0.014, 0.006] m
+[prequal-5] [INFO] [1755272323.058530888] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272323.194082824] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272323.319812232] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272323.454951976] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272323.590688360] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272323.726892584] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272323.795229160] [straight_left_mission]: [INFO] Setting GUIDED mode...
+[prequal-5] [INFO] [1755272323.837878664] [set_guided_mode]: 🔍 Checking current flight mode...
+[prequal-5] [INFO] [1755272323.863380648] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272323.988603432] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272324.124011240] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755272324.170251560] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 7.6Hz, Pos: 7.6Hz
+[prequal-5] [INFO] [1755272324.259375560] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272324.395145288] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272324.504008104] [set_guided_mode]: 📊 Current mode: MANUAL
+[prequal-5] [INFO] [1755272324.505567176] [set_guided_mode]: 🔄 Requesting GUIDED mode...
+[prequal-5] [INFO] [1755272324.518294216] [set_guided_mode]: 📤 Mode change request sent, waiting for confirmation...
+[prequal-5] [INFO] [1755272324.521553064] [set_guided_mode]: ⏳ Still waiting... Current mode: MANUAL
+[prequal-5] [INFO] [1755272324.524836168] [set_guided_mode]: ⏳ Still waiting... Current mode: MANUAL
+[prequal-5] [INFO] [1755272324.534201032] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272324.627702728] [set_guided_mode]: ⏳ Still waiting... Current mode: MANUAL
+[mavros_node-1] [WARN] [1755272324.655326600] [mavros.cmd]: CMD: Unexpected command 11, result 0
+[prequal-5] [INFO] [1755272324.664098888] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272324.666689672] [set_guided_mode]: ✅ Mode successfully changed to GUIDED
+[prequal-5] [INFO] [1755272324.689198408] [straight_left_mission]: [INFO] Waiting for MAVROS vision data and control systems...
+[prequal-5] [INFO] [1755272324.690889192] [straight_left_mission]: [INFO] Waiting for MAVROS vision pose and speed data...
+[prequal-5] [INFO] [1755272324.692403144] [straight_left_mission]: [INFO] ✅ MAVROS vision data available:
+[prequal-5] [INFO] [1755272324.693947752] [straight_left_mission]: [INFO]   Vision Pose: x=-0.008m, y=-0.016m, z=0.005m
+[prequal-5] [INFO] [1755272324.695365288] [straight_left_mission]: [INFO]   Vision Speed: x=0.002m/s, y=0.002m/s, z=-0.001m/s
+[prequal-5] [INFO] [1755272324.696815816] [straight_left_mission]: [INFO]   IMU Heading: -137.6°
+[prequal-5] [INFO] [1755272324.698163528] [straight_left_mission]: [INFO]   Speed Status: SPEED_OK
+[prequal-5] [INFO] [1755272324.699504072] [straight_left_mission]: [INFO] === MISSION START STATUS (MAVROS-VISION) ===
+[prequal-5] [INFO] [1755272324.702631112] [straight_left_mission]: [INFO] MAVROS Vision Pose Status: VALID
+[prequal-5] [INFO] [1755272324.704021032] [straight_left_mission]: [INFO] Initial Position: x=-0.008m, y=-0.016m, z=0.005m
+[prequal-5] [INFO] [1755272324.705426280] [straight_left_mission]: [INFO] Initial Heading: -137.6°
+[prequal-5] [INFO] [1755272324.706754792] [straight_left_mission]: [INFO] MAVROS Vision Speed Status: VALID
+[prequal-5] [INFO] [1755272324.708032104] [straight_left_mission]: [INFO] Initial Velocity: x=0.002m/s, y=0.002m/s, z=-0.001m/s
+[prequal-5] [INFO] [1755272324.709479528] [straight_left_mission]: [INFO] Target Depth: 0.2m
+[prequal-5] [INFO] [1755272324.710797896] [straight_left_mission]: [INFO] Forward Distance: 13.0m
+[prequal-5] [INFO] [1755272324.712231528] [straight_left_mission]: [INFO] Depth Tolerance: ±0.05m
+[prequal-5] [INFO] [1755272324.713574824] [straight_left_mission]: [INFO] Distance Tolerance: ±0.5m
+[prequal-5] [INFO] [1755272324.714868712] [straight_left_mission]: [INFO] 
+[prequal-5] [INFO] [1755272324.787918952] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272324.923882312] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272325.059552136] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272325.061181544] [robot_control]: MAVROS Vision Pose (DVL): x=-0.010m, y=-0.015m, z=0.005m
+[prequal-5] [INFO] [1755272325.195609064] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272325.321646024] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755272325.455233800] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.015, -0.017, 0.008] m
+[prequal-5] [INFO] [1755272325.455836296] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272325.591898536] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272325.727004040] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272325.862597544] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272325.988300296] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.124104328] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.258925192] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.395006856] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.522459176] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.658239592] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.718549416] [straight_left_mission]: [DEPTH] Descending to 0.2m depth using MAVROS vision pose data...
+[prequal-5] [INFO] [1755272326.720092616] [straight_left_mission]: [DEPTH] Current depth: 0.03m (MAVROS vision pose)
+[prequal-5] [INFO] [1755272326.721550152] [robot_control]: Target depth set to: 0.2m
+[prequal-5] [INFO] [1755272326.722898536] [robot_control]: Maximum descent rate enabled
+[prequal-5] [INFO] [1755272326.746591496] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_mavros_bridge-3] [INFO] [1755272326.790521800] [dvl_mavros_bridge]: 🚀 Velocity bridged: [0.003, -0.004, 0.029] m/s
+[dvl_mavros_bridge-3] [INFO] [1755272326.794265736] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.018, -0.026, 0.039] m
+[prequal-5] [INFO] [1755272326.795860744] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.799001832] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272326.852816744] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272326.905078312] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272326.919519944] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272326.958086280] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.010246408] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.055200200] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272327.062335560] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.114528904] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.166543400] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.191889768] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272327.218671912] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.270637864] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.317971752] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272327.322805896] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.05→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.375065928] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.05→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.427287048] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.05→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.454106920] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272327.479430984] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.05→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[mavros_node-1] [INFO] [1755272327.523148616] [mavros.mission]: WP: mission received
+[prequal-5] [INFO] [1755272327.531716456] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.05→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.583928456] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.05→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.590013480] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272327.636911688] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.688980008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.715936488] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272327.741114888] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.793372008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.845565384] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.852713128] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272327.897493064] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.949538344] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272327.977450856] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.002887048] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.054896552] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.106886792] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.111817256] [robot_control]: MAVROS Vision Speed (DVL): x=0.003m/s, y=-0.007m/s, z=-0.067m/s
+[dvl_mavros_bridge-3] [INFO] [1755272328.113059240] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.010, -0.030, 0.023] m
+[prequal-5] [INFO] [1755272328.114617640] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.158981512] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.211142312] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.246542280] [robot_control]: MAVROS Vision Speed (DVL): x=0.007m/s, y=-0.005m/s, z=-0.085m/s
+[prequal-5] [INFO] [1755272328.249620328] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.263002920] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.01→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.315301896] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.01→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.367441320] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=0.01→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.372275624] [robot_control]: MAVROS Vision Speed (DVL): x=0.009m/s, y=-0.005m/s, z=-0.096m/s
+[prequal-5] [INFO] [1755272328.375256360] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.419518888] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.00→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.471596840] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.00→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.508607752] [robot_control]: MAVROS Vision Speed (DVL): x=0.006m/s, y=-0.001m/s, z=-0.099m/s
+[prequal-5] [INFO] [1755272328.511493224] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.523797960] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.01→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.575783272] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.01→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.627880072] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.01→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.645130792] [robot_control]: MAVROS Vision Speed (DVL): x=0.002m/s, y=-0.002m/s, z=-0.096m/s
+[prequal-5] [INFO] [1755272328.648011720] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.680041928] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.732314568] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.00,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.770710216] [robot_control]: MAVROS Vision Speed (DVL): x=-0.009m/s, y=0.003m/s, z=-0.081m/s
+[prequal-5] [INFO] [1755272328.773654056] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.784512744] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.01,y=0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.836645096] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.01,y=0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.888633768] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.01,y=0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.909443016] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272328.940918312] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.02,y=0.02 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272328.993268552] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.02,y=0.02 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.048168136] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.048732904] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.103008680] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.155059112] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=-0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_mavros_bridge-3] [INFO] [1755272329.170336008] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 7.4Hz, Pos: 7.4Hz
+[prequal-5] [INFO] [1755272329.181204936] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.207431752] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.259535816] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.315340392] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.317433800] [robot_control]: MAVROS Vision Speed (DVL): x=0.018m/s, y=0.033m/s, z=0.052m/s
+[prequal-5] [INFO] [1755272329.320389192] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.367538344] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.02,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.419945416] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.02,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.441922760] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.472066984] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.02,y=0.02 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.524265800] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.02,y=0.02 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.578949352] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.02,y=0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.580502312] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.631232776] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.02,y=0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.683405512] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.02,y=0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.715323848] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.727871560] [straight_left_mission]: [DEPTH] Descending... Current: -0.02m, Target: 0.2m, Error: 0.22m, Z-vel: -0.023m/s (VISION_OK, SPEED_OK)
+[prequal-5] [INFO] [1755272329.735464968] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.787473864] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.839606376] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.02→0.20 (Z:0.6m/s) pos: x=-0.0,y=-0.0 vel: x=0.01,y=-0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.848792776] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.891716072] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.943902920] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=-0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272329.984402600] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272329.995988168] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.048211528] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.099925640] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.00 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.126706792] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272330.154011816] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.205789704] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.230307752] [straight_left_mission]: [DEPTH] Descending... Current: -0.03m, Target: 0.2m, Error: 0.23m, Z-vel: -0.008m/s (VISION_OK, SPEED_OK)
+[prequal-5] [INFO] [1755272330.256160744] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272330.259286792] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.311349288] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.363444104] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_mavros_bridge-3] [INFO] [1755272330.391014056] [dvl_mavros_bridge]: 🎯 Position bridged: [0.007, -0.004, -0.028] m
+[prequal-5] [INFO] [1755272330.391482248] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272330.415732104] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.467876776] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272330.491820936] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272330.520078120] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.572218824] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272330.606350760] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272330.624230152] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.676485288] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.728721736] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=-0.0 vel: x=0.01,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.746155592] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272330.781625800] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.02,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.833686568] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.02,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272330.846487624] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272330.885625832] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.02,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.937830504] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.02,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272330.986664424] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272330.989912488] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.042288840] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.094447464] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272331.096695752] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272331.146815720] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.199017128] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.03→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.01,y=0.03 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.236744200] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755272331.252699912] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.305031272] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272331.346976104] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272331.358379720] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.410492136] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272331.450982024] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272331.463592264] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.515613352] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272331.565152936] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272331.567593032] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.619603208] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272331.669068040] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272331.671571208] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.723669320] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.775668616] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272331.783183176] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272331.827738536] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.879770760] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272331.897275080] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272331.931838888] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272331.983879048] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.001513832] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.035972936] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.087968616] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.126055976] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.139993224] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.192009224] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.230203400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.244206216] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.296236040] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.344167112] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.348343400] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.400525096] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.447972552] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.453524008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.505557704] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.546743496] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.557129928] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.609407336] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.650848328] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755272332.656412808] [mavros.rallypoint]: RP: mission received
+[prequal-5] [INFO] [1755272332.661598536] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.714405224] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.736846632] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_OK, SPEED_OK)
+[dvl_node-2] [WARN] [1755272332.754910440] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.766421064] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.818564392] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.858878152] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.870616360] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272332.922714088] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272332.972982504] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272332.974727528] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.026790408] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.077004520] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.078904712] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.110255464] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.131009032] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.183030152] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.235119624] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.239073480] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_OK, SPEED_OK)
+[dvl_node-2] [WARN] [1755272333.244509768] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755272333.277252520] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.287152808] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.339222184] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.350747720] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.391218376] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.443312968] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.484839528] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.495300872] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.517902312] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.547287048] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.571252168] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.599278088] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.652940872] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.704982600] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.725723432] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.757103784] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272333.809186728] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.839796008] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.861226824] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.862446024] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.914042952] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.925831528] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272333.966081512] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272333.988986856] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.018138536] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272334.052254632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.070109864] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272334.115564904] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.122162088] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_mavros_bridge-3] [WARN] [1755272334.170578824] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 2.9s ago, pos: 2.9s ago
+[prequal-5] [INFO] [1755272334.174183560] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[dvl_node-2] [WARN] [1755272334.178796040] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755272334.222083752] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.226218632] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal-5] [INFO] [1755272334.278159944] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.295373864] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.330309832] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.358826344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.382497288] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.422271112] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.434594472] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.485752424] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.486672936] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272334.538810760] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.549375080] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.590863432] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.602664488] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.642911528] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.666177960] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.695013224] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.729753352] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.747027752] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.793231976] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.799203656] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272334.852978888] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.856717320] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.905084968] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272334.910025512] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272334.957123432] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.009258568] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.034336392] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.061358120] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.113495208] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.148362376] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.165522856] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.217665928] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.252479240] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.269706792] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.285509640] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.321849544] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.373837416] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.426027080] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.440214856] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755272335.462931016] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.478036008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.530125000] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.536580456] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.582122248] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.599759368] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.634296008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.653082568] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.686297896] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[mavros_node-1] [WARN] [1755272335.709933480] [mavros.param]: PR: Param BARO1_GND_PRESS (65535/1012): 101500.406250 different index: 525/1012
+[dvl_node-2] [WARN] [1755272335.726747208] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.738326568] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.743447752] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[dvl_node-2] [WARN] [1755272335.779840904] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.790363816] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.833449416] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.842465512] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272335.894513352] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[mavros_node-1] [WARN] [1755272335.899053928] [mavros.param]: PR: Param BARO2_GND_PRESS (65535/1012): 2021443.875000 different index: 531/1012
+[prequal-5] [INFO] [1755272335.946632520] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272335.967584136] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272335.998657384] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272336.052268648] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.081708904] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.104297352] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272336.156350504] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.195747240] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.208472200] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272336.245701160] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[prequal-5] [INFO] [1755272336.260390280] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.299513768] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.312402024] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.332683784] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.364404904] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.396005928] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.416742312] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.459431592] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.468741608] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272336.520870888] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.522809800] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.573041992] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.586219240] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.625130920] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.639437576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.677313128] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.702850920] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.729497064] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.766321928] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.781524584] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.829936360] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.833641288] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272336.885737864] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272336.937888328] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272336.964197704] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272336.989907016] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272337.042020936] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.043090152] [dvl_node]: ⚠️ No valid DVL data for 5.8s
+[dvl_node-2] [WARN] [1755272337.067953480] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.093993224] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.100819272] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.146131080] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.154272680] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.198160392] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.207526216] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.250267208] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.270800616] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.303618344] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.334654216] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.355587976] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.387771144] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.407623784] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.451026600] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.459526792] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272337.511686888] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.515117416] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755272337.525281864] [mavros.geofence]: GF: mission received
+[prequal-5] [INFO] [1755272337.563743560] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.578653352] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.615911944] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.642265576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.668146696] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.695552072] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.720538504] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.759065256] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.772725768] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.822620520] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.824874760] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.875892520] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.877064232] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272337.929326216] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272337.939513384] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272337.981358440] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.002889640] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.033533896] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.043053992] [dvl_node]: ⚠️ No valid DVL data for 6.8s
+[dvl_node-2] [WARN] [1755272338.066489576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.085535496] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.129935720] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.137575432] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272338.189527752] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272338.241615688] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.264221640] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.293660904] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272338.345769928] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.378221992] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.397814056] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272338.449979112] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.492455048] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.504844552] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272338.557027208] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.596459080] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.609204680] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.629535592] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.661331144] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.693105896] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.713541384] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272338.750301736] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[dvl_node-2] [WARN] [1755272338.756583656] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.765561992] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272338.817677960] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.820019336] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.869876264] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.883516968] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.922097096] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272338.936815816] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272338.974108840] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.026194952] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.043019464] [dvl_node]: ⚠️ No valid DVL data for 7.8s
+[dvl_node-2] [WARN] [1755272339.060987880] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.078190824] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.130296424] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_mavros_bridge-3] [WARN] [1755272339.170594344] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 7.9s ago, pos: 7.9s ago
+[prequal-5] [INFO] [1755272339.182424520] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.225742856] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.234527016] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.253584680] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[prequal-5] [INFO] [1755272339.286463944] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.338539784] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.390487208] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.442588424] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.461262856] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.494573512] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.504406504] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.546662760] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.567930952] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.598903560] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.611172392] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.652830184] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.674390664] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.704981544] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.757062216] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.778207400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.809197576] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.861377704] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272339.913613480] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272339.943323560] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272339.965656648] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.017825320] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.043124936] [dvl_node]: ⚠️ No valid DVL data for 8.8s
+[prequal-5] [INFO] [1755272340.070641032] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.122782696] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.174756520] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.178787528] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272340.227008488] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.232359176] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272340.279087912] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.285807912] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755272340.329213992] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272340.331306856] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.383494696] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.392670632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272340.435644520] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.487714280] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.506919240] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272340.539852200] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.591904712] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.644157960] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.671719048] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272340.696240648] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.748379944] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.800557096] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.853640808] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272340.905771240] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272340.908135784] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755272340.951822760] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272340.957863560] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.010024264] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.015257064] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755272341.043076552] [dvl_node]: ⚠️ No valid DVL data for 9.8s
+[prequal-5] [INFO] [1755272341.062130760] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.068582440] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.114256552] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.131982600] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.166243432] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.218344680] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.246025800] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.270278504] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.322327304] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.374323400] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.410853352] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.426424040] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.478391144] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.530463560] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.582383912] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[mavros_node-1] [WARN] [1755272341.604260616] [mavros.param]: PR: Param STAT_FLTTIME (65535/1012): 106720 different index: 760/1012
+[mavros_node-1] [WARN] [1755272341.609796776] [mavros.param]: PR: Param STAT_RUNTIME (65535/1012): 320587 different index: 761/1012
+[prequal-5] [INFO] [1755272341.634458824] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.646345544] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.686430920] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.689416904] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.738587272] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.752845544] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.758146696] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[prequal-5] [INFO] [1755272341.790498536] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.806042856] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.842487560] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.859082632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.894420552] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272341.946497704] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272341.983158472] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272341.998489480] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.043106216] [dvl_node]: ⚠️ No valid DVL data for 10.8s
+[prequal-5] [INFO] [1755272342.051950152] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.103889288] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.148020584] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272342.155866120] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.207882568] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.259943784] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.261742632] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[prequal-5] [INFO] [1755272342.311949832] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.363908296] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.383580392] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272342.415942728] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.437005672] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272342.469156136] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.480105160] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272342.521340008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.534606472] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272342.573455400] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.587732872] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755272342.592113000] [mavros.global_position]: GP: No GPS fix
+[prequal-5] [INFO] [1755272342.625517128] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.677592264] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.712089576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272342.729885832] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.781962280] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.834075048] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272342.876761576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272342.886069864] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.938155656] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272342.990139176] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.042255016] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.043102376] [dvl_node]: ⚠️ No valid DVL data for 11.8s
+[prequal-5] [INFO] [1755272343.094284200] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.112292808] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.146356584] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.155525800] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.198306824] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.208542440] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.250427432] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.261920584] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.303556008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.315083976] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.355545672] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.407507944] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.439241832] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.459505672] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.511985736] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.564072584] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.603948392] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.616194760] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.668182600] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.720242984] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.772262408] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272343.824550888] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.839276232] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.876606952] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.892692744] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.928780552] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.946064680] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272343.980906792] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272343.999380904] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.033086344] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.043001352] [dvl_node]: ⚠️ No valid DVL data for 12.8s
+[dvl_node-2] [WARN] [1755272344.052764456] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.085183400] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.137338728] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.156643592] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [ERROR] [1755272344.170351688] [dvl_mavros_bridge]: ❌ Data stale - vel: 12.9s ago, pos: 12.9s ago
+[prequal-5] [INFO] [1755272344.189401832] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.241557096] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.293628840] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.331523976] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.345705992] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.397685896] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.449980360] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.503596808] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.555592392] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.567094248] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.607546536] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.620570248] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.659636840] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.673922152] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.711760616] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.727286792] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.763805416] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.766124520] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[dvl_node-2] [WARN] [1755272344.790659304] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.815875880] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.867996008] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272344.904909608] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272344.920054984] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272344.972049544] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.024191400] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272345.043101096] [dvl_node]: ⚠️ No valid DVL data for 13.8s
+[dvl_node-2] [WARN] [1755272345.069540968] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272345.076303240] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.128490376] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.180525064] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.232642152] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.268304136] [straight_left_mission]: [DEPTH] Descending... Current: -0.04m, Target: 0.2m, Error: 0.24m, Z-vel: -0.014m/s (VISION_STALE, SPEED_STALE)
+[prequal-5] [INFO] [1755272345.284665928] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272345.305335720] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272345.336798056] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272345.358768232] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272345.388801288] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272345.402002312] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755272345.432193800] [mavros.sys]: FCU: EKF3 IMU1 MAG0 in-flight yaw alignment complete
+[prequal-5] [INFO] [1755272345.440922344] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[mavros_node-1] [INFO] [1755272345.442740520] [mavros.sys]: FCU: EKF3 IMU0 MAG0 in-flight yaw alignment complete
+[dvl_node-2] [WARN] [1755272345.455462536] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272345.492965736] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272345.518775400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272345.545098824] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.597135304] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272345.632922568] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272345.649198472] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.703059624] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[prequal-5] [INFO] [1755272345.755193320] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[dvl_node-2] [WARN] [1755272345.797453832] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755272345.807302344] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+[rosbag_recorder-4] [INFO] [1755272345.853520616] [rosbag_recorder]: 📊 Recording active for 0.5 minutes
+[rosbag_recorder-4] [INFO] [1755272345.855247752] [rosbag_recorder]: 💾 Bag size: 1.0 MB
+[prequal-5] [INFO] [1755272345.859530920] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.04→0.20 (Z:0.6m/s) pos: x=0.0,y=0.0 vel: x=0.00,y=0.04 cmd: F=0.0m/s Y=0.0rad/s (POSE:STALE SPEED:STALE IMU:OK)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
