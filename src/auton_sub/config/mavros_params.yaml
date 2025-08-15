@@ -6,7 +6,6 @@ mavros:
     target_component: 1
     system_id: 1
     
-
     # ✅ MAVLink Message Stream Rates (Hz)
     stream_rate: 10
     sys_rate: 10
@@ -33,25 +32,27 @@ mavros:
 
     # ✅ Vision/DVL Configuration - CRITICAL for DVL integration
     vision_pose:
-      listen_twist: true
-      frame_id: "map"          # Global frame
+      listen_twist: false      # ← CHANGED: Don't listen to twist on pose topic
+      listen_pose: true        # ← ADDED: Explicitly enable pose listening
+      frame_id: "odom"         # ← CHANGED: Use odom frame to match DVL output
       child_frame_id: "base_link"
       
     vision_speed:
-      listen_twist: true
+      listen_twist: true       # ← Keep this for velocity
+      listen_pose: false       # ← ADDED: Don't listen to pose on speed topic
       frame_id: "base_link"    # Vehicle frame for velocities
       
     # ✅ Mocap Configuration (for fake GPS)
     mocap_pose:
       listen_pose: true
-      frame_id: "map"
+      frame_id: "odom"         # ← CHANGED: Match DVL frame
       child_frame_id: "base_link"
 
     # ✅ Local Position Configuration
     local_position:
-      frame_id: "map"
+      frame_id: "odom"         # ← CHANGED: Match DVL frame
       tf_send: true
-      tf_frame_id: "map"
+      tf_frame_id: "odom"      # ← CHANGED: Match DVL frame
       tf_child_frame_id: "base_link"
 
     # ✅ Thruster Control
@@ -80,4 +81,3 @@ mavros:
     # ✅ Additional DVL-specific settings
     setpoint_velocity:
       mav_frame: "BODY_NED"    # Use body frame for velocity commands
-    

@@ -11,7 +11,7 @@ from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Range
 from std_srvs.srv import Trigger
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy
-
+from rclpy.qos import qos_profile_system_default
 from simple_pid import PID
 import numpy as np
 import math
@@ -37,7 +37,9 @@ def quaternion_to_yaw(x, y, z, w):
 class RobotControl(Node):
     def __init__(self):
         super().__init__('robot_control')
-
+        # In your RobotControl.__init__(), add this at the very beginning:
+        time.sleep(5.0)  # Wait for MAVROS to fully initialize
+        self.get_logger().info("🔄 Waiting for MAVROS to initialize...")
         self.rate = self.create_rate(20)  # 20 Hz loop rate
         self.lock = threading.Lock()
         self.debug = True  # Enable debug info
@@ -69,6 +71,7 @@ class RobotControl(Node):
             depth=10
         )
         
+        
         # MAVROS Vision Topic Subscribers (from DVL bridge output)
         self.vision_pose_sub = self.create_subscription(
             PoseStamped,
@@ -97,7 +100,7 @@ class RobotControl(Node):
             PoseStamped, 
             '/mavros/local_position/pose', 
             self.imu_orientation_callback, 
-            mavros_qos
+            qos_profile_system_default
         )
         
         # Publishers for GUIDED mode control
@@ -298,7 +301,7 @@ class RobotControl(Node):
                 
                 if self.max_descent_mode and depth_error > 0.1:
                     # Maximum descent rate
-                    depth_cmd = -1.0  # Full downward velocity
+                    depth_cmd = -0.6  #  downward velocity
                 else:
                     # Normal PID depth control
                     depth_cmd = self.PIDs["depth"](depth_error)
@@ -314,7 +317,7 @@ class RobotControl(Node):
         # Convert normalized commands to actual velocity targets (m/s)
         max_forward_velocity = 2.0   # m/s - adjust based on your sub's max speed
         max_lateral_velocity = 1.0   # m/s - adjust based on thruster config
-        max_vertical_velocity = -1.0  # m/s - depth change rate
+        max_vertical_velocity = -0.6  # m/s - depth change rate
         max_yaw_rate = 1.5          # rad/s - yaw rotation rate
         
         # Scale commands to actual velocities (full speed when active)
