@@ -110,10 +110,10 @@ class RobotControl(Node):
 
         # PID controllers - tuned for DVL-based control via MAVROS vision
         self.PIDs = {   
-            "yaw": PID(1.5, 0.02, 0.05, setpoint=0, output_limits=(-1.0, 1.0)),
-            "depth": PID(1.0, 0.1, 0.2, setpoint=0, output_limits=(-1.0, 1.0)),
-            "surge": PID(0.8, 0.03, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
-            "lateral": PID(0.8, 0.03, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
+            "yaw": PID(1.5, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
+            "depth": PID(1.0, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
+            "surge": PID(0.8, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
+            "lateral": PID(0.8, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
         }
 
         # Start the main control thread
@@ -125,7 +125,9 @@ class RobotControl(Node):
 
     def mavros_pose_callback(self, msg: PoseStamped):
         """MAVROS vision pose callback - DVL position data via bridge"""
+        
         try:
+            self.get_logger().info("Pose CB")
             with self.lock:
                 # Position from MAVROS vision pose (DVL data via bridge)
                 self.position['x'] = msg.pose.position.x
@@ -243,8 +245,7 @@ class RobotControl(Node):
         with self.lock:
             pos = self.position.copy()
             pos['yaw'] = self.orientation['yaw']
-            pos['valid'] = (self.vision_pose_valid and self.check_vision_data_timeout() and
-                           self.imu_valid and self.check_imu_data_timeout())
+            pos['valid'] = (self.vision_pose_valid and self.check_vision_data_timeout())
         return pos
     
     def get_current_velocity(self):

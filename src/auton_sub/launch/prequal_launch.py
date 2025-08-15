@@ -7,6 +7,7 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition
 from ament_index_python.packages import get_package_share_directory
 from launch.actions import TimerAction
 import os
@@ -32,7 +33,11 @@ def generate_launch_description():
             default_value='/dev/ttyUSB0',
             description='DVL serial port'
         ),
-        
+        DeclareLaunchArgument(
+            'record_bag',
+            default_value='true',
+            description='Enable automatic rosbag recording'
+        ),
         # MAVROS Node
         Node(
             package='mavros',
@@ -68,7 +73,17 @@ def generate_launch_description():
                     
             output='screen'
         ),
-        
+        TimerAction(
+            period=3.0,  # Wait 3 seconds for nodes to initialize
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='rosbag_recorder',
+                    output='screen',
+                    condition=IfCondition(LaunchConfiguration('record_bag'))
+                )
+            ]
+        ),
         TimerAction(
             period=5.0,
             actions=[

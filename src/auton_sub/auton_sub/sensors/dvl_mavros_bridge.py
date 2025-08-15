@@ -6,7 +6,7 @@ This node bridges DVL data to MAVROS-compatible topics for ArduSub integration.
 Updated with correct MAVROS topic names, proper error handling, and QoS matching.
 """
 
-import rclpy
+import rclpy   
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from geometry_msgs.msg import TwistStamped, PoseStamped
@@ -84,7 +84,7 @@ class DVLMAVROSBridge(Node):
         try:
             topic_names = [name for name, _ in self.get_topic_names_and_types()]
             mavros_topics = [topic for topic in topic_names if '/mavros/' in topic]
-            
+             
             if len(mavros_topics) > 5:  # MAVROS typically has many topics
                 self.get_logger().info(f"✅ MAVROS topics detected ({len(mavros_topics)} topics) - bridge ready")
                 self.mavros_check_timer.destroy()  # Stop checking
@@ -133,7 +133,7 @@ class DVLMAVROSBridge(Node):
             # Create vision pose message
             vision_pose_msg = PoseStamped()
             vision_pose_msg.header = msg.header
-            vision_pose_msg.header.frame_id = "map"  # MAVROS expects map frame
+            vision_pose_msg.header.frame_id = "odom"  # changed from map frame
             
             # Validate position data
             pos = msg.pose.pose.position

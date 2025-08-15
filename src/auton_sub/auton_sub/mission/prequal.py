@@ -4,6 +4,8 @@ from rclpy.node import Node
 import math
 from auton_sub.utils import arm, disarm
 from auton_sub.utils.guided import set_guided_mode
+from rclpy.executors import SingleThreadedExecutor
+import threading
 
 from auton_sub.motion.robot_control import RobotControl
 
@@ -13,6 +15,10 @@ class StraightLeftMission(Node):
         super().__init__('straight_left_mission')
 
         self.robot_control = RobotControl()
+        self._rc_exec = SingleThreadedExecutor()
+        self._rc_exec.add_node(self.robot_control)
+        self._rc_spin_thread = threading.Thread(target=self._rc_exec.spin, daemon=True)
+        self._rc_spin_thread.start()
         self.get_logger().info("[INFO] Straight Left Mission Node Initialized (MAVROS Vision Topics Mode)")
 
         # Mission parameters - FULL SPEED OPERATION
@@ -322,6 +328,8 @@ def main():
         finally:
             mission.robot_control.stop()
             mission.destroy_node()
+            mission._rc_exec.shutdown()
+            mission._rc_spin_thread.join(timeout=1.0)
             rclpy.shutdown()
 
 if __name__ == '__main__':

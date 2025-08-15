@@ -62,6 +62,7 @@ setup(
             'slalom = auton_sub.mission.slalom:main',
             'path = auton_sub.mission.path:main',
             'home = auton_sub.mission.home:main',
+            'rosbag_recorder = auton_sub.motion.rosbag_recorder:main',
         ],
     },
 )
