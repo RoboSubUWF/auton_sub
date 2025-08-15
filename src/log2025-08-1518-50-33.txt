@@ -1,0 +1,479 @@
+Starting ROS 2 launch script...
+ROS_VERSION=2
+ROS_PYTHON_VERSION=3
+ROS_LOCALHOST_ONLY=0
+ROS_DISTRO=humble
+[INFO] [launch]: All log files can be found below /home/robosub/.ros/log/2025-08-15-18-50-35-971116-ubuntu-3328
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [mavros_node-1]: process started with pid [3376]
+[INFO] [dvl_node-2]: process started with pid [3378]
+[INFO] [dvl_mavros_bridge2-3]: process started with pid [3380]
+[mavros_node-1] [INFO] [1755301836.237047840] [mavros_node]: Starting mavros_node container
+[mavros_node-1] [INFO] [1755301836.238648992] [mavros_node]: FCU URL: serial:///dev/ttyTHS1:57600
+[mavros_node-1] [INFO] [1755301836.239321504] [mavros_node]: GCS URL: 
+[mavros_node-1] [INFO] [1755301836.239900224] [mavros_node]: UAS Prefix: /uas1
+[mavros_node-1] [INFO] [1755301836.240415648] [mavros_node]: Starting mavros router node
+[mavros_node-1] [INFO] [1755301836.255331072] [mavros_router]: Built-in SIMD instructions: ARM NEON
+[mavros_node-1] [INFO] [1755301836.256787520] [mavros_router]: Built-in MAVLink package version: 2025.6.6
+[mavros_node-1] [INFO] [1755301836.257424992] [mavros_router]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser matrixpilot paparazzi standard storm32 uAvionix ualberta
+[mavros_node-1] [INFO] [1755301836.257980576] [mavros_router]: MAVROS Router started
+[mavros_node-1] [INFO] [1755301836.258583904] [mavros_router]: Requested to add endpoint: type: 0, url: serial:///dev/ttyTHS1:57600
+[mavros_node-1] [INFO] [1755301836.259182912] [mavros_router]: Endpoint link[1000] created
+[mavros_node-1] [INFO] [1755301836.265548192] [mavros_router]: link[1000] opened successfully
+[mavros_node-1] [INFO] [1755301836.267443936] [mavros_router]: Requested to add endpoint: type: 2, url: /uas1
+[mavros_node-1] [INFO] [1755301836.268405728] [mavros_router]: Endpoint link[1001] created
+[mavros_node-1] [INFO] [1755301836.275856960] [mavros_router]: link[1001] opened successfully
+[mavros_node-1] [INFO] [1755301836.276894112] [mavros_node]: Starting mavros uas node
+[mavros_node-1] [INFO] [1755301836.335899264] [mavros_router]: link[1000] detected remote address 1.1
+[mavros_node-1] [INFO] [1755301836.350182944] [mavros]: UAS Executor started, threads: 6
+[mavros_node-1] [INFO] [1755301836.391735968] [mavros]: Plugin actuator_control created
+[mavros_node-1] [INFO] [1755301836.393145760] [mavros]: Plugin actuator_control initialized
+[mavros_node-1] [INFO] [1755301836.447702304] [mavros]: Plugin adsb created
+[mavros_node-1] [INFO] [1755301836.449273600] [mavros]: Plugin adsb initialized
+[mavros_node-1] [INFO] [1755301836.461243680] [mavros]: Plugin altitude created
+[mavros_node-1] [INFO] [1755301836.462794976] [mavros]: Plugin altitude initialized
+[mavros_node-1] [INFO] [1755301836.475340192] [mavros]: Plugin cam_imu_sync created
+[mavros_node-1] [INFO] [1755301836.476932288] [mavros]: Plugin cam_imu_sync initialized
+[mavros_node-1] [INFO] [1755301836.490027712] [mavros]: Plugin camera created
+[mavros_node-1] [INFO] [1755301836.491656800] [mavros]: Plugin camera initialized
+[mavros_node-1] [INFO] [1755301836.513848896] [mavros]: Plugin cellular_status created
+[mavros_node-1] [INFO] [1755301836.515421024] [mavros]: Plugin cellular_status initialized
+[mavros_node-1] [INFO] [1755301836.556831648] [mavros]: Plugin command created
+[mavros_node-1] [INFO] [1755301836.558672512] [mavros]: Plugin command initialized
+[mavros_node-1] [INFO] [1755301836.581244608] [mavros]: Plugin companion_process_status created
+[mavros_node-1] [INFO] [1755301836.583048384] [mavros]: Plugin companion_process_status initialized
+[mavros_node-1] [INFO] [1755301836.600081248] [mavros]: Plugin debug_value created
+[mavros_node-1] [INFO] [1755301836.601391424] [mavros]: Plugin debug_value initialized
+[mavros_node-1] [INFO] [1755301836.610932576] [mavros.distance_sensor]: DS: Plugin not configured!
+[mavros_node-1] [INFO] [1755301836.611120672] [mavros]: Plugin distance_sensor created
+[mavros_node-1] [INFO] [1755301836.611190272] [mavros]: Plugin distance_sensor initialized
+[mavros_node-1] [INFO] [1755301836.621017728] [mavros]: Plugin esc_status created
+[mavros_node-1] [INFO] [1755301836.621142976] [mavros]: Plugin esc_status initialized
+[mavros_node-1] [INFO] [1755301836.630573888] [mavros]: Plugin esc_telemetry created
+[mavros_node-1] [INFO] [1755301836.630724960] [mavros]: Plugin esc_telemetry initialized
+[mavros_node-1] [INFO] [1755301836.655181472] [mavros]: Plugin fake_gps created
+[mavros_node-1] [INFO] [1755301836.655296256] [mavros]: Plugin fake_gps initialized
+[mavros_node-1] [INFO] [1755301836.683466528] [mavros]: Plugin ftp created
+[mavros_node-1] [INFO] [1755301836.683927360] [mavros]: Plugin ftp initialized
+[mavros_node-1] [INFO] [1755301836.703016960] [mavros]: Plugin geofence created
+[mavros_node-1] [INFO] [1755301836.703172032] [mavros]: Plugin geofence initialized
+[mavros_node-1] [INFO] [1755301836.736343840] [mavros]: Plugin gimbal_control created
+[mavros_node-1] [INFO] [1755301836.737795392] [mavros]: Plugin gimbal_control initialized
+[mavros_node-1] [INFO] [1755301836.795266144] [mavros]: Plugin global_position created
+[mavros_node-1] [INFO] [1755301836.798488768] [mavros]: Plugin global_position initialized
+[mavros_node-1] [INFO] [1755301836.890402208] [mavros]: Plugin gps_input created
+[mavros_node-1] [INFO] [1755301836.894913280] [mavros]: Plugin gps_input initialized
+[mavros_node-1] [INFO] [1755301836.913929216] [mavros]: Plugin gps_rtk created
+[mavros_node-1] [INFO] [1755301836.915045632] [mavros]: Plugin gps_rtk initialized
+[mavros_node-1] [INFO] [1755301836.947566432] [mavros]: Plugin gps_status created
+[mavros_node-1] [INFO] [1755301836.947730848] [mavros]: Plugin gps_status initialized
+[mavros_node-1] [INFO] [1755301837.040041280] [mavros]: Plugin guided_target created
+[mavros_node-1] [INFO] [1755301837.059601984] [mavros]: Plugin guided_target initialized
+[mavros_node-1] [INFO] [1755301837.197903264] [mavros]: Plugin hil created
+[mavros_node-1] [INFO] [1755301837.198042208] [mavros]: Plugin hil initialized
+[mavros_node-1] [INFO] [1755301837.240318656] [mavros]: Plugin home_position created
+[mavros_node-1] [INFO] [1755301837.240460896] [mavros]: Plugin home_position initialized
+[mavros_node-1] [INFO] [1755301837.272956864] [mavros]: Plugin imu created
+[mavros_node-1] [INFO] [1755301837.273123936] [mavros]: Plugin imu initialized
+[mavros_node-1] [INFO] [1755301837.306635264] [mavros]: Plugin landing_target created
+[mavros_node-1] [INFO] [1755301837.306779584] [mavros]: Plugin landing_target initialized
+[dvl_node-2] [INFO] [1755301837.343587712] [dvl_node]: 🔄 Connecting to DVL via serial...
+[mavros_node-1] [INFO] [1755301837.348057536] [mavros]: Plugin local_position created
+[mavros_node-1] [INFO] [1755301837.348228512] [mavros]: Plugin local_position initialized
+[mavros_node-1] [INFO] [1755301837.377337632] [mavros]: Plugin log_transfer created
+[mavros_node-1] [INFO] [1755301837.377480704] [mavros]: Plugin log_transfer initialized
+[dvl_node-2] [INFO] [1755301837.394037792] [dvl_node]: ✅ Connected to DVL via serial!
+[mavros_node-1] [INFO] [1755301837.394101984] [mavros]: Plugin mag_calibration_status created
+[mavros_node-1] [INFO] [1755301837.394201568] [mavros]: Plugin mag_calibration_status initialized
+[mavros_node-1] [INFO] [1755301837.411725248] [mavros]: Plugin manual_control created
+[mavros_node-1] [INFO] [1755301837.411881856] [mavros]: Plugin manual_control initialized
+[mavros_node-1] [INFO] [1755301837.429257440] [mavros]: Plugin mocap_pose_estimate created
+[mavros_node-1] [INFO] [1755301837.429422688] [mavros]: Plugin mocap_pose_estimate initialized
+[mavros_node-1] [INFO] [1755301837.451519936] [mavros]: Plugin mount_control created
+[mavros_node-1] [INFO] [1755301837.451662368] [mavros]: Plugin mount_control initialized
+[mavros_node-1] [INFO] [1755301837.472721888] [mavros]: Plugin nav_controller_output created
+[mavros_node-1] [INFO] [1755301837.472884928] [mavros]: Plugin nav_controller_output initialized
+[mavros_node-1] [INFO] [1755301837.492858560] [mavros]: Plugin obstacle_distance created
+[mavros_node-1] [INFO] [1755301837.492982752] [mavros]: Plugin obstacle_distance initialized
+[mavros_node-1] [INFO] [1755301837.513969632] [mavros]: Plugin odometry created
+[mavros_node-1] [INFO] [1755301837.515246592] [mavros]: Plugin odometry initialized
+[mavros_node-1] [INFO] [1755301837.536691424] [mavros]: Plugin onboard_computer_status created
+[mavros_node-1] [INFO] [1755301837.536871360] [mavros]: Plugin onboard_computer_status initialized
+[mavros_node-1] [INFO] [1755301837.563790656] [mavros]: Plugin open_drone_id created
+[mavros_node-1] [INFO] [1755301837.563923040] [mavros]: Plugin open_drone_id initialized
+[mavros_node-1] [INFO] [1755301837.588895616] [mavros]: Plugin optical_flow created
+[mavros_node-1] [INFO] [1755301837.590330592] [mavros]: Plugin optical_flow initialized
+[mavros_node-1] [INFO] [1755301837.613814464] [mavros]: Plugin param created
+[mavros_node-1] [INFO] [1755301837.613947648] [mavros]: Plugin param initialized
+[mavros_node-1] [INFO] [1755301837.635095264] [mavros]: Plugin play_tune created
+[mavros_node-1] [INFO] [1755301837.635244768] [mavros]: Plugin play_tune initialized
+[mavros_node-1] [INFO] [1755301837.662119168] [mavros]: Plugin px4flow created
+[mavros_node-1] [INFO] [1755301837.662518336] [mavros]: Plugin px4flow initialized
+[mavros_node-1] [INFO] [1755301837.692601760] [mavros]: Plugin rallypoint created
+[mavros_node-1] [INFO] [1755301837.692756512] [mavros]: Plugin rallypoint initialized
+[mavros_node-1] [INFO] [1755301837.717641664] [mavros]: Plugin rangefinder created
+[mavros_node-1] [INFO] [1755301837.717773120] [mavros]: Plugin rangefinder initialized
+[mavros_node-1] [INFO] [1755301837.745626560] [mavros]: Plugin rc_io created
+[mavros_node-1] [INFO] [1755301837.745801984] [mavros]: Plugin rc_io initialized
+[mavros_node-1] [INFO] [1755301837.771404928] [mavros]: Plugin setpoint_accel created
+[mavros_node-1] [INFO] [1755301837.771531520] [mavros]: Plugin setpoint_accel initialized
+[mavros_node-1] [INFO] [1755301837.801234624] [mavros]: Plugin setpoint_attitude created
+[mavros_node-1] [INFO] [1755301837.802547840] [mavros]: Plugin setpoint_attitude initialized
+[mavros_node-1] [INFO] [1755301837.836671360] [mavros]: Plugin setpoint_position created
+[mavros_node-1] [INFO] [1755301837.836831616] [mavros]: Plugin setpoint_position initialized
+[mavros_node-1] [INFO] [1755301837.871853312] [mavros]: Plugin setpoint_raw created
+[mavros_node-1] [INFO] [1755301837.871997088] [mavros]: Plugin setpoint_raw initialized
+[mavros_node-1] [INFO] [1755301837.907455264] [mavros]: Plugin setpoint_trajectory created
+[mavros_node-1] [INFO] [1755301837.907666656] [mavros]: Plugin setpoint_trajectory initialized
+[mavros_node-1] [INFO] [1755301837.938618400] [mavros]: Plugin setpoint_velocity created
+[mavros_node-1] [INFO] [1755301837.938776512] [mavros]: Plugin setpoint_velocity initialized
+[mavros_node-1] [INFO] [1755301837.991424352] [mavros]: Plugin sys_status created
+[mavros_node-1] [INFO] [1755301837.991590464] [mavros]: Plugin sys_status initialized
+[mavros_node-1] [INFO] [1755301838.021104032] [mavros.time]: TM: Timesync mode: MAVLINK
+[mavros_node-1] [INFO] [1755301838.029164576] [mavros]: Plugin sys_time created
+[mavros_node-1] [INFO] [1755301838.029548992] [mavros]: Plugin sys_time initialized
+[mavros_node-1] [INFO] [1755301838.062102048] [mavros]: Plugin tdr_radio created
+[mavros_node-1] [INFO] [1755301838.062254240] [mavros]: Plugin tdr_radio initialized
+[mavros_node-1] [INFO] [1755301838.093723776] [mavros]: Plugin terrain created
+[mavros_node-1] [INFO] [1755301838.093869312] [mavros]: Plugin terrain initialized
+[mavros_node-1] [INFO] [1755301838.130900704] [mavros]: Plugin trajectory created
+[mavros_node-1] [INFO] [1755301838.131045344] [mavros]: Plugin trajectory initialized
+[mavros_node-1] [INFO] [1755301838.165268288] [mavros]: Plugin tunnel created
+[mavros_node-1] [INFO] [1755301838.165405504] [mavros]: Plugin tunnel initialized
+[mavros_node-1] [INFO] [1755301838.197953888] [mavros]: Plugin vfr_hud created
+[mavros_node-1] [INFO] [1755301838.198091456] [mavros]: Plugin vfr_hud initialized
+[mavros_node-1] [INFO] [1755301838.231849952] [mavros]: Plugin vibration created
+[mavros_node-1] [INFO] [1755301838.231994112] [mavros]: Plugin vibration initialized
+[mavros_node-1] [INFO] [1755301838.270441760] [mavros]: Plugin vision_pose created
+[mavros_node-1] [INFO] [1755301838.270570400] [mavros]: Plugin vision_pose initialized
+[mavros_node-1] [INFO] [1755301838.309627136] [mavros]: Plugin vision_speed created
+[mavros_node-1] [INFO] [1755301838.309795648] [mavros]: Plugin vision_speed initialized
+[mavros_node-1] [INFO] [1755301838.358986176] [mavros]: Plugin waypoint created
+[mavros_node-1] [INFO] [1755301838.359199456] [mavros]: Plugin waypoint initialized
+[mavros_node-1] [INFO] [1755301838.404738272] [mavros]: Plugin wheel_odometry created
+[mavros_node-1] [INFO] [1755301838.406025440] [mavros]: Plugin wheel_odometry initialized
+[mavros_node-1] [INFO] [1755301838.445074944] [mavros]: Plugin wind_estimation created
+[mavros_node-1] [INFO] [1755301838.445226560] [mavros]: Plugin wind_estimation initialized
+[mavros_node-1] [INFO] [1755301838.449465440] [mavros]: Built-in SIMD instructions: ARM NEON
+[mavros_node-1] [INFO] [1755301838.449550656] [mavros]: Built-in MAVLink package version: 2025.6.6
+[mavros_node-1] [INFO] [1755301838.449572064] [mavros]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser matrixpilot paparazzi standard storm32 uAvionix ualberta
+[mavros_node-1] [INFO] [1755301838.449586688] [mavros]: MAVROS UAS via /uas1 started. MY ID 1.191, TARGET ID 1.1
+[mavros_node-1] [INFO] [1755301838.469289952] [mavros.rc]: RC_CHANNELS message detected!
+[mavros_node-1] [INFO] [1755301838.479280224] [mavros.imu]: IMU: Raw IMU message used.
+[mavros_node-1] [WARN] [1755301838.479486592] [mavros.imu]: IMU: linear acceleration on RAW_IMU known on APM only.
+[mavros_node-1] [WARN] [1755301838.479520704] [mavros.imu]: IMU: ~imu/data_raw stores unscaled raw acceleration report.
+[mavros_node-1] [WARN] [1755301838.499351040] [mavros.global_position]: GP: No GPS fix
+[mavros_node-1] [WARN] [1755301838.738239360] [mavros.time]: TM: Wrong FCU time.
+[mavros_node-1] [INFO] [1755301838.969766592] [mavros_router]: link[1001] detected remote address 1.191
+[mavros_node-1] [WARN] [1755301839.055018624] [mavros.cmd]: CMD: Unexpected command 520, result 0
+[dvl_node-2] [INFO] [1755301839.061899616] [dvl_node]: ✅ DVL Node initialized and ready!
+[mavros_node-1] [INFO] [1755301839.069077120] [mavros.geofence]: GF: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755301839.069212928] [mavros.rallypoint]: RP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755301839.069265792] [mavros.mission]: WP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755301839.069315680] [mavros.sys]: VER: 1.1: Capabilities         0x000000000000f9e7
+[mavros_node-1] [INFO] [1755301839.069367328] [mavros.sys]: VER: 1.1: Flight software:     040503ff (6133326338653038)
+[mavros_node-1] [INFO] [1755301839.069404640] [mavros.sys]: VER: 1.1: Middleware software: 00000000 (0000000000000000)
+[mavros_node-1] [INFO] [1755301839.069434336] [mavros.sys]: VER: 1.1: OS software:         00000000 (6332383035386136)
+[mavros_node-1] [INFO] [1755301839.069456320] [mavros.sys]: VER: 1.1: Board hardware:      00320000
+[mavros_node-1] [INFO] [1755301839.069476096] [mavros.sys]: VER: 1.1: VID/PID:             1209:5740
+[mavros_node-1] [INFO] [1755301839.069496800] [mavros.sys]: VER: 1.1: UID:                 0000000000000000
+[mavros_node-1] [INFO] [1755301839.429881888] [mavros]: CON: Got HEARTBEAT, connected. FCU: ArduPilot
+[mavros_node-1] [INFO] [1755301839.430169152] [mavros.mission]: WP: detected enable_partial_push: 1
+[mavros_node-1] [INFO] [1755301839.465810368] [mavros.rc]: RC_CHANNELS message detected!
+[mavros_node-1] [INFO] [1755301839.474266464] [mavros.imu]: IMU: Raw IMU message used.
+[dvl_mavros_bridge2-3] [INFO] [1755301839.993878688] [dvl_mavros_bridge]: 🌉 DVL-MAVROS Bridge started with QoS matching!
+[dvl_mavros_bridge2-3] [INFO] [1755301839.994662016] [dvl_mavros_bridge]: 📡 Bridging /dvl/* → /mavros/vision_* (Z flipped for ENU)
+[dvl_node-2] [WARN] [1755301840.229216576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301840.332472384] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301840.445573728] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301840.558469344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755301840.579715840] [mavros.sys]: VER: 1.1: Capabilities         0x000000000000f9e7
+[mavros_node-1] [INFO] [1755301840.579850304] [mavros.sys]: VER: 1.1: Flight software:     040503ff (80e8c23a)
+[mavros_node-1] [INFO] [1755301840.579876512] [mavros.sys]: VER: 1.1: Middleware software: 00000000 (        )
+[mavros_node-1] [INFO] [1755301840.579892960] [mavros.sys]: VER: 1.1: OS software:         00000000 (6a85082c	@W��)
+[mavros_node-1] [INFO] [1755301840.579907360] [mavros.sys]: VER: 1.1: Board hardware:      00320000
+[mavros_node-1] [INFO] [1755301840.579917920] [mavros.sys]: VER: 1.1: VID/PID:             1209:5740
+[mavros_node-1] [INFO] [1755301840.579927072] [mavros.sys]: VER: 1.1: UID:                 0000000000000000
+[mavros_node-1] [INFO] [1755301840.779955936] [mavros.sys]: FCU: EKF3 IMU1 is using external nav data
+[mavros_node-1] [INFO] [1755301840.788244928] [mavros.sys]: FCU: EKF3 IMU1 initial pos NED = 0.0,0.0,-0.0 (m)
+[mavros_node-1] [INFO] [1755301840.799340576] [mavros.sys]: FCU: EKF3 IMU1 initial vel NED = -0.0,0.0,-0.0 (m/s)
+[mavros_node-1] [INFO] [1755301840.807730016] [mavros.sys]: FCU: EKF3 IMU0 is using external nav data
+[mavros_node-1] [INFO] [1755301840.818877984] [mavros.sys]: FCU: EKF3 IMU0 initial pos NED = 0.0,0.0,-0.0 (m)
+[mavros_node-1] [INFO] [1755301840.830008224] [mavros.sys]: FCU: EKF3 IMU0 initial vel NED = -0.0,0.0,-0.0 (m/s)
+[dvl_node-2] [WARN] [1755301840.938802880] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301841.051883552] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[INFO] [rosbag_recorder-4]: process started with pid [3495]
+[INFO] [prequal_manual2-5]: process started with pid [3497]
+[dvl_node-2] [WARN] [1755301841.292610400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301841.406316672] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[rosbag_recorder-4] [INFO] [1755301841.572648704] [rosbag_recorder]: 🔦 Starting rosbag2 recording to: /home/robosub/rosbags/robosub_2025-08-15_18-50-41
+[rosbag_recorder-4] [INFO] [1755301841.573494496] [rosbag_recorder]: 🛰️ Recording 29 topics for DVL+MAVROS system
+[rosbag_recorder-4] [INFO] [1755301841.574351648] [rosbag_recorder]: 💾 Bag will be saved to: /home/robosub/rosbags/robosub_2025-08-15_18-50-41
+[rosbag_recorder-4] [INFO] [1755301841.574972192] [rosbag_recorder]: 📝 Command: ros2 bag record -o /home/robosub/rosbags/robosub_2025-08-15_18-50-41 --compression-mode file --compression-format ... [+29 topics]
+[rosbag_recorder-4] [INFO] [1755301841.576594432] [rosbag_recorder]: ✅ Rosbag recording started successfully
+[rosbag_recorder-4] [INFO] [1755301841.582130336] [rosbag_recorder]: 📊 Recording active for 0.0 minutes
+[dvl_node-2] [WARN] [1755301841.646533184] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301841.759895840] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301841.997614816] [dvl_mavros_bridge]: ✅ MAVROS topics detected (150) - bridge ready
+[dvl_node-2] [INFO] [1755301842.029966368] [dvl_node]: DVL: V=[0.003, 0.009, 0.002] m/s, FOM=0.006, Range=nanm
+[dvl_node-2] [WARN] [1755301842.143252544] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301842.249461056] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301842.356415392] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301842.470312832] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301842.584658368] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301842.691992416] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301842.804784640] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301842.907444320] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301843.020467808] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301843.133440128] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301843.235788448] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301843.618560480] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301843.892477856] [dvl_mavros_bridge]: 🎯 Position bridged: [0.164, -0.134, 0.089] m (z flipped)
+[dvl_node-2] [INFO] [1755301844.025825952] [dvl_node]: DVL: V=[0.025, -0.007, 0.002] m/s, FOM=0.006, Range=nanm
+[dvl_node-2] [WARN] [1755301844.131842048] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301844.245728000] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301844.349843424] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301844.599593952] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301844.713775008] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301844.996878272] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 2.8 Hz, Pos: 2.8 Hz
+[dvl_node-2] [WARN] [1755301845.496061952] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301845.746733312] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [INFO] [1755301846.020188288] [dvl_node]: DVL: V=[-0.010, -0.028, 0.004] m/s, FOM=0.003, Range=nanm
+[dvl_mavros_bridge2-3] [INFO] [1755301846.558254464] [dvl_mavros_bridge]: 🎯 Position bridged: [0.126, -0.117, 0.073] m (z flipped)
+[prequal_manual2-5] [INFO] [1755301847.702052256] [robot_control]: 🔄 Waiting for MAVROS to initialize...
+[prequal_manual2-5] [INFO] [1755301847.741744672] [robot_control]: RobotControl initialized with MAVROS Vision Topics (DVL via Bridge)
+[prequal_manual2-5] [INFO] [1755301847.745719616] [straight_left_mission]: [INFO] Straight Left Mission Node Initialized (MAVROS Vision Topics Mode)
+[prequal_manual2-5] [INFO] [1755301847.746879520] [straight_left_mission]: [INFO] Starting Straight Left Mission with CONCURRENT Descent and Forward Movement
+[prequal_manual2-5] [INFO] [1755301847.747589792] [straight_left_mission]: [INFO] Arming vehicle...
+[prequal_manual2-5] [INFO] [1755301847.781963328] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301847.866521248] [armer_node]: ✅ Vehicle armed successfully.
+[mavros_node-1] [WARN] [1755301847.889521856] [mavros.sys]: FCU: Backup location parameters are missing or zero
+[dvl_node-2] [WARN] [1755301847.891295968] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755301847.895153184] [mavros.sys]: FCU: Compass performance degraded
+[dvl_node-2] [WARN] [1755301847.995106208] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301848.131662304] [dvl_mavros_bridge]: 🚀 Velocity bridged: [-0.006, 0.011, 0.008] m/s (z flipped)
+[prequal_manual2-5] [INFO] [1755301848.135301440] [robot_control]: Pose CB
+[dvl_mavros_bridge2-3] [INFO] [1755301848.135789920] [dvl_mavros_bridge]: 🎯 Position bridged: [0.133, -0.119, 0.075] m (z flipped)
+[prequal_manual2-5] [INFO] [1755301848.279259488] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301848.415164128] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301848.540669920] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301848.676550624] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301848.812234176] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301848.948491776] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301849.083678016] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301849.225138624] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301849.357764800] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755301849.431222464] [mavros.home_position]: HP: requesting home position
+[dvl_node-2] [WARN] [1755301849.469844416] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755301849.544009664] [mavros.sys]: FCU: ArduSub V4.5.3 (80e8c23a)
+[mavros_node-1] [INFO] [1755301849.549526016] [mavros.sys]: FCU: ChibiOS: 6a85082c
+[mavros_node-1] [INFO] [1755301849.557916128] [mavros.sys]: FCU: Pixhawk4 00380030 31385117 35333837
+[mavros_node-1] [INFO] [1755301849.563380640] [mavros.sys]: FCU: IOMCU: 420 1001 411FC231
+[mavros_node-1] [INFO] [1755301849.568967232] [mavros.sys]: FCU: RCOut: PWM:1-16
+[mavros_node-1] [INFO] [1755301849.577350656] [mavros.sys]: FCU: IMU0: fast sampling enabled 8.0kHz/2.0kHz
+[mavros_node-1] [INFO] [1755301849.582907520] [mavros.sys]: FCU: Frame: VECTORED_6DOF
+[dvl_mavros_bridge2-3] [INFO] [1755301849.609184352] [dvl_mavros_bridge]: 🎯 Position bridged: [0.134, -0.114, 0.079] m (z flipped)
+[prequal_manual2-5] [INFO] [1755301849.609388768] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301849.734928704] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301849.868680160] [straight_left_mission]: [INFO] Setting GUIDED mode...
+[prequal_manual2-5] [INFO] [1755301849.894480992] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301849.900800128] [set_guided_mode]: 🔍 Checking current flight mode...
+[dvl_mavros_bridge2-3] [INFO] [1755301849.997112672] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 6.4 Hz, Pos: 6.4 Hz
+[prequal_manual2-5] [INFO] [1755301850.005816544] [robot_control]: Pose CB
+[dvl_node-2] [INFO] [1755301850.006523232] [dvl_node]: DVL: V=[-0.023, -0.009, -0.015] m/s, FOM=-0.004, Range=nanm
+[prequal_manual2-5] [INFO] [1755301850.143933440] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301850.278060288] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755301850.386752224] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal_manual2-5] [INFO] [1755301850.433984672] [set_guided_mode]: 📊 Current mode: MANUAL
+[prequal_manual2-5] [INFO] [1755301850.434701824] [set_guided_mode]: 🔄 Requesting GUIDED mode...
+[prequal_manual2-5] [INFO] [1755301850.440815872] [set_guided_mode]: 📤 Mode change request sent, waiting for confirmation...
+[prequal_manual2-5] [INFO] [1755301850.441746144] [set_guided_mode]: ⏳ Still waiting... Current mode: MANUAL
+[prequal_manual2-5] [INFO] [1755301850.442481472] [set_guided_mode]: ⏳ Still waiting... Current mode: MANUAL
+[mavros_node-1] [WARN] [1755301850.459480096] [mavros.cmd]: CMD: Unexpected command 11, result 0
+[prequal_manual2-5] [INFO] [1755301850.466856288] [set_guided_mode]: ✅ Mode successfully changed to GUIDED
+[prequal_manual2-5] [INFO] [1755301850.478363392] [straight_left_mission]: [INFO] Waiting for MAVROS vision data and control systems...
+[prequal_manual2-5] [INFO] [1755301850.479079456] [straight_left_mission]: [INFO] Waiting for MAVROS vision pose and speed data...
+[prequal_manual2-5] [INFO] [1755301850.481264992] [straight_left_mission]: [INFO] ✅ MAVROS vision data available:
+[prequal_manual2-5] [INFO] [1755301850.483169248] [straight_left_mission]: [INFO]   Vision Pose: x=0.122m, y=-0.117m, z=-0.073m
+[prequal_manual2-5] [INFO] [1755301850.484199904] [straight_left_mission]: [INFO]   Vision Speed: x=-0.013m/s, y=0.004m/s, z=0.002m/s
+[prequal_manual2-5] [INFO] [1755301850.485253984] [straight_left_mission]: [INFO]   IMU Heading: -106.4°
+[prequal_manual2-5] [INFO] [1755301850.486151616] [straight_left_mission]: [INFO]   Speed Status: SPEED_OK
+[prequal_manual2-5] [INFO] [1755301850.487038688] [straight_left_mission]: [INFO] === MISSION START STATUS (MAVROS-VISION) ===
+[prequal_manual2-5] [INFO] [1755301850.488182176] [straight_left_mission]: [INFO] MAVROS Vision Pose Status: VALID
+[prequal_manual2-5] [INFO] [1755301850.489069600] [straight_left_mission]: [INFO] Initial Position: x=0.122m, y=-0.117m, z=-0.073m
+[prequal_manual2-5] [INFO] [1755301850.489981856] [straight_left_mission]: [INFO] Initial Heading: -106.4°
+[prequal_manual2-5] [INFO] [1755301850.490842432] [straight_left_mission]: [INFO] MAVROS Vision Speed Status: VALID
+[prequal_manual2-5] [INFO] [1755301850.491724352] [straight_left_mission]: [INFO] Initial Velocity: x=-0.013m/s, y=0.004m/s, z=0.002m/s
+[prequal_manual2-5] [INFO] [1755301850.493024832] [straight_left_mission]: [INFO] Target Depth: 0.2m
+[prequal_manual2-5] [INFO] [1755301850.493985312] [straight_left_mission]: [INFO] Forward Distance: 0.0m
+[prequal_manual2-5] [INFO] [1755301850.494759616] [straight_left_mission]: [INFO] Descent Delay Before Forward: 2.0s
+[dvl_node-2] [WARN] [1755301850.494843904] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal_manual2-5] [INFO] [1755301850.495532608] [straight_left_mission]: [INFO] Depth Tolerance: ±0.3m
+[prequal_manual2-5] [INFO] [1755301850.496596480] [straight_left_mission]: [INFO] Distance Tolerance: ±0.5m
+[prequal_manual2-5] [INFO] [1755301850.497304096] [straight_left_mission]: [INFO] ==========================================
+[prequal_manual2-5] [INFO] [1755301850.638306752] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301850.771741664] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301850.906710080] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301851.044582912] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301851.046825824] [robot_control]: MAVROS Vision Pose (DVL): x=0.117m, y=-0.128m, z=-0.077m
+[prequal_manual2-5] [INFO] [1755301851.186715648] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301851.319049664] [robot_control]: Pose CB
+[dvl_mavros_bridge2-3] [INFO] [1755301851.456493632] [dvl_mavros_bridge]: 🎯 Position bridged: [0.113, -0.140, 0.087] m (z flipped)
+[prequal_manual2-5] [INFO] [1755301851.457365504] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755301851.563496992] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301851.696346080] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301851.798785344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301851.941396864] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301852.043833280] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal_manual2-5] [INFO] [1755301852.183399168] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755301852.290120096] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal_manual2-5] [INFO] [1755301852.428669536] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301852.500518912] [straight_left_mission]: [MISSION] Starting concurrent descent to 0.2m and forward movement 0.0m
+[prequal_manual2-5] [INFO] [1755301852.501296544] [straight_left_mission]: [START] Current depth: -0.10m (MAVROS vision pose)
+[prequal_manual2-5] [INFO] [1755301852.501887104] [straight_left_mission]: [START] Starting position: x=0.10m, y=-0.15m
+[prequal_manual2-5] [INFO] [1755301852.502487648] [robot_control]: Target depth set to: 0.2m
+[prequal_manual2-5] [INFO] [1755301852.504200544] [robot_control]: Maximum descent rate enabled
+[prequal_manual2-5] [INFO] [1755301852.504984928] [straight_left_mission]: [DEPTH] ✅ Target depth achieved: -0.10m (target: 0.2m)
+[prequal_manual2-5] [INFO] [1755301852.505611584] [robot_control]: Normal PID depth control resumed
+[prequal_manual2-5] [INFO] [1755301852.506241088] [robot_control]: Normal PID depth control resumed
+[prequal_manual2-5] [INFO] [1755301852.506852416] [straight_left_mission]: [FINAL] Mission Results (MAVROS-VISION):
+[prequal_manual2-5] [INFO] [1755301852.507461344] [straight_left_mission]: [FINAL]   Depth: -0.10m (target: 0.2m, error: 0.30m)
+[prequal_manual2-5] [INFO] [1755301852.508083008] [straight_left_mission]: [FINAL]   Distance: 0.00m (target: 0.0m)
+[prequal_manual2-5] [INFO] [1755301852.508837984] [straight_left_mission]: [FINAL]   Final position: x=0.10, y=-0.15
+[prequal_manual2-5] [INFO] [1755301852.509432800] [straight_left_mission]: [FINAL]   Heading change: 0.0°
+[prequal_manual2-5] [WARN] [1755301852.510154464] [straight_left_mission]: [FINAL] ⚠️ Mission partially completed - depth: ✅, distance: ❌
+[prequal_manual2-5] [ERROR] [1755301852.511936384] [straight_left_mission]: [ERROR] Failed to complete concurrent descent and forward movement
+[prequal_manual2-5] [INFO] [1755301852.539389760] [robot_control]: GUIDED Vel (MAVROS-VISION): depth=-0.10→0.20 (Z:-0.5m/s) pos: x=0.1,y=-0.1 vel: x=-0.00,y=0.01 cmd: F=0.0m/s Y=0.0rad/s (POSE:OK SPEED:OK IMU:OK)
+[prequal_manual2-5] [ERROR] [1755301852.540736192] [straight_left_mission]: [ERROR] Mission failed!
+[prequal_manual2-5] [INFO] [1755301852.562024640] [robot_control]: Pose CB
+[prequal_manual2-5] [INFO] [1755301852.590787200] [robot_control]: RobotControl stopped.
+[INFO] [prequal_manual2-5]: process has finished cleanly [pid 3497]
+[dvl_node-2] [WARN] [1755301853.071591648] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301853.614755424] [dvl_mavros_bridge]: 🚀 Velocity bridged: [0.003, -0.027, 0.004] m/s (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301853.618660160] [dvl_mavros_bridge]: 🎯 Position bridged: [0.089, -0.159, 0.116] m (z flipped)
+[dvl_node-2] [INFO] [1755301854.012531168] [dvl_node]: DVL: V=[-0.039, -0.005, -0.003] m/s, FOM=0.002, Range=nanm
+[dvl_node-2] [WARN] [1755301854.252012768] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755301854.452381952] [mavros.mission]: WP: mission received
+[dvl_mavros_bridge2-3] [INFO] [1755301854.996990752] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 5.8 Hz, Pos: 5.8 Hz
+[dvl_node-2] [WARN] [1755301855.158418528] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [INFO] [1755301856.097615136] [dvl_node]: DVL: V=[-0.033, -0.015, 0.010] m/s, FOM=0.001, Range=nanm
+[dvl_mavros_bridge2-3] [INFO] [1755301856.371923072] [dvl_mavros_bridge]: 🎯 Position bridged: [0.025, -0.193, 0.128] m (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301857.693433504] [dvl_mavros_bridge]: 🚀 Velocity bridged: [0.002, 0.005, -0.008] m/s (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301857.697075264] [dvl_mavros_bridge]: 🎯 Position bridged: [0.015, -0.198, 0.132] m (z flipped)
+[dvl_node-2] [WARN] [1755301858.067423968] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301858.182964768] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301858.683509248] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301859.363633792] [dvl_mavros_bridge]: 🎯 Position bridged: [0.004, -0.233, 0.131] m (z flipped)
+[mavros_node-1] [INFO] [1755301859.476075552] [mavros.rallypoint]: RP: mission received
+[dvl_node-2] [WARN] [1755301859.995460096] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301859.996961568] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 6.8 Hz, Pos: 6.8 Hz
+[dvl_node-2] [WARN] [1755301861.113149344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301861.398737984] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.003, -0.279, 0.137] m (z flipped)
+[dvl_node-2] [WARN] [1755301861.428550592] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301861.482053888] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301861.535449824] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301861.669719968] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301861.712354240] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301861.910913184] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301862.034839232] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301862.807313600] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301862.922186784] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301863.026950656] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301863.403922272] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301863.518145088] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301863.790082336] [dvl_mavros_bridge]: 🚀 Velocity bridged: [-0.006, -0.021, 0.002] m/s (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301863.794076672] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.012, -0.341, 0.140] m (z flipped)
+[dvl_node-2] [INFO] [1755301864.052253856] [dvl_node]: DVL: V=[-0.010, -0.014, 0.015] m/s, FOM=0.000, Range=nanm
+[mavros_node-1] [INFO] [1755301864.452065248] [mavros.geofence]: GF: mission received
+[dvl_node-2] [WARN] [1755301864.593122976] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301864.832650528] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301864.996786304] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 5.4 Hz, Pos: 5.4 Hz
+[dvl_node-2] [INFO] [1755301866.044450784] [dvl_node]: DVL: V=[-0.002, -0.038, 0.026] m/s, FOM=0.002, Range=nanm
+[dvl_mavros_bridge2-3] [INFO] [1755301866.318098336] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.023, -0.392, 0.146] m (z flipped)
+[dvl_node-2] [WARN] [1755301866.418581856] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301866.532829056] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301867.878098464] [dvl_mavros_bridge]: 🚀 Velocity bridged: [-0.018, -0.024, -0.011] m/s (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301867.881824544] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.031, -0.411, 0.139] m (z flipped)
+[dvl_node-2] [INFO] [1755301868.014792736] [dvl_node]: DVL: V=[-0.015, -0.039, 0.000] m/s, FOM=0.005, Range=nanm
+[mavros_node-1] [WARN] [1755301868.439531072] [mavros.param]: PR: Param STAT_FLTTIME (65535/1012): 120712 different index: 760/1012
+[mavros_node-1] [WARN] [1755301868.447739200] [mavros.param]: PR: Param STAT_RUNTIME (65535/1012): 343007 different index: 761/1012
+[dvl_node-2] [WARN] [1755301868.524933952] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301868.628870400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301868.671944480] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301868.724740128] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301868.777835360] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301868.911850336] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755301869.516932896] [mavros.global_position]: GP: No GPS fix
+[dvl_node-2] [WARN] [1755301869.693472064] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301869.807486912] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301869.947850752] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.060, -0.452, 0.141] m (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301869.996840224] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 6.0 Hz, Pos: 6.0 Hz
+[dvl_node-2] [INFO] [1755301870.069984192] [dvl_node]: DVL: V=[-0.023, 0.006, -0.027] m/s, FOM=0.000, Range=nanm
+[dvl_node-2] [WARN] [1755301870.184075840] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301871.397846880] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.096, -0.478, 0.138] m (z flipped)
+[rosbag_recorder-4] [INFO] [1755301871.613574592] [rosbag_recorder]: 📊 Recording active for 0.5 minutes
+[rosbag_recorder-4] [INFO] [1755301871.615317216] [rosbag_recorder]: 💾 Bag size: 0.9 MB
+[dvl_node-2] [WARN] [1755301871.904845632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301872.018727744] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301872.259158912] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301873.061267936] [dvl_mavros_bridge]: 🚀 Velocity bridged: [-0.052, -0.013, -0.022] m/s (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301873.063998624] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.144, -0.501, 0.128] m (z flipped)
+[dvl_node-2] [WARN] [1755301873.980585664] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301874.521124320] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.194, -0.525, 0.136] m (z flipped)
+[mavros_node-1] [INFO] [1755301874.638877088] [mavros.param]: PR: parameters list received
+[dvl_mavros_bridge2-3] [INFO] [1755301874.997156480] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 6.6 Hz, Pos: 6.6 Hz
+[dvl_node-2] [INFO] [1755301876.009086592] [dvl_node]: DVL: V=[-0.019, 0.006, -0.020] m/s, FOM=0.000, Range=nanm
+[dvl_mavros_bridge2-3] [INFO] [1755301876.284241632] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.222, -0.498, 0.104] m (z flipped)
+[dvl_node-2] [WARN] [1755301876.454752768] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301876.841136832] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301876.954601376] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.204124096] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.307886368] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.421835776] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.535290688] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.638540000] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.681658144] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.735117088] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.889481344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.932996768] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301877.986413824] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301878.049584992] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301878.183135072] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301878.694649728] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301878.808855968] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301879.183575552] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301879.297657440] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301879.434218272] [dvl_mavros_bridge]: 🚀 Velocity bridged: [-0.056, 0.002, -0.020] m/s (z flipped)
+[dvl_mavros_bridge2-3] [INFO] [1755301879.437971264] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.386, -0.539, 0.070] m (z flipped)
+[dvl_node-2] [WARN] [1755301879.537207904] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301879.650860224] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301879.683686048] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301879.807987264] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301879.921788480] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301879.997129152] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 4.0 Hz, Pos: 4.0 Hz
+[dvl_node-2] [INFO] [1755301880.059104864] [dvl_node]: DVL: V=[-0.045, 0.016, -0.006] m/s, FOM=-0.003, Range=nanm
+[dvl_node-2] [WARN] [1755301880.995682592] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.099254304] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.213262688] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.317172320] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.430925344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.544758208] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.658487776] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.691311296] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.815372864] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.859461344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.912544128] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301881.975746784] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301882.109652896] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301882.213405664] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301882.527533888] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301882.651500064] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301882.684432192] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301882.808364576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301882.921982176] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301883.025754720] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge2-3] [INFO] [1755301883.164055296] [dvl_mavros_bridge]: 🎯 Position bridged: [-0.361, -0.523, 0.110] m (z flipped)
+[dvl_node-2] [WARN] [1755301883.545354080] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755301883.649081248] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [INFO] [1755301884.057128704] [dvl_node]: DVL: V=[0.055, 0.007, -0.031] m/s, FOM=0.003, Range=nanm
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
