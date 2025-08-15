@@ -1,0 +1,90 @@
+mavros:
+  ros__parameters:
+    # ✅ MAVLink Connection Settings
+    fcu_url: "serial:///dev/ttyTHS1:57600"
+    target_system: 1
+    target_component: 1
+    system_id: 1
+    
+    # ✅ MAVLink Message Stream Rates (Hz)
+    stream_rate: 10
+    sys_rate: 10
+    imu_rate: 50
+    gps_rate: 5
+    battery_rate: 5
+
+    # ✅ Enable DVL/Vision Position Plugins
+    plugin_blacklist: ['image_pub']
+    plugin_whitelist: [
+      'sys_status',
+      'imu',
+      'rc_io',
+      'manual_control',
+      'actuator_control',
+      'setpoint_velocity',
+      'setpoint_position',
+      'setpoint_attitude',
+      'vision_pose',           # ← DVL position integration
+      'vision_speed',          # ← DVL velocity integration
+      'local_position',
+      'mocap_pose'             # ← For fake GPS mode
+    ]
+
+    # ✅ Vision/DVL Configuration - CRITICAL for DVL integration
+    vision_pose:
+      listen_twist: false      # ← CHANGED: Don't listen to twist on pose topic
+      listen_pose: true        # ← ADDED: Explicitly enable pose listening
+      frame_id: "odom"         # ← CHANGED: Use odom frame to match DVL output
+      child_frame_id: "base_link"
+      tf_rate_limit: 50.0
+
+    vision_speed:
+      listen_twist: true       # ← Keep this for velocity
+      listen_pose: false       # ← ADDED: Don't listen to pose on speed topic
+      frame_id: "base_link"    # Vehicle frame for velocities
+      
+    # ✅ Mocap Configuration (for fake GPS)
+    mocap_pose:
+      listen_pose: true
+      frame_id: "odom"         # ← CHANGED: Match DVL frame
+      child_frame_id: "base_link"
+
+    # ✅ Local Position Configuration
+    local_position:
+      frame_id: "odom"         # ← CHANGED: Match DVL frame
+      tf_send: true
+      tf_frame_id: "odom"      # ← CHANGED: Match DVL frame
+      tf_child_frame_id: "base_link"
+      tf_listen: true
+
+    setpoint_velocity:
+      mav_frame: "BODY_NED"    # This ensures Z- is down for ArduSub
+      
+    # 🔧 FIXED: Setpoint position in NED frame  
+    setpoint_position:
+      mav_frame: "LOCAL_NED" 
+
+    # ✅ Thruster Control
+    actuator_control:
+      group_mix: "submarine"
+
+    # ✅ Frame Type
+    frame: "VECTORED"
+
+    # ✅ Safety Settings
+    safety_area:
+      min_altitude: -5.0
+      max_altitude: 0.0
+    arming_check: true
+
+    # ✅ Fake GPS (for indoor/pool testing)
+    global_position:
+      use_mocap: true          # Use vision system instead of GPS
+      mocap_transform: true
+      
+    # ✅ Battery Monitoring
+    battery:
+      min_voltage: 10.5
+      critical_voltage: 9.0
+      
+   
