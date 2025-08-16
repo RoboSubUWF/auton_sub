@@ -39,8 +39,35 @@ class RobotControl(Node):
         super().__init__('robot_control')
         # In your RobotControl.__init__(), add this at the very beginning:
         time.sleep(5.0)  # Wait for MAVROS to fully initialize
-        self.get_logger().info("🔄 Waiting for MAVROS to initialize...")
-        
+        self.get_logger().info("?? Waiting for MAVROS to initialize...")
+                # ----- Altitude-hold params (4 ft pool  1.22 m) -----
+        self.pool_depth_m = 1.22          # adjust if your pool depth differs
+        self.desired_depth_m = 0.20       # you want 0.2 m below surface
+        self.base_alt = self.pool_depth_m - self.desired_depth_m  # => 1.02 m
+
+        self.floor_guard_m = 0.50         # avoid DVL near-floor unreliability
+        self.ascend_bias = -0.25          # negative = UP in your send_velocity_command()
+
+        # Bump-test script (entirely onboard; no comms needed)
+        self.bump_test = True             # set False to disable scripted steps
+        self.bump_delta = 0.05            # +5 cm step
+        self.bump_segment_s = 8.0         # 08, 816, 1624s
+
+        # DVL altitude state
+        self.altitude = None
+        self.altitude_valid = False
+        self._alt_filt = None
+        self._alpha = 0.7                 # LPF on measurement to help Kd
+
+        # Altitude PID (Ki = 0 for now)
+        self.alt_pid = PID(0.4, 0.0, 0.10, setpoint=self.base_alt, output_limits=(-0.4, 0.4))
+        self.alt_pid.sample_time = 0.05
+        self.alt_pid.proportional_on_measurement = True
+        self.alt_pid.differential_on_measurement = True
+
+        # clock for the bump test
+        self._t0 = self.get_clock().now()
+
         self.lock = threading.Lock()
         self.debug = True  # Enable debug info
 
@@ -50,7 +77,7 @@ class RobotControl(Node):
         self.orientation = {'yaw': 0.0, 'pitch': 0.0, 'roll': 0.0}  # IMU orientation
         self.range_to_bottom = float('nan')  # DVL range sensor
         self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None}
-        self.movement_command = {'lateral': 0.0, 'forward': 0.0, 'yaw': 0.0}
+        self.movement_command = {'forward': 0.0, 'yaw': 0.0}
         self.max_descent_mode = False 
         self.mode = "guided"
 
@@ -110,10 +137,10 @@ class RobotControl(Node):
 
         # PID controllers - tuned for DVL-based control via MAVROS vision
         self.PIDs = {   
-            "yaw": PID(0.8, .001, 0.05, setpoint=0, output_limits=(-0.5, 0.5)),
-            "depth": PID(1.2, 0.05, 0.1, setpoint=0, output_limits=(-0.5, 0.5)),
-            "surge": PID(0.5, 0.01, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
-            "lateral": PID(0.5, 0, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
+            "yaw": PID(1.5, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
+            "depth": PID(1.0, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
+            "surge": PID(0.8, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
+            "lateral": PID(0.8, 0, 0, setpoint=0, output_limits=(-1.0, 1.0)),
         }
 
         # Start the main control thread
@@ -164,17 +191,20 @@ class RobotControl(Node):
         except Exception as e:
             self.get_logger().error(f"MAVROS vision speed callback error: {e}")
 
-    def dvl_range_callback(self, msg):
-        """DVL range to bottom callback (direct from DVL if available)"""
+    def dvl_range_callback(self, msg: Range):
+        """DVL range to bottom callback (altitude from bottom, meters)"""
         try:
             with self.lock:
-                self.range_to_bottom = msg.range
-            
-            if self.debug and not math.isnan(self.range_to_bottom) and time.time() % 5 < 0.1:
-                self.get_logger().info(f"DVL Range to bottom: {self.range_to_bottom:.2f}m")
-                
+                self.range_to_bottom = float(msg.range)
+                self.altitude = self.range_to_bottom
+                self.altitude_valid = (msg.min_range <= msg.range <= msg.max_range)
+
+            if self.debug and self.altitude_valid and not math.isnan(self.range_to_bottom) and time.time() % 5 < 0.1:
+                self.get_logger().info(f"DVL Altitude (range to bottom): {self.range_to_bottom:.2f} m")
+
         except Exception as e:
             self.get_logger().error(f"DVL range callback error: {e}")
+
 
     def imu_orientation_callback(self, msg):
         """IMU orientation callback - still need this for heading control"""
@@ -200,10 +230,15 @@ class RobotControl(Node):
         return (time.time() - self.last_imu_time) < self.data_timeout
         
     def set_depth(self, target_depth):
-        """Set the target depth for the submarine"""
-        with self.lock:
-            self.desired_point['z'] = target_depth
-        self.get_logger().info(f"Target depth set to: {target_depth}m")
+        d = float(target_depth)
+        if d < 0:  # accept old negative-down calls; normalize
+            d = -d
+        self.desired_depth_m = d
+        self.base_alt = max(0.10, self.pool_depth_m - d)  # for altitude-hold path
+        self.alt_pid.setpoint = self.base_alt
+        self.desired_point['z'] = None
+        self.get_logger().info(f"Depth SP set: {d:.2f} m ? Altitude SP: {self.base_alt:.2f} m")
+
 
     def set_max_descent_rate(self, enable):
         """Enable/disable maximum descent rate for initial descent"""
@@ -229,7 +264,6 @@ class RobotControl(Node):
     def set_movement_command(self, lateral=0.0, forward=0.0, yaw=0.0):
         """Set movement commands while maintaining depth control"""
         with self.lock:
-            self.movement_command['lateral'] = lateral
             self.movement_command['forward'] = forward
             self.movement_command['yaw'] = yaw
         
@@ -239,7 +273,7 @@ class RobotControl(Node):
     def get_current_depth(self):
         """Get current depth from MAVROS vision pose (DVL data via bridge)"""
         with self.lock:
-            return float(self.position['z'])
+            return -float(self.position['z'])
 
     def get_current_position(self):
         """Get current position from MAVROS vision topics (DVL data via bridge)"""
@@ -262,105 +296,121 @@ class RobotControl(Node):
             time.sleep(0.05)
 
     def update_heading_control(self):
-        """Send control commands appropriate for GUIDED mode - FIXED logic"""
+        """Send control commands appropriate for GUIDED mode"""
         with self.lock:
             # Check data validity from MAVROS vision topics
             vision_pose_ok = self.vision_pose_valid and self.check_vision_data_timeout()
             vision_speed_ok = self.vision_velocity_valid and self.check_vision_data_timeout()
             imu_ok = self.imu_valid and self.check_imu_data_timeout()
-            
+
+            now = time.time()
+            if self.debug and vision_pose_ok and (now - getattr(self, "_last_frame_log", 0.0)) > 1.0:
+                self._last_frame_log = now
+                z_enu = float(self.position['z'])
+                depth_down = -z_enu
+                alt = self.altitude if self.altitude is not None else float('nan')
+                sp = self.alt_pid.setpoint if hasattr(self, "alt_pid") else float('nan')
+                self.get_logger().info(
+                    f"[FRAME] z_enu={z_enu:+.3f} m ? depth_down={depth_down:+.3f} m | "
+                    f"alt={alt:.2f} m (valid={self.altitude_valid}) | sp={sp:.2f} m"
+                )
             # Initialize control outputs
             forward_cmd = 0.0
             lateral_cmd = 0.0
             yaw_cmd = 0.0
             depth_cmd = 0.0
             
-            # FIXED: Always use velocity control mode for submarine operations
-            # Get movement commands (these should always be used)
-            forward_cmd = self.movement_command['forward']
-            lateral_cmd = self.movement_command['lateral'] 
-            yaw_cmd = self.movement_command['yaw']
+            # Check if we have position targets (waypoint navigation)
+            has_position_targets = (self.desired_point['x'] is not None or 
+                                  self.desired_point['y'] is not None or
+                                  self.desired_point['yaw'] is not None)
             
-            # Depth control (always active when target is set) - FIXED coordinate frame
-            if self.desired_point['z'] is not None and vision_pose_ok:
-                current_depth = self.position['z']  # Use direct z value from DVL bridge
-                depth_error = self.desired_point['z'] - current_depth
-                
-                # Log depth status for debugging
-                if abs(depth_error) > 0.02:  # Only log when there's meaningful error
-                    self.get_logger().info(f"DEPTH CONTROL: Current={current_depth:.3f}m, Target={self.desired_point['z']:.3f}m, Error={depth_error:.3f}m")
-
-                if self.max_descent_mode and depth_error > 0.1:  # FIXED: descent means going down (negative z)
-                    depth_cmd = -0.6  # Negative for downward movement
-                    self.get_logger().info(f"MAX DESCENT MODE: depth_cmd={depth_cmd}")
+            if has_position_targets and vision_pose_ok and imu_ok:
+                # Position control mode - use PositionTarget for GUIDED mode
+                self.send_position_target()
+                return
+            elif not has_position_targets:
+                # Velocity control mode using MAVROS vision data
+                forward_cmd = self.movement_command['forward']
+                yaw_cmd = self.movement_command['yaw']
+            else:
+                # Position targets set but no valid data
+                if self.debug:
+                    pose_status = "POSE_OK" if vision_pose_ok else "POSE_STALE"
+                    speed_status = "SPEED_OK" if vision_speed_ok else "SPEED_STALE"
+                    imu_status = "IMU_OK" if imu_ok else "IMU_STALE"
+                    self.get_logger().warn(f"Position targets set but no valid data - {pose_status}, {speed_status}, {imu_status}")
+            
+           # Depth control (only when a target is set)
+                        # ---- Altitude hold using DVL (controls distance from bottom) ----
+            # Compute setpoint (with optional scripted bump test)
+            if self.bump_test:
+                t = (self.get_clock().now() - self._t0).nanoseconds * 1e-9
+                if   t < self.bump_segment_s:
+                    sp = self.base_alt
+                elif t < 2*self.bump_segment_s:
+                    sp = self.base_alt + self.bump_delta
+                elif t < 3*self.bump_segment_s:
+                    sp = self.base_alt
                 else:
-                    depth_cmd = self.PIDs["depth"](depth_error)
-                    if abs(depth_cmd) > 0.02:  # Only log significant depth commands
-                        self.get_logger().info(f"PID DEPTH: depth_cmd={depth_cmd:.3f}")
+                    sp = self.base_alt   # hold after 24s
+            else:
+                sp = self.base_alt
 
-            # FIXED: Always send velocity commands, don't skip based on position targets
+            self.alt_pid.setpoint = sp
+
+            # Measurement low-pass to help Kd
+            if self.altitude is not None:
+                if self._alt_filt is None:
+                    self._alt_filt = self.altitude
+                self._alt_filt = self._alpha*self._alt_filt + (1.0 - self._alpha)*self.altitude
+
+            # Guard against invalid DVL or near-floor region; bias UP (negative) and freeze PID
+            if (self.altitude is None) or (not self.altitude_valid) or (not math.isfinite(self.altitude)) or (self.altitude < self.floor_guard_m):
+                depth_cmd = self.ascend_bias         # negative = up in your mapping
+                
+                self.alt_pid.auto_mode = False       # avoid I windup when you later add Ki
+            else:
+                if not self.alt_pid.auto_mode:
+                    self.alt_pid.set_auto_mode(True, last_output=0.0)
+                depth_cmd = self.alt_pid(self._alt_filt)
+                depth_cmd = -depth_cmd
+
+
+
+
+            # Send velocity commands for GUIDED mode
             self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd)
+
     def send_velocity_command(self, forward, lateral, vertical, yaw_rate):
-        """FIXED velocity command logic"""
         vel_cmd = Twist()
 
-        # FIXED velocity limits for submarine
         max_forward_velocity = 1.0
-        max_lateral_velocity = 0.5
-        max_vertical_velocity = -0.8
-        max_yaw_rate = 0.5  # Reduced for stability
+        max_lateral_velocity = 1.0
+        max_vertical_velocity = 0.55    # positive magnitude
+        max_yaw_rate = 1.5
 
-        # Forward/backward - FIXED logic
-        if abs(forward) > 0.01:
-            vel_cmd.linear.x = forward * max_forward_velocity  # Direct mapping
-            self.get_logger().info(f"FORWARD COMMAND: input={forward:.2f}, output={vel_cmd.linear.x:.2f}")
-        else:
-            vel_cmd.linear.x = 0.0
+        # Forward / lateral (keep as you had)
+        vel_cmd.linear.x = max_forward_velocity if abs(forward) > 0.01 and forward > 0 else \
+                        (-max_forward_velocity if abs(forward) > 0.01 else 0.0)
+        vel_cmd.linear.y = max_lateral_velocity if abs(lateral) > 0.01 and lateral > 0 else \
+                        (-max_lateral_velocity if abs(lateral) > 0.01 else 0.0)
 
-        # Lateral (left/right)
-        if abs(lateral) > 0.01:
-            vel_cmd.linear.y = lateral * max_lateral_velocity
-        else:
-            vel_cmd.linear.y = 0.0
-
-        # Vertical - FIXED logic for submarine depth control
+        # Vertical: our API uses vertical>0 = "go DOWN".
         if abs(vertical) > 0.01:
-            vel_cmd.linear.z = vertical * max_vertical_velocity  # Direct mapping
-            self.get_logger().info(f"VERTICAL COMMAND: input={vertical:.2f}, output={vel_cmd.linear.z:.2f}")
+            mag = min(1.0, abs(vertical))
+            vel_cmd.linear.z = -max_vertical_velocity if vertical > 0 else +max_vertical_velocity
         else:
-            min_vertical_thrust = 0.2 * max_vertical_velocity
-            vel_cmd.linear.z = min_vertical_thrust if vertical > 0 else -min_vertical_thrust
-            self.get_logger().info(f"MINIMAL VERTICAL: input={vertical:.3f}, output={vel_cmd.linear.z:.2f} (min thrust)")
+            vel_cmd.linear.z = 0.0
 
-        # Yaw - FIXED logic
-        if abs(yaw_rate) > 0.01:
-            vel_cmd.angular.z = 0.0
-        else:
-            vel_cmd.angular.z = 0.0
+        vel_cmd.angular.z = max_yaw_rate if abs(yaw_rate) > 0.01 and yaw_rate > 0 else \
+                            (-max_yaw_rate if abs(yaw_rate) > 0.01 else 0.0)
 
         vel_cmd.angular.x = 0.0
         vel_cmd.angular.y = 0.0
 
-        # Log all non-zero commands for debugging
-        if (abs(vel_cmd.linear.x) > 0.01 or abs(vel_cmd.linear.y) > 0.01 or 
-            abs(vel_cmd.linear.z) > 0.01 or abs(vel_cmd.angular.z) > 0.01):
-            self.get_logger().info(f"VELOCITY CMD: x={vel_cmd.linear.x:.2f}, y={vel_cmd.linear.y:.2f}, "
-                                 f"z={vel_cmd.linear.z:.2f}, yaw={vel_cmd.angular.z:.2f}")
-
         self.velocity_pub.publish(vel_cmd)
 
-    def stop(self):
-        """Stop the robot and cleanup"""
-        self.get_logger().info("Stopping robot control...")
-        self.running = False
-        if hasattr(self, 'control_thread'):
-            self.control_thread.join(timeout=2.0)
-        
-        # Send zero velocity commands to stop
-        vel_cmd = Twist()
-        for _ in range(5):  # Send multiple stop commands
-            self.velocity_pub.publish(vel_cmd)
-            time.sleep(0.1)
 
     def send_position_target(self):
         """Send position targets for waypoint navigation in GUIDED mode"""
@@ -412,41 +462,68 @@ class RobotControl(Node):
         manual_cmd = ManualControl()
         manual_cmd.header.stamp = self.get_clock().now().to_msg()
         
-        # Convert to float values for ROS message fields
-        # ManualControl expects -1000.0 to 1000.0 (float type)
+        # For your PWM requirements: 1100=full back, 1500=off, 1900=full forward
+        # ManualControl expects -1000 to 1000, which maps to your 1100-1900 range
         
         # Full speed when active (binary on/off control)
         if abs(forward) > 0.01:
-            manual_cmd.x = float(1000 if forward > 0 else -1000)  # Ensure float type
+            manual_cmd.x = 1000 if forward > 0 else -1000  # Full forward (1900) or full back (1100)
         else:
-            manual_cmd.x = float(0)  # Off
+            manual_cmd.x = 0  # Off (1500)
             
         if abs(lateral) > 0.01:
-            manual_cmd.y = float(1000 if lateral > 0 else -1000)  # Ensure float type
+            manual_cmd.y = 1000 if lateral > 0 else -1000  # Full lateral
         else:
-            manual_cmd.y = float(0)  # Off
+            manual_cmd.y = 0  # Off
             
         if abs(vertical) > 0.01:
-            manual_cmd.z = float(1000 if vertical > 0 else -1000)  # Ensure float type
+            manual_cmd.z = 1000 if vertical > 0 else -1000  # Full up/down (1900/1100)
         else:
-            manual_cmd.z = float(0)  # Off
+            manual_cmd.z = 0  # Off (1500)
             
         if abs(yaw_rate) > 0.01:
-            manual_cmd.r = float(1000 if yaw_rate > 0 else -1000)  # Ensure float type
+            manual_cmd.r = 1000 if yaw_rate > 0 else -1000  # Full yaw rotation
         else:
-            manual_cmd.r = float(0)  # Off
+            manual_cmd.r = 0  # Off
         
         if self.debug:
             pwm_x = int(manual_cmd.x * 0.4 + 1500)  # Convert back to actual PWM for logging
             pwm_z = int(manual_cmd.z * 0.4 + 1500) 
             pwm_r = int(manual_cmd.r * 0.4 + 1500)
             self.get_logger().info(f"MANUAL Control (FULL SPEED): "
-                                f"Forward: {manual_cmd.x} ? PWM {pwm_x}, "
-                                f"Depth: {manual_cmd.z} ? PWM {pwm_z}, "
-                                f"Yaw: {manual_cmd.r} ? PWM {pwm_r}")
+                                 f"Forward: {manual_cmd.x} ? PWM {pwm_x}, "
+                                 f"Depth: {manual_cmd.z} ? PWM {pwm_z}, "
+                                 f"Yaw: {manual_cmd.r} ? PWM {pwm_r}")
         
         # Publish manual control command
         self.manual_control_pub.publish(manual_cmd)
+
+    def stop(self):
+        """Stop the control system"""
+        self.running = False
+        
+        # Send stop commands for GUIDED mode
+        stop_vel = Twist()
+        stop_vel.linear.x = 0.0
+        stop_vel.linear.y = 0.0
+        stop_vel.linear.z = 0.0
+        stop_vel.angular.x = 0.0
+        stop_vel.angular.y = 0.0
+        stop_vel.angular.z = 0.0
+        self.velocity_pub.publish(stop_vel)
+        
+        # Also send neutral manual control (for safety)
+        manual_cmd = ManualControl()
+        manual_cmd.header.stamp = self.get_clock().now().to_msg()
+        manual_cmd.x = 0.0
+        manual_cmd.y = 0.0
+        manual_cmd.z = 0.0
+        manual_cmd.r = 0.0
+        self.manual_control_pub.publish(manual_cmd)
+        
+        if self.control_thread.is_alive():
+            self.control_thread.join()
+        self.get_logger().info("RobotControl stopped.")
 
 
 def main(args=None):
@@ -463,4 +540,7 @@ def main(args=None):
 
 
 if __name__ == '__main__':
+
     main()
+
+

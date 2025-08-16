@@ -164,7 +164,7 @@ class DVLMAVROSBridge(Node):
 
                 self.vision_speed_pub.publish(vision_speed_msg)
                 self.last_velocity_time = time.time()
-                if self.velocity_count % 20 == 0:
+                if self.velocity_count % 10 == 0:
                     self.get_logger().info(
                         f"🚀 Velocity bridged: [{vx:.3f}, {vy:.3f}, {vz:.3f}] m/s (z flipped)"
                     )

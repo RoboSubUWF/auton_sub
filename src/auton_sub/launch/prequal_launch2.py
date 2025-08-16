@@ -90,7 +90,7 @@ def generate_launch_description():
          
                 Node(
                     package='auton_sub',
-                    executable='prequal_manual2',
+                    executable='prequal2',
                     output='screen',
                 )
             ]

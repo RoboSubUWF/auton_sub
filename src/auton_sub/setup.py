@@ -65,7 +65,7 @@ setup(
             'home = auton_sub.mission.home:main',
             'rosbag_recorder = auton_sub.motion.rosbag_recorder:main',
             'prequal_manual = auton_sub.mission.prequal_manual:main',
-            'prequal_manual2 = auton_sub.mission.prequal_manual2:main'
+            'prequal2 = auton_sub.mission.prequal2:main'
 ,       ],
     },
 )

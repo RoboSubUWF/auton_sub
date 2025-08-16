@@ -20,15 +20,19 @@ class StraightLeftMission(Node):
         self._rc_spin_thread.start()
         self.get_logger().info("[INFO] Straight Left Mission Node Initialized (MAVROS Vision Topics Mode)")
 
-        # Mission parameters - FULL SPEED OPERATION
-        self.target_depth = -0.2      # meters below surface (positive = down)
+        # Mission parameters - CONSERVATIVE OPERATION for testing
+        self.target_depth = -0.2      # meters below surface (negative = down in your coordinate system)
         self.forward_distance_1 = 13.0  # meters
         self.pause_time = 2.0         # seconds to pause between steps
-        self.forward_speed = 1.0     # Full speed forward command (1.0 = max)
+        self.forward_speed = 0.5     # REDUCED speed for testing (was 1.0)
         
         # Tolerances - adjusted for MAVROS vision topics operation
-        self.depth_tolerance = 0.05    # 30cm tolerance for depth (MAVROS vision pose)
+        self.depth_tolerance = 0.1    # INCREASED tolerance for initial testing
         self.distance_tolerance = 0.5  # 50cm tolerance for distance
+
+        # FIXED: Store initial heading to maintain straight line
+        self.initial_heading = None
+        self.heading_locked = False
 
     def descend_to_depth(self, target_depth=-0.2):
         """Descend to the specified depth using MAVROS vision pose data"""
@@ -38,21 +42,27 @@ class StraightLeftMission(Node):
         current_depth = self.robot_control.get_current_depth()
         self.get_logger().info(f"[DEPTH] Current depth: {current_depth:.2f}m (MAVROS vision pose)")
         
+        # FIXED: Lock heading during descent to prevent rotation
+        if not self.heading_locked:
+            self.lock_current_heading()
+        
         # Set target depth
         self.robot_control.set_depth(target_depth)
         self.robot_control.set_max_descent_rate(True)
         
         # Wait and monitor depth changes using MAVROS vision pose data
-        max_wait_time = 30.0  # 30 seconds max for descent
+        max_wait_time = 45.0  # INCREASED timeout for conservative descent
         start_time = time.time()
         
         while (time.time() - start_time) < max_wait_time: 
             current = self.robot_control.get_current_depth()  # MAVROS vision pose z
             error = abs(current - target_depth)
             
+            # FIXED: Check if we've reached target depth
             if error < self.depth_tolerance:
-                self.get_logger().info(f"[DEPTH] ✅ Target depth achieved: {current:.2f}m (target: {target_depth}m) [MAVROS-VISION]")
+                self.get_logger().info(f"[DEPTH] ? Target depth achieved: {current:.2f}m (target: {target_depth}m) [MAVROS-VISION]")
                 self.robot_control.set_max_descent_rate(False)
+                time.sleep(1.0)  # Brief pause to stabilize
                 return True
                 
             # Log progress every 3 seconds
@@ -64,35 +74,62 @@ class StraightLeftMission(Node):
                 vel_status = "SPEED_OK" if vision_vel.get('valid', False) else "SPEED_STALE"
                 self.get_logger().info(f"[DEPTH] Descending... Current: {current:.2f}m, Target: {target_depth}m, "
                                      f"Error: {error:.2f}m, Z-vel: {vision_vel['z']:.3f}m/s ({status}, {vel_status})")
+                
+                # FIXED: Safety check - if we're going too deep, abort
+                if current < (target_depth - 0.5):  # 50cm deeper than target
+                    self.get_logger().error(f"[DEPTH] ?? SAFETY ABORT - Too deep: {current:.2f}m (target: {target_depth}m)")
+                    self.robot_control.set_max_descent_rate(False)
+                    self.robot_control.set_depth(current)  # Hold current depth
+                    return False
             
             time.sleep(0.5)
         
         final_depth = self.robot_control.get_current_depth()
-        self.get_logger().warn(f"[DEPTH] ⏰ Descent timeout - Final depth: {final_depth:.2f}m (target: {target_depth}m) [MAVROS-VISION]")
+        self.get_logger().warn(f"[DEPTH] ? Descent timeout - Final depth: {final_depth:.2f}m (target: {target_depth}m) [MAVROS-VISION]")
         self.robot_control.set_max_descent_rate(False)
         return abs(final_depth - target_depth) < (self.depth_tolerance * 2)
+
+    def lock_current_heading(self):
+        """Lock the current heading to prevent unwanted rotation"""
+        current_pos = self.robot_control.get_current_position()
+        if current_pos.get('valid', False):
+            self.initial_heading = current_pos['yaw']
+            self.heading_locked = True
+            heading_deg = math.degrees(self.initial_heading)
+            self.get_logger().info(f"[HEADING] Locked heading at: {heading_deg:.1f}° to maintain straight line")
+            # Set yaw target to maintain this heading
+            self.robot_control.set_position(yaw=self.initial_heading)
+        else:
+            self.get_logger().warn("[HEADING] Cannot lock heading - no valid position data")
 
     def move_forward_distance(self, distance_meters, description=""):
         """Move forward for a specific distance using MAVROS vision pose feedback"""
         self.get_logger().info(f"[MOTION] {description} - Moving forward {distance_meters}m (MAVROS Vision Pose)")
+        
+        # FIXED: Lock heading before movement if not already locked
+        if not self.heading_locked:
+            self.lock_current_heading()
         
         # Record starting position from MAVROS vision pose
         start_pos = self.robot_control.get_current_position()
         
         # Check if we have valid MAVROS vision data
         if not start_pos.get('valid', False):
-            self.get_logger().error("[MOTION] ❌ No valid MAVROS vision pose data - cannot perform distance-based movement")
+            self.get_logger().error("[MOTION] ? No valid MAVROS vision pose data - cannot perform distance-based movement")
             # Try to continue with time-based estimate as fallback
             return self.move_forward_time_based(distance_meters, description)
             
         self.get_logger().info(f"[MOTION] Starting position (MAVROS-VISION): x={start_pos['x']:.2f}m, y={start_pos['y']:.2f}m, depth={start_pos['z']:.2f}m")
+        self.get_logger().info(f"[MOTION] Initial heading: {math.degrees(start_pos['yaw']):.1f}°")
+        
         start_time = time.time()
         
-        # Start moving forward
+        # FIXED: Start moving forward with NO yaw command (maintain locked heading via position control)
         self.robot_control.set_movement_command(forward=self.forward_speed, yaw=0.0)
+        self.get_logger().info(f"[MOTION] Forward command sent: {self.forward_speed}, yaw=0.0 (heading locked)")
         
         # Monitor distance traveled using MAVROS vision pose
-        max_time = (distance_meters / 0.5) + 15.0  # Safety timeout with buffer
+        max_time = (distance_meters / 0.3) + 20.0  # Safety timeout with conservative speed estimate
         last_log_time = start_time 
         
         while (time.time() - start_time) < max_time:
@@ -100,7 +137,7 @@ class StraightLeftMission(Node):
             
             # Check MAVROS vision validity
             if not current_pos.get('valid', False):
-                self.get_logger().warn("[MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback")
+                self.get_logger().warn("[MOTION] ?? MAVROS vision pose lost - continuing with timeout fallback")
                 time.sleep(0.5)
                 continue
             
@@ -111,7 +148,7 @@ class StraightLeftMission(Node):
             
             # Check if target distance reached
             if distance_traveled >= (distance_meters - self.distance_tolerance):
-                self.get_logger().info(f"[MOTION] ✅ Target distance reached: {distance_traveled:.2f}m (MAVROS-VISION verified)")
+                self.get_logger().info(f"[MOTION] ? Target distance reached: {distance_traveled:.2f}m (MAVROS-VISION verified)")
                 break
                 
             # Log progress every 3 seconds with MAVROS vision status
@@ -120,18 +157,20 @@ class StraightLeftMission(Node):
                 depth_error = abs(current_pos['z'] - self.target_depth)
                 velocity = self.robot_control.get_current_velocity()
                 heading = math.degrees(current_pos['yaw'])
+                heading_error = math.degrees(current_pos['yaw'] - self.initial_heading) if self.initial_heading else 0
                 vel_status = "SPEED_OK" if velocity.get('valid', False) else "SPEED_STALE"
                 
                 self.get_logger().info(f"[MOTION] MAVROS-VISION Progress: {distance_traveled:.1f}m/{distance_meters}m, "
                                      f"depth: {current_pos['z']:.2f}m (±{depth_error:.2f}m), "
                                      f"vel: fwd={velocity['x']:.2f}, lat={velocity['y']:.2f}m/s, "
-                                     f"heading: {heading:.1f}° ({vel_status})")
+                                     f"heading: {heading:.1f}° (error: {heading_error:.1f}°) ({vel_status})")
                 last_log_time = current_time
             
             time.sleep(0.2)
         
         # Stop forward movement
         self.robot_control.set_movement_command(forward=0.0, yaw=0.0)
+        self.get_logger().info("[MOTION] Forward movement stopped")
         
         # Log final results with MAVROS vision data
         final_pos = self.robot_control.get_current_position()
@@ -139,12 +178,12 @@ class StraightLeftMission(Node):
             final_distance = ((final_pos['x'] - start_pos['x'])**2 + 
                              (final_pos['y'] - start_pos['y'])**2)**0.5
             heading_change = math.degrees(final_pos['yaw'] - start_pos['yaw'])
-            self.get_logger().info(f"[MOTION] ✅ {description} complete (MAVROS-VISION verified) - "
+            self.get_logger().info(f"[MOTION] ? {description} complete (MAVROS-VISION verified) - "
                                   f"Distance: {final_distance:.2f}m, "
                                   f"Final pos: x={final_pos['x']:.2f}, y={final_pos['y']:.2f}, depth={final_pos['z']:.2f}m, "
                                   f"Heading change: {heading_change:.1f}°")
         else:
-            self.get_logger().warn(f"[MOTION] ⚠️ {description} complete (MAVROS-VISION lost) - Position uncertain")
+            self.get_logger().warn(f"[MOTION] ?? {description} complete (MAVROS-VISION lost) - Position uncertain")
         
         return True
 
@@ -152,8 +191,8 @@ class StraightLeftMission(Node):
         """Fallback time-based forward movement when MAVROS vision data is unavailable"""
         self.get_logger().warn(f"[MOTION] {description} - Using TIME-BASED fallback (no MAVROS vision pose)")
         
-        # Estimate time based on expected speed
-        estimated_speed = 1.0  # m/s estimated forward speed at full throttle
+        # Estimate time based on expected speed - CONSERVATIVE estimate
+        estimated_speed = 0.3  # m/s conservative estimated forward speed
         estimated_time = distance_meters / estimated_speed
         
         self.get_logger().info(f"[MOTION] Estimated time for {distance_meters}m at {estimated_speed}m/s: {estimated_time:.1f}s")
@@ -189,7 +228,7 @@ class StraightLeftMission(Node):
         final_depth = self.robot_control.get_current_depth()
         final_velocity = self.robot_control.get_current_velocity()
         vel_status = "SPEED_OK" if final_velocity.get('valid', False) else "SPEED_STALE"
-        self.get_logger().warn(f"[MOTION] ⚠️ {description} complete (TIME-BASED fallback) - "
+        self.get_logger().warn(f"[MOTION] ?? {description} complete (TIME-BASED fallback) - "
                               f"Estimated distance: {distance_meters}m, "
                               f"Final depth: {final_depth:.2f}m, final vel: {final_velocity['x']:.2f}m/s ({vel_status})")
         return True
@@ -201,6 +240,9 @@ class StraightLeftMission(Node):
         start_time = time.time()
         log_interval = 2.0  # Log every 2 seconds during pause
         last_log_time = start_time
+        
+        # FIXED: Ensure all movement commands are zero during pause
+        self.robot_control.set_movement_command(forward=0.0, lateral=0.0, yaw=0.0)
         
         while (time.time() - start_time) < pause_duration:
             current_depth = self.robot_control.get_current_depth()  # MAVROS vision pose z
@@ -240,7 +282,7 @@ class StraightLeftMission(Node):
             
             if pos.get('valid', False):
                 # Log detailed MAVROS vision status
-                self.get_logger().info(f"[INFO] ✅ MAVROS vision data available:")
+                self.get_logger().info(f"[INFO] ? MAVROS vision data available:")
                 self.get_logger().info(f"[INFO]   Vision Pose: x={pos['x']:.3f}m, y={pos['y']:.3f}m, z={pos['z']:.3f}m")
                 self.get_logger().info(f"[INFO]   Vision Speed: x={vel['x']:.3f}m/s, y={vel['y']:.3f}m/s, z={vel['z']:.3f}m/s")
                 self.get_logger().info(f"[INFO]   IMU Heading: {math.degrees(pos['yaw']):.1f}°")
@@ -279,6 +321,7 @@ class StraightLeftMission(Node):
         self.get_logger().info(f"[INFO] Forward Distance: {self.forward_distance_1}m")
         self.get_logger().info(f"[INFO] Depth Tolerance: ±{self.depth_tolerance}m")
         self.get_logger().info(f"[INFO] Distance Tolerance: ±{self.distance_tolerance}m")
+        self.get_logger().info(f"[INFO] Forward Speed: {self.forward_speed} (CONSERVATIVE)")
         self.get_logger().info("[INFO] ")
 
     def run(self):
@@ -308,16 +351,23 @@ class StraightLeftMission(Node):
             time.sleep(2.0)
 
             # Step 5: Descend to target depth (using MAVROS vision pose)
+            self.get_logger().info("[INFO] === STARTING DESCENT PHASE ===")
             if not self.descend_to_depth(self.target_depth):
-                self.get_logger().error("[ERROR] Failed to reach target depth")
+                self.get_logger().error("[ERROR] Failed to reach target depth - ABORTING MISSION")
                 return False
+            
+            # FIXED: Brief stabilization pause after reaching depth
+            self.get_logger().info("[INFO] Stabilizing at target depth...")
+            self.pause_and_monitor_depth(3.0)  # 3 second stabilization
 
             # Step 6: Execute forward movement (using MAVROS vision pose feedback)
+            self.get_logger().info("[INFO] === STARTING FORWARD MOVEMENT PHASE ===")
             if not self.move_forward_distance(self.forward_distance_1, "Primary forward movement"):
                 self.get_logger().error("[ERROR] Failed to complete forward movement")
                 return False
 
             # Step 7: Final pause and depth check
+            self.get_logger().info("[INFO] === FINAL STABILIZATION PHASE ===")
             self.pause_and_monitor_depth(self.pause_time)
 
             # Step 8: Log final mission status
@@ -328,11 +378,14 @@ class StraightLeftMission(Node):
                 self.get_logger().info("[INFO] === MISSION COMPLETE STATUS (MAVROS-VISION) ===")
                 self.get_logger().info(f"[INFO] Final Position: x={final_pos['x']:.3f}m, y={final_pos['y']:.3f}m, z={final_pos['z']:.3f}m")
                 self.get_logger().info(f"[INFO] Final Heading: {math.degrees(final_pos['yaw']):.1f}°")
+                if self.initial_heading:
+                    heading_drift = math.degrees(final_pos['yaw'] - self.initial_heading)
+                    self.get_logger().info(f"[INFO] Heading Drift: {heading_drift:.1f}°")
                 if final_vel.get('valid', False):
                     self.get_logger().info(f"[INFO] Final Velocity: x={final_vel['x']:.3f}m/s, y={final_vel['y']:.3f}m/s, z={final_vel['z']:.3f}m/s")
                 self.get_logger().info("[INFO]")
 
-            self.get_logger().info("[INFO] ✅ Mission completed successfully! (MAVROS Vision Topics Mode)")
+            self.get_logger().info("[INFO] ? Mission completed successfully! (MAVROS Vision Topics Mode)")
             return True
 
         except KeyboardInterrupt:
@@ -341,7 +394,13 @@ class StraightLeftMission(Node):
         except Exception as e:
             self.get_logger().error(f"[ERROR] Mission failed: {e}")
             return False
-        
+        finally:
+            # FIXED: Ensure robot stops and clears targets
+            self.get_logger().info("[INFO] Cleaning up - stopping all movement")
+            self.robot_control.set_movement_command(forward=0.0, lateral=0.0, yaw=0.0)
+            # Clear position targets
+            self.robot_control.set_position(x=None, y=None, z=None, yaw=None)
+            
             
 def main():
         rclpy.init()
