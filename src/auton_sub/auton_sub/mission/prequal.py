@@ -21,7 +21,7 @@ class StraightLeftMission(Node):
         self.get_logger().info("[INFO] Straight Left Mission Node Initialized (MAVROS Vision Topics Mode)")
 
         # Mission parameters - FULL SPEED OPERATION
-        self.target_depth = 0.2      # meters below surface (positive = down)
+        self.target_depth = -0.2      # meters below surface (positive = down)
         self.forward_distance_1 = 13.0  # meters
         self.pause_time = 2.0         # seconds to pause between steps
         self.forward_speed = 1.0     # Full speed forward command (1.0 = max)
@@ -30,7 +30,7 @@ class StraightLeftMission(Node):
         self.depth_tolerance = 0.05    # 30cm tolerance for depth (MAVROS vision pose)
         self.distance_tolerance = 0.5  # 50cm tolerance for distance
 
-    def descend_to_depth(self, target_depth=0.2):
+    def descend_to_depth(self, target_depth=-0.2):
         """Descend to the specified depth using MAVROS vision pose data"""
         self.get_logger().info(f"[DEPTH] Descending to {target_depth}m depth using MAVROS vision pose data...")
         

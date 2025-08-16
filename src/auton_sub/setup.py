@@ -39,6 +39,7 @@ setup(
             'dual_camera = auton_sub.cv.dual_camera:main',
             'dvl_node = auton_sub.sensors.dvl_node:main',
             'dvl_mavros_bridge = auton_sub.sensors.dvl_mavros_bridge:main',
+            'dvl_mavros_bridge2 = auton_sub.sensors.dvl_mavros_bridge2:main',
             'leak_node = auton_sub.sensors.leak_node:main',
             'test_thruster = auton_sub.test_thruster:main',
             'mission_control = auton_sub.mission_control:main',
@@ -63,6 +64,8 @@ setup(
             'path = auton_sub.mission.path:main',
             'home = auton_sub.mission.home:main',
             'rosbag_recorder = auton_sub.motion.rosbag_recorder:main',
-        ],
+            'prequal_manual = auton_sub.mission.prequal_manual:main',
+            'prequal_manual2 = auton_sub.mission.prequal_manual2:main'
+,       ],
     },
 )

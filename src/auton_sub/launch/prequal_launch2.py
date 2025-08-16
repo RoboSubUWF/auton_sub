@@ -28,7 +28,11 @@ def generate_launch_description():
             description='FCU connection URL'
         ),
         
-        
+        DeclareLaunchArgument(
+            'dvl_port',
+            default_value='/dev/ttyUSB0',
+            description='DVL serial port'
+        ),
         DeclareLaunchArgument(
             'record_bag',
             default_value='true',
@@ -48,15 +52,46 @@ def generate_launch_description():
                 ]
             ),
         
-   
+        # DVL Node
+        Node(
+            package='auton_sub',  # Replace with your package name
+            executable='dvl_node',
+                    
+            output='screen',
+            parameters=[{
+                'dvl_port': LaunchConfiguration('dvl_port'),
+            }],
+            remappings=[
+                        # Optional: remap topics if needed
+            ]
+        ),
+        
+        # DVL-MAVROS Bridge
+        Node(
+            package='auton_sub',  # Replace with your package name
+            executable='dvl_mavros_bridge',
+                    
+            output='screen'
+        ),
+        TimerAction(
+            period=5.0,  # Wait 3 seconds for nodes to initialize
+            actions=[
+                Node(
+                    package='auton_sub',
+                    executable='rosbag_recorder',
+                    output='screen',
+                    condition=IfCondition(LaunchConfiguration('record_bag'))
+                )
+            ]
+        ),
         TimerAction(
             period=5.0,
             actions=[
-        
+         
                 Node(
                     package='auton_sub',
-                    executable='prequal_manual',
-                    output='screen'
+                    executable='prequal_manual2',
+                    output='screen',
                 )
             ]
         ),  
