@@ -1,0 +1,1791 @@
+[INFO] [launch]: All log files can be found below /home/robosub/.ros/log/2025-08-16-04-39-21-222965-ubuntu-4376
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [mavros_node-1]: process started with pid [4378]
+[INFO] [dvl_node-2]: process started with pid [4380]
+[INFO] [dvl_mavros_bridge-3]: process started with pid [4382]
+[mavros_node-1] [INFO] [1755337161.382468048] [mavros_node]: Starting mavros_node container
+[mavros_node-1] [INFO] [1755337161.382709006] [mavros_node]: FCU URL: serial:///dev/ttyTHS1:57600
+[mavros_node-1] [INFO] [1755337161.382740005] [mavros_node]: GCS URL: 
+[mavros_node-1] [INFO] [1755337161.382752866] [mavros_node]: UAS Prefix: /uas1
+[mavros_node-1] [INFO] [1755337161.382761823] [mavros_node]: Starting mavros router node
+[mavros_node-1] [INFO] [1755337161.390489851] [mavros_router]: Built-in SIMD instructions: ARM NEON
+[mavros_node-1] [INFO] [1755337161.390577859] [mavros_router]: Built-in MAVLink package version: 2025.6.6
+[mavros_node-1] [INFO] [1755337161.390599293] [mavros_router]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser matrixpilot paparazzi standard storm32 uAvionix ualberta
+[mavros_node-1] [INFO] [1755337161.390613369] [mavros_router]: MAVROS Router started
+[mavros_node-1] [INFO] [1755337161.390673096] [mavros_router]: Requested to add endpoint: type: 0, url: serial:///dev/ttyTHS1:57600
+[mavros_node-1] [INFO] [1755337161.390718300] [mavros_router]: Endpoint link[1000] created
+[mavros_node-1] [INFO] [1755337161.393868317] [mavros_router]: link[1000] opened successfully
+[mavros_node-1] [INFO] [1755337161.394619824] [mavros_router]: Requested to add endpoint: type: 2, url: /uas1
+[mavros_node-1] [INFO] [1755337161.395155389] [mavros_router]: Endpoint link[1001] created
+[mavros_node-1] [INFO] [1755337161.398900859] [mavros_router]: link[1001] opened successfully
+[mavros_node-1] [INFO] [1755337161.399898314] [mavros_node]: Starting mavros uas node
+[mavros_node-1] [INFO] [1755337161.402155360] [mavros_router]: link[1000] detected remote address 1.1
+[mavros_node-1] [INFO] [1755337161.454340429] [mavros]: UAS Executor started, threads: 6
+[mavros_node-1] [INFO] [1755337161.479315573] [mavros]: Plugin actuator_control created
+[mavros_node-1] [INFO] [1755337161.479455599] [mavros]: Plugin actuator_control initialized
+[mavros_node-1] [INFO] [1755337161.511303037] [mavros]: Plugin adsb created
+[mavros_node-1] [INFO] [1755337161.511432346] [mavros]: Plugin adsb initialized
+[mavros_node-1] [INFO] [1755337161.516689274] [mavros]: Plugin altitude created
+[mavros_node-1] [INFO] [1755337161.516805114] [mavros]: Plugin altitude initialized
+[mavros_node-1] [INFO] [1755337161.522262052] [mavros]: Plugin cam_imu_sync created
+[mavros_node-1] [INFO] [1755337161.522365319] [mavros]: Plugin cam_imu_sync initialized
+[mavros_node-1] [INFO] [1755337161.528132572] [mavros]: Plugin camera created
+[mavros_node-1] [INFO] [1755337161.528251771] [mavros]: Plugin camera initialized
+[mavros_node-1] [INFO] [1755337161.534242099] [mavros]: Plugin cellular_status created
+[mavros_node-1] [INFO] [1755337161.534362898] [mavros]: Plugin cellular_status initialized
+[mavros_node-1] [INFO] [1755337161.545569653] [mavros]: Plugin command created
+[mavros_node-1] [INFO] [1755337161.545708015] [mavros]: Plugin command initialized
+[mavros_node-1] [INFO] [1755337161.552484175] [mavros]: Plugin companion_process_status created
+[mavros_node-1] [INFO] [1755337161.552589682] [mavros]: Plugin companion_process_status initialized
+[mavros_node-1] [INFO] [1755337161.561249391] [mavros]: Plugin debug_value created
+[mavros_node-1] [INFO] [1755337161.561399430] [mavros]: Plugin debug_value initialized
+[mavros_node-1] [INFO] [1755337161.568532036] [mavros.distance_sensor]: DS: Plugin not configured!
+[mavros_node-1] [INFO] [1755337161.568729198] [mavros]: Plugin distance_sensor created
+[mavros_node-1] [INFO] [1755337161.568798107] [mavros]: Plugin distance_sensor initialized
+[mavros_node-1] [INFO] [1755337161.577781855] [mavros]: Plugin esc_status created
+[mavros_node-1] [INFO] [1755337161.577920537] [mavros]: Plugin esc_status initialized
+[mavros_node-1] [INFO] [1755337161.586347093] [mavros]: Plugin esc_telemetry created
+[mavros_node-1] [INFO] [1755337161.586473875] [mavros]: Plugin esc_telemetry initialized
+[mavros_node-1] [INFO] [1755337161.596619864] [mavros]: Plugin fake_gps created
+[mavros_node-1] [INFO] [1755337161.596736152] [mavros]: Plugin fake_gps initialized
+[mavros_node-1] [INFO] [1755337161.613489772] [mavros]: Plugin ftp created
+[mavros_node-1] [INFO] [1755337161.613617161] [mavros]: Plugin ftp initialized
+[mavros_node-1] [INFO] [1755337161.626119465] [mavros]: Plugin geofence created
+[mavros_node-1] [INFO] [1755337161.627406825] [mavros]: Plugin geofence initialized
+[mavros_node-1] [INFO] [1755337161.647071008] [mavros]: Plugin gimbal_control created
+[mavros_node-1] [INFO] [1755337161.648396501] [mavros]: Plugin gimbal_control initialized
+[mavros_node-1] [INFO] [1755337161.674577331] [mavros]: Plugin global_position created
+[mavros_node-1] [INFO] [1755337161.677340446] [mavros]: Plugin global_position initialized
+[mavros_node-1] [INFO] [1755337161.697079456] [mavros]: Plugin gps_input created
+[mavros_node-1] [INFO] [1755337161.699429085] [mavros]: Plugin gps_input initialized
+[mavros_node-1] [INFO] [1755337161.720473338] [mavros]: Plugin gps_rtk created
+[mavros_node-1] [INFO] [1755337161.722961200] [mavros]: Plugin gps_rtk initialized
+[mavros_node-1] [INFO] [1755337161.747779460] [mavros]: Plugin gps_status created
+[mavros_node-1] [INFO] [1755337161.749096731] [mavros]: Plugin gps_status initialized
+[mavros_node-1] [INFO] [1755337161.764025283] [mavros]: Plugin guided_target created
+[mavros_node-1] [INFO] [1755337161.764171483] [mavros]: Plugin guided_target initialized
+[mavros_node-1] [INFO] [1755337161.781018389] [mavros]: Plugin hil created
+[mavros_node-1] [INFO] [1755337161.781183080] [mavros]: Plugin hil initialized
+[mavros_node-1] [INFO] [1755337161.794989283] [mavros]: Plugin home_position created
+[mavros_node-1] [INFO] [1755337161.795112321] [mavros]: Plugin home_position initialized
+[mavros_node-1] [INFO] [1755337161.813957784] [mavros]: Plugin imu created
+[mavros_node-1] [INFO] [1755337161.814107151] [mavros]: Plugin imu initialized
+[mavros_node-1] [INFO] [1755337161.831840919] [mavros]: Plugin landing_target created
+[mavros_node-1] [INFO] [1755337161.832012552] [mavros]: Plugin landing_target initialized
+[mavros_node-1] [INFO] [1755337161.853763299] [mavros]: Plugin local_position created
+[mavros_node-1] [INFO] [1755337161.853905500] [mavros]: Plugin local_position initialized
+[mavros_node-1] [INFO] [1755337161.900030373] [mavros]: Plugin log_transfer created
+[mavros_node-1] [INFO] [1755337161.902814922] [mavros]: Plugin log_transfer initialized
+[mavros_node-1] [INFO] [1755337161.923721197] [mavros]: Plugin mag_calibration_status created
+[mavros_node-1] [INFO] [1755337161.923852105] [mavros]: Plugin mag_calibration_status initialized
+[mavros_node-1] [INFO] [1755337161.949470401] [mavros]: Plugin manual_control created
+[mavros_node-1] [INFO] [1755337161.949670026] [mavros]: Plugin manual_control initialized
+[mavros_node-1] [INFO] [1755337161.968987968] [mavros]: Plugin mocap_pose_estimate created
+[mavros_node-1] [INFO] [1755337161.970351243] [mavros]: Plugin mocap_pose_estimate initialized
+[mavros_node-1] [INFO] [1755337161.994456545] [mavros]: Plugin mount_control created
+[mavros_node-1] [INFO] [1755337161.994822877] [mavros]: Plugin mount_control initialized
+[mavros_node-1] [INFO] [1755337162.015812749] [mavros]: Plugin nav_controller_output created
+[mavros_node-1] [INFO] [1755337162.015954534] [mavros]: Plugin nav_controller_output initialized
+[mavros_node-1] [INFO] [1755337162.036766893] [mavros]: Plugin obstacle_distance created
+[mavros_node-1] [INFO] [1755337162.036887436] [mavros]: Plugin obstacle_distance initialized
+[mavros_node-1] [INFO] [1755337162.058979825] [mavros]: Plugin odometry created
+[mavros_node-1] [INFO] [1755337162.059128264] [mavros]: Plugin odometry initialized
+[mavros_node-1] [INFO] [1755337162.081000746] [mavros]: Plugin onboard_computer_status created
+[mavros_node-1] [INFO] [1755337162.081143202] [mavros]: Plugin onboard_computer_status initialized
+[mavros_node-1] [INFO] [1755337162.108315691] [mavros]: Plugin open_drone_id created
+[mavros_node-1] [INFO] [1755337162.108438090] [mavros]: Plugin open_drone_id initialized
+[mavros_node-1] [INFO] [1755337162.132970924] [mavros]: Plugin optical_flow created
+[mavros_node-1] [INFO] [1755337162.133118116] [mavros]: Plugin optical_flow initialized
+[dvl_node-2] [INFO] [1755337162.155162166] [dvl_node]: 🔄 Connecting to DVL via serial...
+[mavros_node-1] [INFO] [1755337162.156000398] [mavros]: Plugin param created
+[mavros_node-1] [INFO] [1755337162.156133418] [mavros]: Plugin param initialized
+[mavros_node-1] [INFO] [1755337162.176985478] [mavros]: Plugin play_tune created
+[mavros_node-1] [INFO] [1755337162.177128574] [mavros]: Plugin play_tune initialized
+[dvl_node-2] [INFO] [1755337162.200708424] [dvl_node]: ✅ Connected to DVL via serial!
+[mavros_node-1] [INFO] [1755337162.202763952] [mavros]: Plugin px4flow created
+[mavros_node-1] [INFO] [1755337162.202895532] [mavros]: Plugin px4flow initialized
+[mavros_node-1] [INFO] [1755337162.229983692] [mavros]: Plugin rallypoint created
+[mavros_node-1] [INFO] [1755337162.230169017] [mavros]: Plugin rallypoint initialized
+[mavros_node-1] [INFO] [1755337162.252289974] [mavros]: Plugin rangefinder created
+[mavros_node-1] [INFO] [1755337162.252421330] [mavros]: Plugin rangefinder initialized
+[mavros_node-1] [INFO] [1755337162.276867212] [mavros]: Plugin rc_io created
+[mavros_node-1] [INFO] [1755337162.277022210] [mavros]: Plugin rc_io initialized
+[mavros_node-1] [INFO] [1755337162.299913386] [mavros]: Plugin setpoint_accel created
+[mavros_node-1] [INFO] [1755337162.300066048] [mavros]: Plugin setpoint_accel initialized
+[mavros_node-1] [INFO] [1755337162.325555994] [mavros]: Plugin setpoint_attitude created
+[mavros_node-1] [INFO] [1755337162.325677464] [mavros]: Plugin setpoint_attitude initialized
+[mavros_node-1] [INFO] [1755337162.358816400] [mavros]: Plugin setpoint_position created
+[mavros_node-1] [INFO] [1755337162.358934256] [mavros]: Plugin setpoint_position initialized
+[mavros_node-1] [INFO] [1755337162.393826339] [mavros]: Plugin setpoint_raw created
+[mavros_node-1] [INFO] [1755337162.393973530] [mavros]: Plugin setpoint_raw initialized
+[mavros_node-1] [INFO] [1755337162.427836458] [mavros]: Plugin setpoint_trajectory created
+[mavros_node-1] [INFO] [1755337162.427956296] [mavros]: Plugin setpoint_trajectory initialized
+[mavros_node-1] [INFO] [1755337162.457305336] [mavros]: Plugin setpoint_velocity created
+[mavros_node-1] [INFO] [1755337162.457556274] [mavros]: Plugin setpoint_velocity initialized
+[mavros_node-1] [INFO] [1755337162.505973163] [mavros]: Plugin sys_status created
+[mavros_node-1] [INFO] [1755337162.506148219] [mavros]: Plugin sys_status initialized
+[mavros_node-1] [INFO] [1755337162.533620305] [mavros.time]: TM: Timesync mode: MAVLINK
+[mavros_node-1] [INFO] [1755337162.541423108] [mavros]: Plugin sys_time created
+[mavros_node-1] [INFO] [1755337162.541559966] [mavros]: Plugin sys_time initialized
+[mavros_node-1] [INFO] [1755337162.572827067] [mavros]: Plugin tdr_radio created
+[mavros_node-1] [INFO] [1755337162.573013352] [mavros]: Plugin tdr_radio initialized
+[mavros_node-1] [INFO] [1755337162.604320122] [mavros]: Plugin terrain created
+[mavros_node-1] [INFO] [1755337162.604454293] [mavros]: Plugin terrain initialized
+[mavros_node-1] [INFO] [1755337162.638638444] [mavros]: Plugin trajectory created
+[mavros_node-1] [INFO] [1755337162.638780197] [mavros]: Plugin trajectory initialized
+[mavros_node-1] [INFO] [1755337162.671837523] [mavros]: Plugin tunnel created
+[mavros_node-1] [INFO] [1755337162.671971086] [mavros]: Plugin tunnel initialized
+[mavros_node-1] [INFO] [1755337162.704435136] [mavros]: Plugin vfr_hud created
+[mavros_node-1] [INFO] [1755337162.704571930] [mavros]: Plugin vfr_hud initialized
+[mavros_node-1] [INFO] [1755337162.738679942] [mavros]: Plugin vibration created
+[mavros_node-1] [INFO] [1755337162.738829373] [mavros]: Plugin vibration initialized
+[mavros_node-1] [INFO] [1755337162.776474871] [mavros]: Plugin vision_pose created
+[mavros_node-1] [INFO] [1755337162.776602228] [mavros]: Plugin vision_pose initialized
+[mavros_node-1] [INFO] [1755337162.814608106] [mavros]: Plugin vision_speed created
+[mavros_node-1] [INFO] [1755337162.814782106] [mavros]: Plugin vision_speed initialized
+[mavros_node-1] [INFO] [1755337162.862959317] [mavros]: Plugin waypoint created
+[mavros_node-1] [INFO] [1755337162.863129126] [mavros]: Plugin waypoint initialized
+[mavros_node-1] [INFO] [1755337162.907282649] [mavros]: Plugin wheel_odometry created
+[mavros_node-1] [INFO] [1755337162.908984931] [mavros]: Plugin wheel_odometry initialized
+[mavros_node-1] [INFO] [1755337162.946008777] [mavros]: Plugin wind_estimation created
+[mavros_node-1] [INFO] [1755337162.946213072] [mavros]: Plugin wind_estimation initialized
+[mavros_node-1] [INFO] [1755337162.949968866] [mavros]: Built-in SIMD instructions: ARM NEON
+[mavros_node-1] [INFO] [1755337162.950037327] [mavros]: Built-in MAVLink package version: 2025.6.6
+[mavros_node-1] [INFO] [1755337162.950059209] [mavros]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser matrixpilot paparazzi standard storm32 uAvionix ualberta
+[mavros_node-1] [INFO] [1755337162.950074245] [mavros]: MAVROS UAS via /uas1 started. MY ID 1.191, TARGET ID 1.1
+[mavros_node-1] [WARN] [1755337163.131442294] [mavros.time]: TM: Wrong FCU time.
+[mavros_node-1] [ERROR] [1755337163.157774470] [mavros.sys]: FCU: EKF3 lane switch 1
+[mavros_node-1] [INFO] [1755337163.355320430] [mavros.rc]: RC_CHANNELS message detected!
+[mavros_node-1] [INFO] [1755337163.363673172] [mavros.imu]: IMU: Raw IMU message used.
+[mavros_node-1] [WARN] [1755337163.363795090] [mavros.imu]: IMU: linear acceleration on RAW_IMU known on APM only.
+[mavros_node-1] [WARN] [1755337163.363845284] [mavros.imu]: IMU: ~imu/data_raw stores unscaled raw acceleration report.
+[mavros_node-1] [WARN] [1755337163.383069715] [mavros.global_position]: GP: No GPS fix
+[mavros_node-1] [INFO] [1755337163.488172657] [mavros_router]: link[1001] detected remote address 1.191
+[mavros_node-1] [INFO] [1755337163.510839136] [mavros]: CON: Got HEARTBEAT, connected. FCU: ArduPilot
+[mavros_node-1] [INFO] [1755337163.511047877] [mavros.mission]: WP: detected enable_partial_push: 1
+[mavros_node-1] [WARN] [1755337163.530184716] [mavros.cmd]: CMD: Unexpected command 520, result 0
+[mavros_node-1] [INFO] [1755337163.545128740] [mavros.geofence]: GF: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755337163.545227977] [mavros.rallypoint]: RP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755337163.545284281] [mavros.mission]: WP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1755337163.545332204] [mavros.sys]: VER: 1.1: Capabilities         0x000000000000f9e7
+[mavros_node-1] [INFO] [1755337163.545386076] [mavros.sys]: VER: 1.1: Flight software:     040503ff (80e8c23a)
+[mavros_node-1] [INFO] [1755337163.545429041] [mavros.sys]: VER: 1.1: Middleware software: 00000000 (        )
+[mavros_node-1] [INFO] [1755337163.545470149] [mavros.sys]: VER: 1.1: OS software:         00000000 (6a85082c	@W��)
+[mavros_node-1] [INFO] [1755337163.545608382] [mavros.sys]: VER: 1.1: Board hardware:      00320000
+[mavros_node-1] [INFO] [1755337163.545658864] [mavros.sys]: VER: 1.1: VID/PID:             1209:5740
+[mavros_node-1] [INFO] [1755337163.545698309] [mavros.sys]: VER: 1.1: UID:                 0000000000000000
+[mavros_node-1] [INFO] [1755337163.876049182] [mavros.rc]: RC_CHANNELS message detected!
+[mavros_node-1] [INFO] [1755337163.881571802] [mavros.imu]: IMU: Raw IMU message used.
+[dvl_node-2] [INFO] [1755337164.047467768] [dvl_node]: ✅ DVL Node initialized and ready!
+[dvl_mavros_bridge-3] [INFO] [1755337165.023212829] [dvl_mavros_bridge]: 🌉 DVL-MAVROS Bridge started with QoS matching!
+[dvl_mavros_bridge-3] [INFO] [1755337165.023949836] [dvl_mavros_bridge]: 📡 Bridging /dvl/* → /mavros/vision_* (Z flipped for ENU)
+[dvl_node-2] [INFO] [1755337166.040777158] [dvl_node]: DVL: V=[0.049, 0.005, 0.034] m/s, FOM=0.002, Range=nanm
+[INFO] [rosbag_recorder-4]: process started with pid [4434]
+[INFO] [prequal-5]: process started with pid [4436]
+[dvl_mavros_bridge-3] [INFO] [1755337166.446969257] [dvl_mavros_bridge]: 🎯 Position bridged: [0.054, 0.006, 0.020] m (z flipped)
+[rosbag_recorder-4] [INFO] [1755337166.739917411] [rosbag_recorder]: 🔦 Starting rosbag2 recording to: /home/robosub/rosbags/robosub_2025-08-16_04-39-26
+[rosbag_recorder-4] [INFO] [1755337166.740669164] [rosbag_recorder]: 🛰️ Recording 29 topics for DVL+MAVROS system
+[rosbag_recorder-4] [INFO] [1755337166.741328879] [rosbag_recorder]: 💾 Bag will be saved to: /home/robosub/rosbags/robosub_2025-08-16_04-39-26
+[rosbag_recorder-4] [INFO] [1755337166.741886864] [rosbag_recorder]: 📝 Command: ros2 bag record -o /home/robosub/rosbags/robosub_2025-08-16_04-39-26 --compression-mode file --compression-format ... [+29 topics]
+[rosbag_recorder-4] [INFO] [1755337166.743531769] [rosbag_recorder]: ✅ Rosbag recording started successfully
+[rosbag_recorder-4] [INFO] [1755337166.745839942] [rosbag_recorder]: 📊 Recording active for 0.0 minutes
+[dvl_mavros_bridge-3] [INFO] [1755337167.026829515] [dvl_mavros_bridge]: ✅ MAVROS topics detected (150) - bridge ready
+[mavros_node-1] [INFO] [1755337167.154993810] [mavros.sys]: FCU: EKF3 IMU0 is using external nav data
+[mavros_node-1] [INFO] [1755337167.166084759] [mavros.sys]: FCU: EKF3 IMU0 initial pos NED = 0.0,0.0,0.0 (m)
+[mavros_node-1] [INFO] [1755337167.174385024] [mavros.sys]: FCU: EKF3 IMU0 initial vel NED = 0.0,0.0,0.0 (m/s)
+[mavros_node-1] [INFO] [1755337167.182716032] [mavros.sys]: FCU: EKF3 IMU1 is using external nav data
+[mavros_node-1] [INFO] [1755337167.193900714] [mavros.sys]: FCU: EKF3 IMU1 initial pos NED = 0.0,0.0,0.0 (m)
+[mavros_node-1] [INFO] [1755337167.202203186] [mavros.sys]: FCU: EKF3 IMU1 initial vel NED = 0.0,0.0,0.0 (m/s)
+[dvl_mavros_bridge-3] [INFO] [1755337167.796460061] [dvl_mavros_bridge]: 🚀 Velocity bridged: [0.024, -0.011, 0.013] m/s (z flipped)
+[dvl_mavros_bridge-3] [INFO] [1755337167.800313703] [dvl_mavros_bridge]: 🎯 Position bridged: [0.096, 0.016, 0.033] m (z flipped)
+[dvl_node-2] [INFO] [1755337168.068858256] [dvl_node]: DVL: V=[0.011, 0.001, -0.003] m/s, FOM=0.004, Range=nanm
+[dvl_mavros_bridge-3] [INFO] [1755337169.154448706] [dvl_mavros_bridge]: 🎯 Position bridged: [0.132, 0.020, 0.036] m (z flipped)
+[dvl_mavros_bridge-3] [INFO] [1755337170.026494257] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 7.2 Hz, Pos: 7.2 Hz
+[dvl_node-2] [INFO] [1755337170.097208363] [dvl_node]: DVL: V=[0.018, 0.020, -0.002] m/s, FOM=-0.001, Range=nanm
+[dvl_mavros_bridge-3] [INFO] [1755337171.309617606] [dvl_mavros_bridge]: 🎯 Position bridged: [0.179, 0.031, 0.039] m (z flipped)
+[prequal-5] [INFO] [1755337172.546559075] [robot_control]: 🔄 Waiting for MAVROS to initialize...
+[prequal-5] [INFO] [1755337172.573148463] [robot_control]: RobotControl initialized with MAVROS Vision Topics (DVL via Bridge)
+[prequal-5] [INFO] [1755337172.576066314] [straight_left_mission]: [INFO] Straight Left Mission Node Initialized (MAVROS Vision Topics Mode)
+[prequal-5] [INFO] [1755337172.576825735] [straight_left_mission]: [INFO] Starting Straight Left Mission with MAVROS Vision Topics Control
+[prequal-5] [INFO] [1755337172.577515418] [straight_left_mission]: [INFO] Arming vehicle...
+[prequal-5] [INFO] [1755337172.622958227] [armer_node]: ✅ Vehicle armed successfully.
+[dvl_mavros_bridge-3] [INFO] [1755337172.663033420] [dvl_mavros_bridge]: 🚀 Velocity bridged: [-0.001, 0.005, -0.033] m/s (z flipped)
+[prequal-5] [INFO] [1755337172.672113114] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755337172.675384171] [dvl_mavros_bridge]: 🎯 Position bridged: [0.200, 0.037, 0.040] m (z flipped)
+[prequal-5] [INFO] [1755337172.802738538] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337172.937283881] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337173.068215979] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337173.070084443] [robot_control]: MAVROS Vision Pose (DVL): x=0.208m, y=0.041m, z=-0.050m
+[prequal-5] [INFO] [1755337173.204549696] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337173.341220015] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337173.477340867] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755337173.509221644] [mavros.home_position]: HP: requesting home position
+[mavros_node-1] [INFO] [1755337173.545745894] [mavros.sys]: FCU: ArduSub V4.5.3 (80e8c23a)
+[mavros_node-1] [INFO] [1755337173.551296390] [mavros.sys]: FCU: ChibiOS: 6a85082c
+[mavros_node-1] [INFO] [1755337173.559663193] [mavros.sys]: FCU: Pixhawk4 00380030 31385117 35333837
+[mavros_node-1] [INFO] [1755337173.565247855] [mavros.sys]: FCU: IOMCU: 420 1001 411FC231
+[mavros_node-1] [INFO] [1755337173.570766456] [mavros.sys]: FCU: RCOut: PWM:1-16
+[mavros_node-1] [INFO] [1755337173.581835777] [mavros.sys]: FCU: IMU0: fast sampling enabled 8.0kHz/2.0kHz
+[mavros_node-1] [INFO] [1755337173.585664645] [mavros.sys]: FCU: Frame: VECTORED_6DOF
+[prequal-5] [INFO] [1755337173.613906034] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337173.747319218] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337173.882648243] [robot_control]: Pose CB
+[dvl_node-2] [INFO] [1755337174.017054964] [dvl_node]: DVL: V=[0.003, -0.004, 0.002] m/s, FOM=0.003, Range=nanm
+[dvl_mavros_bridge-3] [INFO] [1755337174.017731784] [dvl_mavros_bridge]: 🎯 Position bridged: [0.226, 0.048, 0.044] m (z flipped)
+[prequal-5] [INFO] [1755337174.018413562] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337174.146411122] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337174.282316505] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337174.418215426] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337174.554627600] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337174.626190403] [straight_left_mission]: [INFO] Setting GUIDED mode...
+[prequal-5] [INFO] [1755337174.650216917] [set_guided_mode]: 🔍 Checking current flight mode...
+[prequal-5] [INFO] [1755337174.689498767] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337174.826832583] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337174.962302289] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755337175.026302408] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 7.4 Hz, Pos: 7.4 Hz
+[prequal-5] [INFO] [1755337175.098066053] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337175.233632844] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337175.370225532] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337175.496492712] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337175.502452792] [set_guided_mode]: 📊 Current mode: MANUAL
+[prequal-5] [INFO] [1755337175.503883526] [set_guided_mode]: 🔄 Requesting GUIDED mode...
+[prequal-5] [INFO] [1755337175.512463900] [set_guided_mode]: 📤 Mode change request sent, waiting for confirmation...
+[prequal-5] [INFO] [1755337175.514211658] [set_guided_mode]: ⏳ Still waiting... Current mode: MANUAL
+[prequal-5] [INFO] [1755337175.515670096] [set_guided_mode]: ⏳ Still waiting... Current mode: MANUAL
+[mavros_node-1] [WARN] [1755337175.547260579] [mavros.cmd]: CMD: Unexpected command 11, result 0
+[prequal-5] [INFO] [1755337175.552920975] [set_guided_mode]: ✅ Mode successfully changed to GUIDED
+[prequal-5] [INFO] [1755337175.574300283] [straight_left_mission]: [INFO] Waiting for MAVROS vision data and control systems...
+[prequal-5] [INFO] [1755337175.575609038] [straight_left_mission]: [INFO] Waiting for MAVROS vision pose and speed data...
+[prequal-5] [INFO] [1755337175.576790376] [straight_left_mission]: [INFO] ✅ MAVROS vision data available:
+[prequal-5] [INFO] [1755337175.577896377] [straight_left_mission]: [INFO]   Vision Pose: x=0.241m, y=0.053m, z=-0.049m
+[prequal-5] [INFO] [1755337175.578954008] [straight_left_mission]: [INFO]   Vision Speed: x=-0.015m/s, y=0.015m/s, z=0.013m/s
+[prequal-5] [INFO] [1755337175.580103771] [straight_left_mission]: [INFO]   IMU Heading: 71.2°
+[prequal-5] [INFO] [1755337175.581286644] [straight_left_mission]: [INFO]   Speed Status: SPEED_OK
+[prequal-5] [INFO] [1755337175.582448948] [straight_left_mission]: [INFO] === MISSION START STATUS (MAVROS-VISION) ===
+[prequal-5] [INFO] [1755337175.583550246] [straight_left_mission]: [INFO] MAVROS Vision Pose Status: VALID
+[prequal-5] [INFO] [1755337175.584665812] [straight_left_mission]: [INFO] Initial Position: x=0.241m, y=0.053m, z=-0.049m
+[prequal-5] [INFO] [1755337175.585848173] [straight_left_mission]: [INFO] Initial Heading: 71.2°
+[prequal-5] [INFO] [1755337175.587040739] [straight_left_mission]: [INFO] MAVROS Vision Speed Status: VALID
+[prequal-5] [INFO] [1755337175.588478287] [straight_left_mission]: [INFO] Initial Velocity: x=-0.015m/s, y=0.015m/s, z=0.013m/s
+[prequal-5] [INFO] [1755337175.589715288] [straight_left_mission]: [INFO] Target Depth: -0.2m
+[prequal-5] [INFO] [1755337175.590772056] [straight_left_mission]: [INFO] Forward Distance: 13.0m
+[prequal-5] [INFO] [1755337175.591972364] [straight_left_mission]: [INFO] Depth Tolerance: ±0.05m
+[prequal-5] [INFO] [1755337175.593219985] [straight_left_mission]: [INFO] Distance Tolerance: ±0.5m
+[prequal-5] [INFO] [1755337175.594396557] [straight_left_mission]: [INFO] 
+[prequal-5] [INFO] [1755337175.635663370] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337175.774007879] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337175.909409280] [robot_control]: Pose CB
+[dvl_node-2] [INFO] [1755337176.042541996] [dvl_node]: DVL: V=[0.036, -0.011, 0.020] m/s, FOM=0.001, Range=nanm
+[prequal-5] [INFO] [1755337176.044734255] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337176.046303537] [robot_control]: MAVROS Vision Pose (DVL): x=0.245m, y=0.053m, z=-0.049m
+[prequal-5] [INFO] [1755337176.174210073] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755337176.308923814] [dvl_mavros_bridge]: 🎯 Position bridged: [0.254, 0.052, 0.056] m (z flipped)
+[prequal-5] [INFO] [1755337176.311145568] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337176.446443867] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337176.583212501] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337176.718785724] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337176.855872981] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337176.989559866] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337177.125888059] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337177.260412299] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337177.397607273] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337177.533877282] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337177.598241939] [straight_left_mission]: [DEPTH] Descending to -0.2m depth using MAVROS vision pose data...
+[prequal-5] [INFO] [1755337177.599728331] [straight_left_mission]: [DEPTH] Current depth: -0.09m (MAVROS vision pose)
+[prequal-5] [INFO] [1755337177.600995303] [robot_control]: Target depth set to: -0.2m
+[prequal-5] [INFO] [1755337177.602320145] [robot_control]: Maximum descent rate enabled
+[dvl_mavros_bridge-3] [INFO] [1755337177.654655272] [dvl_mavros_bridge]: 🚀 Velocity bridged: [0.009, 0.008, -0.026] m/s (z flipped)
+[dvl_mavros_bridge-3] [INFO] [1755337177.658493424] [dvl_mavros_bridge]: 🎯 Position bridged: [0.261, 0.050, 0.098] m (z flipped)
+[prequal-5] [INFO] [1755337177.661524143] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337177.795552375] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337177.928134267] [robot_control]: Pose CB
+[dvl_node-2] [INFO] [1755337178.063292751] [dvl_node]: DVL: V=[0.018, -0.001, 0.031] m/s, FOM=0.004, Range=nanm
+[prequal-5] [INFO] [1755337178.065443289] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337178.193283973] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337178.331544103] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337178.460147688] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755337178.528943104] [mavros.mission]: WP: mission received
+[prequal-5] [INFO] [1755337178.593372410] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337178.727513713] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337178.862159437] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755337178.996999468] [dvl_mavros_bridge]: 🎯 Position bridged: [0.282, 0.050, 0.144] m (z flipped)
+[prequal-5] [INFO] [1755337178.997939723] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337179.126775727] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337179.258648028] [robot_control]: MAVROS Vision Speed (DVL): x=0.017m/s, y=0.001m/s, z=-0.055m/s
+[prequal-5] [INFO] [1755337179.261631616] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337179.394024300] [robot_control]: MAVROS Vision Speed (DVL): x=0.016m/s, y=-0.002m/s, z=-0.062m/s
+[prequal-5] [INFO] [1755337179.397692637] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337179.521167601] [robot_control]: MAVROS Vision Speed (DVL): x=0.010m/s, y=-0.004m/s, z=-0.073m/s
+[prequal-5] [INFO] [1755337179.526486691] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337179.606505826] [straight_left_mission]: [DEPTH] ✅ Target depth achieved: -0.17m (target: -0.2m) [MAVROS-VISION]
+[prequal-5] [INFO] [1755337179.608015087] [robot_control]: Normal PID depth control resumed
+[prequal-5] [INFO] [1755337179.609085604] [straight_left_mission]: [MOTION] Primary forward movement - Moving forward 13.0m (MAVROS Vision Pose)
+[prequal-5] [INFO] [1755337179.610090637] [straight_left_mission]: [MOTION] Starting position (MAVROS-VISION): x=0.29m, y=0.05m, depth=-0.17m
+[prequal-5] [INFO] [1755337179.611076380] [robot_control]: Movement command: lateral=0.00, forward=1.00, yaw=0.00
+[prequal-5] [INFO] [1755337179.649468912] [robot_control]: MAVROS Vision Speed (DVL): x=0.009m/s, y=-0.005m/s, z=-0.085m/s
+[prequal-5] [INFO] [1755337179.652285224] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337179.786120918] [robot_control]: MAVROS Vision Speed (DVL): x=0.005m/s, y=-0.006m/s, z=-0.095m/s
+[prequal-5] [INFO] [1755337179.787688368] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337179.911984359] [robot_control]: MAVROS Vision Speed (DVL): x=0.005m/s, y=-0.005m/s, z=-0.100m/s
+[prequal-5] [INFO] [1755337179.915617730] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755337180.027030125] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 7.4 Hz, Pos: 7.4 Hz
+[prequal-5] [INFO] [1755337180.047949763] [robot_control]: MAVROS Vision Speed (DVL): x=0.009m/s, y=-0.003m/s, z=-0.101m/s
+[dvl_node-2] [INFO] [1755337180.050422018] [dvl_node]: DVL: V=[0.009, -0.003, 0.101] m/s, FOM=-0.000, Range=nanm
+[prequal-5] [INFO] [1755337180.050886930] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337180.177586409] [robot_control]: MAVROS Vision Speed (DVL): x=0.011m/s, y=-0.002m/s, z=-0.104m/s
+[prequal-5] [INFO] [1755337180.180216791] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337180.303331945] [robot_control]: MAVROS Vision Speed (DVL): x=0.019m/s, y=0.004m/s, z=-0.107m/s
+[prequal-5] [INFO] [1755337180.306222885] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337180.439070789] [robot_control]: MAVROS Vision Speed (DVL): x=0.034m/s, y=0.014m/s, z=-0.109m/s
+[prequal-5] [INFO] [1755337180.441957667] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337180.564755959] [robot_control]: MAVROS Vision Speed (DVL): x=0.036m/s, y=0.023m/s, z=-0.113m/s
+[prequal-5] [INFO] [1755337180.567660304] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337180.690368864] [robot_control]: MAVROS Vision Speed (DVL): x=0.040m/s, y=0.021m/s, z=-0.114m/s
+[prequal-5] [INFO] [1755337180.693471259] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337180.817670748] [robot_control]: MAVROS Vision Speed (DVL): x=0.043m/s, y=0.019m/s, z=-0.116m/s
+[prequal-5] [INFO] [1755337180.820705548] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337180.951651963] [robot_control]: MAVROS Vision Speed (DVL): x=0.047m/s, y=0.020m/s, z=-0.118m/s
+[prequal-5] [INFO] [1755337180.954561810] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.076814987] [robot_control]: MAVROS Vision Speed (DVL): x=0.045m/s, y=0.021m/s, z=-0.121m/s
+[prequal-5] [INFO] [1755337181.079673870] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.203388984] [robot_control]: MAVROS Vision Speed (DVL): x=0.054m/s, y=0.016m/s, z=-0.123m/s
+[dvl_mavros_bridge-3] [INFO] [1755337181.203948489] [dvl_mavros_bridge]: 🎯 Position bridged: [0.335, 0.065, 0.357] m (z flipped)
+[prequal-5] [INFO] [1755337181.206376243] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.328542113] [robot_control]: MAVROS Vision Speed (DVL): x=0.064m/s, y=0.020m/s, z=-0.125m/s
+[prequal-5] [INFO] [1755337181.331415871] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.455901144] [robot_control]: MAVROS Vision Speed (DVL): x=0.069m/s, y=0.019m/s, z=-0.130m/s
+[prequal-5] [INFO] [1755337181.458807212] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.580155738] [robot_control]: MAVROS Vision Speed (DVL): x=0.073m/s, y=0.016m/s, z=-0.134m/s
+[prequal-5] [INFO] [1755337181.582923065] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.706292623] [robot_control]: MAVROS Vision Speed (DVL): x=0.078m/s, y=0.013m/s, z=-0.138m/s
+[prequal-5] [INFO] [1755337181.709684747] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.831828448] [robot_control]: MAVROS Vision Speed (DVL): x=0.085m/s, y=0.016m/s, z=-0.140m/s
+[prequal-5] [INFO] [1755337181.835468463] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337181.958813037] [robot_control]: MAVROS Vision Speed (DVL): x=0.080m/s, y=0.011m/s, z=-0.139m/s
+[prequal-5] [INFO] [1755337181.961791274] [robot_control]: Pose CB
+[dvl_node-2] [INFO] [1755337182.073401559] [dvl_node]: DVL: V=[0.081, 0.004, 0.140] m/s, FOM=-0.003, Range=nanm
+[prequal-5] [INFO] [1755337182.073624337] [robot_control]: MAVROS Vision Speed (DVL): x=0.081m/s, y=0.004m/s, z=-0.140m/s
+[prequal-5] [INFO] [1755337182.076691631] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337182.078230540] [robot_control]: MAVROS Vision Pose (DVL): x=0.401m, y=0.077m, z=-0.474m
+[prequal-5] [INFO] [1755337182.200989530] [robot_control]: MAVROS Vision Speed (DVL): x=0.076m/s, y=0.003m/s, z=-0.137m/s
+[prequal-5] [INFO] [1755337182.203835613] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337182.303975812] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.397849016] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.481518926] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.555084102] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337182.617387755] [straight_left_mission]: [MOTION] MAVROS-VISION Progress: 0.1m/13.0m, depth: -0.49m (±0.29m), vel: fwd=0.08, lat=0.00m/s, heading: 64.9° (SPEED_OK)
+[dvl_node-2] [WARN] [1755337182.628557594] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.681777025] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.745112834] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.828962016] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.882102048] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337182.945670616] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.008945250] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.041874332] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.104831617] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.158037734] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.221415495] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.274746885] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.338276150] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.401636572] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.455074296] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.528823797] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755337183.546102258] [mavros.rallypoint]: RP: mission received
+[dvl_node-2] [WARN] [1755337183.582024444] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.635244349] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.708760644] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.761956684] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [ERROR] [1755337183.765009163] [mavros.sys]: FCU: EKF3 lane switch 0
+[dvl_node-2] [WARN] [1755337183.815137945] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.888624745] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.942025137] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337183.995120026] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.060146600] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.143845723] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.196873557] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.260255748] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.323675047] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.376964686] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.440420389] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.493397583] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.556653222] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.609728273] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.652284251] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.705205527] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.778402181] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.841781876] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337184.904968449] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337185.018988876] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337185.026611543] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 2.8s ago, pos: 2.8s ago
+[dvl_node-2] [WARN] [1755337185.183661447] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337185.223366758] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337185.419295099] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337185.472917718] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337185.526724983] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337185.569972402] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337185.633376971] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337185.726098183] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337185.747691038] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337185.912371190] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337186.147879559] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337186.201212319] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337186.228665104] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337186.254527932] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337186.307601255] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337186.370932588] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337186.494945058] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337186.659550925] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337186.731033228] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337186.895340054] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337186.948770351] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.001735996] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.055104591] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.118615121] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337187.233755406] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337187.233999008] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.398627557] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.634465261] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.687620928] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.730757432] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337187.736367254] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337187.794071961] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337187.958818297] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337188.048179197] [dvl_node]: ⚠️ No valid DVL data for 5.9s
+[prequal-5] [INFO] [1755337188.117598894] [robot_control]: MAVROS Vision Speed (DVL): x=0.121m/s, y=0.059m/s, z=0.049m/s
+[prequal-5] [INFO] [1755337188.120548571] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337188.238780055] [straight_left_mission]: [MOTION] MAVROS-VISION Progress: 0.9m/13.0m, depth: -0.20m (±0.00m), vel: fwd=0.12, lat=0.06m/s, heading: 50.9° (SPEED_OK)
+[dvl_node-2] [WARN] [1755337188.239352767] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337188.396891728] [robot_control]: MAVROS Vision Speed (DVL): x=0.055m/s, y=-0.009m/s, z=-0.024m/s
+[prequal-5] [INFO] [1755337188.400594603] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337188.439752016] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337188.492979024] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755337188.527816640] [mavros.geofence]: GF: mission received
+[dvl_node-2] [WARN] [1755337188.556379694] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337188.611160092] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337188.775923933] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337188.808960975] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337188.872658958] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337188.936197952] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.100675189] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.133810051] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.207161399] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.280639778] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.344044026] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.387755034] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.451305923] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.515027317] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.568474964] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.672240963] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337189.847493630] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [INFO] [1755337190.026443004] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 0.4 Hz, Pos: 0.4 Hz
+[dvl_node-2] [WARN] [1755337190.073103861] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.126647261] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337190.182964516] [robot_control]: MAVROS Vision Speed (DVL): x=0.092m/s, y=-0.050m/s, z=0.037m/s
+[prequal-5] [INFO] [1755337190.185872793] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337190.335796117] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.378725156] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.442395235] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.495441868] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.660198670] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.703266960] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.766781985] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.820251841] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.883855798] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.937553900] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337190.990991223] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.054581374] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.118447548] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.243378183] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337191.244853128] [straight_left_mission]: [MOTION] MAVROS-VISION Progress: 1.1m/13.0m, depth: -0.14m (±0.06m), vel: fwd=0.09, lat=-0.05m/s, heading: 31.5° (SPEED_OK)
+[dvl_node-2] [WARN] [1755337191.408317350] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.644271607] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.697692017] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.751106892] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.804287699] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.867715264] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337191.991814296] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337192.156672316] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337192.392308459] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337192.445756871] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337192.499031291] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755337192.516810533] [mavros.param]: PR: Param STAT_FLTTIME (65535/1012): 134586 different index: 760/1012
+[mavros_node-1] [WARN] [1755337192.521976917] [mavros.param]: PR: Param STAT_RUNTIME (65535/1012): 359086 different index: 761/1012
+[dvl_node-2] [WARN] [1755337192.552358238] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337192.615588972] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337192.729772962] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337192.894533688] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.130570477] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.183841103] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.227103282] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337193.250193895] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337193.290480596] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.354006022] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.549441323] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.683678694] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.726904629] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337193.752796568] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337193.790217740] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337193.863803788] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337193.920400306] [robot_control]: MAVROS Vision Speed (DVL): x=0.236m/s, y=-0.111m/s, z=0.009m/s
+[prequal-5] [INFO] [1755337193.923443218] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337194.097903897] [robot_control]: MAVROS Vision Speed (DVL): x=0.185m/s, y=-0.124m/s, z=-0.030m/s
+[dvl_node-2] [INFO] [1755337194.097937902] [dvl_node]: DVL: V=[0.185, -0.124, 0.030] m/s, FOM=-0.148, Range=nanm
+[prequal-5] [INFO] [1755337194.100810178] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337194.255340725] [straight_left_mission]: [MOTION] MAVROS-VISION Progress: 1.9m/13.0m, depth: -0.11m (±0.09m), vel: fwd=0.19, lat=-0.12m/s, heading: 11.9° (SPEED_OK)
+[prequal-5] [INFO] [1755337194.266302036] [robot_control]: MAVROS Vision Speed (DVL): x=-0.008m/s, y=-0.107m/s, z=-0.031m/s
+[prequal-5] [INFO] [1755337194.269306045] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337194.297429423] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337194.360850344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337194.434631620] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337194.490668973] [robot_control]: MAVROS Vision Speed (DVL): x=0.145m/s, y=0.105m/s, z=0.012m/s
+[prequal-5] [INFO] [1755337194.494168276] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337194.634516261] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337194.769179225] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337194.903828946] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [INFO] [1755337195.026401025] [dvl_mavros_bridge]: ✅ Bridge healthy - Vel: 1.0 Hz, Pos: 1.0 Hz
+[dvl_node-2] [WARN] [1755337195.038333016] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337195.206744919] [robot_control]: MAVROS Vision Speed (DVL): x=0.121m/s, y=0.006m/s, z=-0.078m/s
+[prequal-5] [INFO] [1755337195.209997676] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337195.365637928] [robot_control]: Pose CB
+[mavros_node-1] [WARN] [1755337195.380110589] [mavros.global_position]: GP: No GPS fix
+[dvl_node-2] [WARN] [1755337195.485322867] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337195.653163181] [robot_control]: MAVROS Vision Speed (DVL): x=0.079m/s, y=-0.119m/s, z=-0.015m/s
+[prequal-5] [INFO] [1755337195.656157111] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337195.786259978] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337195.910744399] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.045264467] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.078145239] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.141684665] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.194782148] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.258554810] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.311826892] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.375281162] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.438688087] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.491748655] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.545117985] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.608596152] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.661745874] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.725007183] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[rosbag_recorder-4] [INFO] [1755337196.779844671] [rosbag_recorder]: 📊 Recording active for 0.5 minutes
+[rosbag_recorder-4] [INFO] [1755337196.781649709] [rosbag_recorder]: 💾 Bag size: 0.9 MB
+[dvl_node-2] [WARN] [1755337196.788291909] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.841602251] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.904840784] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337196.957998344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.011155479] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.084451443] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.137740819] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.190770440] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.254258821] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337197.261950973] [straight_left_mission]: [MOTION] MAVROS-VISION Progress: 2.1m/13.0m, depth: -0.18m (±0.02m), vel: fwd=0.08, lat=-0.12m/s, heading: -6.4° (SPEED_OK)
+[prequal-5] [INFO] [1755337197.320934632] [robot_control]: MAVROS Vision Speed (DVL): x=-0.274m/s, y=0.030m/s, z=0.032m/s
+[prequal-5] [INFO] [1755337197.325687401] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337197.374724738] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.438684964] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.492126193] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.545510258] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.608951903] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.662103724] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337197.728598058] [robot_control]: MAVROS Vision Speed (DVL): x=0.316m/s, y=-0.050m/s, z=0.000m/s
+[prequal-5] [INFO] [1755337197.731756217] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337197.790272317] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.955353381] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337197.998323695] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.162980034] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.195852722] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.259360693] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.454538044] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.497594438] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.561143547] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.614503096] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.677726553] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755337198.699165356] [mavros.param]: PR: parameters list received
+[dvl_node-2] [WARN] [1755337198.842546225] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337198.885621557] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.100756876] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.224624640] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.359313523] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.493884174] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.526874557] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.691060548] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.825619715] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337199.959782020] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337200.026710167] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 2.3s ago, pos: 2.3s ago
+[dvl_node-2] [WARN] [1755337200.084019394] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.127033943] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337200.268757699] [straight_left_mission]: [MOTION] MAVROS-VISION Progress: 1.7m/13.0m, depth: -0.12m (±0.08m), vel: fwd=0.32, lat=-0.05m/s, heading: -15.8° (SPEED_OK)
+[dvl_node-2] [WARN] [1755337200.292236431] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.325115305] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.388584630] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.452169149] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.525778882] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.578761257] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.631851181] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.694808611] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.758344442] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.811622655] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337200.871503539] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337200.874864311] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.938232294] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337200.991172443] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.054315599] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.117683631] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.170630874] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.244170497] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.297330309] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.350458133] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337201.374063909] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337201.414315473] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.467582770] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.531192737] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.584234797] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.657725028] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.710807650] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.784372096] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.837525927] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337201.876632720] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337201.890515236] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337201.953917400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.006880061] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.080285179] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.133358071] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.186454890] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.259929873] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.313051868] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.376492406] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337202.379123976] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337202.439904121] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.493049852] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.546088483] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.619458861] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.672390679] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.725482764] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.799097605] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.852299317] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337202.881789610] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337202.915531220] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337202.988784325] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.041921394] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.048026777] [dvl_node]: ⚠️ No valid DVL data for 5.3s
+[dvl_node-2] [WARN] [1755337203.105155748] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.158144791] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.211076828] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.274414988] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.327603420] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.380597996] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337203.384354757] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337203.444163632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.507904217] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.560913669] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.624011653] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.687155093] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.740252867] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.814004251] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.877588472] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337203.886975863] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337203.930467343] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337203.993376463] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.048189346] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.049550778] [dvl_node]: ⚠️ No valid DVL data for 6.3s
+[dvl_node-2] [WARN] [1755337204.111468443] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.174757936] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.227796750] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.291675230] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.355243286] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337204.389620318] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337204.408415495] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.471737906] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.535154588] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.588271552] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.661790452] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.714854921] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.768568933] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.832043036] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337204.892222371] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337204.895238705] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337204.948266802] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.011783959] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337205.026710343] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 7.3s ago, pos: 7.3s ago
+[dvl_node-2] [WARN] [1755337205.048078629] [dvl_node]: ⚠️ No valid DVL data for 7.3s
+[dvl_node-2] [WARN] [1755337205.064922673] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.138515164] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.191634108] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.245125631] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.318657375] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337205.376116559] [robot_control]: MAVROS Vision Speed (DVL): x=-0.006m/s, y=-0.023m/s, z=-0.051m/s
+[prequal-5] [INFO] [1755337205.379783680] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337205.395516449] [straight_left_mission]: [MOTION] MAVROS-VISION Progress: 1.7m/13.0m, depth: -0.51m (±0.31m), vel: fwd=-0.01, lat=-0.02m/s, heading: -17.4° (SPEED_OK)
+[dvl_node-2] [WARN] [1755337205.527210788] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.661743119] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.694931855] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.860052035] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.893015822] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337205.946084383] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.019562759] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.082885728] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.136033237] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.209488799] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.262699935] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.315862063] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.389404476] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.442538262] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.495638523] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.569407420] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.622594212] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.685748565] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.749131321] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.802528442] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.866025976] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.919130140] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337206.982227936] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.045650300] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.098948222] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.162030528] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.225726644] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.278991361] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.352598411] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.407112148] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.460401017] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.523945664] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.577041446] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.640244256] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.703470258] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.756744380] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.830344041] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.883464870] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337207.936472586] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.009911847] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.062945922] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.115837166] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.189231892] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.242518554] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.305903089] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.379399764] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337208.402100330] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337208.442854804] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.495945852] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.548912238] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.622499507] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.685613285] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.738788593] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.802340432] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.865698288] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337208.904710918] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337208.939019023] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337208.991926069] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.055203441] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.118600735] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.181672732] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.245166121] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.298304963] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.361593814] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337209.407369767] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337209.425238544] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.478723157] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.531957614] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.605666847] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.658592065] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.722037887] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.775247072] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.838633970] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337209.902007177] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337209.910007129] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337209.955016909] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337210.026626584] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 4.6s ago, pos: 4.6s ago
+[dvl_node-2] [WARN] [1755337210.028566344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.081734489] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.134698576] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.207921021] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.261134400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.324425775] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.377501120] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337210.412620655] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337210.440725861] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.503945388] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.556921183] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.620085337] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.693442680] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.746574742] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.809907095] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337210.873464588] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337210.915248427] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337210.946956286] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.000169408] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.047986222] [dvl_node]: ⚠️ No valid DVL data for 5.7s
+[dvl_node-2] [WARN] [1755337211.063442166] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.116526951] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.179472521] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.242951286] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.296077177] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.369547595] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337211.417968649] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337211.422786440] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.476149179] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.539650752] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.602843854] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.655610027] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.729186745] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.782351599] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.835378868] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337211.908904562] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337211.920626060] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337211.961911998] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.014855482] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.048126967] [dvl_node]: ⚠️ No valid DVL data for 6.7s
+[dvl_node-2] [WARN] [1755337212.088198896] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.141768480] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.194658360] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.258239425] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.331708429] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.394937741] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337212.423020397] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337212.447921989] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.510862343] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.563732806] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.636722228] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.689573081] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.752610714] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.805614443] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.879106703] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337212.925854092] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337212.942482174] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337212.995418917] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.048510147] [dvl_node]: ⚠️ No valid DVL data for 7.7s
+[dvl_node-2] [WARN] [1755337213.069470059] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.122485565] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.175271581] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.248658271] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.301781388] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.354968484] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.418795929] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337213.428493175] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337213.482171528] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.535151014] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.598214015] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.661286965] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.714374702] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.787887845] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.841007252] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337213.894004461] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337213.931136120] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337213.946854679] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.010200429] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.048120027] [dvl_node]: ⚠️ No valid DVL data for 8.7s
+[dvl_node-2] [WARN] [1755337214.073578556] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.126474717] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.199443753] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.263569017] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.316696363] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.379820400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337214.433789156] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337214.443172360] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.496239854] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.549257702] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.622726632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.675726917] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.728906789] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.792269881] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.855778299] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337214.919140559] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337214.936343628] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337214.972107416] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337215.026694254] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 9.6s ago, pos: 9.6s ago
+[dvl_node-2] [WARN] [1755337215.035298360] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.047890961] [dvl_node]: ⚠️ No valid DVL data for 9.7s
+[dvl_node-2] [WARN] [1755337215.098696354] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.151599143] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.225838111] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.279710618] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.332803166] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.406469210] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337215.438932794] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337215.460541424] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.514076510] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.587620068] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.640926591] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.693426414] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.767080622] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.820190284] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.873531836] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337215.936803921] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337215.941508908] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337215.999784105] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.048080126] [dvl_node]: ⚠️ No valid DVL data for 10.7s
+[dvl_node-2] [WARN] [1755337216.062994776] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.126075921] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.188913117] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.242163827] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.295323688] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.368629341] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.442089053] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337216.444035908] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337216.495202722] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.548194672] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.611630704] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.674840669] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337216.789046401] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337216.946662781] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337216.953553388] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337217.048089723] [dvl_node]: ⚠️ No valid DVL data for 11.7s
+[dvl_node-2] [WARN] [1755337217.188813152] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337217.242246592] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337217.285530575] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337217.338760084] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337217.402121905] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337217.449385038] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337217.516312488] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337217.680611408] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337217.916335695] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337217.951980241] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337217.969644761] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.022721353] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.048094713] [dvl_node]: ⚠️ No valid DVL data for 12.7s
+[dvl_node-2] [WARN] [1755337218.075905895] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.139106847] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.253101864] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.417770730] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337218.454564532] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337218.652856254] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.706114498] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.749374566] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.802721612] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337218.855963095] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337218.957150336] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337218.979860896] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337219.048064148] [dvl_node]: ⚠️ No valid DVL data for 13.7s
+[dvl_node-2] [WARN] [1755337219.144186940] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337219.379503454] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337219.432974147] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337219.459721522] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337219.476464390] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337219.529866499] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337219.582903997] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337219.706919403] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337219.871579499] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337219.962869291] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_mavros_bridge-3] [ERROR] [1755337220.026410026] [dvl_mavros_bridge]: ❌ Data stale - vel: 14.6s ago, pos: 14.6s ago
+[dvl_node-2] [WARN] [1755337220.048102485] [dvl_node]: ⚠️ No valid DVL data for 14.7s
+[dvl_node-2] [WARN] [1755337220.107352197] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.160223522] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.203161233] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.256455837] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.309598686] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.423549847] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755337220.431624804] [mavros.sys]: FCU: EKF3 IMU0 stopped aiding
+[mavros_node-1] [WARN] [1755337220.436766847] [mavros.sys]: FCU: EKF3 IMU1 stopped aiding
+[mavros_node-1] [ERROR] [1755337220.454112605] [mavros.sys]: FCU: EKF3 lane switch 1
+[prequal-5] [WARN] [1755337220.465478624] [straight_left_mission]: [MOTION] ⚠️ MAVROS vision pose lost - continuing with timeout fallback
+[dvl_node-2] [WARN] [1755337220.598051714] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.833554661] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.886920408] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337220.929915987] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337220.967973261] [straight_left_mission]: [MOTION] ⚠️ Primary forward movement complete (MAVROS-VISION lost) - Position uncertain
+[prequal-5] [INFO] [1755337220.969524185] [straight_left_mission]: [MOTION] Pausing 2.0s while maintaining depth (MAVROS vision monitoring)
+[prequal-5] [WARN] [1755337220.971885710] [straight_left_mission]: [DEPTH] Depth drift detected (MAVROS-VISION): -0.51m (target: -0.2m, error: 0.31m)
+[prequal-5] [INFO] [1755337220.973375887] [robot_control]: Target depth set to: -0.2m
+[dvl_node-2] [WARN] [1755337220.983010500] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.036105127] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.047963293] [dvl_node]: ⚠️ No valid DVL data for 15.7s
+[dvl_node-2] [WARN] [1755337221.109526491] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.182633242] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.245970774] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.370131823] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.413401339] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.466782068] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337221.476705378] [straight_left_mission]: [DEPTH] Depth drift detected (MAVROS-VISION): -0.51m (target: -0.2m, error: 0.31m)
+[prequal-5] [INFO] [1755337221.478310075] [robot_control]: Target depth set to: -0.2m
+[dvl_node-2] [WARN] [1755337221.519895402] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.582898873] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.706775027] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.749734889] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.802861082] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.866206836] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337221.929584546] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337221.981267139] [straight_left_mission]: [DEPTH] Depth drift detected (MAVROS-VISION): -0.51m (target: -0.2m, error: 0.31m)
+[prequal-5] [INFO] [1755337221.982818990] [robot_control]: Target depth set to: -0.2m
+[dvl_node-2] [WARN] [1755337221.983044641] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.047318827] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.048885776] [dvl_node]: ⚠️ No valid DVL data for 16.7s
+[dvl_node-2] [WARN] [1755337222.160976625] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.234325441] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.287460347] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.350738164] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.413969277] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.466943214] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [WARN] [1755337222.485827214] [straight_left_mission]: [DEPTH] Depth drift detected (MAVROS-VISION): -0.51m (target: -0.2m, error: 0.31m)
+[prequal-5] [INFO] [1755337222.487304626] [robot_control]: Target depth set to: -0.2m
+[dvl_node-2] [WARN] [1755337222.530069083] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.593123456] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.656201566] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.709331801] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.772579068] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.825885339] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.889018597] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337222.952862907] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337222.989609627] [straight_left_mission]: [INFO] ✅ Mission completed successfully! (MAVROS Vision Topics Mode)
+[prequal-5] [INFO] [1755337223.008235058] [straight_left_mission]: [INFO] Mission completed successfully!
+[dvl_node-2] [WARN] [1755337223.017182217] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.048072956] [dvl_node]: ⚠️ No valid DVL data for 17.7s
+[dvl_node-2] [WARN] [1755337223.070046253] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] Traceback (most recent call last):
+[prequal-5]   File "/home/robosub/ros2_ws/install/auton_sub/lib/auton_sub/prequal", line 33, in <module>
+[prequal-5]     sys.exit(load_entry_point('auton_sub==0.0.0', 'console_scripts', 'prequal')())
+[prequal-5]   File "/home/robosub/ros2_ws/install/auton_sub/lib/python3.10/site-packages/auton_sub/mission/prequal.py", line 358, in main
+[prequal-5]     mission.robot_control.stop()
+[prequal-5] AttributeError: 'RobotControl' object has no attribute 'stop'
+[dvl_node-2] [WARN] [1755337223.133373725] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.196557311] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.259830753] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.343480060] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755337223.347667769] [mavros.time]: TM: Wrong FCU time.
+[dvl_node-2] [WARN] [1755337223.396619200] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.480290963] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.533514522] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.576365878] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.690072545] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.722959076] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.786395087] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.920670863] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337223.953542039] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.016694272] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.048134090] [dvl_node]: ⚠️ No valid DVL data for 18.7s
+[dvl_node-2] [WARN] [1755337224.069624505] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.132674611] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.195628813] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.248618994] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.382849841] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.405431977] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.468274953] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.602216365] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.644860000] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.706688351] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.770094781] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.833754948] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.886745673] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337224.949905180] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [ERROR] [1755337225.026340424] [dvl_mavros_bridge]: ❌ Data stale - vel: 19.6s ago, pos: 19.6s ago
+[dvl_node-2] [WARN] [1755337225.047973151] [dvl_node]: ⚠️ No valid DVL data for 19.7s
+[dvl_node-2] [WARN] [1755337225.063652413] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337225.227726260] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337225.463398632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337225.516756572] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337225.559510011] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337225.632611794] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337225.689488615] [robot_control]: MAVROS Vision Speed (DVL): x=0.015m/s, y=-0.121m/s, z=0.021m/s
+[prequal-5] [INFO] [1755337225.692461989] [robot_control]: Pose CB
+[mavros_node-1] [WARN] [1755337225.782634714] [mavros.global_position]: GP: No GPS fix
+[mavros_node-1] [INFO] [1755337225.835458374] [mavros.sys]: FCU: EKF3 IMU0 is using external nav data
+[dvl_node-2] [WARN] [1755337225.842607523] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [INFO] [1755337225.843879628] [mavros.sys]: FCU: EKF3 IMU0 initial pos NED = -2.7,2.3,0.1 (m)
+[mavros_node-1] [INFO] [1755337225.854951711] [mavros.sys]: FCU: EKF3 IMU0 initial vel NED = -0.1,0.0,-0.0 (m/s)
+[mavros_node-1] [INFO] [1755337225.863235381] [mavros.sys]: FCU: EKF3 IMU1 is using external nav data
+[mavros_node-1] [INFO] [1755337225.874390731] [mavros.sys]: FCU: EKF3 IMU1 initial pos NED = -2.7,2.3,0.1 (m)
+[mavros_node-1] [INFO] [1755337225.882665028] [mavros.sys]: FCU: EKF3 IMU1 initial vel NED = -0.1,0.0,-0.0 (m/s)
+[dvl_node-2] [WARN] [1755337225.977269311] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337226.134424254] [robot_control]: MAVROS Vision Speed (DVL): x=0.088m/s, y=0.170m/s, z=-0.007m/s
+[prequal-5] [INFO] [1755337226.137817322] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337226.292238320] [robot_control]: MAVROS Vision Speed (DVL): x=0.127m/s, y=0.114m/s, z=0.009m/s
+[prequal-5] [INFO] [1755337226.295698405] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337226.414187398] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337226.581766604] [robot_control]: MAVROS Vision Speed (DVL): x=-0.033m/s, y=-0.095m/s, z=-0.002m/s
+[prequal-5] [INFO] [1755337226.585564588] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337226.736800478] [robot_control]: MAVROS Vision Speed (DVL): x=0.000m/s, y=-0.134m/s, z=-0.003m/s
+[prequal-5] [INFO] [1755337226.739729546] [robot_control]: Pose CB
+[rosbag_recorder-4] [INFO] [1755337226.814832246] [rosbag_recorder]: 📊 Recording active for 1.0 minutes
+[rosbag_recorder-4] [INFO] [1755337226.816521710] [rosbag_recorder]: 💾 Bag size: 1.7 MB
+[dvl_node-2] [WARN] [1755337226.870084489] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337226.994571763] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.037587966] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.090643287] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.163793805] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.216846791] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.270134575] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.333709172] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.397022354] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.450369927] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.513771974] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.576770770] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.629994545] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.703408779] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.756702162] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.820037929] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.873231698] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.936580069] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337227.989384405] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.052549112] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.105549491] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.168493374] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.302829319] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.335707062] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.389205509] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.452353097] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.505356228] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.568540091] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.621573899] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.684690586] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.819319806] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337228.923172380] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.016770995] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.120526739] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.224148194] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.328019322] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.421839211] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.526066888] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.629877077] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.733869923] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.827711437] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337229.860494387] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.004609591] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337230.026559262] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 3.3s ago, pos: 3.3s ago
+[dvl_node-2] [WARN] [1755337230.049259202] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.092143920] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.155153406] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.218351242] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.271345192] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.334561326] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.468588978] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.562194770] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.635367229] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.739106244] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.812610428] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.896099727] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337230.989704975] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.073234175] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.146541415] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.219851533] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.324173420] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.397815071] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.503231875] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.576365734] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.659671585] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.732953649] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.806479980] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.889875015] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337231.993270792] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.048048127] [dvl_node]: ⚠️ No valid DVL data for 5.3s
+[dvl_node-2] [WARN] [1755337232.066477152] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.170120014] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.273944125] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.367633228] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.471133131] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.574685561] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.678347488] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.782152694] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.875847906] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337232.979346914] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.048044266] [dvl_node]: ⚠️ No valid DVL data for 6.3s
+[dvl_node-2] [WARN] [1755337233.083242787] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.186950367] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.280800156] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.384899536] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.488839067] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.592518592] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.686209749] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.759671902] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.863533540] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.936772539] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337233.980255286] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.033389167] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.047924945] [dvl_node]: ⚠️ No valid DVL data for 7.3s
+[dvl_node-2] [WARN] [1755337234.167473229] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.200240842] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.263446191] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.317291147] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.380597869] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.443816174] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.496819118] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.630867736] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.734643105] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.838460764] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337234.932053466] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337235.026560021] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 8.3s ago, pos: 8.3s ago
+[dvl_node-2] [WARN] [1755337235.035767441] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.048077589] [dvl_node]: ⚠️ No valid DVL data for 8.3s
+[dvl_node-2] [WARN] [1755337235.139770129] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.243655481] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.347884970] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.441872647] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.545854958] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.649591435] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.743281519] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.847257304] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.879988442] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337235.943129318] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.006235101] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.048159030] [dvl_node]: ⚠️ No valid DVL data for 9.3s
+[dvl_node-2] [WARN] [1755337236.140395038] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.173439338] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.226961244] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.281421575] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.345191144] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.408295089] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.461314898] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.575098186] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.749661557] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337236.984839723] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.038290190] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.047976734] [dvl_node]: ⚠️ No valid DVL data for 10.3s
+[dvl_node-2] [WARN] [1755337237.081710291] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.134609265] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.198506519] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.312676589] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.477464477] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.713105914] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.766704613] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.809912212] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.863173588] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337237.916188298] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.040241572] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.047985304] [dvl_node]: ⚠️ No valid DVL data for 11.3s
+[dvl_node-2] [WARN] [1755337238.204385551] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.440142222] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.493373772] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.536169089] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.579172749] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.642269244] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.777343999] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.871095339] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337238.974867729] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.048071410] [dvl_node]: ⚠️ No valid DVL data for 12.3s
+[dvl_node-2] [WARN] [1755337239.078358026] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.100811407] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.234696499] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.339417848] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.443155507] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.536478400] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.568959291] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.723163661] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.766389314] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.819534547] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.882707736] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.935689665] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337239.998809241] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [ERROR] [1755337240.026403129] [dvl_mavros_bridge]: ❌ Data stale - vel: 13.3s ago, pos: 13.3s ago
+[dvl_node-2] [WARN] [1755337240.047990759] [dvl_node]: ⚠️ No valid DVL data for 13.3s
+[dvl_node-2] [WARN] [1755337240.062191945] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.186023879] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.218788631] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.354293353] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.387033794] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.449664279] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.512479212] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.585364677] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.658223783] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.731279556] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337240.855178282] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.019152517] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.048073581] [dvl_node]: ⚠️ No valid DVL data for 14.3s
+[dvl_node-2] [WARN] [1755337241.253817065] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.306897817] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.360139217] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.412849187] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.466010743] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.600343558] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.704150110] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337241.807897642] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755337241.833771323] [mavros.sys]: FCU: EKF3 IMU0 stopped aiding
+[mavros_node-1] [WARN] [1755337241.839303310] [mavros.sys]: FCU: EKF3 IMU1 stopped aiding
+[mavros_node-1] [ERROR] [1755337241.843794285] [mavros.sys]: FCU: EKF3 lane switch 0
+[dvl_node-2] [WARN] [1755337241.901592461] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.005522937] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.048060739] [dvl_node]: ⚠️ No valid DVL data for 15.3s
+[dvl_node-2] [WARN] [1755337242.109740619] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.203395018] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.307239103] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.411181842] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.504893853] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.537721834] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.611223661] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.664243912] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.717447203] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.770753594] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.834014361] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.887120022] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337242.950244484] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.013874464] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.048034421] [dvl_node]: ⚠️ No valid DVL data for 16.3s
+[dvl_node-2] [WARN] [1755337243.066968183] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.130036749] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.193038106] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.296792282] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.380340630] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.423561705] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.487041839] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.550317757] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.613510439] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.676712846] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.709626647] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.762771292] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.826094169] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.889232790] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337243.952371956] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.005526100] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.048151888] [dvl_node]: ⚠️ No valid DVL data for 17.3s
+[dvl_node-2] [WARN] [1755337244.059349857] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.132499300] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.185511245] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.259150084] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.332561387] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.385576787] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.448718979] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.511860532] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.564769569] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.658406242] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.702224604] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.745189089] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.838845404] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337244.962731843] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [ERROR] [1755337245.026380479] [dvl_mavros_bridge]: ❌ Data stale - vel: 18.3s ago, pos: 18.3s ago
+[dvl_node-2] [WARN] [1755337245.048036928] [dvl_node]: ⚠️ No valid DVL data for 18.3s
+[dvl_node-2] [WARN] [1755337245.066592256] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.169910738] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.202480838] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.265796206] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.318914760] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.382383963] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.536822243] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.569529287] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.713812883] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.746569702] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.809952215] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337245.862942686] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337246.048107384] [dvl_node]: ⚠️ No valid DVL data for 19.3s
+[dvl_node-2] [WARN] [1755337246.077741163] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337246.242942878] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337246.400636854] [robot_control]: MAVROS Vision Speed (DVL): x=0.097m/s, y=-0.210m/s, z=0.008m/s
+[prequal-5] [INFO] [1755337246.404120625] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755337246.451505627] [mavros.sys]: FCU: EKF3 IMU1 is using external nav data
+[mavros_node-1] [INFO] [1755337246.459753905] [mavros.sys]: FCU: EKF3 IMU1 initial pos NED = -6.8,4.2,-0.1 (m)
+[mavros_node-1] [INFO] [1755337246.470798036] [mavros.sys]: FCU: EKF3 IMU1 initial vel NED = -0.2,0.1,-0.0 (m/s)
+[mavros_node-1] [INFO] [1755337246.479139243] [mavros.sys]: FCU: EKF3 IMU0 is using external nav data
+[mavros_node-1] [INFO] [1755337246.490324668] [mavros.sys]: FCU: EKF3 IMU0 initial pos NED = -6.8,4.2,-0.1 (m)
+[mavros_node-1] [INFO] [1755337246.498607527] [mavros.sys]: FCU: EKF3 IMU0 initial vel NED = -0.2,0.1,-0.0 (m/s)
+[prequal-5] [INFO] [1755337246.570493577] [robot_control]: MAVROS Vision Speed (DVL): x=0.042m/s, y=-0.055m/s, z=0.008m/s
+[prequal-5] [INFO] [1755337246.573749365] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337246.725737724] [robot_control]: MAVROS Vision Speed (DVL): x=-0.037m/s, y=0.290m/s, z=-0.013m/s
+[prequal-5] [INFO] [1755337246.728814758] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337246.882076942] [robot_control]: MAVROS Vision Speed (DVL): x=-0.152m/s, y=0.092m/s, z=-0.011m/s
+[prequal-5] [INFO] [1755337246.885603355] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337247.036710961] [robot_control]: MAVROS Vision Speed (DVL): x=-0.043m/s, y=-0.137m/s, z=-0.018m/s
+[prequal-5] [INFO] [1755337247.040580965] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337247.169725879] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.212735062] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.266024322] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.430863190] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.474146741] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.638828737] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.671752526] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.735071103] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337247.930034966] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.064299452] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.199130447] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.323279876] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.457531362] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.500584106] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.553647996] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.607001385] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.670323598] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.733633015] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.786870604] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.860478778] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.913597913] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337248.976629955] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.039900309] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.103123570] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.156125361] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.209271869] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.262468184] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.396932118] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.430149426] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.565259949] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.668824003] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.711794721] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.764965669] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.818184247] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.881380702] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.934244078] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337249.997146876] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337250.026636847] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 3.0s ago, pos: 3.0s ago
+[dvl_node-2] [WARN] [1755337250.111067632] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.285401872] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.510393790] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.563549663] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.616457398] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.669643436] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.722608496] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.785937790] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.848980593] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.912040606] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337250.974928263] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.027749402] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.090675916] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.204129393] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.368775713] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.603961489] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.656973117] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.710059278] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.763200172] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337251.907490182] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.031233867] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.048127709] [dvl_node]: ⚠️ No valid DVL data for 5.0s
+[prequal-5] [INFO] [1755337252.198904124] [robot_control]: MAVROS Vision Speed (DVL): x=-0.173m/s, y=0.038m/s, z=-0.017m/s
+[prequal-5] [INFO] [1755337252.201941905] [robot_control]: Pose CB
+[dvl_node-2] [WARN] [1755337252.230232704] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.293920349] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.367739508] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.431191684] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.504483604] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.557495543] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.610629264] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.663753644] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.788080885] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337252.952440913] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.187709575] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.232080799] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.285575314] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.338981699] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.513988298] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.546855596] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.610108985] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.663282173] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.726593589] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.779754716] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.843090956] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337253.896429205] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.020328641] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.123853048] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.227591685] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.331515088] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.436010098] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.529349670] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.633223235] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.737146606] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.840835404] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337254.944552800] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337255.026664923] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 2.8s ago, pos: 2.8s ago
+[dvl_node-2] [WARN] [1755337255.049807089] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.143159764] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.246906159] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.350573063] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.454711033] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.548487910] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.653102193] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.757384976] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.861124206] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337255.954620734] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.058299659] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.161784725] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755337256.252910939] [mavros.global_position]: GP: No GPS fix
+[dvl_node-2] [WARN] [1755337256.255970470] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.359804726] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.463561024] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.567385139] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.671304901] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.765234032] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[rosbag_recorder-4] [INFO] [1755337256.850217927] [rosbag_recorder]: 📊 Recording active for 1.5 minutes
+[rosbag_recorder-4] [INFO] [1755337256.851966880] [rosbag_recorder]: 💾 Bag size: 2.4 MB
+[dvl_node-2] [WARN] [1755337256.868990587] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337256.973548108] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.077282453] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.181001984] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.274676666] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.378593983] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.482662830] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.586577972] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.690403322] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.784144092] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.827190863] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.961878663] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337257.994882440] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.050960715] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.052121459] [dvl_node]: ⚠️ No valid DVL data for 5.9s
+[dvl_node-2] [WARN] [1755337258.104027537] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.166909560] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.321607835] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.425561095] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.458515766] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.521751968] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.584772789] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.647874831] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.792413035] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.835373463] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337258.999857669] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.042715728] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.047984497] [dvl_node]: ⚠️ No valid DVL data for 6.9s
+[dvl_node-2] [WARN] [1755337259.105917343] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.178932014] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.252228026] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.325754069] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.368636663] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.421936677] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.556452121] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.660353771] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.764402441] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.858186022] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337259.962279188] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [WARN] [1755337260.026625933] [dvl_mavros_bridge]: ⚠️ Data intermittent - vel: 7.8s ago, pos: 7.8s ago
+[dvl_node-2] [WARN] [1755337260.048148751] [dvl_node]: ⚠️ No valid DVL data for 7.9s
+[dvl_node-2] [WARN] [1755337260.066119061] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.169947284] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.263996713] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.367805104] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.471476391] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.575233215] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.668929041] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.772916024] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.876804387] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337260.980532102] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.048075439] [dvl_node]: ⚠️ No valid DVL data for 8.9s
+[dvl_node-2] [WARN] [1755337261.074102172] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.177684583] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.281771967] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.385837568] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.489994752] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.583810941] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.687859043] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.792054198] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.885964626] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337261.989914811] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.047999682] [dvl_node]: ⚠️ No valid DVL data for 9.9s
+[dvl_node-2] [WARN] [1755337262.093698709] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.197329700] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.291328662] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.334375856] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.458440604] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.501516012] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.554433487] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.617475233] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.680661600] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.733813520] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.797145148] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337262.911224200] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.048113703] [dvl_node]: ⚠️ No valid DVL data for 10.9s
+[dvl_node-2] [WARN] [1755337263.075574260] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.311142303] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.364518523] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.417792443] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.471324639] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.524391752] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.638314847] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337263.813354600] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.038763245] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.048076985] [dvl_node]: ⚠️ No valid DVL data for 11.9s
+[dvl_node-2] [WARN] [1755337264.092303658] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.135097716] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.188079414] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.251415315] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.365531867] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.529932859] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.765400337] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.818647989] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.861620353] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.924900690] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337264.978035549] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [ERROR] [1755337265.026323412] [dvl_mavros_bridge]: ❌ Data stale - vel: 12.8s ago, pos: 12.8s ago
+[dvl_node-2] [WARN] [1755337265.041160193] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.047922736] [dvl_node]: ⚠️ No valid DVL data for 12.9s
+[dvl_node-2] [WARN] [1755337265.104612272] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.177685820] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.240802560] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.294542097] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.347622955] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.471897287] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.636602700] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.872194688] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.925590314] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337265.978837928] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.021774555] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.048042629] [dvl_node]: ⚠️ No valid DVL data for 13.9s
+[dvl_node-2] [WARN] [1755337266.155643633] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.198592989] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.251706598] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.406248541] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.438928753] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.593194698] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.727487883] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.770665734] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.834823861] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.908366037] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337266.971797892] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.024962681] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.048002037] [dvl_node]: ⚠️ No valid DVL data for 14.9s
+[dvl_node-2] [WARN] [1755337267.078051302] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.141026385] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.214303783] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.267415756] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [WARN] [1755337267.298208758] [mavros.sys]: FCU: EKF3 IMU1 stopped aiding
+[mavros_node-1] [WARN] [1755337267.303857676] [mavros.sys]: FCU: EKF3 IMU0 stopped aiding
+[dvl_node-2] [WARN] [1755337267.340902680] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.404408744] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[mavros_node-1] [ERROR] [1755337267.425185890] [mavros.sys]: FCU: EKF3 lane switch 1
+[dvl_node-2] [WARN] [1755337267.458089603] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.521754043] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.584932894] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.658297206] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.711298625] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.774656581] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.827699490] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.890946317] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337267.944253836] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.017814174] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.048032560] [dvl_node]: ⚠️ No valid DVL data for 15.9s
+[dvl_node-2] [WARN] [1755337268.071869744] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.124667263] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.177528087] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.240680958] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.304017124] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.357137217] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.531714331] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.574491419] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.637656894] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.690924870] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.754096134] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.807195978] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.860768807] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.923900629] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337268.997315797] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.047940223] [dvl_node]: ⚠️ No valid DVL data for 16.9s
+[dvl_node-2] [WARN] [1755337269.061057127] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.124086867] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.177012656] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.240491167] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.294359247] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.357616171] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.420980002] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.484197068] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.516765407] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.609597422] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.672251616] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.704682179] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.788536981] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.831295544] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337269.944915099] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.018344654] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [ERROR] [1755337270.026342213] [dvl_mavros_bridge]: ❌ Data stale - vel: 17.8s ago, pos: 17.8s ago
+[dvl_node-2] [WARN] [1755337270.048042483] [dvl_node]: ⚠️ No valid DVL data for 17.9s
+[dvl_node-2] [WARN] [1755337270.142599770] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.266792860] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.299678364] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.352884497] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.487504048] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.510352394] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.664465187] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.697398546] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.851801860] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.884405863] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337270.947327445] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.010384338] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.048132921] [dvl_node]: ⚠️ No valid DVL data for 18.9s
+[dvl_node-2] [WARN] [1755337271.063549842] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.126410992] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.168997193] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.231918034] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.305215049] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.359044318] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.422217646] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.476155516] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.529242008] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.663590764] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.767512894] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.800372804] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337271.985149375] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.018123004] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.047997790] [dvl_node]: ⚠️ No valid DVL data for 19.9s
+[dvl_node-2] [WARN] [1755337272.172999791] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.327953030] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.371041195] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.535387980] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.568038361] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.631157303] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.684085158] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.747175598] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.800305270] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.853539354] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.916748344] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337272.979938684] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.048075050] [dvl_node]: ⚠️ No valid DVL data for 20.9s
+[dvl_node-2] [WARN] [1755337273.134206045] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.167044997] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.220070926] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.283447852] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.347080816] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.410405568] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.463853811] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.577818552] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.681557851] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.724546720] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.777812947] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.851333584] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337273.985578868] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.018392612] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.048028534] [dvl_node]: ⚠️ No valid DVL data for 21.9s
+[dvl_node-2] [WARN] [1755337274.082044060] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.236254148] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.360366077] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.494616373] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.527455931] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.600679963] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.663639943] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.716710013] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.779943561] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.833037526] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.886200746] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337274.949639789] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_mavros_bridge-3] [ERROR] [1755337275.026357177] [dvl_mavros_bridge]: ❌ Data stale - vel: 22.8s ago, pos: 22.8s ago
+[dvl_node-2] [WARN] [1755337275.032887347] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.048007313] [dvl_node]: ⚠️ No valid DVL data for 22.9s
+[dvl_node-2] [WARN] [1755337275.116529098] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.189768927] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.274186596] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.347441012] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.420784484] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.545055324] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.668721674] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[dvl_node-2] [WARN] [1755337275.792603435] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337275.919573928] [robot_control]: MAVROS Vision Speed (DVL): x=0.034m/s, y=-0.079m/s, z=0.297m/s
+[prequal-5] [INFO] [1755337275.923221022] [robot_control]: Pose CB
+[mavros_node-1] [INFO] [1755337275.973006905] [mavros.sys]: FCU: EKF3 IMU0 is using external nav data
+[mavros_node-1] [INFO] [1755337275.981020871] [mavros.sys]: FCU: EKF3 IMU0 initial pos NED = -8.5,4.1,-7.0 (m)
+[mavros_node-1] [INFO] [1755337275.992059336] [mavros.sys]: FCU: EKF3 IMU0 initial vel NED = -0.1,0.0,-0.3 (m/s)
+[mavros_node-1] [INFO] [1755337276.000378346] [mavros.sys]: FCU: EKF3 IMU1 is using external nav data
+[mavros_node-1] [INFO] [1755337276.011541662] [mavros.sys]: FCU: EKF3 IMU1 initial pos NED = -8.5,4.1,-7.0 (m)
+[mavros_node-1] [INFO] [1755337276.019866846] [mavros.sys]: FCU: EKF3 IMU1 initial vel NED = -0.1,0.0,-0.3 (m/s)
+[dvl_node-2] [WARN] [1755337276.043253326] [dvl_node]: ⚠️ Invalid DVL velocities (NaN)
+[prequal-5] [INFO] [1755337276.180150316] [robot_control]: MAVROS Vision Speed (DVL): x=0.016m/s, y=-0.051m/s, z=0.246m/s
+[prequal-5] [INFO] [1755337276.183983296] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337276.306895152] [robot_control]: MAVROS Vision Speed (DVL): x=-0.005m/s, y=-0.045m/s, z=0.227m/s
+[prequal-5] [INFO] [1755337276.309861207] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337276.432336353] [robot_control]: MAVROS Vision Speed (DVL): x=-0.128m/s, y=-0.024m/s, z=0.147m/s
+[prequal-5] [INFO] [1755337276.435158491] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337276.558414321] [robot_control]: MAVROS Vision Speed (DVL): x=-0.059m/s, y=0.053m/s, z=0.105m/s
+[prequal-5] [INFO] [1755337276.561994367] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337276.693980197] [robot_control]: MAVROS Vision Speed (DVL): x=-0.010m/s, y=0.019m/s, z=0.099m/s
+[prequal-5] [INFO] [1755337276.696915991] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337276.829358556] [robot_control]: MAVROS Vision Speed (DVL): x=-0.006m/s, y=-0.014m/s, z=0.057m/s
+[prequal-5] [INFO] [1755337276.833017262] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337276.957461728] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337277.092357179] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755337277.226889492] [dvl_mavros_bridge]: 🎯 Position bridged: [4.108, -8.483, -7.173] m (z flipped)
+[prequal-5] [INFO] [1755337277.227352912] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337277.363340710] [robot_control]: Pose CB
+[mavros_node-1] [ERROR] [1755337277.421260445] [mavros.sys]: FCU: EKF3 lane switch 0
+[prequal-5] [INFO] [1755337277.499044033] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337277.625581542] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337277.761278883] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337277.897034123] [robot_control]: Pose CB
+[dvl_node-2] [INFO] [1755337278.019937780] [dvl_node]: DVL: V=[-0.020, -0.024, 0.014] m/s, FOM=-0.001, Range=nanm
+[prequal-5] [INFO] [1755337278.022399086] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337278.023953608] [robot_control]: MAVROS Vision Pose (DVL): x=4.112m, y=-8.491m, z=7.166m
+[prequal-5] [INFO] [1755337278.159184449] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337278.285281721] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337278.419189575] [robot_control]: MAVROS Vision Speed (DVL): x=0.003m/s, y=-0.078m/s, z=-0.001m/s
+[prequal-5] [INFO] [1755337278.422535559] [robot_control]: Pose CB
+[dvl_mavros_bridge-3] [INFO] [1755337278.552820790] [dvl_mavros_bridge]: 🚀 Velocity bridged: [-0.037, -0.084, -0.016] m/s (z flipped)
+[prequal-5] [INFO] [1755337278.554934474] [robot_control]: MAVROS Vision Speed (DVL): x=-0.037m/s, y=-0.084m/s, z=-0.016m/s
+[dvl_mavros_bridge-3] [INFO] [1755337278.556301254] [dvl_mavros_bridge]: 🎯 Position bridged: [4.099, -8.522, -7.156] m (z flipped)
+[prequal-5] [INFO] [1755337278.558364332] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337278.689565495] [robot_control]: MAVROS Vision Speed (DVL): x=0.005m/s, y=-0.107m/s, z=0.026m/s
+[prequal-5] [INFO] [1755337278.692420549] [robot_control]: Pose CB
+[prequal-5] [INFO] [1755337278.815387665] [robot_control]: MAVROS Vision Speed (DVL): x=0.038m/s, y=-0.123m/s, z=0.062m/s
+[prequal-5] [INFO] [1755337278.818270229] [robot_control]: Pose CB
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
