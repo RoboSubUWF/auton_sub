@@ -1,24 +1,24 @@
 # ROS 2 version of RobotControl using MAVROS Vision Topics (from DVL bridge)
 
-import rclpy
-from rclpy.node import Node
+import rclpy #for ros2
+from rclpy.node import Node 
 from std_msgs.msg import String
-from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
-from mavros_msgs.msg import ManualControl, AttitudeTarget, PositionTarget
-from mavros_msgs.srv import SetMode, CommandBool
-from geometry_msgs.msg import Twist
-from nav_msgs.msg import Odometry
-from sensor_msgs.msg import Range
-from std_srvs.srv import Trigger
-from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy
+from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped #message definitions for representing geometric data
+from mavros_msgs.msg import ManualControl, AttitudeTarget, PositionTarget #from robotcontrol
+from mavros_msgs.srv import SetMode, CommandBool #for pixhawk modes
+from geometry_msgs.msg import Twist 
+from nav_msgs.msg import Odometry #from dvl
+from sensor_msgs.msg import Range # from dvl
+from std_srvs.srv import Trigger #for signaling or triggering actions
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy #for qos stuff
 from rclpy.qos import qos_profile_system_default
-from simple_pid import PID
-import numpy as np
+from simple_pid import PID #to use library for pid
+import numpy as np 
 import math
 import time
 import threading
 
-# Create QoS profile that matches MAVROS
+# Create QoS profile that matches MAVROS (could probably be inside function instead of calling if separately
 def create_mavros_qos():
     """Create QoS profile compatible with MAVROS topics"""
     qos = QoSProfile(
@@ -28,7 +28,7 @@ def create_mavros_qos():
         depth=10
     )
     return qos
-
+#calculates yaw
 def quaternion_to_yaw(x, y, z, w):
     """Convert quaternion to yaw angle (in radians)"""
     yaw = math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
@@ -41,7 +41,7 @@ class RobotControl(Node):
         time.sleep(5.0)  # Wait for MAVROS to fully initialize
         self.get_logger().info("🔄 Waiting for MAVROS to initialize...")
         
-        self.lock = threading.Lock()
+        self.lock = threading.Lock() #prevents multiple services from calling the same things at the same time.
         self.debug = True  # Enable debug info
 
         # Robot state - Use MAVROS Vision Topics (from DVL bridge)
@@ -49,10 +49,10 @@ class RobotControl(Node):
         self.velocity = {'x': 0.0, 'y': 0.0, 'z': 0.0}  # DVL velocity via MAVROS vision
         self.orientation = {'yaw': 0.0, 'pitch': 0.0, 'roll': 0.0}  # IMU orientation
         self.range_to_bottom = float('nan')  # DVL range sensor
-        self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None}
-        self.movement_command = {'lateral': 0.0, 'forward': 0.0, 'yaw': 0.0}
-        self.max_descent_mode = False 
-        self.mode = "guided"
+        self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None} #initialized desired point
+        self.movement_command = {'lateral': 0.0, 'forward': 0.0, 'yaw': 0.0} #initialized movement commands
+        self.max_descent_mode = False  #ensures max descent is off until needed. 
+        self.mode = "guided" #
 
         # Status flags for MAVROS Vision data (from DVL bridge)
         self.vision_pose_valid = False
