@@ -239,7 +239,7 @@ class RobotControl(Node):
     def get_current_depth(self): 
         """Get current depth from MAVROS vision pose (DVL data via bridge)"""
         with self.lock:
-            return float(self.position['z'])
+            return float(self.position['z']) #returns the depth data
 
     def get_current_position(self):
         """Get current position from MAVROS vision topics (DVL data via bridge)"""
@@ -258,10 +258,10 @@ class RobotControl(Node):
     
     def control_loop(self): 
         while rclpy.ok() and self.running: #while ros2 is running and valid
-            self.update_heading_control() 
+            self.update_heading_control() #calls function to update heading
             time.sleep(0.05)
 
-    def update_heading_control(self):
+    def update_heading_control(self): 
         """Send control commands appropriate for GUIDED mode - FIXED logic"""
         with self.lock:
             # Check data validity from MAVROS vision topics 
@@ -300,6 +300,7 @@ class RobotControl(Node):
 
             
             self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd) #actually sends the vel commands
+    #Option 1 sets thrust and can keep the same for a specific amount of time
     def send_velocity_command(self, forward, lateral, vertical, yaw_rate): 
         """FIXED velocity command logic"""
         vel_cmd = Twist() #twist = format for ros2 movement commands
@@ -312,28 +313,28 @@ class RobotControl(Node):
 
         # Forward/backward - FIXED logic
         if abs(forward) > 0.01:
-            vel_cmd.linear.x = forward * max_forward_velocity  # Direct mapping
+            vel_cmd.linear.x = forward * max_forward_velocity  # Direct mapping (make sure x is the correct asix for future, may be y)
             self.get_logger().info(f"FORWARD COMMAND: input={forward:.2f}, output={vel_cmd.linear.x:.2f}")
         else:
-            vel_cmd.linear.x = 0.0
+            vel_cmd.linear.x = 0.0 #dont go forwards 
 
-        # Lateral (left/right)
+        # Lateral (left/right) # cant lateral
         if abs(lateral) > 0.01:
             vel_cmd.linear.y = lateral * max_lateral_velocity
         else:
-            vel_cmd.linear.y = 0.0
+            vel_cmd.linear.y = 0.0 #dont lateral
 
-        # Vertical - FIXED logic for submarine depth control
+        # Vertical - logic for submarine depth control
         if abs(vertical) > 0.01:
             vel_cmd.linear.z = vertical * max_vertical_velocity  # Direct mapping
             self.get_logger().info(f"VERTICAL COMMAND: input={vertical:.2f}, output={vel_cmd.linear.z:.2f}")
         else:
-            min_vertical_thrust = 0.2 * max_vertical_velocity
-            vel_cmd.linear.z = min_vertical_thrust if vertical > 0 else -min_vertical_thrust
+            min_vertical_thrust = 0.2 * max_vertical_velocity #worked to keep the thrusters on some without stopping them too much
+            vel_cmd.linear.z = min_vertical_thrust if vertical > 0 else -min_vertical_thrust # allows for corrections going up/down 
             self.get_logger().info(f"MINIMAL VERTICAL: input={vertical:.3f}, output={vel_cmd.linear.z:.2f} (min thrust)")
 
-        # Yaw - FIXED logic
-        if abs(yaw_rate) > 0.01:
+        # Yaw - logic everything set to zero to see if wouldnt yaw but still did
+        if abs(yaw_rate) > 0.01: 
             vel_cmd.angular.z = 0.0
         else:
             vel_cmd.angular.z = 0.0
@@ -347,24 +348,24 @@ class RobotControl(Node):
             self.get_logger().info(f"VELOCITY CMD: x={vel_cmd.linear.x:.2f}, y={vel_cmd.linear.y:.2f}, "
                                  f"z={vel_cmd.linear.z:.2f}, yaw={vel_cmd.angular.z:.2f}")
 
-        self.velocity_pub.publish(vel_cmd)
+        self.velocity_pub.publish(vel_cmd) #publishes velocity to actually make sub go
 
-    def stop(self):
+    def stop(self): #makes it stop
         """Stop the robot and cleanup"""
         self.get_logger().info("Stopping robot control...")
-        self.running = False
+        self.running = False #stops running
         if hasattr(self, 'control_thread'):
-            self.control_thread.join(timeout=2.0)
+            self.control_thread.join(timeout=2.0) #times out control thread
         
         # Send zero velocity commands to stop
-        vel_cmd = Twist()
+        vel_cmd = Twist() #sends velocity command
         for _ in range(5):  # Send multiple stop commands
             self.velocity_pub.publish(vel_cmd)
             time.sleep(0.1)
-
+    #option 2 to set a target waypoint.
     def send_position_target(self):
         """Send position targets for waypoint navigation in GUIDED mode"""
-        position_target = PositionTarget()
+        position_target = PositionTarget() #sets target
         position_target.header.stamp = self.get_clock().now().to_msg()
         position_target.header.frame_id = "odom"
         
