@@ -18,7 +18,7 @@ import math
 import time
 import threading
 
-# Create QoS profile that matches MAVROS (could probably be inside function instead of calling if separately
+# Create QoS profile that matches MAVROS (could probably be inside function instead of calling if separately)
 def create_mavros_qos():
     """Create QoS profile compatible with MAVROS topics"""
     qos = QoSProfile(
@@ -52,20 +52,20 @@ class RobotControl(Node):
         self.desired_point = {'x': None, 'y': None, 'z': None, 'yaw': None} #initialized desired point
         self.movement_command = {'lateral': 0.0, 'forward': 0.0, 'yaw': 0.0} #initialized movement commands
         self.max_descent_mode = False  #ensures max descent is off until needed. 
-        self.mode = "guided" #
+        self.mode = "guided" #defines what mode is going to be used but is not utilized
 
         # Status flags for MAVROS Vision data (from DVL bridge)
-        self.vision_pose_valid = False
-        self.vision_velocity_valid = False
-        self.imu_valid = False
-        self.last_vision_time = time.time()
-        self.last_imu_time = time.time()
-        self.data_timeout = 3.0  # seconds
+        self.vision_pose_valid = False #sets all data as false until ensured correct
+        self.vision_velocity_valid = False #sets all data as false until ensured correct
+        self.imu_valid = False #sets all data as false until ensured correct
+        self.last_vision_time = time.time() #gets time
+        self.last_imu_time = time.time() #gets time
+        self.data_timeout = 3.0  # seconds 
 
         # QoS profiles
-        mavros_qos = create_mavros_qos()
-        dvl_qos = QoSProfile(
-            reliability=ReliabilityPolicy.BEST_EFFORT,
+        mavros_qos = create_mavros_qos() #calls mavros2_qos from above
+        dvl_qos = QoSProfile( #created qos profile for Best Effort
+            reliability=ReliabilityPolicy.BEST_EFFORT, #used for dvl BEST.EFFORT = tries to get data but will not recieve it constantly becuase DVL pings sporatically
             durability=DurabilityPolicy.VOLATILE,
             history=HistoryPolicy.KEEP_LAST,
             depth=10
@@ -73,26 +73,26 @@ class RobotControl(Node):
         
         
         # MAVROS Vision Topic Subscribers (from DVL bridge output)
-        self.vision_pose_sub = self.create_subscription(
-            PoseStamped,
+        self.vision_pose_sub = self.create_subscription( 
+            PoseStamped, #name of message section
             '/mavros/vision_pose/pose',  # DVL position via bridge
-            self.mavros_pose_callback,
-            mavros_qos
+            self.mavros_pose_callback, #method in a Python class that processes data from a subscribed MAVROS topic
+            mavros_qos #uses the mavros from above
         )
         
         self.vision_speed_sub = self.create_subscription(
             TwistStamped,
             '/mavros/vision_speed/speed_twist',  # DVL velocity via bridge
-            self.mavros_velocity_callback,
+            self.mavros_velocity_callback, 
             mavros_qos
         )
         
         # Optional: Direct DVL range subscription (if available)
         self.dvl_range_sub = self.create_subscription(
-            Range,
+            Range, #gets subscription to Range published from dvl_mavros_bridge
             'dvl/range',
             self.dvl_range_callback,
-            dvl_qos
+            dvl_qos ##uses the dvl qos from above
         )
         
         # IMU data for orientation (still from MAVROS directly)
@@ -104,49 +104,49 @@ class RobotControl(Node):
         )
         
         # Publishers for GUIDED mode control
-        self.velocity_pub = self.create_publisher(Twist, '/mavros/setpoint_velocity/cmd_vel_unstamped', 10)
-        self.position_target_pub = self.create_publisher(PositionTarget, '/mavros/setpoint_raw/local', 10)
+        self.velocity_pub = self.create_publisher(Twist, '/mavros/setpoint_velocity/cmd_vel_unstamped', 10) #10 saves last 10 messaged from velocity
+        self.position_target_pub = self.create_publisher(PositionTarget, '/mavros/setpoint_raw/local', 10) #publishes position for other scripts to use
         self.manual_control_pub = self.create_publisher(ManualControl, '/mavros/manual_control/control', 10)
 
-        # PID controllers - tuned for DVL-based control via MAVROS vision
+        # PID controllers - tuned for DVL-based control via MAVROS vision #
         self.PIDs = {   
-            "yaw": PID(0.8, .001, 0.05, setpoint=0, output_limits=(-0.5, 0.5)),
-            "depth": PID(1.2, 0.05, 0.1, setpoint=0, output_limits=(-0.5, 0.5)),
-            "surge": PID(0.5, 0.01, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
-            "lateral": PID(0.5, 0, 0.02, setpoint=0, output_limits=(-1.0, 1.0)),
+            "yaw": PID(0.8, .001, 0.05, setpoint=0, output_limits=(-0.5, 0.5)), #unsure
+            "depth": PID(1.2, 0.05, 0.1, setpoint=0, output_limits=(-0.5, 0.5)), #works well for leveling
+            "surge": PID(0.5, 0.01, 0.02, setpoint=0, output_limits=(-1.0, 1.0)), #unsure
+            "lateral": PID(0.5, 0, 0.02, setpoint=0, output_limits=(-1.0, 1.0)), #no lateral thrusters on sub
         }
 
         # Start the main control thread
-        self.running = True
-        self.control_thread = threading.Thread(target=self.control_loop)
-        self.control_thread.start()
+        self.running = True #starts it running
+        self.control_thread = threading.Thread(target=self.control_loop) # assigns the created thread to an instance variable to be referenced later
+        self.control_thread.start() #starts threading
         
-        self.get_logger().info("RobotControl initialized with MAVROS Vision Topics (DVL via Bridge)")
+        self.get_logger().info("RobotControl initialized with MAVROS Vision Topics (DVL via Bridge)") #logs to terminal
 
-    def mavros_pose_callback(self, msg: PoseStamped):
+    def mavros_pose_callback(self, msg: PoseStamped): #uses the Posestamped data
         """MAVROS vision pose callback - DVL position data via bridge"""
         
-        try:
-            self.get_logger().info("Pose CB")
-            with self.lock:
+        try: #tries each item must have except segment after
+            self.get_logger().info("Pose CB") # not needed, was just to test that things were publishing
+            with self.lock: #only one thread can modify self.position at a time
                 # Position from MAVROS vision pose (DVL data via bridge)
-                self.position['x'] = msg.pose.position.x
+                self.position['x'] = msg.pose.position.x #sets the incoming data to a variable
                 self.position['y'] = msg.pose.position.y
                 self.position['z'] = msg.pose.position.z
                 
                 # Mark pose data as valid
-                self.vision_pose_valid = True
-                self.last_vision_time = time.time()
+                self.vision_pose_valid = True #marks vision data as positive when can get the data
+                self.last_vision_time = time.time() #records time
             
             if self.debug and time.time() % 3 < 0.1:  # Log every 3 seconds
                 self.get_logger().info(f"MAVROS Vision Pose (DVL): x={self.position['x']:.3f}m, y={self.position['y']:.3f}m, z={self.position['z']:.3f}m")
                 
-        except Exception as e:
-            self.get_logger().error(f"MAVROS vision pose callback error: {e}")
+        except Exception as e: #required for end of try statement
+            self.get_logger().error(f"MAVROS vision pose callback error: {e}") #prints error and e=what error is
 
-    def mavros_velocity_callback(self, msg: TwistStamped):
+    def mavros_velocity_callback(self, msg: TwistStamped): #uses stuff from TwistStamped
         """MAVROS vision speed callback - DVL velocity data via bridge"""
-        try:
+        try: 
             with self.lock:
                 # Velocity from MAVROS vision speed (DVL data via bridge)
                 self.velocity['x'] = msg.twist.linear.x
@@ -158,7 +158,7 @@ class RobotControl(Node):
                 self.last_vision_time = time.time()
             
             # Log velocity changes (only when significant movement)
-            if self.debug and (abs(self.velocity['x']) > 0.05 or abs(self.velocity['y']) > 0.05 or abs(self.velocity['z']) > 0.05):
+            if self.debug and (abs(self.velocity['x']) > 0.05 or abs(self.velocity['y']) > 0.05 or abs(self.velocity['z']) > 0.05): #
                 self.get_logger().info(f"MAVROS Vision Speed (DVL): x={self.velocity['x']:.3f}m/s, y={self.velocity['y']:.3f}m/s, z={self.velocity['z']:.3f}m/s")
                 
         except Exception as e:
@@ -168,7 +168,7 @@ class RobotControl(Node):
         """DVL range to bottom callback (direct from DVL if available)"""
         try:
             with self.lock:
-                self.range_to_bottom = msg.range
+                self.range_to_bottom = msg.range #stores variable of range from messages
             
             if self.debug and not math.isnan(self.range_to_bottom) and time.time() % 5 < 0.1:
                 self.get_logger().info(f"DVL Range to bottom: {self.range_to_bottom:.2f}m")
@@ -176,11 +176,11 @@ class RobotControl(Node):
         except Exception as e:
             self.get_logger().error(f"DVL range callback error: {e}")
 
-    def imu_orientation_callback(self, msg):
+    def imu_orientation_callback(self, msg): #uses imu to convert to the conrols might be able to use channels instead of calculating it here
         """IMU orientation callback - still need this for heading control"""
         try:
-            q = msg.pose.orientation
-            if not math.isnan(q.w):
+            q = msg.pose.orientation #gets orientation
+            if not math.isnan(q.w): #does math
                 with self.lock:
                     self.orientation['yaw'] = quaternion_to_yaw(q.x, q.y, q.z, q.w)
                     self.orientation['pitch'] = math.asin(2.0 * (q.w * q.y - q.z * q.x))
@@ -191,33 +191,33 @@ class RobotControl(Node):
         except Exception as e:
             self.get_logger().error(f"IMU orientation callback error: {e}")
 
-    def check_vision_data_timeout(self):
-        """Check if MAVROS vision data is stale"""
-        return (time.time() - self.last_vision_time) < self.data_timeout
+    def check_vision_data_timeout(self): #makes sure vision (dvl) data has or has not times out 
+        """Check if MAVROS vision data is stale""" 
+        return (time.time() - self.last_vision_time) < self.data_timeout #return true or false based off time
         
-    def check_imu_data_timeout(self):
+    def check_imu_data_timeout(self): #check to see if imu data is still coming through 
         """Check if IMU data is stale"""
         return (time.time() - self.last_imu_time) < self.data_timeout
         
-    def set_depth(self, target_depth):
+    def set_depth(self, target_depth): #
         """Set the target depth for the submarine"""
         with self.lock:
             self.desired_point['z'] = target_depth
         self.get_logger().info(f"Target depth set to: {target_depth}m")
 
-    def set_max_descent_rate(self, enable):
+    def set_max_descent_rate(self, enable): 
         """Enable/disable maximum descent rate for initial descent"""
         with self.lock:
-            self.max_descent_mode = enable
-        if enable:
+            self.max_descent_mode = enable 
+        if enable: #when enabled go to max speed specified
             self.get_logger().info("Maximum descent rate enabled")
         else:
             self.get_logger().info("Normal PID depth control resumed")
 
-    def set_position(self, x=None, y=None, z=None, yaw=None):
+    def set_position(self, x=None, y=None, z=None, yaw=None): #initializes
         """Set target position and orientation"""
         with self.lock:
-            if x is not None:
+            if x is not None: #when recieving valid x position
                 self.desired_point['x'] = x
             if y is not None:
                 self.desired_point['y'] = y
@@ -226,17 +226,17 @@ class RobotControl(Node):
             if yaw is not None:
                 self.desired_point['yaw'] = yaw
 
-    def set_movement_command(self, lateral=0.0, forward=0.0, yaw=0.0):
+    def set_movement_command(self, lateral=0.0, forward=0.0, yaw=0.0): #initiaizes zero
         """Set movement commands while maintaining depth control"""
         with self.lock:
-            self.movement_command['lateral'] = lateral
+            self.movement_command['lateral'] = lateral # changes the given parameters to a command in the class
             self.movement_command['forward'] = forward
             self.movement_command['yaw'] = yaw
         
-        if abs(lateral) > 0.01 or abs(forward) > 0.01 or abs(yaw) > 0.01:
-            self.get_logger().info(f"Movement command: lateral={lateral:.2f}, forward={forward:.2f}, yaw={yaw:.2f}")            
+        if abs(lateral) > 0.01 or abs(forward) > 0.01 or abs(yaw) > 0.01: # if valid command
+            self.get_logger().info(f"Movement command: lateral={lateral:.2f}, forward={forward:.2f}, yaw={yaw:.2f}")    #send log        
     
-    def get_current_depth(self):
+    def get_current_depth(self): 
         """Get current depth from MAVROS vision pose (DVL data via bridge)"""
         with self.lock:
             return float(self.position['z'])
@@ -244,42 +244,42 @@ class RobotControl(Node):
     def get_current_position(self):
         """Get current position from MAVROS vision topics (DVL data via bridge)"""
         with self.lock:
-            pos = self.position.copy()
-            pos['yaw'] = self.orientation['yaw']
-            pos['valid'] = (self.vision_pose_valid and self.check_vision_data_timeout())
-        return pos
+            pos = self.position.copy() #sets pos to the copied position data
+            pos['yaw'] = self.orientation['yaw'] # assigns the yaw value from self.orientation (likely an object or dictionary storing orientation data) to the pos dictionary
+            pos['valid'] = (self.vision_pose_valid and self.check_vision_data_timeout()) #This line sets the 'valid' key in the pos dictionary to a boolean (True/False) value
+        return pos 
     
     def get_current_velocity(self):
         """Get current velocity from MAVROS vision speed (DVL data via bridge)"""
         with self.lock:
             vel = self.velocity.copy()
-            vel['valid'] = self.vision_velocity_valid and self.check_vision_data_timeout()
+            vel['valid'] = self.vision_velocity_valid and self.check_vision_data_timeout() #(boolian_)
         return vel
     
-    def control_loop(self):
-        while rclpy.ok() and self.running:
-            self.update_heading_control()
+    def control_loop(self): 
+        while rclpy.ok() and self.running: #while ros2 is running and valid
+            self.update_heading_control() 
             time.sleep(0.05)
 
     def update_heading_control(self):
         """Send control commands appropriate for GUIDED mode - FIXED logic"""
         with self.lock:
-            # Check data validity from MAVROS vision topics
-            vision_pose_ok = self.vision_pose_valid and self.check_vision_data_timeout()
-            vision_speed_ok = self.vision_velocity_valid and self.check_vision_data_timeout()
-            imu_ok = self.imu_valid and self.check_imu_data_timeout()
+            # Check data validity from MAVROS vision topics 
+            vision_pose_ok = self.vision_pose_valid and self.check_vision_data_timeout() #bool
+            vision_speed_ok = self.vision_velocity_valid and self.check_vision_data_timeout() #bool
+            imu_ok = self.imu_valid and self.check_imu_data_timeout() #bool
             
             # Initialize control outputs
-            forward_cmd = 0.0
+            forward_cmd = 0.0 
             lateral_cmd = 0.0
             yaw_cmd = 0.0
             depth_cmd = 0.0
             
             # FIXED: Always use velocity control mode for submarine operations
             # Get movement commands (these should always be used)
-            forward_cmd = self.movement_command['forward']
-            lateral_cmd = self.movement_command['lateral'] 
-            yaw_cmd = self.movement_command['yaw']
+            forward_cmd = self.movement_command['forward'] #uses the movement data 
+            lateral_cmd = self.movement_command['lateral']  #not used
+            yaw_cmd = self.movement_command['yaw'] 
             
             # Depth control (always active when target is set) - FIXED coordinate frame
             if self.desired_point['z'] is not None and vision_pose_ok:
@@ -288,26 +288,26 @@ class RobotControl(Node):
                 
                 # Log depth status for debugging
                 if abs(depth_error) > 0.02:  # Only log when there's meaningful error
-                    self.get_logger().info(f"DEPTH CONTROL: Current={current_depth:.3f}m, Target={self.desired_point['z']:.3f}m, Error={depth_error:.3f}m")
+                    self.get_logger().info(f"DEPTH CONTROL: Current={current_depth:.3f}m, Target={self.desired_point['z']:.3f}m, Error={depth_error:.3f}m") #log
 
-                if self.max_descent_mode and depth_error > 0.1:  # FIXED: descent means going down (negative z)
+                if self.max_descent_mode and depth_error > 0.1:  # descent means going down (negative z) 
                     depth_cmd = -0.6  # Negative for downward movement
                     self.get_logger().info(f"MAX DESCENT MODE: depth_cmd={depth_cmd}")
-                else:
+                else: #uses the PIDs to correct (was working and held depth)
                     depth_cmd = self.PIDs["depth"](depth_error)
                     if abs(depth_cmd) > 0.02:  # Only log significant depth commands
                         self.get_logger().info(f"PID DEPTH: depth_cmd={depth_cmd:.3f}")
 
-            # FIXED: Always send velocity commands, don't skip based on position targets
-            self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd)
-    def send_velocity_command(self, forward, lateral, vertical, yaw_rate):
+            
+            self.send_velocity_command(forward_cmd, lateral_cmd, depth_cmd, yaw_cmd) #actually sends the vel commands
+    def send_velocity_command(self, forward, lateral, vertical, yaw_rate): 
         """FIXED velocity command logic"""
-        vel_cmd = Twist()
+        vel_cmd = Twist() #twist = format for ros2 movement commands
 
-        # FIXED velocity limits for submarine
-        max_forward_velocity = 1.0
-        max_lateral_velocity = 0.5
-        max_vertical_velocity = -0.8
+        # velocity limits for submarine
+        max_forward_velocity = 1.0 # 1 = max
+        max_lateral_velocity = 0.5 #probably set to 0 since dont have lateral commands
+        max_vertical_velocity = -0.8 #wont go down more than 80%
         max_yaw_rate = 0.5  # Reduced for stability
 
         # Forward/backward - FIXED logic
