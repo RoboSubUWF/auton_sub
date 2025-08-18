@@ -1,4 +1,8 @@
 # ROS 2 version of RobotControl using MAVROS Vision Topics (from DVL bridge)
+#Called By the Mission files for setting waypoints or velocity commands in a certain direction
+#Axis negative = Down, Check on the X and Y directions they may be incorrect here
+#Uses the DVL_Mavros bridge publishers to get data
+#So far the Sub can correctly hold depth, Recieve the data from the DVL, and the axis match between dvl and pixhawk
 
 import rclpy #for ros2
 from rclpy.node import Node 
