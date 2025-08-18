@@ -334,12 +334,12 @@ class RobotControl(Node):
             self.get_logger().info(f"MINIMAL VERTICAL: input={vertical:.3f}, output={vel_cmd.linear.z:.2f} (min thrust)")
 
         # Yaw - logic everything set to zero to see if wouldnt yaw but still did
-        if abs(yaw_rate) > 0.01: 
-            vel_cmd.angular.z = 0.0
+        if abs(yaw_rate) > 0.01: #
+            vel_cmd.angular.z = 0.0 #set to zero to get it canceled
         else:
             vel_cmd.angular.z = 0.0
 
-        vel_cmd.angular.x = 0.0
+        vel_cmd.angular.x = 0.0 #no angle
         vel_cmd.angular.y = 0.0
 
         # Log all non-zero commands for debugging
@@ -370,19 +370,19 @@ class RobotControl(Node):
         position_target.header.frame_id = "odom"
         
         # Coordinate frame (body frame NED)
-        position_target.coordinate_frame = PositionTarget.FRAME_LOCAL_NED
+        position_target.coordinate_frame = PositionTarget.FRAME_LOCAL_NED #uses North east down for coordinate system on pixhawk but down still seems to be positive
         
         # Set what to control (position and yaw) and ignore velocity commands
         position_target.type_mask = (
-            PositionTarget.IGNORE_VX | PositionTarget.IGNORE_VY | PositionTarget.IGNORE_VZ |
+            PositionTarget.IGNORE_VX | PositionTarget.IGNORE_VY | PositionTarget.IGNORE_VZ | 
             PositionTarget.IGNORE_AFX | PositionTarget.IGNORE_AFY | PositionTarget.IGNORE_AFZ
         )
         
         # Set position targets (if specified) - using MAVROS vision pose data
         if self.desired_point['x'] is not None:
-            position_target.position.x = self.desired_point['x']
+            position_target.position.x = self.desired_point['x'] #sets x position target
         else:
-            position_target.type_mask |= PositionTarget.IGNORE_PX
+            position_target.type_mask |= PositionTarget.IGNORE_PX #else ignore X position
             
         if self.desired_point['y'] is not None:
             position_target.position.y = self.desired_point['y'] 
@@ -401,67 +401,25 @@ class RobotControl(Node):
             position_target.type_mask |= PositionTarget.IGNORE_YAW
             
         # Publish position target
-        self.position_target_pub.publish(position_target)
+        self.position_target_pub.publish(position_target) #publish the position target
         
-        if self.debug:
+        if self.debug: 
             self.get_logger().info(f"GUIDED Position Target (MAVROS-VISION): x={position_target.position.x:.2f}, "
                                  f"y={position_target.position.y:.2f}, z={position_target.position.z:.2f}, "
                                  f"yaw={position_target.yaw:.2f}")
-
-    def send_manual_control(self, forward, lateral, vertical, yaw_rate):
-        """Send manual control commands (for MANUAL mode fallback)"""
-        manual_cmd = ManualControl()
-        manual_cmd.header.stamp = self.get_clock().now().to_msg()
-        
-        # Convert to float values for ROS message fields
-        # ManualControl expects -1000.0 to 1000.0 (float type)
-        
-        # Full speed when active (binary on/off control)
-        if abs(forward) > 0.01:
-            manual_cmd.x = float(1000 if forward > 0 else -1000)  # Ensure float type
-        else:
-            manual_cmd.x = float(0)  # Off
-            
-        if abs(lateral) > 0.01:
-            manual_cmd.y = float(1000 if lateral > 0 else -1000)  # Ensure float type
-        else:
-            manual_cmd.y = float(0)  # Off
-            
-        if abs(vertical) > 0.01:
-            manual_cmd.z = float(1000 if vertical > 0 else -1000)  # Ensure float type
-        else:
-            manual_cmd.z = float(0)  # Off
-            
-        if abs(yaw_rate) > 0.01:
-            manual_cmd.r = float(1000 if yaw_rate > 0 else -1000)  # Ensure float type
-        else:
-            manual_cmd.r = float(0)  # Off
-        
-        if self.debug:
-            pwm_x = int(manual_cmd.x * 0.4 + 1500)  # Convert back to actual PWM for logging
-            pwm_z = int(manual_cmd.z * 0.4 + 1500) 
-            pwm_r = int(manual_cmd.r * 0.4 + 1500)
-            self.get_logger().info(f"MANUAL Control (FULL SPEED): "
-                                f"Forward: {manual_cmd.x} ? PWM {pwm_x}, "
-                                f"Depth: {manual_cmd.z} ? PWM {pwm_z}, "
-                                f"Yaw: {manual_cmd.r} ? PWM {pwm_r}")
-        
-        # Publish manual control command
-        self.manual_control_pub.publish(manual_cmd)
-
-
+    
 def main(args=None):
-    rclpy.init(args=args)
-    rc = RobotControl()
+    rclpy.init(args=args) #initializes 
+    rc = RobotControl() #runs robot control
     try:
-        rclpy.spin(rc)
-    except KeyboardInterrupt:
-        rc.get_logger().info("Keyboard interrupt - shutting down")
+        rclpy.spin(rc) #runs the rc node
+    except KeyboardInterrupt: #when ctrl+c 
+        rc.get_logger().info("Keyboard interrupt - shutting down") #cuts 
     finally:
-        rc.stop()
-        rc.destroy_node()
-        rclpy.shutdown()
+        rc.stop() #stops
+        rc.destroy_node() #ends node
+        rclpy.shutdown() #fully finishes
 
 
 if __name__ == '__main__':
-    main()
+    main() #Runs main
