@@ -1,67 +1,70 @@
+#This file should make the sub go down to -0.2m of depth and then forwards 13m forwards.
+#Currently the sub will hold depth, but just spins in circles instead of driving forwards
+# The dvl data is not accurate, but it is consistant so it will go down further than 0.2 meters I believe.
 import time
 import rclpy
-from rclpy.node import Node
+from rclpy.node import Node 
 import math
-from auton_sub.utils import arm, disarm
-from auton_sub.utils.guided import set_guided_mode
+from auton_sub.utils import arm, disarm #from arm/disarm files
+from auton_sub.utils.guided import set_guided_mode #guided mode file
 from rclpy.executors import SingleThreadedExecutor
 import threading
-from auton_sub.motion.robot_control import RobotControl
+from auton_sub.motion.robot_control import RobotControl #robot control File
 
 
 class StraightLeftMission(Node):
     def __init__(self):
         super().__init__('straight_left_mission')
 
-        self.robot_control = RobotControl()
-        self._rc_exec = SingleThreadedExecutor()
-        self._rc_exec.add_node(self.robot_control)
-        self._rc_spin_thread = threading.Thread(target=self._rc_exec.spin, daemon=True)
-        self._rc_spin_thread.start()
+        self.robot_control = RobotControl() #Calls robot control (Super important)
+        self._rc_exec = SingleThreadedExecutor() #processes events sequentially in a single thread
+        self._rc_exec.add_node(self.robot_control) #responsible for managing the execution of nodes
+        self._rc_spin_thread = threading.Thread(target=self._rc_exec.spin, daemon=True) #spinning a ROS node Daemon=true means will stop the task when ^c
+        self._rc_spin_thread.start() #often used to spin a node or executor in a separate thread, allowing the main program to continue executing other tasks concurrently
         self.get_logger().info("[INFO] Straight Left Mission Node Initialized (MAVROS Vision Topics Mode)")
 
         # Mission parameters - CONSERVATIVE OPERATION for testing
-        self.target_depth = -0.2      # meters below surface (negative = down in your coordinate system)
+        self.target_depth = -0.2      # meters below surface (negative = down)
         self.forward_distance_1 = 13.0  # meters
         self.pause_time = 2.0         # seconds to pause between steps
-        self.forward_speed = 0.5     # REDUCED speed for testing (was 1.0)
+        self.forward_speed = 0.5     # m/s speed (was 1.0)
         
         # Tolerances - adjusted for MAVROS vision topics operation
-        self.depth_tolerance = 0.1    # INCREASED tolerance for initial testing
+        self.depth_tolerance = 0.1    # 10cm tolerance for initial testing
         self.distance_tolerance = 0.5  # 50cm tolerance for distance
 
-        # FIXED: Store initial heading to maintain straight line
-        self.initial_heading = None
-        self.heading_locked = False
+        # Store initial heading to maintain straight line
+        self.initial_heading = None #initializes
+        self.heading_locked = False #initializes
 
-    def descend_to_depth(self, target_depth=-0.2):
+    def descend_to_depth(self, target_depth=-0.2): #sets target depth, may be redundant since already declared above
         """Descend to the specified depth using MAVROS vision pose data"""
         self.get_logger().info(f"[DEPTH] Descending to {target_depth}m depth using MAVROS vision pose data...")
         
         # Log current depth before setting target
-        current_depth = self.robot_control.get_current_depth()
+        current_depth = self.robot_control.get_current_depth() #gets current depth from robot control
         self.get_logger().info(f"[DEPTH] Current depth: {current_depth:.2f}m (MAVROS vision pose)")
         
-        # FIXED: Lock heading during descent to prevent rotation
-        if not self.heading_locked:
-            self.lock_current_heading()
+        # Lock heading during descent to prevent rotation
+        if not self.heading_locked: #if heading is not locked
+            self.lock_current_heading() #lock the heading
         
         # Set target depth
-        self.robot_control.set_depth(target_depth)
-        self.robot_control.set_max_descent_rate(True)
+        self.robot_control.set_depth(target_depth) #sets the target depth using function in robot_control
+        self.robot_control.set_max_descent_rate(True) #sets it to true
         
         # Wait and monitor depth changes using MAVROS vision pose data
-        max_wait_time = 45.0  # INCREASED timeout for conservative descent
+        max_wait_time = 45.0  # timeout for  descent
         start_time = time.time()
         
-        while (time.time() - start_time) < max_wait_time: 
+        while (time.time() - start_time) < max_wait_time:  #while hasnt timed out
             current = self.robot_control.get_current_depth()  # MAVROS vision pose z
-            error = abs(current - target_depth)
+            error = abs(current - target_depth) #calculates error
             
-            # FIXED: Check if we've reached target depth
-            if error < self.depth_tolerance:
+            # Check if target depth is reached
+            if error < self.depth_tolerance: #if error is within the tolerance range
                 self.get_logger().info(f"[DEPTH] ? Target depth achieved: {current:.2f}m (target: {target_depth}m) [MAVROS-VISION]")
-                self.robot_control.set_max_descent_rate(False)
+                self.robot_control.set_max_descent_rate(False) #
                 time.sleep(1.0)  # Brief pause to stabilize
                 return True
                 
