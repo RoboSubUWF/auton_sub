@@ -3,6 +3,7 @@
 #Axis negative = Down, Check on the X and Y directions they may be incorrect here
 #Uses the DVL_Mavros bridge publishers to get data
 #So far the Sub can correctly hold depth, Recieve the data from the DVL, and the axis match between dvl and pixhawk
+#rewrite using the different pixhawk channels if needed.
 
 import rclpy #for ros2
 from rclpy.node import Node 
