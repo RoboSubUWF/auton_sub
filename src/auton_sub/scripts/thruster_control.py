@@ -1,3 +1,4 @@
+#I dont remember whether this file works, but if it does it would have to be run on its own and another file run in a separate terminal to send the commands. 
 import rclpy
 import sys
 import time
