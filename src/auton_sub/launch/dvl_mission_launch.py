@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Launch file for DVL + MAVROS integration
+Launch file for DVL + MAVROS + The first coin_toss mission
 """
 
 from launch import LaunchDescription
