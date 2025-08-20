@@ -1,3 +1,4 @@
+#launches the pixhawk, dvl, rosbag(for monitoring the topics but does not work), and the prequalification script.
 #!/usr/bin/env python3
 """
 Launch file for DVL + MAVROS integration
@@ -22,7 +23,7 @@ def generate_launch_description():
     
     return LaunchDescription([
         # Launch arguments
-        DeclareLaunchArgument(
+        DeclareLaunchArgument( 
             'fcu_url',
             default_value='serial:///dev/ttyTHS1:57600',
             description='FCU connection URL'
@@ -42,7 +43,7 @@ def generate_launch_description():
         Node(
             package='mavros',
             executable='mavros_node',
-                    
+            #do not include a name = whatever. This will override the excecutable name and cause issues.
             output='screen',
             parameters=[mavros_params_file, {
                 'fcu_url': LaunchConfiguration('fcu_url'),
