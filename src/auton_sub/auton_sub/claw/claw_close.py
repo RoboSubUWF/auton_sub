@@ -1,3 +1,4 @@
+#was unable to successfully test since the claw motor broke
 #!/usr/bin/env python3
 """
 Simple Claw Close - GPIO Pin 7 LOW  
