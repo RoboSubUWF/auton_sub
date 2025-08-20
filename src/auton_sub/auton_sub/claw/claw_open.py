@@ -1,3 +1,4 @@
+#same as last
 #!/usr/bin/env python3
 """
 Simple Claw Open - GPIO Pin 7 HIGH
