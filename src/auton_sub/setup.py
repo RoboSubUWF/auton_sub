@@ -12,11 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
-        #('share/' + package_name + '/launch', ['launch/auton_sub_launch.py']),
-        #('share/' + package_name + '/launch', ['launch/mavros_launch.py']),
-        #('share/' + package_name + '/launch', ['launch/dvl_mavros_launch.py']),
-        #('share/' + package_name + '/launch', ['launch/pixhawk_launch.py']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')), #allows anythin in launch folder to be excecuted by typing ros2 launch auton_sub (filename).py in terminal
         ('share/' + package_name + '/config', glob('config/*.yaml')),
         
     ],
@@ -30,7 +26,7 @@ setup(
      #   'test': ['pytest'],
     #}
     entry_points={
-        'console_scripts': [
+        'console_scripts': [    #allows any file to be run using ros2 run auton_sub (file name) donot type .py after excecutable name
             'object_detection = auton_sub.cv.object_detection:main',
             '120size = auton_sub.cv.120size:main',
             'front_multi = auton_sub.cv.front_multi:main',
@@ -65,7 +61,7 @@ setup(
             'home = auton_sub.mission.home:main',
             'rosbag_recorder = auton_sub.motion.rosbag_recorder:main',
             'prequal_manual = auton_sub.mission.prequal_manual:main',
-            'prequal2 = auton_sub.mission.prequal2:main'
-,       ],
+            'prequal2 = auton_sub.mission.prequal2:main',
+        ],
     },
 )
