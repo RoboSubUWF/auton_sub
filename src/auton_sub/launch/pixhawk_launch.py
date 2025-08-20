@@ -1,3 +1,4 @@
+Solely launches the pixhawk
 #!/usr/bin/env python3
 """
 Launch file for keyboard inputs
