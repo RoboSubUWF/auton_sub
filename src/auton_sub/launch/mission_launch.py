@@ -1,3 +1,4 @@
+#used to launch the mavros, image recognition, and the file which contains all the missions back to back. Used for testing purposes without the DVL to check for errors before swapping to guided mode.
 #!/usr/bin/env python3
 """
 Launch file for keyboard inputs
