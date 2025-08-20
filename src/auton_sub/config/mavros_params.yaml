@@ -1,3 +1,4 @@
+Includes all the pixhawk parameters. Works well you probably do not need to change this significantly.
 mavros:
   ros__parameters:
     # ✅ MAVLink Connection Settings
