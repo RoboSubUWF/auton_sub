@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Launch file for DVL + MAVROS integration
+Launch file for DVL + MAVROS integration other things could be integrated at the end for testing purposes.
 """
 
 from launch import LaunchDescription
