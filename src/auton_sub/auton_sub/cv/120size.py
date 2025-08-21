@@ -1,4 +1,5 @@
-#front camera
+#front camera with single custom trained model.
+# does work
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
