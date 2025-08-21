@@ -1,3 +1,4 @@
+#is not currently integrated, but works great and ready to be integrated at a later time.
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Bool
@@ -20,7 +21,7 @@ class LeakSensor(Node):
         self.publisher_ = self.create_publisher(Bool, '/leak_detected', 10)
 
         # Initialize GPIO for Jetson
-        GPIO.setmode(GPIO.BCM)  # Use Broadcom pin numbering
+        GPIO.setmode(GPIO.BCM)  # Use Broadcom pin numbering might want to change this to GPIO.Board to use the actual pin numbers on line 9
         GPIO.setup(LEAK_SENSOR_PIN, GPIO.IN)
 
         # Create a timer to check for leaks every second
