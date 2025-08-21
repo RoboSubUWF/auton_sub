@@ -1,4 +1,6 @@
 # front camera - headless version
+#to see if it would run faster without the video display
+#works
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
