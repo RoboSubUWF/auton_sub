@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# not sure if this is important but here if needed later. Dont use now.
+# launches the launchbags and saves them to the rosbags folder
+#it saves the files, but the items in it seem wierd 
 import os
 import signal
 import subprocess
