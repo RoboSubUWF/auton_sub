@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#can be called to disarm the sub when necessary
 
 import rclpy
 from rclpy.node import Node
