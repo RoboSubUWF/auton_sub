@@ -1,3 +1,6 @@
+#for the claw and octogon combined challenge
+#needs to be updated now that robot control has been
+#Has not been tested on the sub
 import time
 import rclpy
 import math
@@ -708,4 +711,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
