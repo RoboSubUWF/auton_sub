@@ -1,3 +1,6 @@
+#occurs directly after path, the mission should start while depth is still being held and continuing after that
+#Has not been tested in water
+#needs to be updated to work with new robot control
 # -*- coding: utf-8 -*-
 
 import time
@@ -583,4 +586,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
