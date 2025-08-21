@@ -12,7 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')), #allows anythin in launch folder to be excecuted by typing ros2 launch auton_sub (filename).py in terminal
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')), #allows anything in launch folder to be excecuted by typing ros2 launch auton_sub (filename).py in terminal
         ('share/' + package_name + '/config', glob('config/*.yaml')),
         
     ],
@@ -35,10 +35,10 @@ setup(
             'dual_camera = auton_sub.cv.dual_camera:main',
             'dvl_node = auton_sub.sensors.dvl_node:main',
             'dvl_mavros_bridge = auton_sub.sensors.dvl_mavros_bridge:main',
-            'dvl_mavros_bridge2 = auton_sub.sensors.dvl_mavros_bridge2:main',
+            
             'leak_node = auton_sub.sensors.leak_node:main',
             'test_thruster = auton_sub.test_thruster:main',
-            'mission_control = auton_sub.mission_control:main',
+            
             'claw = auton_sub.claw',
             'claw_control_node = auton_sub.claw.claw_control_node:main',
             'claw_open = auton_sub.claw.claw_open:main',
@@ -48,12 +48,12 @@ setup(
             'rosbag = auton_sub.utils.rosbag_launcher:main',
             'keyboard = auton_sub.utils.keyboard:main',
             'keyboard_guided = auton_sub.utils.keyboard_guided:main',
-            'servo = auton_sub.motion.servo:main',
+            
             'prequal = auton_sub.mission.prequal:main',
             'coin_toss = auton_sub.mission.coin_toss:main',
             'gate = auton_sub.mission.gate:main',
             'test_thrust = auton_sub.mission.test_thrust:main',
-            'depth_hold = auton_sub.mission.depth_hold:main',
+            
             'full_planner = auton_sub.mission.full_planner:main',
             'Ocean_Cleanup = auton_sub.mission.Ocean_Cleanup:main',
             'slalom = auton_sub.mission.slalom:main',
@@ -61,7 +61,7 @@ setup(
             'home = auton_sub.mission.home:main',
             'rosbag_recorder = auton_sub.motion.rosbag_recorder:main',
             'prequal_manual = auton_sub.mission.prequal_manual:main',
-            'prequal2 = auton_sub.mission.prequal2:main',
+            
         ],
     },
 )
