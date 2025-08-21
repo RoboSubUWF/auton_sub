@@ -1,3 +1,5 @@
+#needs to be updated now that robot control has been
+# has not been tested
 import time 
 import rclpy # uses ros2 functions
 from rclpy.node import Node
