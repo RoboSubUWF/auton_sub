@@ -1,5 +1,8 @@
 # auton_sub/utils/guided.py
-
+# can be called to put the pixhawk in guided mode. 
+#only works when the dvl is in the water and the pressure sensor is connected.
+#works, but the last time the sub was run the jetson overheated and the pixhawk would only flash blue lights instead of red, green, and blue and would not swap to guided mode
+#hopefully it will resolve itself but he Jetson will half current the usb ports after overheating for a while, hopefully the pixhawk is not broken.
 import rclpy
 from rclpy.node import Node
 from mavros_msgs.srv import SetMode
