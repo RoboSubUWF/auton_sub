@@ -1,3 +1,7 @@
+#used for end of run to return home
+#occurs directly after ocean cleanup, the mission should start while depth is still being held and continuing after that
+#Has not been tested in water
+#needs to be updated to work with new robot control
 import time
 import rclpy
 import math
