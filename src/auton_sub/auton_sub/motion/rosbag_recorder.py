@@ -2,6 +2,7 @@
 """
 ROS2 Rosbag Recorder for DVL + MAVROS Integration
 Automatically records all relevant topics for analysis
+Wasnt working great, there is another version of this in utils, not sure if it would work better or not.
 """
 
 import os
