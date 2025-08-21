@@ -1,4 +1,6 @@
-# front camera
+# front camera (solid black usb cable.)
+#works
+#paths to best.pt files should be updated
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
