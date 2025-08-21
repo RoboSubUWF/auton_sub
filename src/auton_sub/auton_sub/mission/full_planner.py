@@ -1,3 +1,6 @@
+#calls all of the different mission files and executes them in order. 
+#Can be easily modified
+#has not been tested in the water
 #!/usr/bin/env python3
 """
 Complete Sequential Mission Controller - ROS2 Node Version
