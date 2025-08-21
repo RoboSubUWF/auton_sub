@@ -1,4 +1,4 @@
-# sets manual mode
+# sets manual mode, not sure if it might be useful at all, but its here
 #!/usr/bin/env python3
 
 import sys
