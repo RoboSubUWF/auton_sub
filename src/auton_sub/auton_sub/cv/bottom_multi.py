@@ -1,3 +1,6 @@
+#bottom camera with multi-object detection node capability. 
+#paths need to be updated with different best.py files listed in model
+#Bottom camera is the one with the colorful wires.
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
