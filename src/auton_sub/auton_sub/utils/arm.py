@@ -1,3 +1,4 @@
+#can be called whenever the pixhawk needs to be armed
 import rclpy
 from rclpy.node import Node
 from mavros_msgs.srv import CommandBool
