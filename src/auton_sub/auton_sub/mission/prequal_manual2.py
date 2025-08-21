@@ -1,3 +1,6 @@
+#this is a different version of prequal
+#does a similar thing but in a different way
+#does not use manual mode, ignore the title.
 import time
 import rclpy
 from rclpy.node import Node
