@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# not sure if this is important but here if needed later. Dont use now.
+# might be useful for later. Was taken from another team's github, but has not been updated. When the cameras are plugged into different ports or in a different order they register the paths to them diferently on the jetson.
 import os
 import sys
 import json
