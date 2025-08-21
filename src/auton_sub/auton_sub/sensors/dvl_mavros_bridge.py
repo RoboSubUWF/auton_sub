@@ -4,10 +4,15 @@ Fixed DVL to MAVROS Bridge Node
 
 This node bridges DVL data to MAVROS-compatible topics for ArduSub integration.
 Updated with correct MAVROS topic names, proper error handling, and QoS matching.
+Do not edit the dvl folder in sensors becuase all those files came with the dvl.
+It takes the best.effort data from the dvl and converts it to reliable data the pixhawk can handle
+make sure to use odom instead of map in any instance of that. Mismatched will prevent the messages from being sent.
+This file does work well
 
-Key changes in this version:
-- Option A fix: flip only Z (down↔up) when publishing to MAVROS vision topics (ROS uses ENU).
-- Sanity checks: drop NaNs/inf, clamp speeds/positions to pool-reasonable ranges.
+This version:
+- flips only Z (down↔up) when publishing to MAVROS vision topics (ROS uses ENU). (previously down was positive for the dvl, but down was negative for the pixhawk, so now both axes align and down is negative.
+- do not flip the pixhawk upside down, we tried that and it tried to right itself
+- Filters out NaNs/inf from dvl, clamp speeds/positions to pool-reasonable ranges.
 - Clear comments on frames and assumptions.
 """
 
@@ -25,12 +30,12 @@ class DVLMAVROSBridge(Node):
     def __init__(self):
         super().__init__('dvl_mavros_bridge')
 
-        # Small startup delay so MAVROS is up before we publish
+        # Small startup delay so MAVROS is up before publishing
         time.sleep(3.0)
 
         # --- Config / assumptions -------------------------------------------------
         # We assume DVL gives body-frame velocities with Z positive DOWN.
-        # MAVROS vision topics expect ROS ENU (Z positive UP). So we flip only Z.
+        # MAVROS vision topics expect ROS ENU (Z positive UP). So we flip Z.
         self.flip_z = True  # Option A: make ENU.z = - DVL.z
         self.max_abs_v = 0.6   # m/s sanity clamp (pool)
         self.max_abs_pos = 10  # m sanity clamp (position)
@@ -38,7 +43,7 @@ class DVLMAVROSBridge(Node):
 
         # Match DVL subscriber QoS
         qos_profile = QoSProfile(
-            reliability=ReliabilityPolicy.BEST_EFFORT,
+            reliability=ReliabilityPolicy.BEST_EFFORT, #means it tries its best to recieve the data but does not all the time becuase the dvl only pings at specific times
             history=HistoryPolicy.KEEP_LAST,
             depth=10,
             durability=DurabilityPolicy.VOLATILE
@@ -46,7 +51,7 @@ class DVLMAVROSBridge(Node):
 
         # MAVROS prefers RELIABLE for its inputs
         mavros_qos = QoSProfile(
-            reliability=ReliabilityPolicy.RELIABLE,
+            reliability=ReliabilityPolicy.RELIABLE, #pixhawk needs constant data
             history=HistoryPolicy.KEEP_LAST,
             depth=10,
             durability=DurabilityPolicy.VOLATILE
@@ -183,7 +188,7 @@ class DVLMAVROSBridge(Node):
             # Build MAVROS message
             vision_pose_msg = PoseStamped()
             vision_pose_msg.header = msg.header
-            vision_pose_msg.header.frame_id = "odom"
+            vision_pose_msg.header.frame_id = "odom" #keep this, do not use map anywhere
 
             # Copy pose then flip z
             vision_pose_msg.pose = msg.pose.pose
@@ -198,7 +203,7 @@ class DVLMAVROSBridge(Node):
 
                 self.vision_pose_pub.publish(vision_pose_msg)
                 self.last_position_time = time.time()
-                if self.position_count % 10 == 0:
+                if self.position_count % 10 == 0: #bridges the data after every 10 velocity receptions, seemed to work well to allow for stability and prevent overshoot
                     self.get_logger().info(
                         f"🎯 Position bridged: [{pos.x:.3f}, {pos.y:.3f}, {-pos.z:.3f}] m (z flipped)"
                     )
