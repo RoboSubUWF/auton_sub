@@ -1,3 +1,4 @@
+#was created to attempt to control the thrusters from a keyboard but did not work, it might be better now that robot control has been improved, but idk
 #!/usr/bin/env python3
 """
 DVL-aware keyboard control that doesn't require root privileges
