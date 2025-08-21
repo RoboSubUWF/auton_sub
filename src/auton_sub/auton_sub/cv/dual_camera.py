@@ -1,4 +1,7 @@
 # Enhanced Dual camera object detection node for different camera specs
+#This one should be used for most of the missions if both cameras are needed. 
+#can also swap between the different files paths
+#working
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
