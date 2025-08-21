@@ -1,4 +1,6 @@
 #down facing old camera
+#works
+#only for one best.pt path
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
